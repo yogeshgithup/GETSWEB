@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.*;
 
 import java.text.ParseException;
@@ -69,7 +70,7 @@ public class SerPerson extends HttpServlet {
          if(request.getParameter("submit")!=null)
         {
             try {
-                String p_id=request.getParameter("p_id");
+                String pid=cop.generatepid(op);
                 String email=request.getParameter("email");
                 String gender=request.getParameter("gender");
                 
@@ -97,7 +98,7 @@ public class SerPerson extends HttpServlet {
                 String password=cop.randompassword();
                 //String mime_type=request.getParameter("mime_type");
                 
-                Person p= new Person(p_id,email,gender,date,home_no,street_no,street_name,area,city,pincode,contact_no,f_name,m_name,l_name,file_path,file_name,password);
+                Person p= new Person(pid,email,gender,date,home_no,street_no,street_name,area,city,pincode,contact_no,f_name,m_name,l_name,file_path,file_name,password);
                // CourseSubSecOperation cop=new CourseSubSecOperation(con);
                p.setQuali(quali);
                String msg = null;
@@ -118,14 +119,16 @@ public class SerPerson extends HttpServlet {
                 if(op.equals("a"))
                 {          
                     String addrole_id=(String)hs.getAttribute("addrole_id");
-                   user_role ur= new user_role(p_id,addrole_id);
+                   user_role ur= new user_role(pid,addrole_id);
                    msg = cop.insertuser_role(ur);
                        
                 }
                 
             } catch (ParseException ex) {
                 Logger.getLogger(SerPerson.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            } catch (SQLException ex) {
+                 Logger.getLogger(SerPerson.class.getName()).log(Level.SEVERE, null, ex);
+             }
             
 
         }

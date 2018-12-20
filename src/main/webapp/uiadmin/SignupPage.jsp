@@ -162,14 +162,7 @@ return false;
                     <form id="demo-form2"  action="<%=application.getContextPath()%>/SerPerson" name="frmSample" data-parsley-validate class="form-horizontal form-label-left" method="post" onsubmit="return ValidateForm() && validateEmail() && matchpass()"
                           
                                enctype="multipart/form-data">
-                        <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="f_name">P_id <span class="required">*</span>
-                        </label>
-                        <div class="col-md-5 col-sm-6 col-xs-12">
-                          <input type="text" id="firstname" required name="p_id" class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-
+                      
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="f_name">First Name <span class="required">*</span>
                         </label>
