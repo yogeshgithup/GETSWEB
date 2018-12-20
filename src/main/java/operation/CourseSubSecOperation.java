@@ -271,6 +271,29 @@ public class CourseSubSecOperation {
         return msg;
     }
       
+      public String generatepid(String op) throws SQLException
+      {
+              String pid = "nill";
+
+          if(op.equals('s'))
+          {
+             String sql="SELECT concat('s',max(SUBSTRING(pid,2,2))+1) FROM project.demotest d where SUBSTRING(pid,1,1)='s'";
+             Statement stmt=con.createStatement();
+       ResultSet rs=stmt.executeQuery(sql);
+      while(rs.next())
+      {
+          pid=rs.getString("pid");
+          System.out.println("pid---"+pid);
+          
+      }
+ 
+          
+          }
+              
+   return pid;
+         
+      }
+
       public String insertinPerson(Person p) {
           System.out.println("-"+p);
         String msg = "Success";
@@ -604,34 +627,53 @@ System.out.println("551"+id1);
        }
        
      public String insertinlayout(FirstPage f) {
-
+         System.out.println("hello");
         String msg = "hi";
         PreparedStatement pstmt = null;
   PreparedStatement pstmtq = null;
- 
+         System.out.println("1");
          String sql = "insert into layout value(?,?,?,?,?,?,?,?)";
         String sqlq="insert into pictures values(?,?,?)";
+         System.out.println("2");
         try {
+            System.out.println("cone----"+con);
             con.setAutoCommit(false);
+            System.out.println("3");
             pstmt = con.prepareStatement(sql);
             pstmtq=con.prepareStatement(sqlq);
+            System.out.println("4");
             System.out.println(f.getInstitutename());
+            System.out.println("5");
             pstmt.setString(1,f.getInstitutename());
+            System.out.println("6");
             pstmt.setString(2, f.getFilepath());
+            System.out.println("7");
             pstmt.setString(3, f.getFilename());
+            System.out.println("8");
             pstmt.setInt(4,f.getContactno());
+            System.out.println("9");
             pstmt.setString(5, f.getEmail());
+            System.out.println("10");
             pstmt.setString(6, f.getAddress());
+            System.out.println("11");
             pstmt.setString(7, f.getAboutus());
+            System.out.println("12");
             pstmt.setString(8, f.getQuote());
+            System.out.println("13");
             pstmt.executeUpdate();
+            System.out.println("14");
                  pstmtq.setString(1,f.getInstitutename());
+             System.out.println("15");
                  pstmtq.setString(2,f.getImagepath());
+            System.out.println("16");
                  pstmtq.setString(3,f.getImagename());
-                 
-                 int r=pstmtq.executeUpdate();
+                 System.out.println("17");
+                 int r=pstmtq.executeUpdate();  
+                 System.out.println("18");
                  System.out.println("---result--"+r);
-            con.commit();
+            System.out.println("19");
+                 con.commit();
+            System.out.println("20");
             msg = "success";
             
      
