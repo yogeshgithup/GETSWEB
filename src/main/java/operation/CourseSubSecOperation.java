@@ -273,24 +273,54 @@ public class CourseSubSecOperation {
       
       public String generatepid(String op) throws SQLException
       {
-              String pid = "nill";
-
-          if(op.equals('s'))
+          System.out.println("output-----in operation-----"+op);
+              String p_id = "nill";
+          if(op.equals("a"))
           {
-             String sql="SELECT concat('s',max(SUBSTRING(pid,2,2))+1) FROM project.demotest d where SUBSTRING(pid,1,1)='s'";
+             String sql="SELECT concat('A',max(SUBSTRING(p_id,2,2))+1) FROM person where SUBSTRING(p_id,1,1)='A'";
              Statement stmt=con.createStatement();
-       ResultSet rs=stmt.executeQuery(sql);
-      while(rs.next())
-      {
-          pid=rs.getString("pid");
-          System.out.println("pid---"+pid);
-          
-      }
- 
-          
-          }
-              
-   return pid;
+             ResultSet rs=stmt.executeQuery(sql);
+             while(rs.next())
+             {
+                    p_id=rs.getString(1);
+                 if(p_id == null)
+                 {
+                 p_id="A1";
+                 }
+              }
+            }
+      
+              if(op.equals("b"))
+          {
+             String sql="SELECT concat('F',max(SUBSTRING(p_id,2,2))+1) FROM person where SUBSTRING(p_id,1,1)='F'";
+             Statement stmt=con.createStatement();
+             ResultSet rs=stmt.executeQuery(sql);
+             while(rs.next())
+             {
+                    p_id=rs.getString(1);
+                 if(p_id == null)
+                 {
+                 p_id="F1";
+                 }
+              }
+            }
+      
+                if(op.equals("s"))
+          {
+             String sql="SELECT concat('S',max(SUBSTRING(p_id,2,2))+1) FROM person where SUBSTRING(p_id,1,1)='S'";
+             Statement stmt=con.createStatement();
+             ResultSet rs=stmt.executeQuery(sql);
+             while(rs.next())
+             {
+                    p_id=rs.getString(1);
+                 if(p_id == null)
+                 {
+                 p_id="S1";
+                 }
+              }
+            }
+      
+   return p_id;
          
       }
 

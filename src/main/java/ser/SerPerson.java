@@ -42,7 +42,10 @@ import operation.SMSOperation;
  * @author Asadali
  */
 public class SerPerson extends HttpServlet {
-
+protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+doPost(request,response);
+}
    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -70,56 +73,74 @@ public class SerPerson extends HttpServlet {
          if(request.getParameter("submit")!=null)
         {
             try {
-                String pid=cop.generatepid(op);
+                String p_id=cop.generatepid(op);
+                System.out.println("11");
                 String email=request.getParameter("email");
+                System.out.println("12");
                 String gender=request.getParameter("gender");
-                
+                System.out.println("13");
                 String dob=request.getParameter("dob");
+                System.out.println("14");
                 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+                System.out.println("15");
                 Date  date= sdf.parse(dob);
-                  
+                  System.out.println("16");
                 String home_no=request.getParameter("home_no");
+                System.out.println("17");
                 String street_no=request.getParameter("street_no");
+                System.out.println("18");
                 String street_name=request.getParameter("street_name");
+                System.out.println("19");
                 String area=request.getParameter("area");
+                System.out.println("20");
                 String city=request.getParameter("city");
+                System.out.println("21");
                 int pincode=Integer.parseInt(request.getParameter("pincode"));
+                System.out.println("22");
                 long contact_no=Long.parseLong(request.getParameter("contact_no"));
+                System.out.println("23");
                 String f_name=request.getParameter("f_name");
+                System.out.println("24");
                 String m_name=request.getParameter("m_name");
+                System.out.println("25");
                 String l_name=request.getParameter("l_name");    
+                System.out.println("26");
                 String quali[]=request.getParameterValues("qualification");
                 for(int i=0;i<quali.length;i++)
                 {
                     System.out.println("--90"+quali[i]);
                 }
                 String file_path=url;
-                String file_name=name;               
+                System.out.println("27");
+                String file_name=name;
+                System.out.println("28");
                 String password=cop.randompassword();
                 //String mime_type=request.getParameter("mime_type");
-                
-                Person p= new Person(pid,email,gender,date,home_no,street_no,street_name,area,city,pincode,contact_no,f_name,m_name,l_name,file_path,file_name,password);
+                System.out.println("29");
+                Person p= new Person(p_id,email,gender,date,home_no,street_no,street_name,area,city,pincode,contact_no,f_name,m_name,l_name,file_path,file_name,password);
                // CourseSubSecOperation cop=new CourseSubSecOperation(con);
-               p.setQuali(quali);
+                System.out.println("30");
+                p.setQuali(quali);
+                System.out.println("31");
                String msg = null;
                 String mess="username="+email+"password="+password;
                 System.out.println(mess);
                 String num= "8200781397";
-                
+                System.out.println("32");
                 msg = cop.insertinPerson(p);
-                
+                System.out.println("33");
                 SMSOperation sms=new SMSOperation();
-              //  System.out.println("12");
+                System.out.println("34");
                 sms.sendSMS(num,mess);
-               //s System.out.println("3");
+                System.out.println("35");
                 out.println(msg);
                 
-                System.out.println("116"+op);
+                System.out.println("36---"+op);
 
                 if(op.equals("a"))
                 {          
                     String addrole_id=(String)hs.getAttribute("addrole_id");
-                   user_role ur= new user_role(pid,addrole_id);
+                   user_role ur= new user_role(p_id,addrole_id);
                    msg = cop.insertuser_role(ur);
                        
                 }
