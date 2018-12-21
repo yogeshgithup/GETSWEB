@@ -5,11 +5,14 @@
  */
 package data;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Asadali
  */
 public class FirstPage {
+
     String institutename;
     String filepath;
     String filename;
@@ -19,10 +22,27 @@ public class FirstPage {
     String aboutus;
     String quote;
     
-    String imagepath;
-    String imagename;
+    ArrayList<String> imagepath;
+    ArrayList<String> imagename;
 
- 
+    public ArrayList<String> getImagepath() {
+        return imagepath;
+    }
+
+    public void setImagepath(ArrayList<String> imagepath) {
+        this.imagepath = imagepath;
+    }
+
+    public ArrayList<String> getImagename() {
+        return imagename;
+    }
+
+    public void setImagename(ArrayList<String> imagename) {
+        this.imagename = imagename;
+    }
+
+  
+   
     public void setInstitutename(String institutename) {
         this.institutename = institutename;
     }
@@ -55,14 +75,7 @@ public class FirstPage {
         this.quote = quote;
     }
 
-    public void setImagepath(String imagepath) {
-        this.imagepath = imagepath;
-    }
-
-    public void setImagename(String imagename) {
-        this.imagename = imagename;
-    }
-
+   
     public String getInstitutename() {
         return institutename;
     }
@@ -95,19 +108,7 @@ public class FirstPage {
         return quote;
     }
 
-    public String getImagepath() {
-        return imagepath;
-    }
-
-    public String getImagename() {
-        return imagename;
-    }
-
-    public FirstPage(String imagepath, String imagename) {
-        this.imagepath = imagepath;
-        this.imagename = imagename;
-    }
-
+    
     public FirstPage(String institutename, String filepath, String filename, int contactno, String email, String address, String aboutus, String quote) {
         this.institutename = institutename;
         this.filepath = filepath;

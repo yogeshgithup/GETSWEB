@@ -17,6 +17,7 @@ import data.Subject;
 import data.user_role;
 import static java.lang.System.out;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
@@ -691,13 +692,33 @@ System.out.println("551"+id1);
             pstmt.setString(8, f.getQuote());
             System.out.println("13");
             pstmt.executeUpdate();
-            System.out.println("14");
-                 pstmtq.setString(1,f.getInstitutename());
-             System.out.println("15");
-                 pstmtq.setString(2,f.getImagepath());
-            System.out.println("16");
-                 pstmtq.setString(3,f.getImagename());
-                 System.out.println("17");
+             ArrayList<String> imname=f.getImagename();
+             for(int i=0;i<imname.size();i++)
+             {
+                 pstmtq.setString(1,imname.get(i));
+                 int r=pstmtq.executeUpdate();
+             //    System.out.println("---result--"+r);
+             }
+            
+             ArrayList<String> impath=f.getImagepath();
+             for(int i=0;i<impath.size();i++)
+             {
+                 pstmtq.setString(1,impath.get(i));
+                 int r1=pstmtq.executeUpdate();
+             //    System.out.println("---result--"+r);
+             }
+            
+
+
+
+
+//            System.out.println("14");
+//                 pstmtq.setString(1,f.getInstitutename());
+//             System.out.println("15");
+//                 pstmtq.setString(2,f.getImagepath());
+//            System.out.println("16");
+////                 pstmtq.setString(3,f.getImagename());
+//                 System.out.println("17");
                  int r=pstmtq.executeUpdate();  
                  System.out.println("18");
                  System.out.println("---result--"+r);
