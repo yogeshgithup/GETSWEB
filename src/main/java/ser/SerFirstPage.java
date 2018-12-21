@@ -8,6 +8,9 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -34,6 +37,7 @@ public class SerFirstPage extends HttpServlet {
         Connection con=(Connection)ctx.getAttribute("MyConn");
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
            Part part=req.getPart("image");
+      
       //String ct=part.getContentType();
                   HttpSession hs=req.getSession(true);
       InputStream is=part.getInputStream();
@@ -48,25 +52,37 @@ public class SerFirstPage extends HttpServlet {
         String url=dop.uploadFile(name, is);
         if(req.getParameter("submit")!=null)
         {   
+                             String imagename;
+                              String imagepath;
               String institutename=req.getParameter("institutename");
               String filepath=url;
-              String filename=name; 
-//              String image[]=req.getParameterValues("image");
-//              for(int i=0;i<image.length;i++)
-//                {
-//                    System.out.println("--image"+image[i]);
-//                }
-//               
-              String imagepath=null;
-              String imagename=null;
+              String filename=name;
               String aboutus=req.getParameter("aboutus");
               int contactno=Integer.parseInt(req.getParameter("contactnumber"));
               String email=req.getParameter("email");
               String address=req.getParameter("address");
               String quote=req.getParameter("quote");
               FirstPage f=new FirstPage(institutename,filepath,filename,contactno,email,address,aboutus,quote);
-              f.setImagename(imagename);
-              f.setImagepath(imagepath);
+              Collection<Part> colpart=req.getParts();
+              Iterator<Part> it=colpart.iterator();
+              ArrayList<String> im=new ArrayList<>();
+              ArrayList<String> imi=new ArrayList<>();
+             
+              while(it.hasNext())
+               {
+                   Part p=it.next();
+                   InputStream isi=part.getInputStream();
+                   String pic=p.getName();
+                   if(pic.equals("pic"))
+                   {
+                        imagename=extractFileName(part);
+                      im.add(imagename);
+                    imagepath=dop.uploadFile(name, isi);
+                     imi.add(imagepath);
+                   }
+               }
+        f.setImagename(im);
+        f.setImagepath(imi);
               String msg = null;
          msg = cop.insertinlayout(f);
 //         out.println(msg);
