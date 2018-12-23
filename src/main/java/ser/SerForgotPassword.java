@@ -33,7 +33,7 @@ public class SerForgotPassword extends HttpServlet {
        out.println("hello");
        
         if(request.getParameter("submit")!=null)
-{
+        {
            try 
            {
                

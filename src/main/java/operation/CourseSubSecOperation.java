@@ -745,8 +745,26 @@ System.out.println("551"+id1);
             
          con.commit();
          return password;
-
-         
+ }
+ public String changepassword(String pid,String newpassword)
+ {
+  
+        PreparedStatement pstmt = null;
+        
+      
+        String sql = "UPDATE person SET password=? WHERE pid=?";
+        try {
+            con.setAutoCommit(false);
+             pstmt = con.prepareStatement(sql);
+            pstmt.setString(1,newpassword);
+            pstmt.setString(2,pid);
+            int r=pstmt.executeUpdate();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "success";
      
  }
        
