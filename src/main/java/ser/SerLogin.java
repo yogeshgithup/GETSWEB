@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import operation.CourseSubSecOperation;
 import operation.DropBoxOperation;
@@ -41,7 +42,8 @@ public class SerLogin extends HttpServlet {
          PrintWriter out=response.getWriter();
          
          
-           
+              HttpSession hs=request.getSession(true);  
+         
             String data=request.getParameter("data");
             System.out.println("98");
           System.out.println("---"+data);
@@ -63,6 +65,8 @@ public class SerLogin extends HttpServlet {
            
             String LoginId=obj.getString("Username");
             System.out.println(LoginId);
+            hs.setAttribute("pid",LoginId);
+          System.out.println("---"+hs.getAttribute("pid"));
             String Password=obj.getString("Password");
             System.out.println(Password);
             String msg = null;
