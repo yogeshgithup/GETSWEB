@@ -47,26 +47,32 @@ import org.json.JSONTokener;
 public class SerPerson extends HttpServlet {
      protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+         
+           String data=request.getParameter("data");
+            System.out.println("--data="+data);
+            JSONTokener js=new JSONTokener(data);
         ServletContext ctx=this.getServletContext();
+         System.out.println("helloo");
         Connection con=(Connection)ctx.getAttribute("MyConn");
             HttpSession hs=request.getSession(true);
-     String op=(String) hs.getAttribute("id");
-        System.out.println(op);
-            CourseSubSecOperation cop=new CourseSubSecOperation(con);
+    // String op=(String) hs.getAttribute("id");
+      //  System.out.println(op);
+      String op="s";  
+      CourseSubSecOperation cop=new CourseSubSecOperation(con);
         
         
-        Part part=request.getPart("Image");   
-      String ct=part.getContentType();
-      InputStream is=part.getInputStream();
-      String name=extractFileName(part);
-        System.out.println("---"+name);
+//     Part part=request.getPart("Image");   
+  //    String ct=part.getContentType();
+    //  InputStream is=part.getInputStream();
+      //String name=extractFileName(part);
+        //System.out.println("---"+name);
      
        
-        String accesstoken=ctx.getInitParameter("accesstoken");
-        DropBoxOperation dop=new DropBoxOperation(accesstoken);
+      //  String accesstoken=ctx.getInitParameter("accesstoken");
+      //  DropBoxOperation dop=new DropBoxOperation(accesstoken);
      
-        String url=dop.uploadFile(name, is);
-        System.out.println(url);
+       // String url=dop.uploadFile(name, is);
+       // System.out.println(url);
          if(request.getParameter("submit")!=null)
         {
             try {
@@ -93,8 +99,10 @@ public class SerPerson extends HttpServlet {
                 {
                     System.out.println("--90"+quali[i]);
                 }
-                String file_path=url;
-                String file_name=name;               
+                String file_path=null;
+                String file_name=null;
+               // String file_path=url;
+                //String file_name=name;               
                 String password=cop.randompassword();
                 //String mime_type=request.getParameter("mime_type");
                 
@@ -102,20 +110,31 @@ public class SerPerson extends HttpServlet {
                // CourseSubSecOperation cop=new CourseSubSecOperation(con);
                p.setQuali(quali);
                String msg = null;
+               msg = cop.insertinPerson(p);
+               
                 String mess="username="+email+"password="+password;
                 System.out.println(mess);
                 String num= "8200781397";
+                String guardian_contact_no=request.getParameter("guardian_contact_no");
+                String parent_name=request.getParameter("parent_name");
+                String parent_contact_no=request.getParameter("parent_contact_no");
+                String guardian_name=request.getParameter("guardian_name");
+                String course=request.getParameter("course");
                 
-                msg = cop.insertinPerson(p);
+                 
                 
-                SMSOperation sms=new SMSOperation();
-              //  System.out.println("12");
-                sms.sendSMS(num,mess);
-               //s System.out.println("3");
+                
+             
                 out.println(msg);
                 
                 System.out.println("116"+op);
-                
+                Student st=new Student(guardian_contact_no,parent_name,parent_contact_no,guardian_name,course);
+                String msgg=null;
+                msgg=cop.insertinstudent(st);
+                   SMSOperation sms=new SMSOperation();
+              //  System.out.println("12");
+                sms.sendSMS(num,mess);
+               //s System.out.println("3");
                 if(op.equals("a"))
                 {          
                     String addrole_id=(String)hs.getAttribute("addrole_id");
@@ -142,12 +161,11 @@ doPost(request,response);
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          PrintWriter out=response.getWriter();
-          out.println("i am called");
-         //   String data=request.getParameter("data");
-           // System.out.println("--"+data);
-           // JSONTokener js=new JSONTokener(data);
+        //  out.println("i am called");
+         
         ServletContext ctx=this.getServletContext();
         Connection con=(Connection)ctx.getAttribute("MyConn");
+        System.out.println("helloo");
             HttpSession hs=request.getSession(true);
      String op=(String) hs.getAttribute("id");
         System.out.println(op);
