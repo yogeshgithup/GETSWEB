@@ -738,6 +738,37 @@ System.out.println("551"+id1);
  
         return msg;
     }
+
+ public String forgotpassword(String email) throws SQLException
+ {
+     String password="hi";
+        PreparedStatement pstmt = null;
+        
+        ResultSet rs;
+        String sql = "SELECT password FROM person WHERE email=?";
+         
+            con.setAutoCommit(false);
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1,email);
+            
+            rs = pstmt.executeQuery(); 
+      
+           while (rs.next()) {               
+                               
+               System.out.println("1231213--"+rs.getString("email"));
+                password=rs.getString("password");
+               System.out.println(rs.getString("password"));
+
+           }
+            
+         con.commit();
+         return password;
+
+         
+     
+ }
+       
+
   
         public String insertinstudent(Student st) {
 
@@ -769,4 +800,5 @@ System.out.println("551"+id1);
         }
         return msg1;
       }    
+
 }
