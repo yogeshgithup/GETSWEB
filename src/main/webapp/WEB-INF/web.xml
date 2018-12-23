@@ -14,7 +14,7 @@
     </context-param>
     <context-param>
         <param-name>password</param-name>
-        <param-value>ajava</param-value>
+        <param-value>booo</param-value>
     </context-param>
     <context-param>
         <param-name>accesstoken</param-name>
@@ -95,6 +95,14 @@
         <servlet-name>SerUserRole</servlet-name>
         <servlet-class>ser.SerUserRole</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerForgotPassword</servlet-name>
+        <servlet-class>ser.SerForgotPassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerChangePassword</servlet-name>
+        <servlet-class>ser.SerChangePassword</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -170,6 +178,14 @@
     <servlet-mapping>
         <servlet-name>SerUserRole</servlet-name>
         <url-pattern>/SerUserRole</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerForgotPassword</servlet-name>
+        <url-pattern>/SerForgotPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerChangePassword</servlet-name>
+        <url-pattern>/SerChangePassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
