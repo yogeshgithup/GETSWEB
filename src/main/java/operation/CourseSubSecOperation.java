@@ -671,10 +671,8 @@ System.out.println("551"+id1);
             con.setAutoCommit(false);
             System.out.println("3");
             pstmt = con.prepareStatement(sql);
-            pstmtq=con.prepareStatement(sqlq);
+            pstmtq=con.prepareStatement(sqlq); 
             System.out.println("4");
-            System.out.println(f.getInstitutename());
-            System.out.println("5");
             pstmt.setString(1,f.getInstitutename());
             System.out.println("6");
             pstmt.setString(2, f.getFilepath());
@@ -692,36 +690,20 @@ System.out.println("551"+id1);
             pstmt.setString(8, f.getQuote());
             System.out.println("13");
             pstmt.executeUpdate();
-             ArrayList<String> imname=f.getImagename();
-             for(int i=0;i<imname.size();i++)
-             {
-                 pstmtq.setString(1,imname.get(i));
-                 int r=pstmtq.executeUpdate();
-             //    System.out.println("---result--"+r);
-             }
-            
+ 
+            ArrayList<String> imname=f.getImagename();
              ArrayList<String> impath=f.getImagepath();
-             for(int i=0;i<impath.size();i++)
+          
+            for(int i=0;i<impath.size();i++)
              {
-                 pstmtq.setString(1,impath.get(i));
-                 int r1=pstmtq.executeUpdate();
-             //    System.out.println("---result--"+r);
+                         pstmtq.setString(1,f.getInstitutename());
+                                pstmtq.setString(2,impath.get(i)); 
+                         pstmtq.setString(3,imname.get(i));
+                          
+                           int r=pstmtq.executeUpdate();
              }
-            
 
-
-
-
-//            System.out.println("14");
-//                 pstmtq.setString(1,f.getInstitutename());
-//             System.out.println("15");
-//                 pstmtq.setString(2,f.getImagepath());
-//            System.out.println("16");
-////                 pstmtq.setString(3,f.getImagename());
-//                 System.out.println("17");
-                 int r=pstmtq.executeUpdate();  
-                 System.out.println("18");
-                 System.out.println("---result--"+r);
+  System.out.println("14");
             System.out.println("19");
                  con.commit();
             System.out.println("20");

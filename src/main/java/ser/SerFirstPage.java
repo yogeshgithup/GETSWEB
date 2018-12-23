@@ -37,8 +37,6 @@ public class SerFirstPage extends HttpServlet {
         Connection con=(Connection)ctx.getAttribute("MyConn");
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
            Part part=req.getPart("image");
-      
-      //String ct=part.getContentType();
                   HttpSession hs=req.getSession(true);
       InputStream is=part.getInputStream();
         System.out.println(is);
@@ -67,22 +65,28 @@ public class SerFirstPage extends HttpServlet {
               Iterator<Part> it=colpart.iterator();
               ArrayList<String> im=new ArrayList<>();
               ArrayList<String> imi=new ArrayList<>();
-             
               while(it.hasNext())
                {
                    Part p=it.next();
                    InputStream isi=part.getInputStream();
+                   System.out.println("isi------"+isi);
                    String pic=p.getName();
+                   System.out.println("pic----"+pic);
                    if(pic.equals("pic"))
                    {
                         imagename=extractFileName(part);
-                      im.add(imagename);
-                    imagepath=dop.uploadFile(name, isi);
-                     imi.add(imagepath);
+                        System.out.println(imagename);
+                        im.add(imagename);
+                        imagepath=dop.uploadFile(imagename, isi);
+                       System.out.println(imagepath);
+                     imi.add(imagepath); 
                    }
                }
+              System.out.println("15");
         f.setImagename(im);
+            System.out.println("16");
         f.setImagepath(imi);
+        
               String msg = null;
          msg = cop.insertinlayout(f);
 //         out.println(msg);
@@ -102,6 +106,7 @@ res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"SignupPage.jsp?id=a");
     
     
     
+        
 }
     
       private String extractFileName(Part part) {
@@ -111,6 +116,7 @@ res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"SignupPage.jsp?id=a");
             if (s.trim().startsWith("filename")) {
                 return s.substring(s.indexOf("=") + 2, s.length()-1);
             }
+  
         }
         return "";
     }
