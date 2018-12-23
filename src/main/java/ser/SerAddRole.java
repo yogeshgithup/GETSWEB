@@ -39,7 +39,8 @@ public class SerAddRole extends HttpServlet {
         
         if(req.getParameter("submit")!=null)
         {
-              String addrole_id=req.getParameter("AddROLE_Id");
+             
+              String addrole_id=req.getParameter("A ddROLE_Id");
               String role=req.getParameter("Role");
              AddRole ar= new AddRole(addrole_id,role);
          CourseSubSecOperation cop=new CourseSubSecOperation(con);

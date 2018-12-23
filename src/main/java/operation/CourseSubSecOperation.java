@@ -13,6 +13,7 @@ import data.FirstPage;
 import data.Login;
 import data.Person;
 import data.Section;
+import data.Student;
 import data.Subject;
 import data.user_role;
 import static java.lang.System.out;
@@ -687,5 +688,34 @@ System.out.println("551"+id1);
         return msg;
     }
   
-       
+        public String insertinstudent(Student st) {
+
+        String msg1 = "success";
+        PreparedStatement pstmt = null;
+ 
+        String sql = "insert into Student value(?,?,?,?,?)";
+        try {
+            con.setAutoCommit(false);
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, st.getGuardian_contact_no());
+            
+            pstmt.setString(2, st.getParent_name());
+            pstmt.setString(3, st.getParent_contact_no());
+            pstmt.setString(4, st.getGuardian_contact_no());
+            pstmt.setString(5, st.getCourse());
+            pstmt.executeUpdate();
+
+            con.commit();
+            msg1 = "success";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg1 = cnfe.getMessage();
+        }
+        return msg1;
+      }    
 }
