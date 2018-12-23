@@ -41,11 +41,12 @@ public class SerAddPriority extends HttpServlet {
         {
               String Priority=req.getParameter("Priority");
               String role=req.getParameter("Role");
-    //
-    //AddRole ar= new AddRole(addrole_id,role);
+
+        //     AddRole ar= new AddRole(addrole_id,role);
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
          String msg = null;
-  //       msg = cop.insertRole(ar);
+        // msg = cop.insertRole(ar);
+
          out.println(msg);
 
         }

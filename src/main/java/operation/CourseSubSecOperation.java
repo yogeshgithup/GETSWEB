@@ -13,10 +13,12 @@ import data.FirstPage;
 import data.Login;
 import data.Person;
 import data.Section;
+import data.Student;
 import data.Subject;
 import data.user_role;
 import static java.lang.System.out;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Random;
@@ -691,13 +693,33 @@ System.out.println("551"+id1);
             pstmt.setString(8, f.getQuote());
             System.out.println("13");
             pstmt.executeUpdate();
-            System.out.println("14");
-                 pstmtq.setString(1,f.getInstitutename());
-             System.out.println("15");
-                 pstmtq.setString(2,f.getImagepath());
-            System.out.println("16");
-                 pstmtq.setString(3,f.getImagename());
-                 System.out.println("17");
+             ArrayList<String> imname=f.getImagename();
+             for(int i=0;i<imname.size();i++)
+             {
+                 pstmtq.setString(1,imname.get(i));
+                 int r=pstmtq.executeUpdate();
+             //    System.out.println("---result--"+r);
+             }
+            
+             ArrayList<String> impath=f.getImagepath();
+             for(int i=0;i<impath.size();i++)
+             {
+                 pstmtq.setString(1,impath.get(i));
+                 int r1=pstmtq.executeUpdate();
+             //    System.out.println("---result--"+r);
+             }
+            
+
+
+
+
+//            System.out.println("14");
+//                 pstmtq.setString(1,f.getInstitutename());
+//             System.out.println("15");
+//                 pstmtq.setString(2,f.getImagepath());
+//            System.out.println("16");
+////                 pstmtq.setString(3,f.getImagename());
+//                 System.out.println("17");
                  int r=pstmtq.executeUpdate();  
                  System.out.println("18");
                  System.out.println("---result--"+r);
@@ -716,6 +738,7 @@ System.out.println("551"+id1);
  
         return msg;
     }
+
  public String forgotpassword(String email) throws SQLException
  {
      String password="hi";
@@ -745,4 +768,37 @@ System.out.println("551"+id1);
      
  }
        
+
+  
+        public String insertinstudent(Student st) {
+
+        String msg1 = "success";
+        PreparedStatement pstmt = null;
+ 
+        String sql = "insert into Student value(?,?,?,?,?)";
+        try {
+            con.setAutoCommit(false);
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, st.getGuardian_contact_no());
+            
+            pstmt.setString(2, st.getParent_name());
+            pstmt.setString(3, st.getParent_contact_no());
+            pstmt.setString(4, st.getGuardian_contact_no());
+            pstmt.setString(5, st.getCourse());
+            pstmt.executeUpdate();
+
+            con.commit();
+            msg1 = "success";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg1 = cnfe.getMessage();
+        }
+        return msg1;
+      }    
+
 }
