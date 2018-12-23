@@ -25,6 +25,9 @@ import javax.servlet.http.Part;
 import operation.CourseSubSecOperation;
 import operation.DropBoxOperation;
 import operation.SMSOperation;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 /**
  *
@@ -32,7 +35,56 @@ import operation.SMSOperation;
  */
 public class SerLogin extends HttpServlet {
    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+ 
+   protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+         PrintWriter out=response.getWriter();
+         
+         
+           
+            String data=request.getParameter("data");
+            System.out.println("98");
+          System.out.println("---"+data);
+            System.out.println("45");
+       
+           JSONTokener js=new JSONTokener(data);
+            System.out.println("78");
+            
+           JSONArray ja=(JSONArray)js.nextValue();
+           JSONObject obj=(JSONObject)ja.getJSONObject(0);
+            System.out.println("46"+obj.toString());
+          
+  
+        ServletContext ctx=this.getServletContext();
+        Connection con=(Connection)ctx.getAttribute("MyConn");
+        System.out.println("welcome");
+        CourseSubSecOperation cop=new CourseSubSecOperation(con);
+            System.out.println("welcome2");
+           
+            String LoginId=obj.getString("Username");
+            System.out.println(LoginId);
+            String Password=obj.getString("Password");
+            System.out.println(Password);
+            String msg = null;
+            Login l=new Login(LoginId,Password);
+            msg = cop.LoginProcess(l);
+            if(msg.equals("Admin"))
+            {
+              //  response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AdminPanel.jsp");
+               out.println("A1");
+            }
+            else
+            {
+               // response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"StaffPanel.jsp");
+               out.println("F");
+            }
+            
+            
+       
+   }
+
+   
+   protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          PrintWriter out=response.getWriter();
         ServletContext ctx=this.getServletContext();
@@ -64,7 +116,6 @@ public class SerLogin extends HttpServlet {
 
     
     
-    
 }
       private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
@@ -79,3 +130,4 @@ public class SerLogin extends HttpServlet {
 
 
 }
+ 

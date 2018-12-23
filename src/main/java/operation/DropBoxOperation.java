@@ -30,7 +30,8 @@ public class DropBoxOperation {
     public DropBoxOperation(String ACCESS_TOKEN)
     {
         // Create Dropbox client
-        config = new DbxRequestConfig("text-edit/0.1");
+        
+        config = new DbxRequestConfig("text-edit/0.1","en-US");
         client = new DbxClientV2(config, ACCESS_TOKEN);
         
         try {
@@ -99,7 +100,6 @@ public class DropBoxOperation {
         }
         catch (Exception dbxe)
         {
-            
             System.out.println("105 : DbxException Caused By "+dbxe.getLocalizedMessage());
         }
     }
