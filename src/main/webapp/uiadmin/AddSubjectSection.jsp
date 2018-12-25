@@ -111,7 +111,7 @@ $("input[type='button']").click(function(){
                     <br />
 
                                             
-  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="get"action="<%=application.getContextPath()%>/SerViewCourse" >
+  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="get"  >
       <h>Select Course</h>   
       <select  id="course" name="course">
         

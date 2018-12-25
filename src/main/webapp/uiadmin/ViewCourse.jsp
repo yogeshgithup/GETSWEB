@@ -56,7 +56,7 @@
                   <div class="x_content">
                     <br />
                         
-  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="get" >
+  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" >
              
         <table class="table table-striped projects">
                       <thead>
@@ -72,10 +72,14 @@
                       </thead>
                       <tbody>   
                               <%
+                              System.out.println("75");
                               HashSet<Course> setcourse=(HashSet<Course>)session.getAttribute("setcourse");
+                              System.out.println("77");
                               Iterator<Course> it=setcourse.iterator();
+                                System.out.println("78");
                               while(it.hasNext())
                               {
+                                    System.out.println("82");
                                   Course course=it.next();
                                 %>
                                   <tr>
@@ -95,7 +99,7 @@
                                          <%=course.getHours_per_week()%>
                                        </td>
                                         <td>
-                                         <%=course.getDays_per_week()%>
+                                          <%=course.getDays_per_week()%>
                                        </td>
                                         <td>
                                             <a href="<%=application.getContextPath()%>/SerDelete?id=<%=course.getC_id()%>" class="btn btn-danger btn-xs"  ><i class="fa fa-trash-o"></i> Delete </a>
@@ -120,5 +124,5 @@
       <!-- /page content -->
       <%@include file="adminfootersfiles.jsp" %>
  
-  </body>
+   </body>
 </html>
