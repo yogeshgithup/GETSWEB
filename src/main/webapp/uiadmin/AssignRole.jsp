@@ -50,7 +50,7 @@
                     <br />
 
                                             
-  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post"action="<%=application.getContextPath()%>/SerUserRole">
+  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerUserRole">
       <h3>Select User</h3>   
       <select style="width:25%" id="person" name="p_id" multiple>
                                <%  Connection con=(Connection)application.getAttribute("MyConn");

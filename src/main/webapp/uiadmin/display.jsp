@@ -1,3 +1,4 @@
+<%@page import="java.time.LocalDate"%>
 <!doctype html>
 <html lang="en">
 	<head>
@@ -8,29 +9,28 @@
         <!--===============================================================================================-->	
 	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="<%=application.getContextPath()%>/uiadmin/vendors/bootstrap/dist/css/bootstrap.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="<%=application.getContextPath()%>/uiadmin/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="fonts/iconic/css/material-design-iconic-font.min.css">
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+	<link rel="stylesheet" type="text/css" href="<%=application.getContextPath()%>/uiadmin/vendor/css-hamburgers/hamburgers.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+	<link rel="stylesheet" type="text/css" href="<%=application.getContextPath()%>/uiadmin/vendor/animsition/css/animsition.min.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+	<link rel="stylesheet" type="text/css" href="<%=application.getContextPath()%>/uiadmin/vendor/select2/select2.min.css">
 <!--===============================================================================================-->	
-	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+	<link rel="stylesheet" type="text/css" href="<%=application.getContextPath()%>/uiadmin/vendor/daterangepicker/daterangepicker.css">
 <!--===============================================================================================-->
-	<link rel="stylesheet" type="text/css" href="css/util.css">
-	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="<%=application.getContextPath()%>/uiadmin/css/util.css">
+	<link rel="stylesheet" type="text/css" href="<%=application.getContextPath()%>/uiadmin/css/main.css">
 <!--===============================================================================================-->
-
 
         <!-- Main CSS --> 
-        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="<%=application.getContextPath()%>/uiadmin/vendor/select2/style.css">
 
         <!-- Font Awesome -->
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -46,7 +46,7 @@
                 <a class="navbar-brand" href="#"><span>Generic</span>E-system</a>
 
                 <!-- Mobile menu toggle -->
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar" aria-controls="mainNavbar"  aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
@@ -80,7 +80,7 @@
                                 <a class="nav-link" href="#log">Login</a>
                         </li>
                     </ul>
-                    
+                     
                     <form class="form-inline header-search-form my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="text" size="6"  placeholder="Search" aria-label="Search">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
@@ -148,7 +148,7 @@
                 <div class="padded-box row">
                     <div class="col-md-4">
                         <div class="card text-center">
-                          <img class="card-img-top" src="images/pic1.jpg" alt="Card image cap">
+                          <img class="card-img-top" src="<%=application.getContextPath()%>/uiadmin/images/pic1.jpg" alt="Card image cap">
                           <div class="card-body">
                             <p class="card-text">Integer dictum sed nibh vitae imperdiet. Nam suscipit lorem nec dui viverra vestibulum. </p>
                             <a href="#" class="btn btn-primary">Left link</a>
@@ -159,7 +159,7 @@
 
                     <div class="col-md-4">
                         <div class="card text-center">
-                          <img class="card-img-top" src="images/pic2.jpg" alt="Card image cap">
+                          <img class="card-img-top" src="<%=application.getContextPath()%>/uiadmin/images/pic2.jpg" alt="Card image cap">
                           <div class="card-body">
                             <p class="card-text">Morbi iaculis, justo vitae dignissim aliquam, quam eros vehicula est, facilisis ultrices mi.</p>
                              <a href="#" class="btn btn-primary">Left link</a>
@@ -170,7 +170,7 @@
 
                     <div class="col-md-4">
                         <div class="card text-center">
-                          <img class="card-img-top" src="images/pic3.jpg" alt="Card image cap">
+                          <img class="card-img-top" src="<%=application.getContextPath()%>/uiadmin/images/pic3.jpg" alt="Card image cap">
                           <div class="card-body">
                             <p class="card-text">Nam lacinia aliquet tempus. Sed vitae semper augue. Vestibulum pulvinar laoreet egestas. </p>
                              <a href="#" class="btn btn-primary">Left link</a>
@@ -521,7 +521,7 @@
                 <div class="padded-box pt-0 row">
                     <div class="col-md-4">
                         <div class="card text-center">
-                          <img class="card-img-top" src="images/pic4.jpg" alt="Card image cap">
+                          <img class="card-img-top" src="<%=application.getContextPath()%>/uiadmin/images/pic4.jpg" alt="Card image cap">
                           <div class="card-body">
                             <blockquote class="card-text">In tristique sem vitae metus ornare luctus tempus nisl volutpat. Integer et est id nisi tempus pharetra sagittis et libero.</blockquote>
                             <p class="card-text quote-text">- Joe Bloggs, <a href="#">A Company</a></p>
@@ -531,7 +531,7 @@
 
                     <div class="col-md-4">
                         <div class="card text-center">
-                          <img class="card-img-top" src="images/pic5.jpg" alt="Card image cap">
+                          <img class="card-img-top" src="<%=application.getContextPath()%>/uiadmin/images/pic5.jpg" alt="Card image cap">
                           <div class="card-body">
                             <blockquote class="card-text">Aenean non libero vestibulum, finibus lacus quis, ullamcorper diam. Ut quis sollicitudin mi, dignissim ultrices elit. </blockquote>
                             <p class="card-text quote-text">- Jane Doe, <a href="#">Marketing Business</a></p>
@@ -541,7 +541,7 @@
 
                     <div class="col-md-4">
                         <div class="card text-center">
-                          <img class="card-img-top" src="images/pic6.jpg" alt="Card image cap">
+                          <img class="card-img-top" src="<%=application.getContextPath()%>/uiadmin/images/pic6.jpg" alt="Card image cap">
                           <div class="card-body">
                             <blockquote class="card-text">Quisque faucibus neque sodales, suscipit nisi vitae, placerat nisi. Nam cursus molestie posuere, Aenean non libero vestibulum. </blockquote>
                             <p class="card-text quote-text">- Annaleigh Rose, <a href="#">CEO</a></p>
@@ -792,7 +792,7 @@
                     <div class="col-md-9">
                        <h1>Locate us</h1><br></br>
                       
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.9856568207324!2d-73.9852353!3d40.7623402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2585631334765%3A0x5dbf06b70e5364d8!2sGershwin+Theatre!5e0!3m2!1sen!2suk!4v1517586622554" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3021.9856568207324!2d-73.9852353!3d40.7623402!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c2585631334765%3A0x5dbf06b70e5364d8!2sGershwin+Theatre!5e0!3m2!1sen!2suk!4v1517586622554" width="100" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
                     </div>
                 </div>
             </div>
@@ -925,9 +925,9 @@
 
         <!-- Bootcamp JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" ></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>
 
     </body>
 </html>
