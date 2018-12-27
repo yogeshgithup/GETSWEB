@@ -41,9 +41,6 @@ public class SerLogin extends HttpServlet {
             throws ServletException, IOException {
          PrintWriter out=response.getWriter();
          
-         
-              HttpSession hs=request.getSession(true);  
-         
             String data=request.getParameter("data");
             System.out.println("98");
           System.out.println("---"+data);
@@ -63,14 +60,13 @@ public class SerLogin extends HttpServlet {
         CourseSubSecOperation cop=new CourseSubSecOperation(con);
             System.out.println("welcome2");
            
-            String LoginId=obj.getString("Username");
-            System.out.println(LoginId);
-            hs.setAttribute("pid",LoginId);
-          System.out.println("---"+hs.getAttribute("pid"));
+            String email=obj.getString("Username");
+            System.out.println(email);
+           
             String Password=obj.getString("Password");
             System.out.println(Password);
             String msg = null;
-            Login l=new Login(LoginId,Password);
+            Login l=new Login(email,Password);
             msg = cop.LoginProcess(l);
             if(msg.equals("Admin"))
             {
