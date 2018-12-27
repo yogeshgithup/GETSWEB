@@ -47,29 +47,30 @@ public class SerChangePassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          HttpSession session=request.getSession(true);  
-        String pid=(String)session.getAttribute("pid");
-        System.out.println("pid-----"+pid);
+         ServletContext ctx=this.getServletContext();
+       Connection con=(Connection)ctx.getAttribute("MyConn");
+       
          PrintWriter out=response.getWriter();
          String data=request.getParameter("data");
+         System.out.println(data);
+         
          JSONTokener js=new JSONTokener(data);
             System.out.println("78");
             
          JSONArray ja=(JSONArray)js.nextValue();
+         System.out.println("6789");
          JSONObject obj=(JSONObject)ja.getJSONObject(0);
             System.out.println("46"+obj.toString());
             
-       ServletContext ctx=this.getServletContext();
-       Connection con=(Connection)ctx.getAttribute("MyConn");
-       out.println("hello");
+      
        
         String password= obj.getString("password");
         String newpassword =obj.getString("newpassword");
-        
+        String email=obj.getString("email");
        
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
             
-       String pswd=cop.changepassword(pid, newpassword); 
+       String pswd=cop.changepassword( newpassword,email); 
     }
 
  

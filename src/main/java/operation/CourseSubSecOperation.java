@@ -746,18 +746,18 @@ System.out.println("551"+id1);
          con.commit();
          return password;
  }
- public String changepassword(String pid,String newpassword)
+ public String changepassword(String newpassword,String email)
  {
   
         PreparedStatement pstmt = null;
         
       
-        String sql = "UPDATE person SET password=? WHERE pid=?";
+        String sql = "UPDATE person SET password=? WHERE email=?";
         try {
             con.setAutoCommit(false);
              pstmt = con.prepareStatement(sql);
             pstmt.setString(1,newpassword);
-            pstmt.setString(2,pid);
+            pstmt.setString(2,email);
             int r=pstmt.executeUpdate();
         }
         catch (SQLException ex) {
@@ -801,4 +801,5 @@ System.out.println("551"+id1);
         return msg1;
       }    
 
+   
 }
