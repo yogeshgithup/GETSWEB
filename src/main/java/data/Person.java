@@ -28,7 +28,7 @@ public class Person {
     private String file_name;
     private String password; 
 
-    public String[] getQuali() {
+   public String[] getQuali() {
         return quali;
     }
 

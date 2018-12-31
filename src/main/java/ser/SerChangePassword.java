@@ -26,7 +26,7 @@ import org.json.JSONTokener;
  */
 public class SerChangePassword extends HttpServlet {
 
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    protected void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
@@ -44,7 +44,7 @@ public class SerChangePassword extends HttpServlet {
     }
 
  
-    @Override
+   @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          ServletContext ctx=this.getServletContext();
@@ -75,9 +75,24 @@ public class SerChangePassword extends HttpServlet {
 
  
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
+  res.setContentType("text/html");
+        PrintWriter out=res.getWriter();
+        HttpSession hs=req.getSession(true);
+        ServletContext ctx=this.getServletContext();
+        Connection con=(Connection)ctx.getAttribute("MyConn");
         
+        if(req.getParameter("submit")!=null)
+        {
+              String Enter_Current_Password=req.getParameter("Enter_Current_Password");
+              String New_Password=req.getParameter("New_Password");
+              String loginid=(String) hs.getAttribute("loginid");
+         CourseSubSecOperation cop=new CourseSubSecOperation(con);
+         String msg = null;
+         msg = cop.insertinChangePassword(loginid,New_Password);
+         out.println(msg);
+        }     
     }
 
  
