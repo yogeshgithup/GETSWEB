@@ -1,3 +1,6 @@
+<%@page import="java.util.Iterator,data.FirstPage"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="data.Course"%>
 <%@page import="java.time.LocalDate"%>
 <!doctype html>
 <html lang="en">
@@ -34,22 +37,33 @@
 
         <!-- Font Awesome -->
         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-    </head>
+    
+        </head>
   
-    <body id="home" data-spy="scroll" data-target="#navbar-top" data-offset="200">
+              <body id="home" data-spy="scroll" data-target="#navbar-top" data-offset="200">
         
         <!-- Main navigation -->
         <nav id="navbar-top" class="navbar fixed-top navbar-expand-md navbar-dark">
             <div class="container">
-                
+<%
+System.out.println("entry");
+                             HashSet<FirstPage> setfirstpage=(HashSet<FirstPage>)session.getAttribute("setfirstpage");
+System.out.println("entry1"+setfirstpage);                      
+                             Iterator<FirstPage> it=setfirstpage.iterator();
+System.out.println("entry1"+it);                            
+                             while(it.hasNext())
+                              {
+                                    System.out.println("82");
+                                  FirstPage fp=it.next();
+                              
+%>                
                 <!-- Company name shown on mobile -->
-                <a class="navbar-brand" href="#"><span>Generic</span>E-system</a>
-
+                <a class="navbar-brand" href="#"><span><%=fp.getInstitutename()%></a>
+<%}%>
                 <!-- Mobile menu toggle -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar" aria-controls="mainNavbar"  aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <!-- Main navigation items -->
                 <div class="collapse navbar-collapse" id="mainNavbar">
                     <ul class="navbar-nav mr-auto">
@@ -73,7 +87,7 @@
                         <li data-toggle="collapse" data-target=".navbar-collapse.show" class="nav-item">
                                 <a class="nav-link" href="#one-column">Contact us</a>
                         </li>
-                        <li data-toggle="collapse" data-target=".navbar-collapse.show" class="nav-item">
+                         <li data-toggle="collapse" data-target=".navbar-collapse.show" class="nav-item">
                                 <a class="nav-link" href="#locate">Location</a>
                         </li>
                         <li data-toggle="collapse" data-target=".navbar-collapse.show" class="nav-item">

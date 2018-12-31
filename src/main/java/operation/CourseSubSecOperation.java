@@ -170,6 +170,34 @@ public class CourseSubSecOperation {
         return msg;
     }
 
+    public HashSet<FirstPage> getfirstpage()
+    {
+        System.out.println("175----in");
+       HashSet<FirstPage> setfirstpage=new HashSet<FirstPage>();
+        System.out.println("176-------");
+       Statement stmt = null;
+       ResultSet rs=null;
+       String sql="select * from layout";
+        System.out.println("181------sql"+sql);
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           while(rs.next())  
+           {
+               FirstPage firstpage=new FirstPage(rs.getString("institutename"),rs.getString("filepath"),rs.getString("filename"),rs.getInt("contactno"),rs.getString("email"),rs.getString("address"),rs.getString("aboutus"),rs.getString("quotes"));
+               System.out.println("189----firstpage"+firstpage);
+                       setfirstpage.add(firstpage);
+                       System.out.println("191-----");
+           }
+       }catch(Exception e)
+       {
+           setfirstpage=null;
+       }
+        
+        return setfirstpage;
+    }
+    
     
     public HashSet<Course> getCourse()
     {
