@@ -54,7 +54,7 @@ $("input[type='button']").click(function(){
           
         location.href="<%=application.getContextPath()%>/SerSubject?cid="+course_id+"&subject_id="+subject_id+"&subject_name="+subject_name+"&hours_per_week="+hours_per_week+"&days_per_week="+days_per_week;
                   
-           //       alert("Course_id="+course_id+"Subject_Id="+section_id+"Subject_Name="+section_name);
+          //       alert("Course_id="+course_id+"Subject_Id="+section_id+"Subject_Name="+section_name);
     });
                      $("#f1").append(btnsubmit);
                     }       
@@ -132,7 +132,7 @@ $("input[type='button']").click(function(){
           
       </select>
       <h4>Is The Course Divided.</h4>
-    <p> 
+    <p>  
         <label><input type="checkbox" class="flat" name="radio" value="subject">Subject</label> 
         <label><input type="checkbox" class="flat" name="radio" value="section">Section</label>
     </p>

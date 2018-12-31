@@ -5,6 +5,7 @@
  */
 package ser;
 
+import data.FirstPage;
 import data.Person;
 import data.Student;
 import data.user_role;
@@ -222,9 +223,17 @@ public class SerPerson extends HttpServlet {
                 if(op.equals("a"))
                 {          
                     String addrole_id=(String)hs.getAttribute("addrole_id");
-                   user_role ur= new user_role(p_id,addrole_id);
-                   msg = cop.insertuser_role(ur);
+                    System.out.println("226----");
+                    user_role ur= new user_role(p_id,addrole_id);
+                    System.out.println("227----");
+                    msg = cop.insertuser_role(ur);
                        
+                   HashSet<FirstPage> setfirstpage=cop.getfirstpage();
+                    System.out.println("232----setfirstpage"+setfirstpage);
+                   hs.setAttribute("setfirstpage",setfirstpage);
+                    System.out.println("234-------");
+                   response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"display.jsp");
+            
                 }
                 
             } catch (ParseException ex) {
@@ -254,4 +263,3 @@ public class SerPerson extends HttpServlet {
 
     }
   
-

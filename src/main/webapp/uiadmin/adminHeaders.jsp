@@ -30,4 +30,4 @@
     <link href="<%=application.getContextPath()%>/uiadmin/vendors/jqvmap/dist/jqvmap.min.css" rel="stylesheet"/>
     <!-- Custom Theme Style -->
     <link href="<%=application.getContextPath()%>/uiadmin/build/css/custom.min.css" rel="stylesheet">
-    
+     

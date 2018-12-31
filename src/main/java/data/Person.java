@@ -6,6 +6,7 @@
 package data;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
 
 public class Person {
@@ -28,12 +29,21 @@ public class Person {
     private String file_name;
     private String password; 
 
+    HashSet<FirstPage> setfirstpage;
     public String[] getQuali() {
         return quali;
     }
 
     public void setQuali(String[] quali) {
-        this.quali = quali;
+        this.quali = quali; 
+    }
+    
+    public HashSet<FirstPage> getSetfirstpage() {
+        return setfirstpage;
+    }
+
+    public void setSetfirstpage(HashSet<FirstPage> setfirstpage) {
+        this.setfirstpage = setfirstpage;
     }
 
     public Person(String p_id,String email, String gender, Date dob, String home_no, String street_no, String street_name, String area, String city, int pincode, long contact_no, String f_name, String m_name, String l_name, String file_path, String file_name, String password) {
