@@ -21,6 +21,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import operation.CourseSubSecOperation;
 import operation.DropBoxOperation;
@@ -40,8 +41,6 @@ public class SerLogin extends HttpServlet {
             throws ServletException, IOException {
          PrintWriter out=response.getWriter();
          
-         
-           
             String data=request.getParameter("data");
             System.out.println("98");
           System.out.println("---"+data);
@@ -61,12 +60,13 @@ public class SerLogin extends HttpServlet {
         CourseSubSecOperation cop=new CourseSubSecOperation(con);
             System.out.println("welcome2");
            
-            String LoginId=obj.getString("Username");
-            System.out.println(LoginId);
+            String email=obj.getString("Username");
+            System.out.println(email);
+           
             String Password=obj.getString("Password");
             System.out.println(Password);
             String msg = null;
-            Login l=new Login(LoginId,Password);
+            Login l=new Login(email,Password);
             msg = cop.LoginProcess(l);
             if(msg.equals("Admin"))
             {
@@ -88,14 +88,17 @@ public class SerLogin extends HttpServlet {
             throws ServletException, IOException {
          PrintWriter out=response.getWriter();
         ServletContext ctx=this.getServletContext();
+       HttpSession hs=request.getSession(true);
+              
         Connection con=(Connection)ctx.getAttribute("MyConn");
-        System.out.println("welcome");
+        System.out.println("welcome11");
         CourseSubSecOperation cop=new CourseSubSecOperation(con);
              System.out.println(request.getParameter("submit"));
         if(request.getParameter("submit")!=null)
         {
             System.out.println("welcome2");
             String LoginId=request.getParameter("LoginId");
+             hs.setAttribute("loginid",LoginId);
             String Password=request.getParameter("Password");
             String msg = null;
             Login l=new Login(LoginId,Password);

@@ -28,9 +28,9 @@ public class Person {
     private String file_path;
     private String file_name;
     private String password; 
-
     HashSet<FirstPage> setfirstpage;
     public String[] getQuali() {
+
         return quali;
     }
 

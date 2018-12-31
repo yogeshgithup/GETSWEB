@@ -773,8 +773,26 @@ System.out.println("551"+id1);
             
          con.commit();
          return password;
-
-         
+ }
+ public String changepassword(String newpassword,String email)
+ {
+  
+        PreparedStatement pstmt = null;
+        
+      
+        String sql = "UPDATE person SET password=? WHERE email=?";
+        try {
+            con.setAutoCommit(false);
+             pstmt = con.prepareStatement(sql);
+            pstmt.setString(1,newpassword);
+            pstmt.setString(2,email);
+            int r=pstmt.executeUpdate();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return "success";
      
  }
        
@@ -811,4 +829,26 @@ System.out.println("551"+id1);
         return msg1;
       }    
 
+    public String insertinChangePassword(String loginid, String New_Password) {
+        
+        
+        PreparedStatement pstmt = null;
+        
+      
+        String sql = "UPDATE person SET password=? WHERE email=?";
+        try {
+            con.setAutoCommit(false);
+             pstmt = con.prepareStatement(sql);
+            pstmt.setString(1,loginid);
+            pstmt.setString(2,New_Password);
+            int r=pstmt.executeUpdate();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        return "success";
+    
+    }
+   
 }
