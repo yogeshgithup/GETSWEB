@@ -88,14 +88,17 @@ public class SerLogin extends HttpServlet {
             throws ServletException, IOException {
          PrintWriter out=response.getWriter();
         ServletContext ctx=this.getServletContext();
+       HttpSession hs=request.getSession(true);
+              
         Connection con=(Connection)ctx.getAttribute("MyConn");
-        System.out.println("welcome");
+        System.out.println("welcome11");
         CourseSubSecOperation cop=new CourseSubSecOperation(con);
              System.out.println(request.getParameter("submit"));
         if(request.getParameter("submit")!=null)
         {
             System.out.println("welcome2");
             String LoginId=request.getParameter("LoginId");
+             hs.setAttribute("loginid",LoginId);
             String Password=request.getParameter("Password");
             String msg = null;
             Login l=new Login(LoginId,Password);

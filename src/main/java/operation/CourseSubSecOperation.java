@@ -801,5 +801,26 @@ System.out.println("551"+id1);
         return msg1;
       }    
 
+    public String insertinChangePassword(String loginid, String New_Password) {
+        
+        
+        PreparedStatement pstmt = null;
+        
+      
+        String sql = "UPDATE person SET password=? WHERE email=?";
+        try {
+            con.setAutoCommit(false);
+             pstmt = con.prepareStatement(sql);
+            pstmt.setString(1,loginid);
+            pstmt.setString(2,New_Password);
+            int r=pstmt.executeUpdate();
+        }
+        catch (SQLException ex) {
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+        return "success";
+    
+    }
    
 }
