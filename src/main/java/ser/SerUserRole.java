@@ -6,6 +6,7 @@
 package ser;
 
 import data.AddRole;
+import data.Assign_role;
 import data.user_role;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,14 +37,15 @@ public class SerUserRole extends HttpServlet {
         if(request.getParameter("submit")!=null)
         {
          //   System.out.println("41----Welcome in");
-              String p_id=request.getParameter("p_id");
+              String p_id[]=request.getParameterValues("p_id");
            //   System.out.println("43----PID"+p_id);
               String role_id=request.getParameter("role_id");
              // System.out.println("45-----roleid"+role_id);
-             user_role ur= new user_role(p_id,role_id);
+             Assign_role ar= new Assign_role(role_id);
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
+         ar.setP_id(p_id);
          String msg = null;
-         msg = cop.insertuser_role(ur);
+         msg = cop.assign_role(ar);
          out.println(msg);
 
     }

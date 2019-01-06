@@ -69,7 +69,7 @@
                                 %>
                                   
                                 
-                                  <option value="<%=person.getP_id()%>"><%=person.getP_id()%></option>
+                                  <option value="<%=person.getP_id()%>"><%=person.getP_id()%>       <%=person.getF_name()%>      <%=person.getM_name()%>      <%=person.getL_name()%></option>
                                   <% } %>
       </select>
       <br /> <br />

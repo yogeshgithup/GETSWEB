@@ -55,7 +55,7 @@ System.out.println("entry1"+it);
                               {
                                     System.out.println("82");
                                   FirstPage fp=it.next();
-                              
+                              System.out.println(fp.getInstitutename());
 %>                
                 <!-- Company name shown on mobile -->
                 <a class="navbar-brand" href="#"><span><%=fp.getInstitutename()%></a>

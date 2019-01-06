@@ -8,6 +8,7 @@ package operation;
 import data.AddAttribute;
 import data.AddDesignation;
 import data.AddRole;
+import data.Assign_role;
 import data.Course;
 import data.FirstPage;
 import data.Login;
@@ -389,7 +390,7 @@ public class CourseSubSecOperation {
             pstmt.setString(17, p.getPassword());
             //pstmt.setString(17, p.getMime_type());
             
-            pstmt.executeUpdate();
+            pstmt.executeUpdate(); 
              String quali[]=p.getQuali();
              for(int i=0;i<quali.length;i++)
              {
@@ -556,6 +557,39 @@ public class CourseSubSecOperation {
         }
         return msg;
     }   
+
+            public String assign_role(Assign_role ar) {
+
+        String msg = "success";
+        PreparedStatement pstmt = null;
+ 
+        String sql = "insert into user_role value(?,?)";
+        try {
+            con.setAutoCommit(false);
+            pstmt = con.prepareStatement(sql);
+             String p_id[]=ar.getP_id();
+             for(int i=0;i<p_id.length;i++)
+             {
+                 pstmt.setString(1,p_id[i]);
+                 pstmt.setString(2,ar.getRole_id());
+                 int r=pstmt.executeUpdate();
+             //    System.out.println("---result--"+r);
+             }       
+            con.commit();
+            msg = "success";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return msg;
+    }   
+
+      
       public String insertdesignation(AddDesignation obj) {
 
         String msg = "success";
@@ -632,9 +666,10 @@ public class CourseSubSecOperation {
        
        public String LoginProcess(Login l)
        {
+      
            String msg="hi";
-        PreparedStatement pstmt = null;
-        PreparedStatement pstmtt = null;
+        PreparedStatement pstmt;
+        PreparedStatement pstmtt;
         ResultSet rs,rs1;
         String sql = "SELECT email,password,p_id FROM person WHERE email=? and password=?";
         String sqlq="select p_id from user_role where role_id=?";
@@ -645,24 +680,20 @@ public class CourseSubSecOperation {
             pstmt.setString(1,l.getLoginId());
             pstmt.setString(2,l.getPassword());
             rs = pstmt.executeQuery(); 
-      
-           while (rs.next()) {               
-                               
-               System.out.println("1231213--"+rs.getString("email"));
-               System.out.println("23132132--"+rs.getString("password"));
+           while (rs.next()) {                                             
                id=rs.getString("p_id");
                System.out.println("6534----"+id);
            }
            
-            pstmt = con.prepareStatement(sqlq);
-            pstmt.setString(1,"1");
-            rs1 = pstmt.executeQuery(); 
+            pstmtt= con.prepareStatement(sqlq);
+            pstmtt.setString(1,"1");
+            rs1 = pstmtt.executeQuery(); 
            while (rs1.next()) {               
            id1=rs1.getString("p_id");
            }
            
             System.out.println("550"+id);
-System.out.println("551"+id1);
+            System.out.println("551"+id1);
 
                  if(id.equals(id1))
                  {
@@ -774,25 +805,39 @@ System.out.println("551"+id1);
          con.commit();
          return password;
  }
- public String changepassword(String newpassword,String email)
+ public String changepassword(String loginid,String newpassword)
  {
-  
+         String msg;
         PreparedStatement pstmt = null;
-        
-      
+        System.out.println("operation--------"+loginid);
+      System.out.println("operation-------"+newpassword);
         String sql = "UPDATE person SET password=? WHERE email=?";
-        try {
+    //  String sql="UPDATE person SET password=? WHERE password=?";  
+      System.out.println(sql);
+      try {
+          System.out.println("784");
             con.setAutoCommit(false);
-             pstmt = con.prepareStatement(sql);
+            pstmt = con.prepareStatement(sql);
             pstmt.setString(1,newpassword);
-            pstmt.setString(2,email);
-            int r=pstmt.executeUpdate();
-        }
+            pstmt.setString(2,loginid);
+          System.out.println("789");
+          pstmt.executeUpdate();
+          con.commit();
+          msg="error";
+      }
         catch (SQLException ex) {
             Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("795"+ex.getMessage()); 
+             try {
+                 con.rollback();
+             } catch (SQLException ex1) {
+                 Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex1);
+             }
+            msg=ex.getMessage();
+
         }
         
-        return "success";
+        return msg;
      
  }
        
@@ -829,26 +874,5 @@ System.out.println("551"+id1);
         return msg1;
       }    
 
-    public String insertinChangePassword(String loginid, String New_Password) {
-        
-        
-        PreparedStatement pstmt = null;
-        
-      
-        String sql = "UPDATE person SET password=? WHERE email=?";
-        try {
-            con.setAutoCommit(false);
-             pstmt = con.prepareStatement(sql);
-            pstmt.setString(1,loginid);
-            pstmt.setString(2,New_Password);
-            int r=pstmt.executeUpdate();
-        }
-        catch (SQLException ex) {
-            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
-        return "success";
-    
-    }
    
 }
