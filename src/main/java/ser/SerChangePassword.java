@@ -26,22 +26,11 @@ import org.json.JSONTokener;
  */
 public class SerChangePassword extends HttpServlet {
 
-    protected void service(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet SerChangePassword</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet SerChangePassword at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
-    }
+//   protected void doGet(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//  doPost(request,response);
+//   } 
+
 
  
    @Override
@@ -85,14 +74,22 @@ public class SerChangePassword extends HttpServlet {
         
         if(req.getParameter("submit")!=null)
         {
-              String Enter_Current_Password=req.getParameter("Enter_Current_Password");
+              String Current_Password=req.getParameter("Enter_Current_Password");
+            System.out.println("ser--------"+Current_Password);
               String New_Password=req.getParameter("New_Password");
+            System.out.println("ser--------"+New_Password);
+       
               String loginid=(String) hs.getAttribute("loginid");
-         CourseSubSecOperation cop=new CourseSubSecOperation(con);
+         
+              CourseSubSecOperation cop=new CourseSubSecOperation(con);
          String msg = null;
-         msg = cop.insertinChangePassword(loginid,New_Password);
+         msg = cop.changepassword(loginid,New_Password);
          out.println(msg);
+         
+  
         }     
+        res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AdminPanel.jsp");
+
     }
 
  
@@ -100,5 +97,6 @@ public class SerChangePassword extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 
 }

@@ -34,7 +34,7 @@
                  
                     <div class="x_content">
                     <br />
-                    <form enctype="multipart/form-data" id="demo-form2" name="frmSample" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerLogin" 
+                    <form  id="demo-form2" name="frmSample" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerLogin" 
                               >
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Name">Login Id
