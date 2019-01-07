@@ -1,4 +1,4 @@
-
+<%@page import="java.util.ArrayList"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="operation.CourseSubSecOperation"%>
 <%@page import="data.Person"%>
@@ -74,23 +74,43 @@
       </select>
       <br /> <br />
      <h2>Assign Role</h2>   
-      <select style="width:25%" id="person" name="role_id">
+      <select style="width:25%" id="person" name="role">
      <%    HashSet<AddRole > setrole=cso.getRole();
-                              //System.out.println("31"+setrole);
+                              System.out.println("31"+setrole);
                               Iterator<AddRole> it=setrole.iterator();
-                                //System.out.println("41"+is);
+                                System.out.println("41"+is);
                               while(it.hasNext())
                               {
                                   AddRole role=it.next();
-                                  //System.out.println("67"+role);
+                                  System.out.println("67"+role);
                                   
                                 %>
                                   
                                 
-                                  <option value="<%=role.getrole_id()%>"><%=role.getrole_id()%></option>
+                                  <option value="<%=role.getRole()%>"><%=role.getRole()%></option>
                                   <% } %>
       </select>
-     <br /><br />
+     <br /><br />      
+     <label>Select Attribute:</label>  
+
+     <% 
+                                       HttpSession hs=request.getSession(true);
+                                           System.out.println("100");
+                                        
+                                       ArrayList<String> ar=(ArrayList<String>)hs.getAttribute("setAttr");
+                                           System.out.println("103"+ar);
+                                         
+                                       for (int i = 0; i < ar.size(); i++) 
+                                        {
+                                            System.out.println("103");
+                                        
+     %>
+                   
+     <p style="padding: 5px;">
+                          <input type="checkbox" name="Pattr" id="Pattr" value="<%=ar.get(i)%>" data-parsley-mincheck="2"   class="flat" /><%=ar.get(i)%>
+                        <br />
+                     <p>
+<%}%>
       <button type="submit" value="submit" name="submit" class="btn btn-success">Submit</button>
                                   
      <%@include file="adminfootersfiles.jsp" %>

@@ -461,7 +461,9 @@ public class CourseSubSecOperation {
        System.out.println("332"+setperson);
         return setperson;
     }
-      public HashSet<AddRole> getRole()
+     
+     
+     public HashSet<AddRole> getRole()
     {
         
        HashSet<AddRole> setrole=new HashSet<AddRole>();
@@ -484,7 +486,8 @@ public class CourseSubSecOperation {
         
         return setrole;
     }
-       public HashSet<AddRole> getrole_id()
+     
+     public HashSet<AddRole> getrole_id()
     {
         
        HashSet<AddRole> setrole=new HashSet<AddRole>();
@@ -507,7 +510,32 @@ public class CourseSubSecOperation {
         
         return setrole;
     }
-         public HashSet<Person> getp_id()
+       
+     public ArrayList<String> getAttr() {
+        ArrayList ar = new ArrayList();
+        
+      Statement stmt = null;
+       ResultSet rs=null;
+       String sql="select profile_attribute from profileattribute";
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           while(rs.next())  
+           {
+               String pa=rs.getString("profile_attribute");
+               ar.add(pa);
+           }
+       }catch(Exception e)
+       {
+           ar=null;
+       }
+        
+      
+        return ar;
+    }
+
+     public HashSet<Person> getp_id()
     {
         
        HashSet<Person> setperson=new HashSet<Person>();
@@ -557,22 +585,32 @@ public class CourseSubSecOperation {
         }
         return msg;
     }   
-
-            public String assign_role(Assign_role ar) {
+       public String assign_role(Assign_role ar) {
 
         String msg = "success";
         PreparedStatement pstmt = null;
- 
-        String sql = "insert into user_role value(?,?)";
+        PreparedStatement pstmtt= null;
+           ResultSet rs;
+      String role_id = null;
+        String sql= "select role_id from role where role=?";
+        String sqll = "insert into user_role value(?,?)";
         try {
             con.setAutoCommit(false);
-            pstmt = con.prepareStatement(sql);
-             String p_id[]=ar.getP_id();
+            pstmt=con.prepareStatement(sql);
+            pstmtt= con.prepareStatement(sqll);
+            pstmt.setString(1, ar.getRole());
+             rs = pstmt.executeQuery(); 
+           while (rs.next()) {                                             
+              role_id=rs.getString("role_id");
+               System.out.println("6534----"+role_id);
+           }
+       
+            String p_id[]=ar.getP_id();
              for(int i=0;i<p_id.length;i++)
              {
-                 pstmt.setString(1,p_id[i]);
-                 pstmt.setString(2,ar.getRole_id());
-                 int r=pstmt.executeUpdate();
+                 pstmtt.setString(1,p_id[i]);
+                 pstmtt.setString(2,role_id);
+                 int r=pstmtt.executeUpdate();
              //    System.out.println("---result--"+r);
              }       
             con.commit();
@@ -640,7 +678,8 @@ public class CourseSubSecOperation {
         
         return setdes_id;
     }
-        public HashSet<AddDesignation> getDes_id()
+    
+       public HashSet<AddDesignation> getDes_id()
     {
         
        HashSet<AddDesignation> setdes_id=new HashSet<AddDesignation>();
@@ -874,5 +913,6 @@ public class CourseSubSecOperation {
         return msg1;
       }    
 
+    
    
 }
