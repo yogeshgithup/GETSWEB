@@ -103,6 +103,10 @@
         <servlet-name>SerChangePassword</servlet-name>
         <servlet-class>ser.SerChangePassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerAssignRole</servlet-name>
+        <servlet-class>ser.SerAssignRole</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -186,6 +190,10 @@
     <servlet-mapping>
         <servlet-name>SerChangePassword</servlet-name>
         <url-pattern>/SerChangePassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAssignRole</servlet-name>
+        <url-pattern>/SerAssignRole</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

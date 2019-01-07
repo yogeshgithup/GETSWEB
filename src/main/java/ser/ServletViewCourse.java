@@ -35,7 +35,6 @@ public class ServletViewCourse extends HttpServlet {
         response.setContentType("text/html");
         PrintWriter out=response.getWriter();
         System.out.println("37");
-  
               ServletContext ctx=this.getServletContext();
               System.out.println("40");
               String op=request.getParameter("op");
