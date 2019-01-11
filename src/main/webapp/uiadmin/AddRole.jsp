@@ -11,6 +11,24 @@
     <div class="container body">
       <div class="main_container">
      <%@include file="navigation.jsp" %>
+  <%
+session.setMaxInactiveInterval(2);
+%>
+
+ <script type="text/javascript">
+var Msg=null;
+Msg ="<%=(String)session.getAttribute("msg")%>";
+ if (Msg === "1") {
+ 
+ alert("Data Entered Successfully");
+  
+ }
+ if(Msg === "0")
+ {
+ alert("Duplicacy error");   
+    }
+ 
+ </script> 
        
   
   <!-- page content -->

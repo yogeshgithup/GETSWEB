@@ -10,11 +10,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import operation.CourseSubSecOperation;
 
 /**
@@ -33,6 +36,7 @@ public class SerAddRole extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         res.setContentType("text/html");
+        HttpSession hs=req.getSession();
         PrintWriter out=res.getWriter();
         ServletContext ctx=this.getServletContext();
         Connection con=(Connection)ctx.getAttribute("MyConn");
@@ -45,9 +49,16 @@ public class SerAddRole extends HttpServlet {
              AddRole ar= new AddRole(addrole_id,role);
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
          String msg = null;
-         msg = cop.insertRole(ar);
+            try {
+                msg = cop.insertRole(ar);
+            } catch (SQLException ex) {
+                Logger.getLogger(SerAddRole.class.getName()).log(Level.SEVERE, null, ex);
+                msg= ex.getMessage();
+            }
          out.println(msg);
-           res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddRole.jsp");
+                          hs.setAttribute("id", msg);
+         
+         res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddRole.jsp");
      
         }
 

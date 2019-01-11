@@ -91,7 +91,7 @@ public class Course implements Serializable{
         this.c_id = c_id;
         this.c_name = c_name;
         this.c_fees = c_fees;
-        this.duration = duration;
+        this.duration = Duration;
         this.hours_per_week = hours_per_week;
         this.days_per_week = days_per_week;
     }

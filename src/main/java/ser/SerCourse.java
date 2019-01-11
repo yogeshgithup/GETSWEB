@@ -51,6 +51,7 @@ public class SerCourse extends HttpServlet {
            String b=req.getParameter("Course_Name");
             int ci=Integer.parseInt(req.getParameter("Course_fees"));
             int d=Integer.parseInt(req.getParameter("Duration"));
+          
             int e=Integer.parseInt(req.getParameter("Hours_Per_Week"));
             int f=Integer.parseInt(req.getParameter("Days_Per_Week"));
              Course c = new Course(a,b,ci,d,e,f);
@@ -65,7 +66,9 @@ public class SerCourse extends HttpServlet {
             catch (SQLException ex) {
                   msg=ex.getMessage();
             }
-
+             hs.setAttribute("id", msg);
+            
+            
              res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddCourse.jsp");
 //            String radio=req.getParameter("radio");
 //            if("Yes".equals(radio))

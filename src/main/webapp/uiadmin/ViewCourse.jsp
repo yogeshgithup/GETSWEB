@@ -55,7 +55,20 @@
                   </div>
                   <div class="x_content">
                     <br />
-                        
+
+  <%
+session.setMaxInactiveInterval(2);
+%>
+
+ <script type="text/javascript">
+var Msg=null;
+Msg ="<%=(String)session.getAttribute("msg")%>";
+ if (Msg !== null) {
+ 
+ alert("Course Deleted");
+  
+ }
+ </script>                         
   <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" >
              
         <table class="table table-striped projects">
@@ -72,7 +85,7 @@
                       </thead>
                       <tbody>   
                               <%
-                              System.out.println("75");
+                                  System.out.println("75");
                               HashSet<Course> setcourse=(HashSet<Course>)session.getAttribute("setcourse");
                               System.out.println("77");
                               Iterator<Course> it=setcourse.iterator();

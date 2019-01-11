@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,8 +15,25 @@
             <%@include file="navigation.jsp" %>
            
         <!-- /page content -->
+
+  <%
+session.setMaxInactiveInterval(2);
+%>
+
+ <script type="text/javascript">
+var Msg=null;
+Msg ="<%=(String)session.getAttribute("id")%>";
+ if (Msg === "1") {
+ 
+ alert("Data Entered Successfully");
   
-          
+ }
+ if(Msg === "0")
+ {
+ alert("Duplicacy error");   
+    }
+ 
+ </script> 
           <div class="right_col" role="main">
           <div class="">
             <div class="page-title">

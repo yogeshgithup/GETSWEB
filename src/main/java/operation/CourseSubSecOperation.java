@@ -45,7 +45,7 @@ public class CourseSubSecOperation {
 
         String sql = "insert into course value(?,?,?,?,?,?)";
        
-        System.out.println(sql);
+       
         try {
             con.setAutoCommit(false);
             pstmt = con.prepareStatement(sql);
@@ -55,12 +55,22 @@ public class CourseSubSecOperation {
             pstmt.setInt(4, c.getDuration());
             pstmt.setInt(5, c.getHours_per_week());
             pstmt.setInt(6, c.getDays_per_week());
-            pstmt.executeUpdate();
+            int r=pstmt.executeUpdate();
+            System.out.println("R"+r);
             con.commit();
-            msg = "success";
+            if(r==1)
+            {
+            msg = "1";             
+            }
+            else
+            {
+            msg="0";
+            }
         } catch (SQLException cnfe) {
             con.rollback();
             msg = cnfe.getMessage();
+            msg="0";
+            
         }
         return msg;
     }
@@ -248,7 +258,7 @@ public class CourseSubSecOperation {
         return setcourse;
     }
     
-      public String insertRole(AddRole ar) {
+      public String insertRole(AddRole ar) throws SQLException {
 
         String msg = "hi";
         PreparedStatement pstmt = null;
@@ -262,20 +272,28 @@ public class CourseSubSecOperation {
             pstmt.executeUpdate();
 
             con.commit();
-            msg = "success";
-            
-        } catch (SQLException cnfe) {
-            try {
-                con.rollback();
-            } catch (SQLException ex) {
-                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+                int r=pstmt.executeUpdate();
+            System.out.println("R"+r);
+            con.commit();
+            if(r==1)
+            {
+            msg = "1";             
             }
+            else
+            {
+            msg="0";
+            }
+        } catch (SQLException cnfe) {
+            con.rollback();
             msg = cnfe.getMessage();
+            msg="0";
+            
         }
+       
         return msg;
     }
       
-      public String insertProfileAttribute(AddAttribute aa) {
+      public String insertProfileAttribute(AddAttribute aa) throws SQLException {
 
         String msg = "hi";
         PreparedStatement pstmt = null;
@@ -289,15 +307,22 @@ public class CourseSubSecOperation {
             pstmt.executeUpdate();
 
             con.commit();
-            msg = "success";
-            
-        } catch (SQLException cnfe) {
-            try {
-                con.rollback();
-            } catch (SQLException ex) {
-                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            int r=pstmt.executeUpdate();
+            System.out.println("R"+r);
+            con.commit();
+            if(r==1)
+            {
+            msg = "1";             
             }
+            else
+            {
+            msg="0";
+            }
+        } catch (SQLException cnfe) {
+            con.rollback();
             msg = cnfe.getMessage();
+            msg="0";
+            
         }
         return msg;
     }
@@ -628,7 +653,7 @@ public class CourseSubSecOperation {
     }   
 
       
-      public String insertdesignation(AddDesignation obj) {
+      public String insertdesignation(AddDesignation obj) throws SQLException {
 
         String msg = "success";
         PreparedStatement pstmt = null;
@@ -643,18 +668,26 @@ public class CourseSubSecOperation {
             pstmt.executeUpdate();
 
             con.commit();
-            msg = "success";
-            
-        } catch (SQLException cnfe) {
-            try {
-                con.rollback();
-            } catch (SQLException ex) {
-                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+     int r=pstmt.executeUpdate();
+            System.out.println("R"+r);
+            con.commit();
+            if(r==1)
+            {
+            msg = "1";             
             }
+            else
+            {
+            msg="0";
+            }
+        } catch (SQLException cnfe) {
+            con.rollback();
             msg = cnfe.getMessage();
+            msg="0";
+            
         }
-        return msg;
-      }    
+               return msg;
+      } 
+      
        public HashSet<AddDesignation> getDesignation()
     {
         

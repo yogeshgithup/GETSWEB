@@ -93,69 +93,14 @@
                                   {
                           %>
                           <td >
-                              <%=PA[ii]%>
+                         <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="ValueAttribute" name="ValueAttribute"  class="form-control col-md-7 col-xs-12">
+                        </div>
+               
                           </td>
                             <%}%>                                      
-                           <td>
-                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
-                        </tr>
+                         </tr>
                         <%}%>
-<!--                        <tr>
-                      
-                        <tr>
-                          <td>
-                            <a>2</a>
-                          </td>
-                          <td>ABC
-                          </td>
-                          <td >Experience of 5 years
-                          </td>
-                          <td>MNO
-                          </td>
-                          <td>
-                            Staff
-                          </td>
-                          <td>
-                            3
-                          </td>
-                          <td>
-                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
-                        </tr>
-                        <tr>
-                         
-                           <tr>
-                          <td>
-                            <a>3</a>
-                          </td>
-                          <td>UZI
-                          </td>
-                          <td >Experience of 1 years
-                          </td>
-                          <td>JKL
-                          </td>
-                          <td>
-                            FACULTY
-                          </td>
-                          <td>
-                            2
-                          </td>
-                          <td>
-                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
-                        </tr>
-                        <tr>
-                      -->
-                      </tbody>
-                    </table>
-                    <!-- end project list -->
 
                   </div>
                 </div>
