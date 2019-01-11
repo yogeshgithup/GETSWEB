@@ -53,6 +53,7 @@ public class SerDelete extends HttpServlet {
               HashSet<Course> setcourse=cop.getCourse();
               out.println(setcourse.size());
               hs.setAttribute("setcourse",setcourse);
+              hs.setAttribute("msg",msg);
        res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"ViewCourse.jsp");
     
     }

@@ -59,7 +59,6 @@ System.out.println("entry1"+it);
 %>                
                 <!-- Company name shown on mobile -->
                 <a class="navbar-brand" href="#"><span><%=fp.getInstitutename()%></a>
-<%}%>
                 <!-- Mobile menu toggle -->
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar" aria-controls="mainNavbar"  aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -94,12 +93,6 @@ System.out.println("entry1"+it);
                                 <a class="nav-link" href="#log">Login</a>
                         </li>
                     </ul>
-                     
-                    <form class="form-inline header-search-form my-2 my-lg-0">
-                        <input class="form-control mr-sm-2" type="text" size="6"  placeholder="Search" aria-label="Search">
-                        <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-                    </form>
-                    
                 </div>
                 
                 
@@ -111,22 +104,23 @@ System.out.println("entry1"+it);
 
         <!-- Jumbtron / Slider -->
         <div class="jumbotron-wrap jumbotron-wrap-image mb-2">
-            <div class="container">
+            <div class="container" >
                 <div id="mainCarousel" class="carousel slide" data-ride="carousel">
                     <div class="carousel-inner">
                         <div class="carousel-item active">
                             <div class="jumbotron">
-                                <h1 class="text-center">Take a Visit To Our Institue</h1>
-                                <p class="lead text-center">Where Success Is Habbit</p>
+                                <h1 class="text-center"><%=fp.getQuote()%></h1>
+                                <p class="lead text-center"></p>
                                 <p class="lead text-center">
-                                    <a class="btn btn-primary btn-lg" href="#" role="button"><i class="fa fa-info"></i> &nbsp; Enroll Now</a>
+                                    <a class="btn btn-primary btn-lg" href="SignupPage.jsp" role="button"><i class="fa fa-info"></i> &nbsp; Enroll Now</a>
                                 </p>
                             </div>
                         </div>
+<%}%>
 
                         <div class="carousel-item">
                             <div class="jumbotron">
-                                <h1 class="text-center">MY KARSOL TECHS</h1>
+                                <h1 class="text-center">KARSOL TECHS</h1>
                                 <p class="lead text-center"></p>
                                 <p class="lead text-center">
                                     <a class="btn btn-secondary btn-lg" href="#" role="button"><i class="fa fa-gbp"></i> &nbsp; Signup Now</a>
@@ -147,7 +141,7 @@ System.out.println("entry1"+it);
             </div>
         </div>
 
-        <!-- Welcome content area -->
+<!--         Welcome content area 
         <section id="weclome" class="card-container">
             <div class="container">
    
@@ -197,8 +191,8 @@ System.out.println("entry1"+it);
         </section>
         
         
-        
-        <!-- About section -->
+        -->
+     
         <section id="about" class="colored-bg">
             <div class="container">
                 <div class="row">

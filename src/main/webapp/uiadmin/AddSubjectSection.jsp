@@ -16,20 +16,27 @@
  <script>
 function createButton()
 {
-    var ctrl=$("<input/>").attr({type:'button',id:'btnsubmit',value:'submit'});
-    return ctrl;
+      var ctrl=$("<input/>").attr({type:'button',id:'btnsubmit',value:'submit'});
+   return ctrl;
 }
+</script>
+<script>
+//alert("3");
 
     $(document).ready(function(){
+     alert("4");
     
-$("input[type='button']").click(function(){
-            var radioValue = $("input[name='radio']:checked").val();
-             
+$("#submit").click(function(){
+        alert("4");
+
+        var radioValue = $("input[name='radio']:checked").val();
+             alert("5"+radioValue);
+
         if(radioValue==="section"){
             
             
               
-                     $("#f1").append("Section_Id"+" "+"<input type='text' id='Section_Id' name='Section_Id'>").append("Section_Name"+" "+"<input type='text' id='Section_Name' name='Section_name'>"); 
+                     $("#f1").append("Section_Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"<input type='text' id='Section_Id' name='Section_Id'>"+"<br><br>").append("Section_Name&nbsp;&nbsp;"+" "+"<input type='text' id='Section_Name' name='Section_name'>"+"<br><br>"); 
                       var btnsubmit=createButton();
                      $(btnsubmit).click(function(){
                   var course_id= $("#course").val();   
@@ -40,10 +47,11 @@ $("input[type='button']").click(function(){
            //       alert("Course_id="+course_id+"Section_Id="+section_id+"Section_Name="+section_name);
                                                   });
                      $("#f1").append(btnsubmit);
+                     $("#f1").append("<br><br>");
                     }
         if(radioValue==="subject")
         {
-        $("#f1").append("Subject_Id"+" "+"<input type='text' id='Subject_Id' name='Subject_Id'>").append("Subject_Name"+" "+"<input type='text' id='Subject_Name' name='Subject_name'>").append("Hours_per_week"+" "+"<input type='text' id='Hours_per_week' name='Hours_per_week'>").append("Days_per_week"+" "+"<input type='text' id='Days_per_week' name='Days_per_week'>"); 
+        $("#f1").append("Subject_Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"<input type='text' id='Subject_Id' name='Subject_Id'>"+"<br><br>").append("Subject_Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"<input type='text' id='Subject_Name' name='Subject_name'>"+"<br><br>").append("Hours_per_week&nbsp;&nbsp;"+"<input type='text' id='Hours_per_week' name='Hours_per_week'>"+"<br><br>").append("Days_per_week&nbsp;&nbsp;&nbsp;"+"<input type='text' id='Days_per_week' name='Days_per_week'>"+"<br><br>"); 
                      var btnsubmit=createButton();
                      $(btnsubmit).click(function(){
                    var course_id= $("#course").val();   
@@ -57,12 +65,31 @@ $("input[type='button']").click(function(){
           //       alert("Course_id="+course_id+"Subject_Id="+section_id+"Subject_Name="+section_name);
     });
                      $("#f1").append(btnsubmit);
-                    }       
+                     $("#f1").append("<br><br>");
+                               
+}       
                     
-                    }
+                    });
                     
-        });
-});
+        });       
+       
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+  
+
+
 </script>
 
 
@@ -117,8 +144,13 @@ $("input[type='button']").click(function(){
         
   
                       <%
+                      System.out.println("1");
                               HashSet<Course> setcourse=(HashSet<Course>)session.getAttribute("setcourse");
+                      System.out.println("2"+setcourse);
+                             
                               Iterator<Course> it=setcourse.iterator();
+                                  System.out.println("3");
+                 
                               while(it.hasNext())
                               {
                                   Course course=it.next();
@@ -136,7 +168,7 @@ $("input[type='button']").click(function(){
         <label><input type="checkbox" class="flat" name="radio" value="subject">Subject</label> 
         <label><input type="checkbox" class="flat" name="radio" value="section">Section</label>
     </p>
-    <p><input type="button" value="Submit"></p>
+    <p><input type="button" name="submit" id="submit" value="submit"></p>
   
     <div id="f1"> </div>
          

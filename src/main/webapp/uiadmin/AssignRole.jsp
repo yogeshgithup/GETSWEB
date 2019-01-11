@@ -90,13 +90,13 @@
                                   <option value="<%=role.getRole()%>"><%=role.getRole()%></option>
                                   <% } %>
       </select>
+      
      <br /><br />      
      <label>Select Attribute:</label>  
 
      <% 
                                        HttpSession hs=request.getSession(true);
                                            System.out.println("100");
-                                        
                                        ArrayList<String> ar=(ArrayList<String>)hs.getAttribute("setAttr");
                                            System.out.println("103"+ar);
                                          

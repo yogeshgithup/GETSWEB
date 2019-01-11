@@ -58,7 +58,7 @@
                         </li>
 
                         <li data-toggle="collapse" data-target=".navbar-collapse.show" class="nav-item">
-                                <a class="nav-link" href="#about">Academics</a>
+                                <a class="nav-link" href="#about">AboutUS</a>
                         </li>
 
 
@@ -81,11 +81,11 @@
                         </li>
                     </ul>
                     
-                    <form class="form-inline header-search-form my-2 my-lg-0">
+<!--                    <form class="form-inline header-search-form my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="text" size="6"  placeholder="Search" aria-label="Search">
                         <button class="btn btn-secondary my-2 my-sm-0" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
                     </form>
-                    
+                    -->
                 </div>
                 
                 
@@ -103,7 +103,7 @@
                         <div class="carousel-item active">
                             <div class="jumbotron">
                                 <h1 class="text-center">Take a Visit To Our Institue</h1>
-                                <p class="lead text-center">Where Success Is Habbit</p>
+                                <p class="lead text-center"></p>
                                 <p class="lead text-center">
                                     <a class="btn btn-primary btn-lg" href="#" role="button"><i class="fa fa-info"></i> &nbsp; Enroll Now</a>
                                 </p>

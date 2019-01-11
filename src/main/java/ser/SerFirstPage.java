@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -34,54 +36,65 @@ public class SerFirstPage extends HttpServlet {
         res.setContentType("text/html");
         PrintWriter out=res.getWriter();
         ServletContext ctx=this.getServletContext();
+        System.out.println("37------");
         Connection con=(Connection)ctx.getAttribute("MyConn");
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
-           Part part=req.getPart("image");
                   HttpSession hs=req.getSession(true);
-      InputStream is=part.getInputStream();
-        System.out.println(is);
-      String name=extractFileName(part);
+    
+         Collection<Part> colpart=req.getParts();
+              Iterator<Part> it=colpart.iterator();
+              ArrayList<String> im=new ArrayList<>();
+              ArrayList<String> imi=new ArrayList<>();
+    String accesstoken=ctx.getInitParameter("accesstoken");
+        DropBoxOperation dop=new DropBoxOperation(accesstoken);
+     
+             
+//         Part part=req.getPart("image");
+//      InputStream is=part.getInputStream();
+//        System.out.println(is);
       
      
        
-        String accesstoken=ctx.getInitParameter("accesstoken");
-        DropBoxOperation dop=new DropBoxOperation(accesstoken);
-     
-        String url=dop.uploadFile(name, is);
         if(req.getParameter("submit")!=null)
-        {   
-                             String imagename;
-                              String imagepath;
-              String institutename=req.getParameter("institutename");
-              String filepath=url;
-              String filename=name;
+        {
+            System.out.println("54");
+            String institutename=req.getParameter("institutename");
+            String imagename;
+            String imagepath;
+            String filepath = null;
+            String filename = null;
+                
+              while(it.hasNext())
+               {
+                   Part p=it.next();
+                   InputStream isi=p.getInputStream();
+                   String name=extractFileName(p);
+                   String pic=p.getName();
+                  
+                  if(pic.equals("pic"))
+                   {
+                        imagename=name;
+                        im.add(imagename);
+                        imagepath=dop.uploadFile(imagename, isi);
+                       System.out.println(imagepath);
+                     imi.add(imagepath); 
+                   }
+                   if(pic.equals("image"))
+                   {
+                       filename=name;
+                       System.out.println(filename);
+                       filepath=dop.uploadFile(filename, isi);
+                       System.out.println(filepath);
+                   }
+               }
+    
               String aboutus=req.getParameter("aboutus");
               int contactno=Integer.parseInt(req.getParameter("contactnumber"));
               String email=req.getParameter("email");
               String address=req.getParameter("address");
               String quote=req.getParameter("quote");
               FirstPage f=new FirstPage(institutename,filepath,filename,contactno,email,address,aboutus,quote);
-              Collection<Part> colpart=req.getParts();
-              Iterator<Part> it=colpart.iterator();
-              ArrayList<String> im=new ArrayList<>();
-              ArrayList<String> imi=new ArrayList<>();
-              while(it.hasNext())
-               {
-                   Part p=it.next();
-                   InputStream isi=part.getInputStream();
-                   System.out.println("isi------"+isi);
-                   String pic=p.getName();
-                   System.out.println("pic----"+pic);
-                   if(pic.equals("pic"))
-                   {
-                        imagename=extractFileName(part);
-                        System.out.println(imagename);
-                        im.add(imagename);
-                        imagepath=dop.uploadFile(imagename, isi);
-                       System.out.println(imagepath);
-                     imi.add(imagepath); 
-                   }
-               }
+           
               System.out.println("15");
         f.setImagename(im);
             System.out.println("16");
@@ -94,7 +107,11 @@ public class SerFirstPage extends HttpServlet {
                        String addrole_id="1";
                       String role="Admin";
                         AddRole ar= new AddRole(addrole_id,role);
-                          msg = cop.insertRole(ar);
+            try {
+                msg = cop.insertRole(ar);
+            } catch (SQLException ex) {
+                Logger.getLogger(SerFirstPage.class.getName()).log(Level.SEVERE, null, ex);
+            }
                          out.println(msg);    
                          hs.setAttribute("addrole_id",addrole_id);
            

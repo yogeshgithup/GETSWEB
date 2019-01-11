@@ -10,11 +10,15 @@ import data.user_role;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import operation.CourseSubSecOperation;
 
 /**
@@ -28,7 +32,7 @@ public class SerAddDesignation extends HttpServlet {
             throws ServletException, IOException {
         res.setContentType("text/html");
         PrintWriter out=res.getWriter();
-        
+        HttpSession hs=req.getSession();
         ServletContext ctx=this.getServletContext();
         Connection con=(Connection)ctx.getAttribute("MyConn");
         
@@ -40,8 +44,15 @@ public class SerAddDesignation extends HttpServlet {
              AddDesignation obj= new AddDesignation(AddDES_ID,Designation);
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
          String msg = null;
-         msg = cop.insertdesignation(obj);
+            try {
+                msg = cop.insertdesignation(obj);
+            } catch (SQLException ex) {
+                Logger.getLogger(SerAddDesignation.class.getName()).log(Level.SEVERE, null, ex);
+            }
          out.println(msg);
+                             hs.setAttribute("id", msg);
+             res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddAttribute.jsp");
+ 
         }
     }
 }
