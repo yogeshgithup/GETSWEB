@@ -51,7 +51,7 @@ public class SerAddDesignation extends HttpServlet {
             }
          out.println(msg);
                              hs.setAttribute("id", msg);
-             res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddAttribute.jsp");
+             res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddDesignation.jsp");
  
         }
     }
