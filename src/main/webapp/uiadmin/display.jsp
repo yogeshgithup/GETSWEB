@@ -71,7 +71,7 @@ System.out.println("entry1"+it);
                         </li>
 
                         <li data-toggle="collapse" data-target=".navbar-collapse.show" class="nav-item">
-                                <a class="nav-link" href="#about">Academics</a>
+                                <a class="nav-link" href="#about">ABoutUS</a>
                         </li>
 
 
@@ -106,22 +106,24 @@ System.out.println("entry1"+it);
         <div class="jumbotron-wrap jumbotron-wrap-image mb-2">
             <div class="container" >
                 <div id="mainCarousel" class="carousel slide" data-ride="carousel">
+                         <br><br><br><br>                                
+                  
                     <div class="carousel-inner">
+                         
                         <div class="carousel-item active">
-                            <div class="jumbotron">
-                                <h1 class="text-center"><%=fp.getQuote()%></h1>
-                                <p class="lead text-center"></p>
+                            <div class="jumbotron" >
+                                   <h1 class="text-center"><%=fp.getQuote()%></h1>
+                                <!--<p class="lead text-center"></p>-->
                                 <p class="lead text-center">
                                     <a class="btn btn-primary btn-lg" href="SignupPage.jsp" role="button"><i class="fa fa-info"></i> &nbsp; Enroll Now</a>
                                 </p>
                             </div>
                         </div>
-<%}%>
+
 
                         <div class="carousel-item">
                             <div class="jumbotron">
-                                <h1 class="text-center">KARSOL TECHS</h1>
-                                <p class="lead text-center"></p>
+                                <h1 class="text-center"><%=fp.getInstitutename()%></h1>
                                 <p class="lead text-center">
                                     <a class="btn btn-secondary btn-lg" href="#" role="button"><i class="fa fa-gbp"></i> &nbsp; Signup Now</a>
                                 </p>
@@ -138,7 +140,9 @@ System.out.println("entry1"+it);
                         <span class="sr-only">Next</span>
                     </a>
                 </div>
+     <br><br><br><br>      
             </div>
+       
         </div>
 
 <!--         Welcome content area 
@@ -200,116 +204,15 @@ System.out.println("entry1"+it);
                     <!-- Main content -->
                     <div class="col-md-8">
                         <article>
-                            <h2 class="article-title">Introduction to bridges</h2>
-
-                            <p class="article-meta">Posted on <time datetime="2017-05-14">14 May</time> by <a href="#" rel="author">Joe Bloggs</a></p>
-
-                            <p>Welcome to bridges, a free CSS3 &amp; HTML5 responsive web template from <a href="https://zypopwebtemplates.com/" title="ZyPOP">ZyPOP</a>. This template is completely <strong>free</strong> to use permitting a link remains back to  <a href="https://zypopwebtemplates.com/" title="ZyPOP">https://zypopwebtemplates.com/</a>.</p>
-
-                            <p> Should you wish to use this template unbranded you can buy a template license from our website for 8.00 GBP, this will allow you remove all branding related to our site, for more information about this see below.</p>	
-
-                            <p>This template has been tested in:</p>
-
-                            <ul>
-                                <li>Firefox</li>
-                                <li>IE / Edge</li>
-                                <li>Chrome</li>
-                                <li>Safari</li>
-                                <li>iOS / Android</li>
-                            </ul>
-
-                            <a href="#" class="btn btn-primary">Read more</a>
-                            <a href="#" class="btn btn-secondary">Comments</a>
-
-                        </article>
-
-                        <article>
-
-                            <h2 class="article-title">Buy unbranded</h2>
-                            <p class="article-meta">Posted on <time datetime="2013-05-14">14 May</time> by <a href="#" rel="author">Joe Bloggs</a></p>
-
-                            <p>Purchasing a template license for 8.00 GBP (at time of writing around 12 USD) gives you the right to remove any branding including links, logos and source tags relating to ZyPOP. As well as waiving the attribution requirement, your payment will also help us provide continued support for users as well as creating new web templates. Find out more about how to buy at the licensing page on our website which can be accessed at <a href="https://zypopwebtemplates.com/licensing" title="template license">https://zypopwebtemplates.com/licensing</a></p>
-
-                            <h3>Lorem lipsum</h3>
-
-                            <p>Morbi fermentum condimentum felis, commodo vestibulum sem mattis sed. Aliquam magna ante, mollis vitae tincidunt in, malesuada vitae turpis. Sed aliquam libero ut velit bibendum consectetur. Quisque sagittis, est in laoreet semper, enim dui consequat felis, faucibus ornare urna velit nec leo. Maecenas condimentum velit vitae est lobortis fermentum. In tristique sem vitae metus ornare luctus tempus nisl volutpat. Integer et est id nisi tempus pharetra sagittis et libero.</p>
-
-                            <a href="#" class="btn btn-primary">Read more</a>
-                            <a href="#" class="btn btn-secondary">Comments</a>
-                        </article>
-
-
-                        <!-- Example pagination Bootstrap component -->
-                        <nav>
-                            <ul class="pagination">
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Previous">
-                                            <span aria-hidden="true">&laquo;</span>
-                                            <span class="sr-only">Previous</span>
-                                        </a>
-                                    </li>
-                                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                                    <li class="page-item active"><a class="page-link" href="#">2</a></li>
-                                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                    <li class="page-item">
-                                        <a class="page-link" href="#" aria-label="Next">
-                                            <span aria-hidden="true">&raquo;</span>
-                                            <span class="sr-only">Next</span>
-                                        </a>
-                                    </li>
-                            </ul>
-                        </nav>
-                    </div>
-
-
-                    <!-- Sidebar -->
-                    <aside class="col-md-4">
-                        <div class="sidebar-box">
-                            <h4>Categories</h4>
-                            <div class="list-group list-group-root">
-                                <a class="list-group-item" href="#">Home Page</a>
-                                <a class="list-group-item active" href="#about">About</a>
-                                <a class="list-group-item" href="#style-examples">Style Examples</a>
-                                <div class="list-group">
-                                    <a class="list-group-item" href="#three-column">Three Column</a>
-                                    <a class="list-group-item" href="#one-column">One column / no sidebar</a>
-                                    <a class="list-group-item" href="#contact">Contact</a>	
-                                </div>
-                                <a class="list-group-item" href="#three-column">Three column layout example</a>
-                                <a class="list-group-item" href="#">Sed aliquam libero ut velit bibendum</a>
-                                <a class="list-group-item" href="#">Maecenas condimentum velit vitae</a>
-                            </div>
-                        </div>
-
-                        <div class="sidebar-box sidebar-box-bg">
-                            <h4>About us</h4>
-                            <p>Aenean nec massa a tortor auctor sodales sed a dolor. Duis vitae lorem sem. Proin at velit vel arcu pretium luctus. <a href="#" class="readmore">Read More &raquo;</a></p>    
-                        </div>
-
-                        <div class="sidebar-box">
-                            <h4>Search site</h4>
-                            <form class="form-inline my-2 my-lg-0">
-                                <input class="form-control mr-sm-2" type="text"  placeholder="Search" aria-label="Search">
-                                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-                            </form>
-                        </div>
-
-                        <div class="sidebar-box">
-                            <h4>Helpful Links</h4>
-                            <ul>
-                                <li><a href="http://www.themeforest.net/?ref=spykawg" title="premium templates">Premium HTML web templates from $10</a></li>
-                                <li><a href="http://www.dreamhost.com/r.cgi?259541" title="web hosting">Cheap web hosting from Dreamhost</a></li>
-                                <li><a href="http://tuxthemes.com" title="Tux Themes">Premium WordPress themes</a></li>
-                            </ul>
-                        </div>
-                    </aside> 
-
+                            <h2 class="article-title">Introduction to Institute</h2>
+<p><%=fp.getAboutus()%>
+                  
                 </div>
             </div> 
         </section>
         
         
-        
+<%}%>        
         <!-- Style Examples / Right sidebar -->
         <div id="style-examples" class="jumbotron-wrap colored-bg-container">
             <div class="container">
@@ -809,53 +712,67 @@ System.out.println("entry1"+it);
 
             <!-- LOGIN -->
         <section id="log">
-            <div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<form class="login100-form validate-form">
-					<span class="login100-form-title p-b-26">
-						Welcome
-					</span>
-					<span class="login100-form-title p-b-48">
-						<i class="zmdi zmdi-font"></i>
-					</span>
+                   <div class="right_col" role="main">
+          <div class="">
+            <div class="clearfix"></div>
+            <div class="row">
+              <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="x_panel">
+                  
+                    <div class="x_title">
+                        <h2><center>Login</center></h2>
+                    <ul class="nav navbar-right panel_toolbox">
+                      <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                      </li>
+                      <li><a class="close-link"><i class="fa fa-close"></i></a>
+                      </li>
+                    </ul>
+                    <div class="clearfix"></div>
+                  </div>
+                 
+                    <div class="x_content">
+                    <br />
+                    <form  id="demo-form2" name="frmSample" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerLogin" 
+                              >
+                        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Name">Login Id
+                        </label>
+                        <div class="col-md-5 col-sm-6 col-xs-12">
+                          <input type="text" id="LoginId"  name="LoginId" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
-						<input class="input100" type="text" name="email">
-						<span class="focus-input100" data-placeholder="Email"></span>
-					</div>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Password">Password
+                        </label>
+                        <div class="col-md-5 col-sm-6 col-xs-12">
+                            <input type="password" id="Password" name="Password" class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                  
 
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<span class="btn-show-pass">
-							<i class="zmdi zmdi-eye"></i>
-						</span>
-						<input class="input100" type="password" name="pass">
-						<span class="focus-input100" data-placeholder="Password"></span>
-					</div>
 
-					<div class="container-login100-form-btn">
-						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn">
-								Login
-							</button>
-						</div>
-					</div>
 
-					<div class="text-center p-t-115">
-						<span class="txt1">
-							Don?t have an account?
-						</span>
 
-						<a class="txt2" href="#">
-							Sign Up
-						</a>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
-	
+
+  <div id="f2"> </div>
+      
+<div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-5 col-sm-6 col-xs-12 col-md-offset-3">
+                            <center><button type="submit" value="submit" name="submit" class="btn btn-success">Login</button></center>
+                        </div>
+                      </div>
+   </div>
+                </div>
+                 
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+
         </section>
         
         
