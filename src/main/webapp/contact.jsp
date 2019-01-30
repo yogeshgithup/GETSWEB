@@ -5,10 +5,9 @@
 
                                  <%@include file="homepageheaders.jsp" %>
             </head>
-	
 
-			<!-- start banner Area -->
-			<section class="banner-area relative about-banner" id="home">	
+<!-- start banner Area -->
+                        <section class="banner-area relative about-banner" id="home">	
 				<div class="overlay overlay-bg"></div>
 				<div class="container">				
 					<div class="row d-flex align-items-center justify-content-center">
@@ -32,10 +31,22 @@
 								<div class="icon">
 									<span class="lnr lnr-home"></span>
 								</div>
-								<div class="contact-details">
-									<h5>Binghamton, New York</h5>
+								
+	<%
+                System.out.println("hereee------------"+it);
+                it=setfirstpage.iterator();
+                System.out.println("entry1"+it);                              
+                while(it.hasNext())
+                              {
+                                  FirstPage fp=it.next();
+                                  System.out.println(fp.getInstitutename());
+                                  System.out.println(fp.getAddress());
+%>                    
+
+                                                                <div class="contact-details">
+                                                                    <h5>Address</h5>
 									<p>
-										4343 Hinkle Deegan Lake Road
+										<%=fp.getAddress()%>
 									</p>
 								</div>
 							</div>
@@ -44,8 +55,8 @@
 									<span class="lnr lnr-phone-handset"></span>
 								</div>
 								<div class="contact-details">
-									<h5>00 (958) 9865 562</h5>
-									<p>Mon to Fri 9am to 6 pm</p>
+									<h5><%=fp.getContactno()%></h5>
+									<p>Available all the time</p>
 								</div>
 							</div>
 							<div class="single-contact-address d-flex flex-row">
@@ -53,9 +64,10 @@
 									<span class="lnr lnr-envelope"></span>
 								</div>
 								<div class="contact-details">
-									<h5>support@colorlib.com</h5>
+									<h5><%=fp.getEmail()%></h5>
 									<p>Send us your query anytime!</p>
 								</div>
+                                                                        <%}%>
 							</div>														
 						</div>
 						
@@ -63,7 +75,6 @@
 				</div>	
 			</section>
 			<!-- End contact-page Area -->
-
 		 <%@include file="homepagefooters.jsp" %>
 				
 		</body>

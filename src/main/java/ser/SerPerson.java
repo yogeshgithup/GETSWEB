@@ -42,6 +42,9 @@ import org.json.JSONTokener;
  * @author Asadali
  */
 public class SerPerson extends HttpServlet {
+    
+      String SAVE_DIR;
+    static final int BUFFER_SIZE = 4096;
      protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          
@@ -55,21 +58,30 @@ public class SerPerson extends HttpServlet {
     // String op=(String) hs.getAttribute("id");
       //  System.out.println(op);
       String op="s";  
-      CourseSubSecOperation cop=new CourseSubSecOperation(con);
-        
-        
+     
+         SAVE_DIR=request.getSession().getServletContext().getRealPath("/");
+          CourseSubSecOperation cop=new CourseSubSecOperation(con);
+         String name=null ; 
 //     Part part=request.getPart("Image");   
   //    String ct=part.getContentType();
     //  InputStream is=part.getInputStream();
       //String name=extractFileName(part);
         //System.out.println("---"+name);
      
-       
-      //  String accesstoken=ctx.getInitParameter("accesstoken");
-      //  DropBoxOperation dop=new DropBoxOperation(accesstoken);
+        Part part=request.getPart("file");
+        InputStream inputStream =part.getInputStream();
+        name=this.extractFileName(part);
+        String des=request.getParameter("description");
+        System.out.println("des----"+des);
+        String keywords=request.getParameter("keywords");
+        System.out.println("keywords----"+keywords);
+        System.out.println("size--"+inputStream.available());
+         System.out.println("1234");
+        String accesstoken=ctx.getInitParameter("accesstoken");
+        DropBoxOperation dop=new DropBoxOperation(accesstoken);
      
-       // String url=dop.uploadFile(name, is);
-       // System.out.println(url);
+        String url=dop.uploadFile(name, inputStream);
+        System.out.println(url);
          if(request.getParameter("submit")!=null)
         {
             try {
@@ -90,16 +102,15 @@ public class SerPerson extends HttpServlet {
                 long contact_no=Long.parseLong(request.getParameter("contact_no"));
                 String f_name=request.getParameter("f_name");
                 String m_name=request.getParameter("m_name");
-                String l_name=request.getParameter("l_name");    
+                String l_name=request.getParameter("l_name");
+                String file_path=url;
+                String file_name= name;  
                 String quali[]=request.getParameterValues("qualification");
                 for(int i=0;i<quali.length;i++)
                 {
                     System.out.println("--90"+quali[i]);
                 }
-                String file_path=null;
-                String file_name=null;
-               // String file_path=url;
-                //String file_name=name;               
+                            
                 String password=cop.randompassword();
                 //String mime_type=request.getParameter("mime_type");
                 
@@ -146,6 +157,7 @@ public class SerPerson extends HttpServlet {
             } catch (SQLException ex) {
                  Logger.getLogger(SerPerson.class.getName()).log(Level.SEVERE, null, ex);
              }
+             inputStream.close();
             
 
         } 

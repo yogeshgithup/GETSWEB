@@ -16,7 +16,7 @@ public class FirstPage {
     String institutename;
     String filepath;
     String filename;
-    int contactno;
+    String contactno;
     String email;
     String address;
     String aboutus;
@@ -55,7 +55,7 @@ public class FirstPage {
         this.filename = filename;
     }
 
-    public void setContactno(int contactno) {
+    public void setContactno(String contactno) {
         this.contactno = contactno;
     }
 
@@ -88,7 +88,7 @@ public class FirstPage {
         return filename;
     }
 
-    public int getContactno() {
+    public String getContactno() {
         return contactno;
     }
 
@@ -109,7 +109,7 @@ public class FirstPage {
     }
 
     
-    public FirstPage(String institutename, String filepath, String filename, int contactno, String email, String address, String aboutus, String quote) {
+    public FirstPage(String institutename, String filepath, String filename, String contactno, String email, String address, String aboutus, String quote) {
         this.institutename = institutename;
         this.filepath = filepath;
         this.filename = filename;

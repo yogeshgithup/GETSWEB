@@ -107,6 +107,14 @@
         <servlet-name>SerAssignRole</servlet-name>
         <servlet-class>ser.SerAssignRole</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>profilepic</servlet-name>
+        <servlet-class>p1.profilepic</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerPersonAndroid</servlet-name>
+        <servlet-class>ser.SerPersonAndroid</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -168,10 +176,6 @@
         <url-pattern>/SerFirstPage</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SerFirstPage</servlet-name>
-        <url-pattern>/SerFirstPage</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>SerLogin</servlet-name>
         <url-pattern>/SerLogin</url-pattern>
     </servlet-mapping>
@@ -194,6 +198,14 @@
     <servlet-mapping>
         <servlet-name>SerAssignRole</servlet-name>
         <url-pattern>/SerAssignRole</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>profilepic</servlet-name>
+        <url-pattern>/profilepic</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerPersonAndroid</servlet-name>
+        <url-pattern>/SerPersonAndroid</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

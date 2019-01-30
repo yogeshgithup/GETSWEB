@@ -1,17 +1,20 @@
+<%@page import="operation.CourseSubSecOperation"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="data.FirstPage"%>
 <%@page import="java.util.HashSet"%>
+<%@page import="java.sql.Connection"%>
 <head>
 <%
-System.out.println("entry");
-                             HashSet<FirstPage> setfirstpage=(HashSet<FirstPage>)session.getAttribute("setfirstpage");
-System.out.println("entry1"+setfirstpage);                      
-                             Iterator<FirstPage> it=setfirstpage.iterator();
-System.out.println("entry1"+it);                            
-                             while(it.hasNext())
-                              {
-                                  FirstPage fp=it.next();
-                              System.out.println(fp.getInstitutename());
+
+                                 ServletContext ctx=this.getServletContext();
+                                  Connection con=(Connection)ctx.getAttribute("MyConn");
+                                  CourseSubSecOperation cop=new CourseSubSecOperation(con);
+                               HashSet<FirstPage> setfirstpage=cop.getfirstpage();
+                               Iterator<FirstPage> it=setfirstpage.iterator();
+                                 while(it.hasNext())
+                                 {
+                                       FirstPage fp=it.next();
+                                          System.out.println(fp.getInstitutename());
 %>                    
     <!-- Mobile Specific Meta -->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -55,20 +58,20 @@ System.out.println("entry1"+it);
                             </ul>           
                         </div>
                         <div class="col-lg-6 col-sm-6 col-4 header-top-right no-padding">
-                            <a href="tel:+953 012 3654 896"><span class="lnr lnr-phone-handset"></span> <span class="text"></span></a>
-                               <a href="mailto:support@colorlib.com"><span class="lnr lnr-envelope"></span></a>         
+                         <a href="#"><span class="lnr lnr-phone-handset"></span> <span class="text"><%=fp.getContactno()%></span></a>
+	                <a href="#"><span class="lnr lnr-envelope"></span> <span class="text"><%=fp.getEmail()%></span></a>		
                         </div>
                     </div>                              
-                </div>
+                </div> 
             </div>
                 <div class="container main-menu">
                 <div class="row align-items-center justify-content-between d-flex">
                   <div id="logo">
-                    <a href="homepage.jsp"><img src="<%=fp.getFilepath()%>" alt="" title="" /></a>
+                    <a href="HomePage.jsp"><img src="<%=fp.getFilepath()%>" alt="" title="" /></a>
                   </div>
                   <nav id="nav-menu-container">
                     <ul class="nav-menu">
-                      <li><a href="homepage.jsp">Home</a></li>
+                      <li><a href="HomePage.jsp">Home</a></li>
                       <li><a href="about.jsp">About</a></li>
                       <li><a href="courses.jsp">Courses</a></li>
                       <li><a href="locate.jsp">Locate us</a></li>
@@ -83,5 +86,5 @@ System.out.println("entry1"+it);
                 </div>
             </div>
           </header><!-- #header -->
-
+ 
 <%}%>        

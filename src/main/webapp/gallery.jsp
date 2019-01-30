@@ -1,11 +1,12 @@
-	<!DOCTYPE html>
+	<%@page import="data.pictures"%>
+<%@page import="operation.CourseSubSecOperation"%>
+<!DOCTYPE html> 
 	<html lang="zxx" class="no-js">
 	   <head>
                 		<title>Homepage</title>
 
                                  <%@include file="homepageheaders.jsp" %>
             </head>
-	
 			<!-- start banner Area -->
 			<section class="banner-area relative about-banner" id="home">	
 				<div class="overlay overlay-bg"></div>
@@ -15,7 +16,7 @@
 							<h1 class="text-white">
 								Gallery				
 							</h1>	
-							<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="gallery.html"> Gallery</a></p>
+							<p class="text-white link-nav"><a href="index.jsp">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="gallery.jsp"> Gallery</a></p>
 						</div>	
 					</div>
 				</div>
@@ -27,80 +28,34 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-7">
-							<a href="img/gallery/g1.jpg" class="img-gal">
+		<%
+               System.out.println("entrypic");
+                             HashSet<pictures> setpictures=cop.getimages();
+System.out.println("entrypic"+setfirstpage);                      
+                             Iterator<pictures> ittt=setpictures.iterator();
+System.out.println("entrpic"+it);                            
+                             while(ittt.hasNext())
+                              {
+                                  pictures p=ittt.next();
+                           
+%> 
+
+                                                    <a href="#" class="img-gal">
 								<div class="single-imgs relative">		
 									<div class="overlay overlay-bg"></div>
 									<div class="relative">				
-										<img class="img-fluid" src="img/gallery/g1.jpg" alt="">		
+                                                                            <img class="img-fluid" src=<%=p.getImagepath()%> >		
 									</div>
 								</div>
 							</a>
 						</div>
-						<div class="col-lg-5">
-							<a href="img/gallery/g2.jpg" class="img-gal">
-								<div class="single-imgs relative">		
-									<div class="overlay overlay-bg"></div>
-									<div class="relative">				
-										<img class="img-fluid" src="img/gallery/g2.jpg" alt="">				
-									</div>
-								</div>
+                                        			</div>
 							</a>
-						</div>
-						<div class="col-lg-4">
-							<a href="img/gallery/g3.jpg" class="img-gal">
-								<div class="single-imgs relative">		
-									<div class="overlay overlay-bg"></div>
-									<div class="relative">				
-										<img class="img-fluid" src="img/gallery/g3.jpg" alt="">				
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="col-lg-4">
-							<a href="img/gallery/g4.jpg" class="img-gal">
-								<div class="single-imgs relative">		
-									<div class="overlay overlay-bg"></div>
-									<div class="relative">					
-										<img class="img-fluid" src="img/gallery/g4.jpg" alt="">				
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="col-lg-4">
-							<a href="img/gallery/g5.jpg"  class="img-gal">
-								<div class="single-imgs relative">		
-									<div class="overlay overlay-bg"></div>
-									<div class="relative">					
-										<img class="img-fluid" src="img/gallery/g5.jpg" alt="">				
-									</div>
-								</div>
-							</a>
-						</div>
-						<div class="col-lg-5">
-							<a href="img/gallery/g6.jpg" class="img-gal">
-								<div class="single-imgs relative">		
-									<div class="overlay overlay-bg"></div>
-									<div class="relative">				
-										<img class="img-fluid" src="img/gallery/g6.jpg" alt="">				
-									</div>
-								</div>
-							 </a>
-						</div>
-						<div class="col-lg-7">
-							<a href="img/gallery/g7.jpg" class="img-gal">
-								<div class="single-imgs relative">		
-									<div class="overlay overlay-bg"></div>
-									<div  class="relative">					
-										<img class="img-fluid" src="img/gallery/g7.jpg" alt="">				
-									</div>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>	
+						</div>					
+					
 			</section>
 			<!-- End gallery Area -->
-													
+					<%}%>								
 	 <%@include file="homepagefooters.jsp" %>
 	
 		</body>
