@@ -44,11 +44,7 @@ public class SerAddDesignation extends HttpServlet {
              AddDesignation obj= new AddDesignation(AddDES_ID,Designation);
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
          String msg = null;
-            try {
-                msg = cop.insertdesignation(obj);
-            } catch (SQLException ex) {
-                Logger.getLogger(SerAddDesignation.class.getName()).log(Level.SEVERE, null, ex);
-            }
+         msg = cop.insertdesignation(obj);
          out.println(msg);
                              hs.setAttribute("id", msg);
              res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddDesignation.jsp");

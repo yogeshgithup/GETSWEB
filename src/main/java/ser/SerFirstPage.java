@@ -89,7 +89,7 @@ public class SerFirstPage extends HttpServlet {
                }
     
               String aboutus=req.getParameter("aboutus");
-              int contactno=Integer.parseInt(req.getParameter("contactnumber"));
+              String contactno=req.getParameter("contactnumber");
               String email=req.getParameter("email");
               String address=req.getParameter("address");
               String quote=req.getParameter("quote");
@@ -107,11 +107,7 @@ public class SerFirstPage extends HttpServlet {
                        String addrole_id="1";
                       String role="Admin";
                         AddRole ar= new AddRole(addrole_id,role);
-            try {
-                msg = cop.insertRole(ar);
-            } catch (SQLException ex) {
-                Logger.getLogger(SerFirstPage.class.getName()).log(Level.SEVERE, null, ex);
-            }
+                        msg = cop.insertRole(ar);
                          out.println(msg);    
                          hs.setAttribute("addrole_id",addrole_id);
            

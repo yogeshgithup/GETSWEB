@@ -17,18 +17,19 @@
 								for a better world			
 							</h1>
 							<br>
-								<form>
+								<form  method="post" action="<%=application.getContextPath()%>/SerLogin">
 								
 									  <div class="form-group col-lg-6 col-md-12 name">
-									    <input type="text" class="form-control" id="LoginId" placeholder="Enter Login Id" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Login Id'">
+									    <input type="text" class="form-control" name="LoginId" id="LoginId" placeholder="Enter Login Id" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Login Id'">
 									  </div>
 									 										
 								
 									<div class="form-group col-lg-6 col-md-12 name">
-										<input type="text" class="form-control" id="Password" placeholder="Enter Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Password'">
+										<input type="text" class="form-control" name="Password" id="Password" placeholder="Enter Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Password'">
 										<br>
-								<a href="#" class="primary-btn text-uppercase">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
-
+                                                                                                       
+                                                                                <button type="submit" value="submit" name="submit" class="primary-btn text-uppercase">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Login&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+                                                                                                      
 									</div>
 							
 						
