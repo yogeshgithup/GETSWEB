@@ -946,8 +946,5 @@ public class CourseSubSecOperation {
         return msg1;
       }    
 
-      
-
-  
-   
+     
 }
