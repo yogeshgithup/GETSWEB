@@ -45,12 +45,7 @@ public class SerAddAttribute extends HttpServlet {
              AddAttribute aa= new AddAttribute(AddPA_ID,ProfileAttribute);
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
          String msg = null;
-            try {
-                msg = cop.insertProfileAttribute(aa);
-            } catch (SQLException ex) {
-                Logger.getLogger(SerAddAttribute.class.getName()).log(Level.SEVERE, null, ex);
-               msg=ex.getMessage();
-            }
+         msg = cop.insertProfileAttribute(aa);
          out.println(msg);
                       hs.setAttribute("id", msg);
              res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddAttribute.jsp");
