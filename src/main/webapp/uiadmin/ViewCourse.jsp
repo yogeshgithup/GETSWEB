@@ -115,7 +115,7 @@ Msg ="<%=(String)session.getAttribute("msg")%>";
                                           <%=course.getDays_per_week()%>
                                        </td>
                                         <td>
-                                            <a href="<%=application.getContextPath()%>/SerDelete?id=<%=course.getC_id()%>" class="btn btn-danger btn-xs"  ><i class="fa fa-trash-o"></i> Delete </a>
+                                            <a href="<%=application.getContextPath()%>/SerDelete?id=<%=course.getC_id()%>&id1=deletecourse" class="btn btn-danger btn-xs"  ><i class="fa fa-trash-o"></i> Delete </a>
                                        </td>
 
                                   </tr>

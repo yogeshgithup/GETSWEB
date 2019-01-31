@@ -170,17 +170,18 @@ public class CourseSubSecOperation {
         return msg;
     }
 
-    public String deleteCourse(String cid) {
+    public String deleteCourse(String id,String id1) {
 
         String msg = "hi";
         PreparedStatement pstmt = null;
-
+if(id1.equals("deletecourse"))
+{
+    System.out.println("insidecopdelete");
         String sql = "DELETE FROM course where c_id=?";
         try {
             con.setAutoCommit(false);
-
             pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, cid);
+            pstmt.setString(1, id);
             pstmt.executeUpdate();
             con.commit();
             msg = "success";
@@ -192,8 +193,81 @@ public class CourseSubSecOperation {
             }
             msg = cnfe.getMessage();
         }
+}
 
-        return msg;
+if(id1.equals("deleteattribute"))
+{
+    System.out.println("insidecopdeleteattribute");
+    
+      String sql = "DELETE FROM profileattribute where pa_id=?";
+        try {
+            con.setAutoCommit(false);
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.executeUpdate();
+            con.commit();
+            msg = "success";
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+}
+
+
+if(id1.equals("deletedesignation"))
+{
+    System.out.println("insidecopdeletedesignation");
+    
+      String sql = "DELETE FROM designation where des_id=?";
+        try {
+            con.setAutoCommit(false);
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.executeUpdate();
+            con.commit();
+            msg = "success";
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+}
+    
+
+if(id1.equals("deleterole"))
+{
+    System.out.println("insidecopdeleterole");
+    
+      String sql = "DELETE FROM role where role_id=?";
+        try {
+            con.setAutoCommit(false);
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.executeUpdate();
+            con.commit();
+            msg = "success";
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+}
+
+
+return msg;
     }
 
       public HashSet<FirstPage> getfirstpage()
@@ -640,7 +714,7 @@ public class CourseSubSecOperation {
             System.out.println(obj.getDesignation());
             pstmt.setString(2, obj.getDesignation());
             pstmt.executeUpdate();
-
+            System.out.println("suuuscsss");
             con.commit();
             msg = "success";
             
@@ -658,7 +732,7 @@ public class CourseSubSecOperation {
       public HashSet<AddDesignation> getDesignation()
     {
         
-       HashSet<AddDesignation> setdes_id=new HashSet<AddDesignation>();
+       HashSet<AddDesignation> setdes_id=new HashSet<>();
        Statement stmt = null;
        ResultSet rs=null;
        String sql="select * from designation";
@@ -969,6 +1043,55 @@ public class CourseSubSecOperation {
         }
    
         }
+
+    public HashSet<AddAttribute> getProfileAttribute() {
+     
+        HashSet<AddAttribute> setAddAttribute=new HashSet<>();
+        System.out.println("176-------");
+       Statement stmt = null;
+       ResultSet rs=null;
+       String sql="select * from profileattribute";
+        System.out.println("181------sql"+sql);
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           while(rs.next())  
+           {
+             AddAttribute aa=new AddAttribute(rs.getString("pa_id"),rs.getString("profile_attribute"));
+              
+               System.out.println("189----aa="+aa);
+                       setAddAttribute.add(aa);
+                       System.out.println("191-----");
+           }
+       }catch(Exception e)
+       {
+           setAddAttribute=null;
+       }
+        
+        return setAddAttribute ;
+    
+    }
+
+    public String updatelayout(String updatedlogo) {
+   
+     try{
+        
+         PreparedStatement pstmt = null;
+            
+         String sql = "UPDATE layout SET filepath=?";
+       pstmt = con.prepareStatement(sql);
+       pstmt.executeUpdate();
+        return "success";
+        }catch(Exception e)
+        {
+            System.out.println("msg======"+e.getMessage());
+            return "error";
+        }
+   
+        
+    }
+    
     
   
 }

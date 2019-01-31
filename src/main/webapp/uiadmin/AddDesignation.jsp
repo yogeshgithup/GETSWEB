@@ -1,3 +1,13 @@
+<%@page import="data.AddDesignation"%>
+<%@page import="data.AddAttribute"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.sql.ResultSetMetaData"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -11,26 +21,12 @@
     <div class="container body">
       <div class="main_container">
           <%@include file="navigation.jsp" %>
- 
-    <%
+   <%
 session.setMaxInactiveInterval(2);
+String msg=(String)session.getAttribute("msg");
 %>
 
- <script type="text/javascript">
-var Msg=null;
-Msg ="<%=(String)session.getAttribute("msg")%>";
- if (Msg === "1") {
- 
- alert("Data Entered Successfully");
-  
- }
- if(Msg === "0")
- {
- alert("Duplicacy error");   
-    }
- 
- </script> 
-
+    
   <!-- page content -->
           <div class="right_col" role="main">
           <div class="">
@@ -67,7 +63,7 @@ Msg ="<%=(String)session.getAttribute("msg")%>";
                   <div class="x_content">
                     <br />
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="get" action="<%=application.getContextPath()%>/SerAddDesignation">
-
+<%out.println(msg);%>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="AddDES_ID">Add DES_ID<span class="required">*</span>
                         </label>
@@ -98,38 +94,29 @@ Msg ="<%=(String)session.getAttribute("msg")%>";
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1
-                          </td>
-                          <td>Faculty
-                          </td>
-                          <td>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
-                        </tr>
-                        <tr>
-                      
+                            <%
+                                  System.out.println("75");
+                              HashSet<AddDesignation> setdesignation=(HashSet<AddDesignation>)session.getAttribute("setdesignation");
+                              System.out.println("77"+setdesignation);
+                              
+                              Iterator<AddDesignation> it=setdesignation.iterator();
+                                System.out.println("78");
+                              while(it.hasNext())
+                              {
+                                    System.out.println("82");
+                                    AddDesignation des=it.next();
+                                %>
                           <tr>
-                          <td>2
+                          <td><%=des.getAddDES_ID()%>
                           </td>
-                          <td>Staff
+                          <td><%=des.getDesignation()%>
                           </td>
                           <td>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            <a href="<%=application.getContextPath()%>/SerDelete?id=<%=des.getAddDES_ID()%>&id1=deletedesignation" class="btn btn-danger btn-xs"  ><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
                         </tr>
-                        <tr>
-                    
+  <%}%>
 
-                        <tr>
-                          <td>3
-                          </td>
-                          <td>Admin</td>
-                          <td>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
-                        </tr>
-                        <tr>
                         </tbody>
                     </table>
                     

@@ -5,6 +5,9 @@
  */
 package ser;
 
+import data.AddAttribute;
+import data.AddDesignation;
+import data.AddRole;
 import data.Course;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -40,13 +43,17 @@ public class SerDelete extends HttpServlet {
         ServletContext ctx = this.getServletContext();
         Connection con = (Connection) ctx.getAttribute("MyConn");
 
-        String a = req.getParameter("id");
-        System.out.println("---"+a);
+        String id = req.getParameter("id");
+        String id1=req.getParameter("id1");
+        System.out.println("---"+id);
+        System.out.println("---"+id1);
+       
         CourseSubSecOperation cop=new CourseSubSecOperation(con);
        
-           String msg = null;
-                    
-                msg = cop.deleteCourse(a);
+if(id1.equals("deletecourse"))
+{
+        String msg = null;
+                msg = cop.deleteCourse(id,id1);
                 System.out.println(msg);
                     HttpSession hs=req.getSession(true);
    
@@ -55,6 +62,57 @@ public class SerDelete extends HttpServlet {
               hs.setAttribute("setcourse",setcourse);
               hs.setAttribute("msg",msg);
        res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"ViewCourse.jsp");
+}
+  
+if(id1.equals("deleteattribute"))
+        {
+    System.out.println("insidedeleteattribute---------");
     
+            String msg = null;
+                msg = cop.deleteCourse(id,id1);
+                System.out.println("deletedmsgforattribute"+msg);
+                    HttpSession hs=req.getSession(true);
+   
+              HashSet<AddAttribute> setAttribute=cop.getProfileAttribute();
+              out.println(setAttribute.size());
+              hs.setAttribute("setAttribute",setAttribute);
+              hs.setAttribute("msg",msg);
+       res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddAttribute.jsp");
+        }
+       
+
+if(id1.equals("deletedesignation"))
+        {
+    System.out.println("insidedeletedesignation---------");
+    
+            String msg = null;
+                msg = cop.deleteCourse(id,id1);
+                System.out.println("deletedmsgforsdesignation------"+msg);
+                    HttpSession hs=req.getSession(true);
+   
+              HashSet<AddDesignation> setDesignation=cop.getDesignation();
+              System.out.println("setdesignation"+setDesignation);
+              out.println(setDesignation.size());
+              hs.setAttribute("setdesignation",setDesignation);
+              hs.setAttribute("msg",msg);
+       res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddDesignation.jsp");
+        }
+
+if(id1.equals("deleterole"))
+        {
+    System.out.println("insidedeletedesignation---------");
+    
+            String msg = null;
+                msg = cop.deleteCourse(id,id1);
+                System.out.println("deletedmsgforrole------"+msg);
+                    HttpSession hs=req.getSession(true);
+   
+              HashSet<AddRole> setRole=cop.getRole();
+              System.out.println("setRole"+setRole);
+              out.println(setRole.size());
+              hs.setAttribute("setRole",setRole);
+              hs.setAttribute("msg",msg);
+       res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddRole.jsp");
+        }
     }
 }

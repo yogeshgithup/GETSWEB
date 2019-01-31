@@ -5,7 +5,9 @@
  */
 package ser;
 
-import data.AddRole;
+import data.AddAttribute;
+import data.AddDesignation;
+import data.user_role;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -22,43 +24,29 @@ import operation.CourseSubSecOperation;
 
 /**
  *
- * @author harshjainn
+ * @author Asadali
  */
-public class SerAddRole extends HttpServlet {
+public class SerEditLogo extends HttpServlet {
 
-   
-    @Override
+      @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        
-    }
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res)
-            throws ServletException, IOException {
         res.setContentType("text/html");
-        HttpSession hs=req.getSession();
         PrintWriter out=res.getWriter();
+                HttpSession hs=req.getSession(true);
         ServletContext ctx=this.getServletContext();
         Connection con=(Connection)ctx.getAttribute("MyConn");
         
         if(req.getParameter("submit")!=null)
         {
-             
-              String addrole_id=req.getParameter("AddROLE_Id");
-              String role=req.getParameter("Role");
-             AddRole ar= new AddRole(addrole_id,role);
+              String updatedlogo=req.getParameter("updatedlogo");
+           
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
          String msg = null;
-         msg = cop.insertRole(ar);
-         out.println(msg);
-                          hs.setAttribute("id", msg);
-                 res.sendRedirect(ctx.getContextPath()+"/SerViewManageDetail?id=role");
-     
-         
-        }
+         msg = cop.updatelayout(updatedlogo);
+         System.out.println(msg);
+        res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"EditLogo.jsp");
 
-    
-    
-    
-}
+        }
+    }
 }

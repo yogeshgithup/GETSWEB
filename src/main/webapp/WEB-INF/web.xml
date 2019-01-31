@@ -115,6 +115,14 @@
         <servlet-name>SerPersonAndroid</servlet-name>
         <servlet-class>ser.SerPersonAndroid</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerViewManageDetail</servlet-name>
+        <servlet-class>ser.SerViewManageDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerEditLogo</servlet-name>
+        <servlet-class>ser.SerEditLogo</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -206,6 +214,14 @@
     <servlet-mapping>
         <servlet-name>SerPersonAndroid</servlet-name>
         <url-pattern>/SerPersonAndroid</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerViewManageDetail</servlet-name>
+        <url-pattern>/SerViewManageDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerEditLogo</servlet-name>
+        <url-pattern>/SerEditLogo</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
