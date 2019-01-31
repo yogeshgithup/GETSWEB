@@ -948,6 +948,11 @@ public class CourseSubSecOperation {
         return msg1;
       }    
 
+
+      
+
+  
+
         
         public String editviewcourse(Course c){
    
@@ -967,6 +972,7 @@ public class CourseSubSecOperation {
             System.out.println("msg======"+e.getMessage());
             return "error";
         }
+
    
         }
     
