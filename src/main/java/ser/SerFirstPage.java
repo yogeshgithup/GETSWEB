@@ -128,11 +128,7 @@ res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"SignupPage.jsp?id=a");
             throws ServletException, IOException {
            PrintWriter out=response.getWriter();
          
-            
-         
-          
-  
-        ServletContext ctx=this.getServletContext();
+             ServletContext ctx=this.getServletContext();
         Connection con=(Connection)ctx.getAttribute("MyConn");
         System.out.println("welcome");
         CourseSubSecOperation cop=new CourseSubSecOperation(con);
