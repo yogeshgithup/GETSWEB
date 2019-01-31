@@ -79,8 +79,6 @@ public class SerLogin extends HttpServlet {
                out.println("F");
             }
             
-            
-       
    }
 
    
@@ -124,9 +122,6 @@ public class SerLogin extends HttpServlet {
  
         }
         
-
-    
-    
 }
       private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");

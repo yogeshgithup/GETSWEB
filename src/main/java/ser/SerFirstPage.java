@@ -7,9 +7,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,13 +25,15 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.Part;
 import operation.CourseSubSecOperation;
 import operation.DropBoxOperation;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 @MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
                  maxFileSize=1024*1024*10,      // 10MB
                  maxRequestSize=1024*1024*50)   // 50MB
 
 public class SerFirstPage extends HttpServlet {
 
-   
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
@@ -121,10 +125,54 @@ res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"SignupPage.jsp?id=a");
         }
 
     
+  }
     
-    
-        
-}
+       @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+           PrintWriter out=response.getWriter();
+         
+            
+         
+          
+  
+        ServletContext ctx=this.getServletContext();
+        Connection con=(Connection)ctx.getAttribute("MyConn");
+        System.out.println("welcome");
+        CourseSubSecOperation cop=new CourseSubSecOperation(con);
+            System.out.println("welcome2");
+           JSONArray ja=new JSONArray();
+           JSONObject obj=new JSONObject();
+            HashSet<FirstPage> firstpage=cop.getfirstpage();
+            Iterator it=firstpage.iterator();
+            while(it.hasNext())
+            {
+                FirstPage fp=(FirstPage) it.next();
+                obj.put("contactno",fp.getContactno());
+                 obj.put("email",fp.getContactno());
+                  obj.put("address",fp.getContactno());
+                  ja.put(obj);
+            }
+            
+            out.println(ja.toString());
+            
+           
+           
+           
+//              int contactno=Integer.parseInt(obj.getString("contactnumber"));
+//      
+//            System.out.println(contactno);
+//           
+//            String email=obj.getString("email");
+//            System.out.println(email);
+//              String address=obj.getString("address");
+//            System.out.println(address);
+//            String msg = null;
+//             contactus l=new Login(email,Password);
+//            msg = cop.LoginProcess(l);
+//       
+           }
+         
     
       private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
