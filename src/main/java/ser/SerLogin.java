@@ -68,17 +68,23 @@ public class SerLogin extends HttpServlet {
             String msg = null;
             Login l=new Login(email,Password);
             msg = cop.LoginProcess(l);
+            
             if(msg.equals("Admin"))
             {
               //  response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AdminPanel.jsp");
                out.println("A1");
             }
-            else
+            else if(msg.equals("Faculty"))
             {
                // response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"StaffPanel.jsp");
                out.println("F");
             }
+            else if(msg.equals("Student"))
+            {
+                out.println("S");
+            }
             
+
    }
 
    
@@ -119,7 +125,7 @@ public class SerLogin extends HttpServlet {
             }
             out.println(msg);
             
- 
+  
         }
         
 }

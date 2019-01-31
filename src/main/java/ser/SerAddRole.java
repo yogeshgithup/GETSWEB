@@ -49,12 +49,7 @@ public class SerAddRole extends HttpServlet {
              AddRole ar= new AddRole(addrole_id,role);
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
          String msg = null;
-            try {
-                msg = cop.insertRole(ar);
-            } catch (SQLException ex) {
-                Logger.getLogger(SerAddRole.class.getName()).log(Level.SEVERE, null, ex);
-                msg= ex.getMessage();
-            }
+         msg = cop.insertRole(ar);
          out.println(msg);
                           hs.setAttribute("id", msg);
          

@@ -5,7 +5,15 @@
 
                                  <%@include file="homepageheaders.jsp" %>
             </head>
-	
+	<%
+        it=setfirstpage.iterator();
+System.out.println("entry1"+it);                    
+                     while(it.hasNext())
+                              {
+                                  FirstPage fp=it.next();
+                              System.out.println(fp.getInstitutename());
+%>                    
+
 
 			<!-- start banner Area -->
 			<section class="banner-area relative about-banner" id="home">	
@@ -46,7 +54,7 @@
 								</div>
 								<div class="desc-wrap">
 									<p>
-										For many of us, our very first experience of learning about the celestial bodies begins when we saw our first.
+                                                                                Without Focus Hardwork is wasted.
 									</p>
 								</div>
 							</div>
@@ -58,7 +66,7 @@
 								</div>
 								<div class="desc-wrap">
 									<p>
-										If you are a serious astronomy fanatic like a lot of us are, you can probably remember that one event.
+                                                                                Success is achieved by combination of hardwork and focus.
 									</p>
 								</div>
 							</div>
@@ -80,7 +88,7 @@
 						<div class="col-lg-6 info-area-right">
 							<h1>Introduction</h1>
 							<p>
-								inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach. inappropriate behavior is often laughed off as “boys will be boys,” women face higher conduct standards especially in the workplace. That’s why it’s crucial that, as women, our behavior on the job is beyond reproach.
+								<%=fp.getAboutus()%>
 							</p>
 						</div>
 					</div>
@@ -140,6 +148,6 @@
 			</section>
 			<!-- End course-mission Area -->
 					 <%@include file="homepagefooters.jsp" %>
-		
+<%}%>		
 		</body>
 	</html>

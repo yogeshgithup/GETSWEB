@@ -16,6 +16,7 @@ import data.Person;
 import data.Section;
 import data.Student;
 import data.Subject;
+import data.pictures;
 import data.user_role;
 import static java.lang.System.out;
 import java.sql.*;
@@ -45,7 +46,7 @@ public class CourseSubSecOperation {
 
         String sql = "insert into course value(?,?,?,?,?,?)";
        
-       
+        System.out.println(sql);
         try {
             con.setAutoCommit(false);
             pstmt = con.prepareStatement(sql);
@@ -55,26 +56,40 @@ public class CourseSubSecOperation {
             pstmt.setInt(4, c.getDuration());
             pstmt.setInt(5, c.getHours_per_week());
             pstmt.setInt(6, c.getDays_per_week());
-            int r=pstmt.executeUpdate();
-            System.out.println("R"+r);
+            pstmt.executeUpdate();
             con.commit();
-            if(r==1)
-            {
-            msg = "1";             
-            }
-            else
-            {
-            msg="0";
-            }
+            msg = "success";
         } catch (SQLException cnfe) {
             con.rollback();
             msg = cnfe.getMessage();
-            msg="0";
-            
         }
         return msg;
     }
 
+    
+    public HashSet<pictures> getimages()
+    {
+        HashSet<pictures> setpictures=new HashSet<>();
+         Statement stmt = null;
+       ResultSet rs=null;
+       String sql="select * from pictures";
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           while(rs.next())  
+           {
+               pictures pic=new pictures(rs.getString("institutename"),rs.getString("imagepath"),rs.getString("imagename"));
+               setpictures.add(pic);
+           }
+       }catch(Exception e)
+       {
+           setpictures=null;
+       }
+        
+        return setpictures;
+    }
+    
     public String insertSubject(Subject s) {
 
         String msg = "hi";
@@ -181,7 +196,7 @@ public class CourseSubSecOperation {
         return msg;
     }
 
-    public HashSet<FirstPage> getfirstpage()
+      public HashSet<FirstPage> getfirstpage()
     {
         System.out.println("175----in");
        HashSet<FirstPage> setfirstpage=new HashSet<FirstPage>();
@@ -196,7 +211,7 @@ public class CourseSubSecOperation {
            rs=stmt.executeQuery(sql);
            while(rs.next())  
            {
-               FirstPage firstpage=new FirstPage(rs.getString("institutename"),rs.getString("filepath"),rs.getString("filename"),rs.getInt("contactno"),rs.getString("email"),rs.getString("address"),rs.getString("aboutus"),rs.getString("quotes"));
+               FirstPage firstpage=new FirstPage(rs.getString("institutename"),rs.getString("filepath"),rs.getString("filename"),rs.getString("contactno"),rs.getString("email"),rs.getString("address"),rs.getString("aboutus"),rs.getString("quotes"));
                System.out.println("189----firstpage"+firstpage);
                        setfirstpage.add(firstpage);
                        System.out.println("191-----");
@@ -208,6 +223,7 @@ public class CourseSubSecOperation {
         
         return setfirstpage;
     }
+  
     
     
     public HashSet<Course> getCourse()
@@ -258,7 +274,7 @@ public class CourseSubSecOperation {
         return setcourse;
     }
     
-      public String insertRole(AddRole ar) throws SQLException {
+      public String insertRole(AddRole ar) {
 
         String msg = "hi";
         PreparedStatement pstmt = null;
@@ -272,28 +288,20 @@ public class CourseSubSecOperation {
             pstmt.executeUpdate();
 
             con.commit();
-                int r=pstmt.executeUpdate();
-            System.out.println("R"+r);
-            con.commit();
-            if(r==1)
-            {
-            msg = "1";             
-            }
-            else
-            {
-            msg="0";
-            }
-        } catch (SQLException cnfe) {
-            con.rollback();
-            msg = cnfe.getMessage();
-            msg="0";
+            msg = "success";
             
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
         }
-       
         return msg;
     }
       
-      public String insertProfileAttribute(AddAttribute aa) throws SQLException {
+      public String insertProfileAttribute(AddAttribute aa) {
 
         String msg = "hi";
         PreparedStatement pstmt = null;
@@ -307,22 +315,15 @@ public class CourseSubSecOperation {
             pstmt.executeUpdate();
 
             con.commit();
-            int r=pstmt.executeUpdate();
-            System.out.println("R"+r);
-            con.commit();
-            if(r==1)
-            {
-            msg = "1";             
-            }
-            else
-            {
-            msg="0";
-            }
-        } catch (SQLException cnfe) {
-            con.rollback();
-            msg = cnfe.getMessage();
-            msg="0";
+            msg = "success";
             
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
         }
         return msg;
     }
@@ -486,9 +487,7 @@ public class CourseSubSecOperation {
        System.out.println("332"+setperson);
         return setperson;
     }
-     
-     
-     public HashSet<AddRole> getRole()
+      public HashSet<AddRole> getRole()
     {
         
        HashSet<AddRole> setrole=new HashSet<AddRole>();
@@ -511,8 +510,7 @@ public class CourseSubSecOperation {
         
         return setrole;
     }
-     
-     public HashSet<AddRole> getrole_id()
+       public HashSet<AddRole> getrole_id()
     {
         
        HashSet<AddRole> setrole=new HashSet<AddRole>();
@@ -535,32 +533,7 @@ public class CourseSubSecOperation {
         
         return setrole;
     }
-       
-     public ArrayList<String> getAttr() {
-        ArrayList ar = new ArrayList();
-        
-      Statement stmt = null;
-       ResultSet rs=null;
-       String sql="select profile_attribute from profileattribute";
-       try
-       {
-           stmt=con.createStatement();
-           rs=stmt.executeQuery(sql);
-           while(rs.next())  
-           {
-               String pa=rs.getString("profile_attribute");
-               ar.add(pa);
-           }
-       }catch(Exception e)
-       {
-           ar=null;
-       }
-        
-      
-        return ar;
-    }
-
-     public HashSet<Person> getp_id()
+         public HashSet<Person> getp_id()
     {
         
        HashSet<Person> setperson=new HashSet<Person>();
@@ -610,7 +583,8 @@ public class CourseSubSecOperation {
         }
         return msg;
     }   
-       public String assign_role(Assign_role ar) {
+
+         public String assign_role(Assign_role ar) {
 
         String msg = "success";
         PreparedStatement pstmt = null;
@@ -653,7 +627,7 @@ public class CourseSubSecOperation {
     }   
 
       
-      public String insertdesignation(AddDesignation obj) throws SQLException {
+      public String insertdesignation(AddDesignation obj) {
 
         String msg = "success";
         PreparedStatement pstmt = null;
@@ -668,27 +642,20 @@ public class CourseSubSecOperation {
             pstmt.executeUpdate();
 
             con.commit();
-     int r=pstmt.executeUpdate();
-            System.out.println("R"+r);
-            con.commit();
-            if(r==1)
-            {
-            msg = "1";             
-            }
-            else
-            {
-            msg="0";
-            }
-        } catch (SQLException cnfe) {
-            con.rollback();
-            msg = cnfe.getMessage();
-            msg="0";
+            msg = "success";
             
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
         }
-               return msg;
-      } 
-      
-       public HashSet<AddDesignation> getDesignation()
+        return msg;
+      }    
+    
+      public HashSet<AddDesignation> getDesignation()
     {
         
        HashSet<AddDesignation> setdes_id=new HashSet<AddDesignation>();
@@ -711,8 +678,9 @@ public class CourseSubSecOperation {
         
         return setdes_id;
     }
-    
-       public HashSet<AddDesignation> getDes_id()
+     
+      
+      public HashSet<AddDesignation> getDes_id()
     {
         
        HashSet<AddDesignation> setdes_id=new HashSet<AddDesignation>();
@@ -771,6 +739,14 @@ public class CourseSubSecOperation {
                  {
                      msg="Admin";
                  }
+                 else if(id.contains("F"))
+                 {
+                     msg="Faculty";
+                 }
+                 else if(id.contains("S"))
+                 {
+                     msg="Student";
+                 }
                  else
                  {
                      msg="other";
@@ -789,7 +765,7 @@ public class CourseSubSecOperation {
            return msg;
        }
        
-     public String insertinlayout(FirstPage f) {
+  public String insertinlayout(FirstPage f) {
          System.out.println("hello");
         String msg = "hi";
         PreparedStatement pstmt = null;
@@ -811,7 +787,7 @@ public class CourseSubSecOperation {
             System.out.println("7");
             pstmt.setString(3, f.getFilename());
             System.out.println("8");
-            pstmt.setInt(4,f.getContactno());
+            pstmt.setString(4,f.getContactno());
             System.out.println("9");
             pstmt.setString(5, f.getEmail());
             System.out.println("10");
@@ -851,6 +827,30 @@ public class CourseSubSecOperation {
  
         return msg;
     }
+    
+  public ArrayList<String> getAttr() {
+        ArrayList ar = new ArrayList();
+        
+      Statement stmt = null;
+       ResultSet rs=null;
+       String sql="select profile_attribute from profileattribute";
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           while(rs.next())  
+           {
+               String pa=rs.getString("profile_attribute");
+               ar.add(pa);
+           }
+       }catch(Exception e)
+       {
+           ar=null;
+       }
+        
+      
+        return ar;
+    }
 
  public String forgotpassword(String email) throws SQLException
  {
@@ -877,6 +877,7 @@ public class CourseSubSecOperation {
          con.commit();
          return password;
  }
+
  public String changepassword(String loginid,String newpassword)
  {
          String msg;
@@ -887,13 +888,14 @@ public class CourseSubSecOperation {
     //  String sql="UPDATE person SET password=? WHERE password=?";  
       System.out.println(sql);
       try {
-          System.out.println("784");
+          System.out.println("784"+loginid+"  "+loginid.length());
             con.setAutoCommit(false);
             pstmt = con.prepareStatement(sql);
-            pstmt.setString(1,newpassword);
-            pstmt.setString(2,loginid);
+            pstmt.setString(1,loginid);
+            pstmt.setString(2,newpassword);
           System.out.println("789");
-          pstmt.executeUpdate();
+         int r = pstmt.executeUpdate();
+          System.out.println(r);
           con.commit();
           msg="error";
       }
@@ -946,8 +948,33 @@ public class CourseSubSecOperation {
         return msg1;
       }    
 
+
       
 
   
+
+        
+        public String editviewcourse(Course c){
    
+     try{
+        
+         PreparedStatement pstmt = null;
+            
+         String sql = "UPDATE course SET c_name=?,c_fees=?,duration=?,hours_per_week=?,days_per_week=? WHERE c_id=?";
+       pstmt = con.prepareStatement(sql);
+       pstmt.executeUpdate();
+          
+       
+         System.out.println("118=====op");
+        return "success";
+        }catch(Exception e)
+        {
+            System.out.println("msg======"+e.getMessage());
+            return "error";
+        }
+
+   
+        }
+    
+  
 }

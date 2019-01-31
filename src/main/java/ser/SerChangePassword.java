@@ -38,7 +38,7 @@ public class SerChangePassword extends HttpServlet {
             throws ServletException, IOException {
          ServletContext ctx=this.getServletContext();
        Connection con=(Connection)ctx.getAttribute("MyConn");
-       
+       HttpSession hs=request.getSession(true);
          PrintWriter out=response.getWriter();
          String data=request.getParameter("data");
          System.out.println(data);
@@ -55,11 +55,12 @@ public class SerChangePassword extends HttpServlet {
        
         String password= obj.getString("password");
         String newpassword =obj.getString("newpassword");
-        String email=obj.getString("email");
+        String loginid=obj.getString("email");
        
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
             
-       String pswd=cop.changepassword( newpassword,email); 
+       String pswd=cop.changepassword( newpassword,loginid); 
+      // out.println(pswd);
     }
 
  
