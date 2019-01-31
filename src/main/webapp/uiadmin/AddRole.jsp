@@ -1,3 +1,11 @@
+<%@page import="data.AddRole"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.sql.ResultSetMetaData"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -13,20 +21,9 @@
      <%@include file="navigation.jsp" %>
   <%
 session.setMaxInactiveInterval(2);
+String msg=(String)session.getAttribute("msg");
+out.println(msg);
 %>
-
- <script type="text/javascript">
-var Msg=null;
-Msg ="<%=(String)session.getAttribute("msg")%>";
- if (Msg === "1") {
- 
- alert("Data Entered Successfully");
-  
- }
- if(Msg === "0")
- {
- alert("Duplicacy error");   
-    }
  
  </script> 
        
@@ -98,39 +95,30 @@ Msg ="<%=(String)session.getAttribute("msg")%>";
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1
-                          </td>
-                          <td>Faculty
-                          </td>
-                          <td>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
-                        </tr>
-                        <tr>
-                      
+                           <%
+                                  System.out.println("75");
+                              HashSet<AddRole> setRole=(HashSet<AddRole>)session.getAttribute("setRole");
+                              System.out.println("77"+setRole);
+                              
+                              Iterator<AddRole> it=setRole.iterator();
+                                System.out.println("78");
+                              while(it.hasNext())
+                              {
+                                    System.out.println("82");
+                                    AddRole ar=it.next();
+                                %>
                           <tr>
-                          <td>2
+                          <td><%=ar.getrole_id()%>
                           </td>
-                          <td>Staff
+                          <td><%=ar.getrole_id()%>
                           </td>
                           <td>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            <a href="<%=application.getContextPath()%>/SerDelete?id=<%=ar.getrole_id()%>&id1=deleterole" class="btn btn-danger btn-xs"  ><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
                         </tr>
                         <tr>
-                    
-
-                        <tr>
-                          <td>3
-                          </td>
-                          <td>Admin</td>
-                          <td>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
-                        </tr>
-                        <tr>
-                        </tbody>
+  <%}%>
+  </tbody>
                     </table>
                     
 

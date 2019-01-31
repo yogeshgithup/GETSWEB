@@ -1,3 +1,11 @@
+<%@page import="data.AddAttribute"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.sql.ResultSetMetaData"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -96,44 +104,30 @@ Msg ="<%=(String)session.getAttribute("msg")%>";
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
-                          <td>1
-                          </td>
-                          <td>
-                          </td>
-                          <td>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
-                        </tr>
-                        <tr>
-                      
+     <%
+                                  System.out.println("75");
+                              HashSet<AddAttribute> setAttribute=(HashSet<AddAttribute>)session.getAttribute("setAttribute");
+                              System.out.println("77"+setAttribute);
+                              
+                              Iterator<AddAttribute> it=setAttribute.iterator();
+                                System.out.println("78");
+                              while(it.hasNext())
+                              {
+                                    System.out.println("82");
+                                    AddAttribute aa=it.next();
+                                %>
                           <tr>
-                          <td>2
+                          <td><%=aa.getPA_ID()%>
                           </td>
-                          <td>Experince
+                          <td><%=aa.getProfileAttribute()%>
                           </td>
                           <td>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
+                            <a href="<%=application.getContextPath()%>/SerDelete?id=<%=aa.getPA_ID()%>&id1=deleteattribute" class="btn btn-danger btn-xs"  ><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
                         </tr>
-                        <tr>
-                    
-
-                        <tr>
-                          <td>3
-                          </td>
-                          <td>Expertise</td>
-                          <td>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
-                        </tr>
-                        <tr>
-                                          
-                    
-
-
-
-  </tbody>
+                        
+  <%}%>
+                      </tbody>
                     </table>
                     
 
