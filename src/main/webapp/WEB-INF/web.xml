@@ -120,8 +120,8 @@
         <servlet-class>ser.SerViewManageDetail</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SerEditLogo</servlet-name>
-        <servlet-class>ser.SerEditLogo</servlet-class>
+        <servlet-name>SerEditLayout</servlet-name>
+        <servlet-class>ser.SerEditLayout</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
@@ -220,8 +220,8 @@
         <url-pattern>/SerViewManageDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>SerEditLogo</servlet-name>
-        <url-pattern>/SerEditLogo</url-pattern>
+        <servlet-name>SerEditLayout</servlet-name>
+        <url-pattern>/SerEditLayout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

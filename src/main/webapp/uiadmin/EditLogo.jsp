@@ -44,16 +44,28 @@
                   <div class="x_content">
                     <br />
                     <%
-                               ServletContext ctx=this.getServletContext();
-                                  Connection con=(Connection)ctx.getAttribute("MyConn");
-                                  CourseSubSecOperation cop=new CourseSubSecOperation(con);
-                               HashSet<FirstPage> setfirstpage=cop.getfirstpage();
-                               Iterator<FirstPage> it=setfirstpage.iterator();
-                                 while(it.hasNext())
+                        HttpSession hs=request.getSession();
+                        hs.setAttribute("id","editlogo");
+                           System.out.println("1");
+                        ServletContext ctx=this.getServletContext();
+                          System.out.println("2");         
+                        Connection con=(Connection)ctx.getAttribute("MyConn");
+                          System.out.println("3");                        
+                        CourseSubSecOperation cop=new CourseSubSecOperation(con);
+                               System.out.println("4");         
+                       
+                        HashSet<FirstPage> setfirstpage=cop.getfirstpage();
+                               System.out.println("5");         
+                          
+                        Iterator<FirstPage> it=setfirstpage.iterator();
+                                        System.out.println("6");         
+                   while(it.hasNext())
                                  {
+                                            System.out.println("7");         
+                   
                                        FirstPage fp=it.next();
                     %>
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerEditLogo">
+                    <form enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerEditLayout">
                                   
                   <center>      <div class="x_content">
                       <label class="control-label col-md-3 col-sm-3 col-xs-12">Present Logo<span class="required">

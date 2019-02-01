@@ -18,7 +18,6 @@ import data.Student;
 import data.Subject;
 import data.pictures;
 import data.user_role;
-import static java.lang.System.out;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -26,7 +25,6 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.management.relation.Role;
 
 /**
  *
@@ -91,13 +89,13 @@ public class CourseSubSecOperation {
     }
     
     public String insertSubject(Subject s) {
-
+        System.out.println("================in");
         String msg = "hi";
         PreparedStatement pstmtsub = null;
         PreparedStatement pstmtsubcourse = null;
 
         String sqlsubject = "insert into subject value(?,?,?,?)";
-        String sqlsubcourse = "insert into course_subject value(?,?)";
+        String sqlsubcourse = "insert into course_subject value(?,?)";       
         HashSet<Course> setcourse;
         try {
             con.setAutoCommit(false);
@@ -389,7 +387,7 @@ return msg;
             pstmt.executeUpdate();
 
             con.commit();
-            msg = "success";
+            msg = "Attribute Added ";
             
         } catch (SQLException cnfe) {
             try {
@@ -1080,14 +1078,16 @@ return msg;
     
     }
 
-    public String updatelayout(String updatedlogo) {
+    public String updatelayout(String filepath,String filename) {
    
      try{
         
          PreparedStatement pstmt = null;
             
-         String sql = "UPDATE layout SET filepath=?";
+         String sql = "UPDATE layout SET filepath=?,filename=?";
        pstmt = con.prepareStatement(sql);
+       pstmt.setString(1, filepath);
+       pstmt.setString(2, filename);
        pstmt.executeUpdate();
         return "success";
         }catch(Exception e)
@@ -1097,6 +1097,68 @@ return msg;
         }
    
         
+    }
+
+    public String updateinstitutename(String updatedname) {
+     try{
+        
+         PreparedStatement pstmt = null;
+            
+         String sql = "UPDATE layout SET institutename=?";
+       pstmt = con.prepareStatement(sql);
+       pstmt.setString(1, updatedname);
+       pstmt.executeUpdate();
+        return "success";
+        }catch(Exception e)
+        {
+            System.out.println("msg======"+e.getMessage());
+            return "error";
+        }
+   
+ 
+    }
+
+    public String updatequotesaboutus(String updatedquote, String updatedaboutus) {
+ try{
+        
+         PreparedStatement pstmt = null;
+            System.out.println("in========");
+         String sql = "UPDATE layout SET quotes=?,aboutus=?";
+       pstmt = con.prepareStatement(sql);
+       System.out.println("1");
+       pstmt.setString(1,updatedquote);
+       System.out.println("2");
+       pstmt.setString(2,updatedaboutus);
+       pstmt.executeUpdate();
+        return "success";
+        }catch(Exception e)
+        {
+            System.out.println("msg======"+e.getMessage());
+            return "error";
+        }
+   
+ 
+    }
+
+    public String updatequotesaboutus(String updatedcontactus, String updatedemail, String updatedaddress) {
+ try{
+        
+         PreparedStatement pstmt = null;
+            System.out.println("in========");
+         String sql = "UPDATE layout SET contactno=?,email=?,address=?";
+       pstmt = con.prepareStatement(sql);
+       pstmt.setString(1,updatedcontactus);
+       pstmt.setString(2,updatedemail);
+       pstmt.setString(3,updatedaddress);
+             pstmt.executeUpdate();
+        return "success";
+        }catch(Exception e)
+        {
+            System.out.println("msg======"+e.getMessage());
+            return "error";
+        }
+   
+
     }
     
     

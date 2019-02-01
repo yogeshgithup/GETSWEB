@@ -123,48 +123,6 @@ res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"SignupPage.jsp?id=a");
     
   }
     
-       @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-           PrintWriter out=response.getWriter();
-         
-             ServletContext ctx=this.getServletContext();
-        Connection con=(Connection)ctx.getAttribute("MyConn");
-        System.out.println("welcome");
-        CourseSubSecOperation cop=new CourseSubSecOperation(con);
-            System.out.println("welcome2");
-           JSONArray ja=new JSONArray();
-           JSONObject obj=new JSONObject();
-            HashSet<FirstPage> firstpage=cop.getfirstpage();
-            Iterator it=firstpage.iterator();
-            while(it.hasNext())
-            {
-                FirstPage fp=(FirstPage) it.next();
-                obj.put("contactno",fp.getContactno());
-                 obj.put("email",fp.getContactno());
-                  obj.put("address",fp.getContactno());
-                  ja.put(obj);
-            }
-            
-            out.println(ja.toString());
-            
-           
-           
-           
-//              int contactno=Integer.parseInt(obj.getString("contactnumber"));
-//      
-//            System.out.println(contactno);
-//           
-//            String email=obj.getString("email");
-//            System.out.println(email);
-//              String address=obj.getString("address");
-//            System.out.println(address);
-//            String msg = null;
-//             contactus l=new Login(email,Password);
-//            msg = cop.LoginProcess(l);
-//       
-           }
-         
     
       private String extractFileName(Part part) {
         String contentDisp = part.getHeader("content-disposition");
