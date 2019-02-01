@@ -43,15 +43,28 @@ public class SerViewManageDetail extends HttpServlet {
               CourseSubSecOperation cop=new CourseSubSecOperation(con);
               HttpSession hs=request.getSession(true);
          
-              if(id.equals("aa"))
+              if(id.equals("aa")||id.equals("aaa"))
               {
-                  System.out.println("aa");
+                  if(id.equals("aa"))
+                  {
               HashSet<AddAttribute> setAttribute=cop.getProfileAttribute();
               System.out.println("48"+setAttribute);
-   
+     
               out.println(setAttribute.size());
                hs.setAttribute("setAttribute",setAttribute);
                   response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddAttribute.jsp");
+                   }
+                  if(id.equals("aaa"))
+                  {
+                     HashSet<AddAttribute> setAttribute=cop.getProfileAttribute();
+              System.out.println("4sdcsdjcvsdjcjs8"+setAttribute);
+              
+              out.println("dskbfhjdfhdsfjdsf"+setAttribute.size());
+               hs.setAttribute("setAttribute",setAttribute);
+              hs.setAttribute("msg", hs.getAttribute("msg"));
+               response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddAttribute.jsp");
+                      
+                  }
               }
               if(id.equals("des"))
               {

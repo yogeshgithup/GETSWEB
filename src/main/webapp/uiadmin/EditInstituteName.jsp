@@ -1,3 +1,14 @@
+<%@page import="data.FirstPage"%>
+<%@page import="operation.CourseSubSecOperation"%>
+<%@page import="data.AddDesignation"%>
+<%@page import="data.AddAttribute"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.sql.ResultSetMetaData"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -47,8 +58,21 @@
                   </div>
                   <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerEditContactUs">
-
+                       <%
+                                 HttpSession hs=request.getSession();
+                        hs.setAttribute("id","editinstitutename");                  
+                               ServletContext ctx=this.getServletContext();
+                                  Connection con=(Connection)ctx.getAttribute("MyConn");
+                                  CourseSubSecOperation cop=new CourseSubSecOperation(con);
+                               HashSet<FirstPage> setfirstpage=cop.getfirstpage();
+                               Iterator<FirstPage> it=setfirstpage.iterator();
+                                 while(it.hasNext())
+                                 {
+                                       FirstPage fp=it.next();
+                    %>
+                 
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerEditLayout">
+                        <center><h3><bold><%=fp.getInstitutename()%></bold></h3></center>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="updateinstitutename">Update Institute Name
                         </label>
@@ -60,14 +84,15 @@
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-3">
                           <button type="submit" class="btn btn-primary">Cancel</button>
-                          <button id="send" type="submit" class="btn btn-success">Submit</button>
+                          <button id="submit" name="submit" type="submit" class="btn btn-success">Submit</button>
                         </div>
                       </div>
+                    </form>
                   </div>
                 </div>
               </div>
             </div>
-
+<%}%>
       </div>
     </div>
 
