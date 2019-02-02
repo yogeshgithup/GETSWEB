@@ -1,3 +1,4 @@
+<%@page import="operation.CourseSubSecOperation"%>
 <%@page import="data.AddAttribute"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.HashSet"%>
@@ -20,17 +21,33 @@
              
        
     <%@include file="navigation.jsp" %>
-    <%
+  <%
 session.setMaxInactiveInterval(2);
+HttpSession hs=request.getSession();
+String msg=(String)hs.getAttribute("msg");
+                    if(msg!=null)
+                    {
+                 //      out.println(msg);
+                    }
+                  else if(msg==null)
+                {
+                    msg="";
+              }
 %>
 
- <script type="text/javascript">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
 $(document).ready(function(){
-    $('#msg').fadeOut(3000);
-    
+    //alert("Hello");
+    //$('#msg').load(function(){
+      //      alert("how are you");
+       $('#msg').fadeOut(5000);
+        //    });
+//    
 });
  </script>
-  <!-- page content -->
+ 
+ <!-- page content -->
         <div class="right_col" role="main">
           <div class="">
              <div class="clearfix"></div>
@@ -39,16 +56,16 @@ $(document).ready(function(){
                 <div class="x_panel">
                   <div class="x_title">
                     <h2>Add Attributes</h2>
-                    <div id="msg" align="center" style="color:red">
-                    <%HttpSession hs=request.getSession();
-                      String msg=(String)hs.getAttribute("msg");
-                      %></div>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                     </ul>
+                      <div id="msg" align="center" style="color:red">
+                        <h3><%=msg%></h3>
+                    </div>
+
                     <div class="clearfix"></div>
                   </div>
                    <div class="x_content">
@@ -85,10 +102,11 @@ $(document).ready(function(){
                       </thead>
                       <tbody>
      <%
-                                  System.out.println("75");
-                              HashSet<AddAttribute> setAttribute=(HashSet<AddAttribute>)session.getAttribute("setAttribute");
-                              System.out.println("77"+setAttribute);
-                              
+                                    ServletContext ctx=this.getServletContext();
+                                  Connection con=(Connection)ctx.getAttribute("MyConn");
+                                  CourseSubSecOperation cop=new CourseSubSecOperation(con);                               
+                              HashSet<AddAttribute> setAttribute=cop.getProfileAttribute();
+              
                               Iterator<AddAttribute> it=setAttribute.iterator();
                                 System.out.println("78");
                               while(it.hasNext())

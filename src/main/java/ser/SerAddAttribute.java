@@ -48,7 +48,7 @@ public class SerAddAttribute extends HttpServlet {
          msg = cop.insertProfileAttribute(aa);
          out.println(msg);
                       hs.setAttribute("msg", msg);                      
-             res.sendRedirect(ctx.getContextPath()+"/SerViewManageDetail?id=aa");
-        }
+       res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddAttribute.jsp");
+                  }
     }
 }

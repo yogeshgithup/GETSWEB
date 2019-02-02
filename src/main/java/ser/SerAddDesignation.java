@@ -47,8 +47,8 @@ public class SerAddDesignation extends HttpServlet {
          msg = cop.insertdesignation(obj);
          out.println(msg);
                              hs.setAttribute("id", msg);
-                             res.sendRedirect(ctx.getContextPath()+"/SerViewManageDetail?id=des");
-             
+          res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddDesignation.jsp");
+                     
  
         }
     }

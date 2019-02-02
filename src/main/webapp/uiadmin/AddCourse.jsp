@@ -15,23 +15,32 @@
             <%@include file="navigation.jsp" %>
            
         <!-- /page content -->
-
-  <%
+ <%
 session.setMaxInactiveInterval(2);
+HttpSession hs=request.getSession();
+String msg=(String)hs.getAttribute("msg");
+                    if(msg!=null)
+                    {
+                 //      out.println(msg);
+                    }
+                  else if(msg==null)
+                {
+                    msg="";
+              }
 %>
 
- <script type="text/javascript">
-var Msg=null;
-Msg ="<%=(String)session.getAttribute("id")%>";
- if (Msg === "1") {
- 
- alert("Data Entered Successfully");
-  
- }
- if(Msg === "0")
- {
- alert("Duplicacy error");   
-    }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    //alert("Hello");
+    //$('#msg').load(function(){
+      //      alert("how are you");
+       $('#msg').fadeOut(5000);
+        //    });
+//    
+});
+ </script>
+
  
  </script> 
           <div class="right_col" role="main">
@@ -42,6 +51,9 @@ Msg ="<%=(String)session.getAttribute("id")%>";
               </div>
 
             </div>
+               <div id="msg" align="center" style="color:red">
+                        <h3><%=msg%></h3>
+               </div>
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">

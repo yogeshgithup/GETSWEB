@@ -51,9 +51,9 @@ public class SerAddRole extends HttpServlet {
          String msg = null;
          msg = cop.insertRole(ar);
          out.println(msg);
-                          hs.setAttribute("id", msg);
-                 res.sendRedirect(ctx.getContextPath()+"/SerViewManageDetail?id=role");
-     
+                          hs.setAttribute("msg", msg);
+          res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddRole.jsp");
+              
          
         }
 

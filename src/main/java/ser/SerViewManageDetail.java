@@ -43,51 +43,52 @@ public class SerViewManageDetail extends HttpServlet {
               CourseSubSecOperation cop=new CourseSubSecOperation(con);
               HttpSession hs=request.getSession(true);
          
-              if(id.equals("aa")||id.equals("aaa"))
-              {
-                  if(id.equals("aa"))
-                  {
-              HashSet<AddAttribute> setAttribute=cop.getProfileAttribute();
-              System.out.println("48"+setAttribute);
-     
-              out.println(setAttribute.size());
-               hs.setAttribute("setAttribute",setAttribute);
-                  response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddAttribute.jsp");
-                   }
-                  if(id.equals("aaa"))
-                  {
-                     HashSet<AddAttribute> setAttribute=cop.getProfileAttribute();
-              System.out.println("4sdcsdjcvsdjcjs8"+setAttribute);
-              
-              out.println("dskbfhjdfhdsfjdsf"+setAttribute.size());
-               hs.setAttribute("setAttribute",setAttribute);
-              hs.setAttribute("msg", hs.getAttribute("msg"));
-               response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddAttribute.jsp");
-                      
-                  }
-              }
-              if(id.equals("des"))
-              {
-                  System.out.println("des");
-              HashSet<AddDesignation> setDesignation=cop.getDesignation();
-              System.out.println("48"+setDesignation);
-   
-              out.println(setDesignation.size());
-               hs.setAttribute("setdesignation",setDesignation);
-                  response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddDesignation.jsp");
-                  
-              }
-               if(id.equals("role"))
-              {
-                  System.out.println("role");
-              HashSet<AddRole> setRole=cop.getRole();
-              System.out.println("48"+setRole);
-   
-              out.println(setRole.size());
-               hs.setAttribute("setRole",setRole);
-                  response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddRole.jsp");
-                  
-              }
-    }
-    
+//              if(id.equals("aa")||id.equals("aaa"))
+//              {
+//                  if(id.equals("aa"))
+//                  {
+//              HashSet<AddAttribute> setAttribute=cop.getProfileAttribute();
+//              System.out.println("48"+setAttribute);
+//     
+//              out.println(setAttribute.size());
+//               hs.setAttribute("setAttribute",setAttribute);
+//                  response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddAttribute.jsp");
+//                   }
+//                  if(id.equals("aaa"))
+//                  {
+//                     HashSet<AddAttribute> setAttribute=cop.getProfileAttribute();
+//              System.out.println("4sdcsdjcvsdjcjs8"+setAttribute);
+//              
+//              out.println("dskbfhjdfhdsfjdsf"+setAttribute.size());
+//               hs.setAttribute("setAttribute",setAttribute);
+//              hs.setAttribute("msg", hs.getAttribute("msg"));
+//               response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddAttribute.jsp");
+//                      
+//                  }
+//              }
+//              if(id.equals("des"))
+//              {
+//                  System.out.println("des");
+//              HashSet<AddDesignation> setDesignation=cop.getDesignation();
+//              System.out.println("48"+setDesignation);
+//   
+//              out.println(setDesignation.size());
+//               hs.setAttribute("setdesignation",setDesignation);
+//                  response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddDesignation.jsp");
+//                  
+//              }
+//               if(id.equals("role"))
+//              {
+//                  System.out.println("role");
+//              HashSet<AddRole> setRole=cop.getRole();
+//              System.out.println("48"+setRole);
+//   
+//              out.println(setRole.size());
+//               hs.setAttribute("setRole",setRole);
+//                  response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddRole.jsp");
+//                  
+//              }
+//    }
+//    
+}
 }
