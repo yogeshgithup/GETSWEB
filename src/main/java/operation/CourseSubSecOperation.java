@@ -876,14 +876,18 @@ return msg;
             pstmt.executeUpdate();
  
             ArrayList<String> imname=f.getImagename();
+            System.out.println("inname"+imname.toString());
              ArrayList<String> impath=f.getImagepath();
+             System.out.println("impath"+impath.toString());
           
             for(int i=0;i<impath.size();i++)
              {
                          pstmtq.setString(1,f.getInstitutename());
-                                pstmtq.setString(2,impath.get(i)); 
+                     System.out.println("poilkujyhtgrf");
+                         pstmtq.setString(2,impath.get(i)); 
+                     System.out.println("1234456678");
                          pstmtq.setString(3,imname.get(i));
-                          
+                         System.out.println("2132thrty435ggd"); 
                            int r=pstmtq.executeUpdate();
              }
 
