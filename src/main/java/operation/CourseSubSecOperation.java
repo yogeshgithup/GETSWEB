@@ -56,7 +56,7 @@ public class CourseSubSecOperation {
             pstmt.setInt(6, c.getDays_per_week());
             pstmt.executeUpdate();
             con.commit();
-            msg = "success";
+            msg = "Data Entered Successfully";
         } catch (SQLException cnfe) {
             con.rollback();
             msg = cnfe.getMessage();
@@ -115,7 +115,7 @@ public class CourseSubSecOperation {
             pstmtsubcourse.setString(2, s.getSub_id());
             pstmtsubcourse.executeUpdate();
             con.commit();
-            msg = "success";
+            msg = "Data Entered Successfully";
 
         } catch (SQLException cnfe) {
             try {
@@ -156,7 +156,7 @@ public class CourseSubSecOperation {
 
             }
             con.commit();
-            msg = "success";
+            msg = "Data Entered Successfully";
         } catch (SQLException cnfe) {
             try {
                 con.rollback();
@@ -182,7 +182,7 @@ if(id1.equals("deletecourse"))
             pstmt.setString(1, id);
             pstmt.executeUpdate();
             con.commit();
-            msg = "success";
+            msg = "Record Deleted";
         } catch (SQLException cnfe) {
             try {
                 con.rollback();
@@ -205,7 +205,7 @@ if(id1.equals("deleteattribute"))
             pstmt.setString(1, id);
             pstmt.executeUpdate();
             con.commit();
-            msg = "success";
+            msg = "Record Deleted";
         } catch (SQLException cnfe) {
             try {
                 con.rollback();
@@ -229,7 +229,7 @@ if(id1.equals("deletedesignation"))
             pstmt.setString(1, id);
             pstmt.executeUpdate();
             con.commit();
-            msg = "success";
+            msg = "Record Deleted";
         } catch (SQLException cnfe) {
             try {
                 con.rollback();
@@ -253,7 +253,7 @@ if(id1.equals("deleterole"))
             pstmt.setString(1, id);
             pstmt.executeUpdate();
             con.commit();
-            msg = "success";
+            msg = "Record Deleted";
         } catch (SQLException cnfe) {
             try {
                 con.rollback();
@@ -360,7 +360,7 @@ return msg;
             pstmt.executeUpdate();
 
             con.commit();
-            msg = "success";
+            msg = "Data Entered Succesfully";
             
         } catch (SQLException cnfe) {
             try {
@@ -387,7 +387,7 @@ return msg;
             pstmt.executeUpdate();
 
             con.commit();
-            msg = "Attribute Added ";
+            msg = "Data Entered Succesfully";
             
         } catch (SQLException cnfe) {
             try {
@@ -498,7 +498,7 @@ return msg;
              //    System.out.println("---result--"+r);
              }
             con.commit();
-            msg = "success";
+            msg = "Data Entered Succesfully";
             
         } catch (SQLException e) {
             System.out.println(e.getMessage());            
@@ -605,7 +605,9 @@ return msg;
         
         return setrole;
     }
-         public HashSet<Person> getp_id()
+
+       
+       public HashSet<Person> getp_id()
     {
         
        HashSet<Person> setperson=new HashSet<Person>();
@@ -629,7 +631,9 @@ return msg;
         
         return setperson;
     }
-      public String insertuser_role(user_role ur) {
+      
+       
+       public String insertuser_role(user_role ur) {
 
         String msg = "success";
         PreparedStatement pstmt = null;
@@ -643,7 +647,7 @@ return msg;
             pstmt.executeUpdate();
 
             con.commit();
-            msg = "success";
+            msg = "Data Entered Succesfully";
             
         } catch (SQLException cnfe) {
             try {
@@ -685,7 +689,7 @@ return msg;
              //    System.out.println("---result--"+r);
              }       
             con.commit();
-            msg = "success";
+            msg = "Role Assigned";
             
         } catch (SQLException cnfe) {
             try {
@@ -714,7 +718,7 @@ return msg;
             pstmt.executeUpdate();
             System.out.println("suuuscsss");
             con.commit();
-            msg = "success";
+            msg = "Data Entered Succesfully";
             
         } catch (SQLException cnfe) {
             try {
@@ -887,7 +891,7 @@ return msg;
             System.out.println("19");
                  con.commit();
             System.out.println("20");
-            msg = "success";
+            msg = "Homepage Configured";
             
      
             
@@ -969,7 +973,7 @@ return msg;
          int r = pstmt.executeUpdate();
           System.out.println(r);
           con.commit();
-          msg="error";
+          msg="Password Changed Succesfully";
       }
         catch (SQLException ex) {
             Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
@@ -1007,7 +1011,7 @@ return msg;
             pstmt.executeUpdate();
 
             con.commit();
-            msg1 = "success";
+            msg1 = "Data Entered Succesfully";
             
         } catch (SQLException cnfe) {
             try {
@@ -1089,7 +1093,7 @@ return msg;
        pstmt.setString(1, filepath);
        pstmt.setString(2, filename);
        pstmt.executeUpdate();
-        return "success";
+        return "Logo Updated";
         }catch(Exception e)
         {
             System.out.println("msg======"+e.getMessage());
@@ -1108,7 +1112,7 @@ return msg;
        pstmt = con.prepareStatement(sql);
        pstmt.setString(1, updatedname);
        pstmt.executeUpdate();
-        return "success";
+        return "Institute Name Updated";
         }catch(Exception e)
         {
             System.out.println("msg======"+e.getMessage());
@@ -1130,7 +1134,7 @@ return msg;
        System.out.println("2");
        pstmt.setString(2,updatedaboutus);
        pstmt.executeUpdate();
-        return "success";
+        return "Data Updated";
         }catch(Exception e)
         {
             System.out.println("msg======"+e.getMessage());
@@ -1148,10 +1152,10 @@ return msg;
          String sql = "UPDATE layout SET contactno=?,email=?,address=?";
        pstmt = con.prepareStatement(sql);
        pstmt.setString(1,updatedcontactus);
-       pstmt.setString(2,updatedemail);
+       pstmt.setString(2,updatedemail); 
        pstmt.setString(3,updatedaddress);
              pstmt.executeUpdate();
-        return "success";
+        return "Data Updated";
         }catch(Exception e)
         {
             System.out.println("msg======"+e.getMessage());

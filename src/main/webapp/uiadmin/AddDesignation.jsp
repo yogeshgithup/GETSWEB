@@ -1,3 +1,4 @@
+<%@page import="operation.CourseSubSecOperation"%>
 <%@page import="data.AddDesignation"%>
 <%@page import="data.AddAttribute"%>
 <%@page import="java.util.Iterator"%>
@@ -95,11 +96,14 @@ String msg=(String)session.getAttribute("msg");
                       </thead>
                       <tbody>
                             <%
-                                  System.out.println("75");
-                              HashSet<AddDesignation> setdesignation=(HashSet<AddDesignation>)session.getAttribute("setdesignation");
-                              System.out.println("77"+setdesignation);
+                                    ServletContext ctx=this.getServletContext();
+                                  Connection con=(Connection)ctx.getAttribute("MyConn");
+                                  CourseSubSecOperation cop=new CourseSubSecOperation(con);                               
+                                    HashSet<AddDesignation> setDesignation=cop.getDesignation();
+       
+                              System.out.println("77"+setDesignation);
                               
-                              Iterator<AddDesignation> it=setdesignation.iterator();
+                              Iterator<AddDesignation> it=setDesignation.iterator();
                                 System.out.println("78");
                               while(it.hasNext())
                               {

@@ -44,10 +44,10 @@
                   </li>
                   <li><a><i class="fa fa-desktop"></i>Manage Detail<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="<%=application.getContextPath()%>/SerViewManageDetail?id=aa">Profile Attribute</a></li>
-                      <li><a href="<%=application.getContextPath()%>/SerViewManageDetail?id=des">Designation</a></li>
+                      <li><a href="AddAttribute.jsp">Profile Attribute</a></li>
+                      <li><a href="AddDesignation.jsp">Designation</a></li>
                       <li><a href="AddPriority.jsp">Priority</a></li>
-                      <li><a href="<%=application.getContextPath()%>/SerViewManageDetail?id=role">Role</a></li>
+                      <li><a href="AddRole.jsp">Role</a></li>
                        </ul>
                   </li>
                   <li><a><i class="fa fa-table"></i> Manage Batch<span class="fa fa-chevron-down"></span></a>

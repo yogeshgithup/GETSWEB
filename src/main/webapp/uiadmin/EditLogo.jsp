@@ -23,7 +23,34 @@
     <div class="container body">
       <div class="main_container">
           <%@include file="navigation.jsp" %>
-    
+   
+   <%
+session.setMaxInactiveInterval(2);
+HttpSession hs=request.getSession();
+String msg=(String)hs.getAttribute("msg");
+                    if(msg!=null)
+                    {
+                 //      out.println(msg);
+                    }
+                  else if(msg==null)
+                {
+                    msg="";
+              }
+%>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    //alert("Hello");
+    //$('#msg').load(function(){
+      //      alert("how are you");
+       $('#msg').fadeOut(5000);
+        //    });
+//    
+});      
+
+</script>  
+ 
   <!-- page content -->
           <div class="right_col" role="main">
           <div class="">
@@ -39,12 +66,15 @@
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                     </ul>
+                              <div id="msg" align="center" style="color:red">
+                        <h3><%=msg%></h3>
+             
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br />
                     <%
-                        HttpSession hs=request.getSession();
+                       
                         hs.setAttribute("id","editlogo");
                            System.out.println("1");
                         ServletContext ctx=this.getServletContext();
