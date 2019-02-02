@@ -116,6 +116,21 @@
         <servlet-class>ser.SerPersonAndroid</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SerContactus</servlet-name>
+        <servlet-class>ser.SerContactus</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerAndroidMenu</servlet-name>
+        <servlet-class>ser.SerAndroidMenu</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerAndroidDetails</servlet-name>
+        <servlet-class>ser.SerAndroidDetails</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerAndroidGallery</servlet-name>
+        <servlet-class>ser.SerAndroidGallery</servlet-class>
+      
         <servlet-name>SerViewManageDetail</servlet-name>
         <servlet-class>ser.SerViewManageDetail</servlet-class>
     </servlet>
@@ -216,12 +231,28 @@
         <url-pattern>/SerPersonAndroid</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SerContactus</servlet-name>
+        <url-pattern>/SerContactus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAndroidMenu</servlet-name>
+        <url-pattern>/SerAndroidMenu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAndroidDetails</servlet-name>
+        <url-pattern>/SerAndroidDetails</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAndroidGallery</servlet-name>
+        <url-pattern>/SerAndroidGallery</url-pattern>
+
         <servlet-name>SerViewManageDetail</servlet-name>
         <url-pattern>/SerViewManageDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SerEditLayout</servlet-name>
         <url-pattern>/SerEditLayout</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

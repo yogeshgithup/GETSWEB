@@ -18,6 +18,8 @@ import data.Student;
 import data.Subject;
 import data.pictures;
 import data.user_role;
+import java.io.IOException;
+import static java.lang.System.out;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,6 +27,10 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.management.relation.Role;
+import javax.servlet.ServletException;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -32,7 +38,7 @@ import java.util.logging.Logger;
  */
 public class CourseSubSecOperation {
 
-    Connection con;
+    Connection con=null;
 
     public CourseSubSecOperation(Connection con) {
         this.con = con;
@@ -1029,12 +1035,6 @@ return msg;
       }    
 
 
-
-      
-
-  
-
-        
         public String editviewcourse(Course c){
    
      try{
@@ -1056,7 +1056,108 @@ return msg;
 
    
         }
+    public String contactus() throws SQLException,ServletException,IOException {
+     
+        JSONArray ja=new JSONArray();   
+              
+       System.out.println("12");
+           Statement stmt = null;
+            System.out.println("13");
+       ResultSet rs;
+        System.out.println("14");
+       
+      
+        String sql="select contactno,email,address,aboutus from layout";
+           System.out.println("15");
+           try
+       {
+           con.setAutoCommit(false);
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           System.out.println(rs);
+       while(rs.next())
+         
+               {
+     
+                   JSONObject obj=new JSONObject();
+       
+                   System.out.println("19");
+                   
+                  String contactno=rs.getString("contactno");
+                  
+                  String email=rs.getString("email");
+                   //System.out.println("21");
+                  String address=rs.getString("address"); 
+                   //System.out.println("22");
+                  String aboutus=rs.getString("aboutus");
+                
+                   obj.put("contactno",contactno);
+                     System.out.println("23");
+                    obj.put("email",email);
+                     System.out.println("24");
+                    obj.put("address",address);
+                     System.out.println("25");
+                   obj.put("aboutus",aboutus);  
+                          
+                    ja.put(obj);
+                 con.commit();       
+            
+               }
+               stmt.close();
+                }
+           catch(Exception e)
+       {
+        System.out.println(e.getMessage());
+       }
+            System.out.println("27");
+           
+                  String s=ja.toString();
+                 System.out.println("30");
+                    return s;
+         }
 
+  
+
+    public String androidgallery() throws SQLException,ServletException,IOException {
+     JSONArray ja=new JSONArray();
+        Statement stmt=null;
+        ResultSet rs;
+        String sql="select * from pictures";
+        try
+        {
+              con.setAutoCommit(false);
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           System.out.println(rs);
+       while(rs.next())
+       {
+           JSONObject obj=new JSONObject();
+           
+           String institutename=rs.getString("institutename");
+            String imagepath=rs.getString("imagepath");
+             String imagename=rs.getString("imagename");
+             
+             obj.put("institutename",institutename);
+                 
+             obj.put("imagepath",imagepath);
+                 
+             obj.put("imagename",imagename);
+               ja.put(obj);
+                 con.commit();   
+       }
+              stmt.close();
+                }
+           catch(Exception e)
+       {
+        System.out.println(e.getMessage());
+       }
+            System.out.println("27");
+           
+                  String s=ja.toString();
+                 System.out.println("30");
+                    return s;
+    }
+                
     public HashSet<AddAttribute> getProfileAttribute() {
      
         HashSet<AddAttribute> setAddAttribute=new HashSet<>();
@@ -1170,5 +1271,7 @@ return msg;
     }
     
     
- 
+
+    
+     
 }
