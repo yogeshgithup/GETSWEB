@@ -62,7 +62,7 @@ $("#submit").click(function(){
           
         location.href="<%=application.getContextPath()%>/SerSubject?cid="+course_id+"&subject_id="+subject_id+"&subject_name="+subject_name+"&hours_per_week="+hours_per_week+"&days_per_week="+days_per_week;
                   
-          //       alert("Course_id="+course_id+"Subject_Id="+section_id+"Subject_Name="+section_name);
+                 alert("Course_id="+course_id+"Subject_Id="+section_id+"Subject_Name="+section_name);
     });
                      $("#f1").append(btnsubmit);
                      $("#f1").append("<br><br>");

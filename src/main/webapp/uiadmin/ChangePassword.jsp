@@ -12,17 +12,37 @@
       <div class="main_container">
      <%@include file="navigation.jsp" %>
        
-  
+   <%
+session.setMaxInactiveInterval(2);
+HttpSession hs=request.getSession();
+String msg=(String)hs.getAttribute("msg");
+                    if(msg!=null)
+                    {
+                 //      out.println(msg);
+                    }
+                  else if(msg==null)
+                {
+                    msg="";
+              }
+%>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    //alert("Hello");
+    //$('#msg').load(function(){
+      //      alert("how are you");
+       $('#msg').fadeOut(5000);
+        //    });
+//    
+});      
+
+</script>  
+
   <!-- page content -->
 
   <div class="right_col" role="main">
           <div class="">
-            <div class="page-title">
-              <div class="title_left">
-                <h3>Change Password</h3>
-              </div>
-
-            </div>
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
@@ -33,6 +53,10 @@
                   </div>
                   <div class="x_content">
                     <br />
+               <div id="msg" align="center" style="color:red">
+                        <h3><%=msg%></h3>
+               </div>
+
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerChangePassword">
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Enter_Current_Password">Enter Current Password

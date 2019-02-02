@@ -46,7 +46,8 @@ public class SerSubject extends HttpServlet {
 //          if(req.getParameter("submit")!=null)
 //        {
          String cid=req.getParameter("cid");
-          String a=req.getParameter("subject_id");
+        System.out.println("--------------------"+cid);
+         String a=req.getParameter("subject_id");
            String b=req.getParameter("subject_name");
             int e=Integer.parseInt(req.getParameter("hours_per_week"));
             int f=Integer.parseInt(req.getParameter("days_per_week"));

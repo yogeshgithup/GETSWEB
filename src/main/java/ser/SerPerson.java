@@ -5,9 +5,11 @@
  */
 package ser;
 
+import data.Course;
 import data.FirstPage;
 import data.Person;
 import data.Student;
+import data.pictures;
 import data.user_role;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,9 +44,6 @@ import org.json.JSONTokener;
  * @author Asadali
  */
 public class SerPerson extends HttpServlet {
-    
-      String SAVE_DIR;
-    static final int BUFFER_SIZE = 4096;
      protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
          
@@ -58,30 +57,21 @@ public class SerPerson extends HttpServlet {
     // String op=(String) hs.getAttribute("id");
       //  System.out.println(op);
       String op="s";  
-     
-         SAVE_DIR=request.getSession().getServletContext().getRealPath("/");
-          CourseSubSecOperation cop=new CourseSubSecOperation(con);
-         String name=null ; 
+      CourseSubSecOperation cop=new CourseSubSecOperation(con);
+        
+        
 //     Part part=request.getPart("Image");   
   //    String ct=part.getContentType();
     //  InputStream is=part.getInputStream();
       //String name=extractFileName(part);
         //System.out.println("---"+name);
      
-        Part part=request.getPart("file");
-        InputStream inputStream =part.getInputStream();
-        name=this.extractFileName(part);
-        String des=request.getParameter("description");
-        System.out.println("des----"+des);
-        String keywords=request.getParameter("keywords");
-        System.out.println("keywords----"+keywords);
-        System.out.println("size--"+inputStream.available());
-         System.out.println("1234");
-        String accesstoken=ctx.getInitParameter("accesstoken");
-        DropBoxOperation dop=new DropBoxOperation(accesstoken);
+       
+      //  String accesstoken=ctx.getInitParameter("accesstoken");
+      //  DropBoxOperation dop=new DropBoxOperation(accesstoken);
      
-        String url=dop.uploadFile(name, inputStream);
-        System.out.println(url);
+       // String url=dop.uploadFile(name, is);
+       // System.out.println(url);
          if(request.getParameter("submit")!=null)
         {
             try {
@@ -102,15 +92,16 @@ public class SerPerson extends HttpServlet {
                 long contact_no=Long.parseLong(request.getParameter("contact_no"));
                 String f_name=request.getParameter("f_name");
                 String m_name=request.getParameter("m_name");
-                String l_name=request.getParameter("l_name");
-                String file_path=url;
-                String file_name= name;  
+                String l_name=request.getParameter("l_name");    
                 String quali[]=request.getParameterValues("qualification");
                 for(int i=0;i<quali.length;i++)
                 {
                     System.out.println("--90"+quali[i]);
                 }
-                            
+                String file_path=null;
+                String file_name=null;
+               // String file_path=url;
+                //String file_name=name;               
                 String password=cop.randompassword();
                 //String mime_type=request.getParameter("mime_type");
                 
@@ -157,7 +148,6 @@ public class SerPerson extends HttpServlet {
             } catch (SQLException ex) {
                  Logger.getLogger(SerPerson.class.getName()).log(Level.SEVERE, null, ex);
              }
-             inputStream.close();
             
 
         } 
@@ -231,19 +221,15 @@ public class SerPerson extends HttpServlet {
                 
                 System.out.println("36---"+op);
 
-                if(op.equals("a"))
-                {          
+                if(op.equals("a")) 
+                {            
                     String addrole_id=(String)hs.getAttribute("addrole_id");
                     System.out.println("226----");
                     user_role ur= new user_role(p_id,addrole_id);
                     System.out.println("227----");
                     msg = cop.insertuser_role(ur);
-                       
-                   HashSet<FirstPage> setfirstpage=cop.getfirstpage();
-                    System.out.println("232----setfirstpage"+setfirstpage);
-                   hs.setAttribute("setfirstpage",setfirstpage);
-                    System.out.println("234-------");
-                   response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"display.jsp");
+               
+                   response.sendRedirect(ctx.getContextPath()+"/"+"HomePage.jsp");
             
                 }
                 
