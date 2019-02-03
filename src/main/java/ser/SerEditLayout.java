@@ -48,10 +48,12 @@ public class SerEditLayout extends HttpServlet {
         res.setContentType("text/html");
         PrintWriter out=res.getWriter();
                 HttpSession hs=req.getSession(true);
-        ServletContext ctx=this.getServletContext();
+                HttpSession hss=req.getSession(true);
+
+                ServletContext ctx=this.getServletContext();
         Connection con=(Connection)ctx.getAttribute("MyConn");
       
-          String id=(String) hs.getAttribute("id");
+          String id=(String) hss.getAttribute("id");
           System.out.println("------df-----------"+id);
     
           if(id.equals("editlogo"))

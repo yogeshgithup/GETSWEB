@@ -13,7 +13,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    
     <title>EditLogo</title>
    <%@include file="adminHeaders.jsp" %>
  
@@ -22,12 +21,13 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-          <%@include file="navigation.jsp" %>
-   
+     <%//HttpSession hs=request.getSession();%>
+           <%@include file="navigation.jsp" %>
+ 
+          
    <%
-session.setMaxInactiveInterval(2);
-HttpSession hs=request.getSession();
-String msg=(String)hs.getAttribute("msg");
+//session.setMaxInactiveInterval(2);
+String msg=(String)session.getAttribute("msg");
                     if(msg!=null)
                     {
                  //      out.println(msg);
@@ -74,22 +74,18 @@ $(document).ready(function(){
                   <div class="x_content">
                     <br />
                     <%
-                       
-                        hs.setAttribute("id","editlogo");
+                        session.setAttribute("id","editlogo");
                            System.out.println("1");
-                        ServletContext ctx=this.getServletContext();
-                          System.out.println("2");         
-                        Connection con=(Connection)ctx.getAttribute("MyConn");
+                                           System.out.println("2");         
                           System.out.println("3");                        
-                        CourseSubSecOperation cop=new CourseSubSecOperation(con);
                                System.out.println("4");         
                        
-                        HashSet<FirstPage> setfirstpage=cop.getfirstpage();
                                System.out.println("5");         
                           
-                        Iterator<FirstPage> it=setfirstpage.iterator();
+                                 it=setfirstpage.iterator();
+                                 System.out.println(it);
                                         System.out.println("6");         
-                   while(it.hasNext())
+                                      while(it.hasNext())
                                  {
                                             System.out.println("7");         
                    

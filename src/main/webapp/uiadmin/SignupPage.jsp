@@ -147,13 +147,11 @@ return false;
           System.out.println(id);
           if(id!=null)
           {
-                        HttpSession hs=request.getSession(true);
-           hs.setAttribute("id",id);
+           session.setAttribute("id",id);
               
           }else
           {
-              HttpSession hs=request.getSession(true);
-           hs.setAttribute("id","b");
+           session.setAttribute("id","b");
  
           }
    

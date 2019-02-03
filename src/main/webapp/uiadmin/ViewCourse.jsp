@@ -88,12 +88,12 @@ Msg ="<%=(String)session.getAttribute("msg")%>";
                                   System.out.println("75");
                               HashSet<Course> setcourse=(HashSet<Course>)session.getAttribute("setcourse");
                               System.out.println("77");
-                              Iterator<Course> it=setcourse.iterator();
+                              Iterator<Course> ittt=setcourse.iterator();
                                 System.out.println("78");
-                              while(it.hasNext())
+                              while(ittt.hasNext())
                               {
                                     System.out.println("82");
-                                  Course course=it.next();
+                                  Course course=ittt.next();
                                 %>
                                   <tr>
                                         <td>

@@ -23,8 +23,7 @@
     <%@include file="navigation.jsp" %>
   <%
 session.setMaxInactiveInterval(2);
-HttpSession hs=request.getSession();
-String msg=(String)hs.getAttribute("msg");
+String msg=(String)session.getAttribute("msg");
                     if(msg!=null)
                     {
                  //      out.println(msg);
@@ -102,17 +101,14 @@ $(document).ready(function(){
                       </thead>
                       <tbody>
      <%
-                                    ServletContext ctx=this.getServletContext();
-                                  Connection con=(Connection)ctx.getAttribute("MyConn");
-                                  CourseSubSecOperation cop=new CourseSubSecOperation(con);                               
                               HashSet<AddAttribute> setAttribute=cop.getProfileAttribute();
               
-                              Iterator<AddAttribute> it=setAttribute.iterator();
+                              Iterator<AddAttribute> ittt=setAttribute.iterator();
                                 System.out.println("78");
-                              while(it.hasNext())
+                              while(ittt.hasNext())
                               {
                                     System.out.println("82");
-                                    AddAttribute aa=it.next();
+                                    AddAttribute aa=ittt.next();
                                 %>
                           <tr>
                           <td><%=aa.getPA_ID()%>
