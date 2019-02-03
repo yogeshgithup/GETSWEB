@@ -108,10 +108,6 @@
         <servlet-class>ser.SerAssignRole</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>profilepic</servlet-name>
-        <servlet-class>p1.profilepic</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>SerPersonAndroid</servlet-name>
         <servlet-class>ser.SerPersonAndroid</servlet-class>
     </servlet>
@@ -130,7 +126,8 @@
     <servlet>
         <servlet-name>SerAndroidGallery</servlet-name>
         <servlet-class>ser.SerAndroidGallery</servlet-class>
-      
+    </servlet>
+    <servlet>      
         <servlet-name>SerViewManageDetail</servlet-name>
         <servlet-class>ser.SerViewManageDetail</servlet-class>
     </servlet>
@@ -222,10 +219,7 @@
         <servlet-name>SerAssignRole</servlet-name>
         <url-pattern>/SerAssignRole</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>profilepic</servlet-name>
-        <url-pattern>/profilepic</url-pattern>
-    </servlet-mapping>
+   
     <servlet-mapping>
         <servlet-name>SerPersonAndroid</servlet-name>
         <url-pattern>/SerPersonAndroid</url-pattern>
@@ -242,11 +236,14 @@
         <servlet-name>SerAndroidDetails</servlet-name>
         <url-pattern>/SerAndroidDetails</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>SerAndroidGallery</servlet-name>
         <url-pattern>/SerAndroidGallery</url-pattern>
-
-        <servlet-name>SerViewManageDetail</servlet-name>
+    </servlet-mapping>
+   
+    <servlet-mapping>
+           <servlet-name>SerViewManageDetail</servlet-name>
         <url-pattern>/SerViewManageDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

@@ -44,12 +44,11 @@ String loginid=(String)session.getAttribute("loginid");
                                              System.out.println("fileeepathhhhhhhhhh"+p.getFile_path());
 %>                    
 
-<img src="<%=p.getFile_path()%>" alt="..." class="img-circle profile_img">
- <%}}%>             
+<img src="<%=p.getFile_path()%>" alt="..." height="42" width="42" class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome</span>
-                <h2>Admin</h2>
+                <h2><%=p.getF_name()%></h2>
               </div>
             </div>
             <!-- /menu profile quick info -->
@@ -138,15 +137,16 @@ String loginid=(String)session.getAttribute("loginid");
               <ul class="nav navbar-nav navbar-right">
                 <li >
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    <img src="<%=application.getContextPath()%>/uiadmin/images/img.jpg" alt="">Admin
+                      <img src="<%=p.getFile_path()%>" alt=""><%=p.getF_name()%>
                     <span class=" fa fa-angle-down"></span>
                   </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+ <%}}%>             
+                    <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="ChangePassword.jsp"> Change Password </a></li>
                     <li>
-                      <a href="javascript:;"> Add Email </a>
+                      <a hr ef="javascript:;"> Add Email </a>
                     </li>
-                    <li><a href="login.jsp"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href="HomePage.jsp"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 

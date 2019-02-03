@@ -22,8 +22,8 @@ System.out.println("entry1"+it);
 					<div class="row fullscreen d-flex align-items-center justify-content-between">
 						<div class="banner-content col-lg-9 col-md-12">
 							<h1 class="text-uppercase">
-                                                        <%=fp.getQuote()%>
-							</h1>
+                                                        <%=fp.getInstitutename()%>
+				 			</h1>
 							<p class="pt-10 pb-10">
 							</p>
 							<a href="<%=application.getContextPath()%>/uiadmin/SignupPage.jsp" class="primary-btn text-uppercase">Enroll Now</a>
