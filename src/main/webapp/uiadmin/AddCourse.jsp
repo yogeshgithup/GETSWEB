@@ -17,8 +17,7 @@
         <!-- /page content -->
  <%
 session.setMaxInactiveInterval(2);
-HttpSession hs=request.getSession();
-String msg=(String)hs.getAttribute("msg");
+String msg=(String)session.getAttribute("msg");
                     if(msg!=null)
                     {
                  //      out.println(msg);

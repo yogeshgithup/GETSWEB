@@ -18,8 +18,7 @@
      <%@include file="navigation.jsp" %>
   <%
 session.setMaxInactiveInterval(2);
-HttpSession hs=request.getSession();
-String msg=(String)hs.getAttribute("msg");
+String msg=(String)session.getAttribute("msg");
                     if(msg!=null)
                     {
                  //      out.println(msg);
@@ -75,10 +74,9 @@ $(document).ready(function(){
                           <th style="width: 10%">ID</th>
                    <!--//     <th>Name</th>-->
                      
-<% Connection con=(Connection)application.getAttribute("MyConn");
-//                                  System.out.println("1"+con);
+<% //                                  System.out.println("1"+con);
                                    CourseSubSecOperation cso=new CourseSubSecOperation(con);
-                                   AssignAttribute aa=(AssignAttribute)hs.getAttribute("Attr");
+                                   AssignAttribute aa=(AssignAttribute)session.getAttribute("Attr");
                                    String PA[]=aa.getProfile_Attr();
                                    for(int i=0;i<PA.length;i++)
                                   {

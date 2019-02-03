@@ -148,12 +148,12 @@ $("#submit").click(function(){
                               HashSet<Course> setcourse=(HashSet<Course>)session.getAttribute("setcourse");
                       System.out.println("2"+setcourse);
                              
-                              Iterator<Course> it=setcourse.iterator();
+                              Iterator<Course> ittt=setcourse.iterator();
                                   System.out.println("3");
                  
-                              while(it.hasNext())
+                              while(ittt.hasNext())
                               {
-                                  Course course=it.next();
+                                  Course course=ittt.next();
                                   
                                 %>
                                   

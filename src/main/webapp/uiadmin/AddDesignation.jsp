@@ -64,7 +64,6 @@ String msg=(String)session.getAttribute("msg");
                   <div class="x_content">
                     <br />
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="get" action="<%=application.getContextPath()%>/SerAddDesignation">
-<%out.println(msg);%>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="AddDES_ID">Add DES_ID<span class="required">*</span>
                         </label>
@@ -96,19 +95,16 @@ String msg=(String)session.getAttribute("msg");
                       </thead>
                       <tbody>
                             <%
-                                    ServletContext ctx=this.getServletContext();
-                                  Connection con=(Connection)ctx.getAttribute("MyConn");
-                                  CourseSubSecOperation cop=new CourseSubSecOperation(con);                               
-                                    HashSet<AddDesignation> setDesignation=cop.getDesignation();
+                                                               HashSet<AddDesignation> setDesignation=cop.getDesignation();
        
                               System.out.println("77"+setDesignation);
                               
-                              Iterator<AddDesignation> it=setDesignation.iterator();
+                              Iterator<AddDesignation> ittt=setDesignation.iterator();
                                 System.out.println("78");
-                              while(it.hasNext())
+                              while(ittt.hasNext())
                               {
                                     System.out.println("82");
-                                    AddDesignation des=it.next();
+                                    AddDesignation des=ittt.next();
                                 %>
                           <tr>
                           <td><%=des.getAddDES_ID()%>

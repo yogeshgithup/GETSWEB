@@ -22,8 +22,7 @@
             <%@include file="navigation.jsp" %>
  <%
 session.setMaxInactiveInterval(2);
-HttpSession hs=request.getSession();
-String msg=(String)hs.getAttribute("msg");
+String msg=(String)session.getAttribute("msg");
                     if(msg!=null)
                     {
                  //      out.println(msg);
@@ -71,11 +70,10 @@ $(document).ready(function(){
   <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerUserRole">
       <h3>Select User</h3>   
       <select style="width:25%" id="person" name="p_id" multiple>
-                               <%  Connection con=(Connection)application.getAttribute("MyConn");
-//                                  System.out.println("1"+con);
+                               <%   System.out.println("1"+con);
                                    CourseSubSecOperation cso=new CourseSubSecOperation(con);
   //                                 System.out.println("2"+cso);
-                              HashSet<Person> setperson=cso.getPerson();
+                               setperson=cso.getPerson();
     //                          System.out.println("3"+setperson);
                               Iterator<Person> is=setperson.iterator();
       //                          System.out.println("4"+is);
@@ -95,11 +93,11 @@ $(document).ready(function(){
       <select style="width:25%" id="person" name="role">
      <%    HashSet<AddRole > setrole=cso.getRole();
                               System.out.println("31"+setrole);
-                              Iterator<AddRole> it=setrole.iterator();
+                              Iterator<AddRole> ittt=setrole.iterator();
                                 System.out.println("41"+is);
-                              while(it.hasNext())
+                              while(ittt.hasNext())
                               {
-                                  AddRole role=it.next();
+                                  AddRole role=ittt.next();
                                   System.out.println("67"+role);
                                   
                                 %>
@@ -113,9 +111,8 @@ $(document).ready(function(){
      <label>Select Attribute:</label>  
 
      <% 
-                                       HttpSession hs=request.getSession(true);
                                            System.out.println("100");
-                                       ArrayList<String> ar=(ArrayList<String>)hs.getAttribute("setAttr");
+                                       ArrayList<String> ar=(ArrayList<String>)session.getAttribute("setAttr");
                                            System.out.println("103"+ar);
                                          
                                        for (int i = 0; i < ar.size(); i++) 
