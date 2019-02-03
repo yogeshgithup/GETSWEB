@@ -49,7 +49,9 @@ public class SerPersonAndroid extends HttpServlet {
             throws ServletException, IOException {
          String data=request.getParameter("data");
             System.out.println("--data="+data);
+            System.out.println("12345678915");
             JSONTokener js=new JSONTokener(data);
+            System.out.println("82920");
        ServletContext ctx=this.getServletContext();
         System.out.println("1234567890-");
         Connection con=(Connection)ctx.getAttribute("MyConn");
@@ -81,7 +83,7 @@ public class SerPersonAndroid extends HttpServlet {
                 String email=obj.getString("email");
                 System.out.println(email);
                 String gender=obj.getString("Gender:");
-                
+                System.out.println(gender);
                 String dob=obj.getString("dob");
                 SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
                 Date  date= sdf.parse(dob);
@@ -189,11 +191,11 @@ public class SerPersonAndroid extends HttpServlet {
         
         url=dop.uploadFile(name, inputStream);
         System.out.println(url);
-                    HttpSession hs=req.getSession(true);
-        hs.setAttribute("url",url);
-       System.out.println("----"+hs.getAttribute("url"));
-        hs.setAttribute("name", name);
-        System.out.println("------99"+hs.getAttribute("name"));
+                   
+        //hs.setAttribute("url",url);
+       //System.out.println("----"+hs.getAttribute("url"));
+        //hs.setAttribute("name", name);
+        //System.out.println("------99"+hs.getAttribute("name"));
          inputStream.close();
     }
  private String extractFileName(Part part) {
@@ -210,3 +212,4 @@ public class SerPersonAndroid extends HttpServlet {
  
 
 }
+ 

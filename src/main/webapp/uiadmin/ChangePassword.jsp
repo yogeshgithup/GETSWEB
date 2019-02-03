@@ -13,8 +13,8 @@
      <%@include file="navigation.jsp" %>
        
    <%
-session.setMaxInactiveInterval(2);
-String msg=(String)session.getAttribute("msg");
+   session.setAttribute(loginid, session.getAttribute("loginid"));
+   String msg=(String)session.getAttribute("msg");
                     if(msg!=null)
                     {
                  //      out.println(msg);
@@ -67,7 +67,7 @@ $(document).ready(function(){
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="New_Password">New Password
                         </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
+                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="New_Password" name="New_Password" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>

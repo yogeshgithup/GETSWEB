@@ -89,7 +89,7 @@ public class SerChangePassword extends HttpServlet {
          
   
         }     
-        res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AdminPanel.jsp");
+        res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"ChangePassword.jsp");
 
     }
 

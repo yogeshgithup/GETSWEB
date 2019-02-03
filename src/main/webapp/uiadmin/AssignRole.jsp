@@ -10,57 +10,30 @@
   <head>
     <title>Assign Role</title>
   <%@include file="adminHeaders.jsp" %>
- 
-
-
     </head>
 
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
+    <%@include file="navigation.jsp" %>
     
-            <%@include file="navigation.jsp" %>
- <%
-session.setMaxInactiveInterval(2);
-String msg=(String)session.getAttribute("msg");
-                    if(msg!=null)
-                    {
-                 //      out.println(msg);
-                    }
-                  else if(msg==null)
-                {
-                    msg="";
-              }
-%>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-    //alert("Hello");
-    //$('#msg').load(function(){
-      //      alert("how are you");
-       $('#msg').fadeOut(5000);
-        //    });
-//    
-});      
-
-</script>  
           <!-- /page content -->
+             <div class="right_col" role="main">
+          <div class="">
+            
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Add Role</h2>
+                         <h2>Add Role</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                     </ul>
-                  <div id="msg" align="center" style="color:red">
-                        <h3><%=msg%></h3>
-               </div>
+                 
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
@@ -128,8 +101,17 @@ $(document).ready(function(){
 <%}%>
       <button type="submit" value="submit" name="submit" class="btn btn-success">Submit</button>
                                   
-     <%@include file="adminfootersfiles.jsp" %>
-       
-      
+  </form>
+                  </div>
+                </div>
+     </div>
+            </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  
+   <%@include file="adminfootersfiles.jsp" %>
   </body>
-</html>
+  
+  </html>

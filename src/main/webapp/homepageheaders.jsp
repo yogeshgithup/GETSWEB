@@ -67,7 +67,7 @@
                 <div class="container main-menu">
                 <div class="row align-items-center justify-content-between d-flex">
                   <div id="logo">
-                    <a href="HomePage.jsp"><img src="<%=fp.getFilepath()%>" alt="" title="" /></a>
+                    <a href="HomePage.jsp"><img src="<%=fp.getFilepath()%>" height="60" width="120" alt="" title="" /></a>
                   </div>
                   <nav id="nav-menu-container">
                     <ul class="nav-menu">

@@ -16,7 +16,7 @@
 							<h1 class="text-white">
 								Gallery				
 							</h1>	
-							<p class="text-white link-nav"><a href="index.jsp">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="gallery.jsp"> Gallery</a></p>
+							<p class="text-white link-nav"><a href="HomePage.jsp">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="gallery.jsp"> Gallery</a></p>
 						</div>	
 					</div>
 				</div>
@@ -24,7 +24,7 @@
 			<!-- End banner Area -->	
 				
 			<!-- Start gallery Area -->
-			<section class="gallery-area section-gap">
+			<section cleeyass="gallery-area section-gap">
 				<div class="container">
 					<div class="row">
 						<div class="col-lg-7">
@@ -44,7 +44,7 @@ System.out.println("entrpic"+it);
 								<div class="single-imgs relative">		
 									<div class="overlay overlay-bg"></div>
 									<div class="relative">				
-                                                                            <img class="img-fluid" src=<%=p.getImagepath()%> >		
+                                                                            <img class="img-fluid" height="100" width="100" src=<%=p.getImagepath()%> >		
 									</div>
 								</div>
 							</a>
