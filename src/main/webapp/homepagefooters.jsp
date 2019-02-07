@@ -1,3 +1,24 @@
+<%@page import="operation.CourseSubSecOperation"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="data.FirstPage"%>
+<%@page import="java.util.HashSet"%>
+<%@page import="java.sql.Connection"%>
+<%!
+String quote;
+%>
+<%
+
+                                  ServletContext ctxx=this.getServletContext();
+                                  Connection conn=(Connection)ctxx.getAttribute("MyConn");
+                                  CourseSubSecOperation copo=new CourseSubSecOperation(conn);
+                               HashSet<FirstPage> setfirstpagee=copo.getfirstpage();
+                               Iterator<FirstPage> iyt=setfirstpagee.iterator();
+                                 while(iyt.hasNext())
+                                 {
+                                       FirstPage fpp=iyt.next();
+                                          quote=fpp.getQuote();
+                                 }
+%>                    
 
             
             <!-- Start cta-two Area -->
@@ -5,11 +26,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-lg-8 cta-left">
-                            <h1>Not Yet Satisfied with our Trend?</h1>
+                            <h1><%=quote%></h1>
                         </div>
                     </div>
                 </div>  
             </section>
+          
             <!-- End cta-two Area -->
             <script src="<%=application.getContextPath()%>/js/vendor/jquery-2.2.4.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
