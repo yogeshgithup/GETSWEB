@@ -6,13 +6,17 @@
                           
                                 <%@include file="homepageheaders.jsp" %>
             </head>
+            <%!
+            String Iname;
+            %>
             <%
             it=setfirstpage.iterator();
 System.out.println("entry1"+it);                    
                              while(it.hasNext())
                               {
                                   FirstPage fp=it.next();
-                              System.out.println(fp.getInstitutename());
+                            Iname=fp.getInstitutename();
+                  }
 %>                    
 
           		<!-- start banner Area -->
@@ -22,7 +26,7 @@ System.out.println("entry1"+it);
 					<div class="row fullscreen d-flex align-items-center justify-content-between">
 						<div class="banner-content col-lg-9 col-md-12">
 							<h1 class="text-uppercase">
-                                                        <%=fp.getInstitutename()%>
+                                                        <%=Iname%>
 				 			</h1>
 							<p class="pt-10 pb-10">
 							</p>
@@ -34,8 +38,7 @@ System.out.println("entry1"+it);
 					</div>
 				</div>					
 			</section>
-			<!-- End banner Area -->
-<%}%>                       
+			<!-- End banner Area -->                       
 			<!-- Start popular-courses Area --> 
 			<section class="popular-courses-area section-gap courses-page">
 				<div class="container">
@@ -75,6 +78,8 @@ System.out.println("entry1"+it);
 			</section>
     	
 <!-- End popular-course Area -->
+ <!-- Start cta-two Area -->
+           
 		 <%@include file="homepagefooters.jsp" %>
 		</body>
 	</html>

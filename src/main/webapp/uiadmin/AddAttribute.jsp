@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>AddAttribute</title>
+    <title>Add Attribute</title>
     <%@include file="adminHeaders.jsp" %>
  
   </head>
@@ -33,7 +33,7 @@ String msg=(String)session.getAttribute("msg");
                     msg="";
               }
 %>
-
+ 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
@@ -133,10 +133,12 @@ $(document).ready(function(){
   
       </div>
     </div>
-
+      </div>
+                      </div>
+</body>
   
      <%@include file="adminfootersfiles.jsp" %>
            
       
-  </body>
+  
 </html>

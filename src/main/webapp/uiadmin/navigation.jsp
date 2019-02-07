@@ -5,6 +5,13 @@
 <%@page import="java.util.HashSet"%>
 <%@page import="java.sql.Connection"%>
 <head>
+       <%!
+              String path;
+              String name;
+              String Iname; 
+              String quote;
+              %>
+           
 <%
    // HttpSession hs=request.getSession();
 //System.out.println("in navigation"+hs.getId()+hs.isNew());
@@ -19,19 +26,22 @@ String loginid=(String)session.getAttribute("loginid");
                                  while(it.hasNext())
                                  {
                                        FirstPage fp=it.next();
-                                          System.out.println(fp.getInstitutename());
+                                          Iname=fp.getInstitutename();
+                                          quote=fp.getQuote();
+                                 }
 %>                    
 <div class="col-md-3 left_col">
           <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a class="site_title"><i class="fa fa-paw"></i> <span><%=fp.getInstitutename()%></span></a>
+            <div class="navbar nav_title" style="border:0;">
+              <a class="site_title"><i class="fa fa-paw"></i> <span><%=Iname%></span></a>
             </div>
 
 <div class="clearfix"></div>
             <!-- menu profile quick info -->
             <div class="profile clearfix">
               <div class="profile_pic">
-              <%}
+          
+              <%
                                HashSet<Person> setperson=cop.getPerson();
                                Iterator<Person> itt=setperson.iterator();
                                  while(itt.hasNext())
@@ -42,16 +52,21 @@ String loginid=(String)session.getAttribute("loginid");
                                           if(p.getEmail().equals(loginid))
                                           {
                                              System.out.println("fileeepathhhhhhhhhh"+p.getFile_path());
+                                             path=p.getFile_path();
+                                             name=p.getF_name();
 %>                    
+ <%}}%> 
+<img src="<%=path%>" alt="..." height="42" width="42" class="img-circle profile_img">
 
-<img src="<%=p.getFile_path()%>" alt="..." height="42" width="42" class="img-circle profile_img">
               </div>
               <div class="profile_info">
                 <span>Welcome</span>
-                <h2><%=p.getF_name()%></h2>
+                <h2><%=name%></h2>
               </div>
             </div>
-            <!-- /menu profile quick info -->
+            
+
+              <!-- /menu profile quick info -->
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
               <div class="menu_section">
@@ -121,11 +136,10 @@ String loginid=(String)session.getAttribute("loginid");
               </div>
 
             </div>
-            
-            <!-- /menu footer buttons -->
           </div>
+            <!-- /menu footer buttons -->
+          
         </div>
-
         <!-- top navigation -->
         <div class="top_nav">
           <div class="nav_menu">
@@ -137,14 +151,15 @@ String loginid=(String)session.getAttribute("loginid");
               <ul class="nav navbar-nav navbar-right">
                 <li >
                   <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                      <img src="<%=p.getFile_path()%>" alt=""><%=p.getF_name()%>
-                    <span class=" fa fa-angle-down"></span>
+ 
+                      <img src="<%=path%>" height="42" width="42" alt=""><%=name%>
+
+                      <span class=" fa fa-angle-down"></span>
                   </a>
- <%}}%>             
                     <ul class="dropdown-menu dropdown-usermenu pull-right">
                     <li><a href="ChangePassword.jsp"> Change Password </a></li>
                     <li>
-                      <a hr ef="javascript:;"> Add Email </a>
+                      <a href="javascript:;"> Add Email </a>
                     </li>
                     <li><a href="HomePage.jsp"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
