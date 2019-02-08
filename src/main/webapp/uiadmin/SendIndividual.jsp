@@ -87,6 +87,7 @@ $(document).ready(function(){
                           <button id="send" type="submit" class="btn btn-success">Submit</button>
                         </div>
                       </div>
+                    </form>
                   </div>
                 </div>
               </div>
