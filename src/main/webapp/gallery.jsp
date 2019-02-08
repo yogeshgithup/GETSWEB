@@ -44,13 +44,12 @@ System.out.println("entrpic"+it);
 								<div class="single-imgs relative">		
 									<div class="overlay overlay-bg"></div>
 									<div class="relative">				
-                                                                            <img class="img-fluid" height="100" width="100" src=<%=p.getImagepath()%> >		
+                                                                            <img class="img-fluid" src=<%=p.getImagepath()%> >		
 									</div>
 								</div>
 							</a>
 						</div>
-                                        			</div>
-							</a>
+                                                </div>
 						</div>					
 					
 			</section>
