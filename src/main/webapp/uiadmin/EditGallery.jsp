@@ -1,3 +1,4 @@
+<%@page import="data.pictures"%>
 <%@page import="data.FirstPage"%>
 <%@page import="operation.CourseSubSecOperation"%>
 <%@page import="data.AddDesignation"%>
@@ -13,9 +14,32 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>EditLogo</title>
+    <title>Update Gallery</title>
    <%@include file="adminHeaders.jsp" %>
- 
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+ <script>
+function createImage(name,id)
+{
+      var ctrl=$("<input/>").attr({type:'file',id:'file',value:'file',class:'date-picker form-control col-md-7 col-xs-12'});
+   return ctrl;
+}
+</script>
+<script>
+//alert("3");
+
+    $(document).ready(function(){
+     alert("4");
+     c=0;
+    
+$("#submit").click(function(){
+    c=c+1;
+        
+        ctrl=createImage('name'+c,'id'+c);
+        $("#mydiv").append(ctrl);
+    });
+    });
+        </script>
     </head>
 
   <body class="nav-md">
@@ -38,7 +62,7 @@ String msg=(String)session.getAttribute("msg");
               }
 %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script>
 $(document).ready(function(){
     //alert("Hello");
@@ -54,12 +78,12 @@ $(document).ready(function(){
   <!-- page content -->
           <div class="right_col" role="main">
           <div class="">
-            <div class="clearfix"></div>
+            <div class="clearfix"></div> 
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>EditGallery</h2>
+                    <h2>Edit Gallery</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -73,49 +97,53 @@ $(document).ready(function(){
                   </div>
                   <div class="x_content">
                     <br />
-                    <%
-                        session.setAttribute("id","editgallery");
-                                 it=setfirstpage.iterator();
-                                 
-                                 System.out.println("1"+it);
-                                        System.out.println("6");         
-                                      while(it.hasNext())
-                                 {
-                                            System.out.println("7");         
-                   
-                                       FirstPage fp=it.next();
-                    %>
-                    <form enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerEditLayout">
-                                  
-                  <center>      <div class="x_content">
-                      <label class="control-label col-md-3 col-sm-3 col-xs-12">Present Logo<span class="required">
-                        </label>
-                       
+                    <form enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <section cleeyass="gallery-area section-gap">
+                         <div id="mixit-container" class="aa-gallery-body">
+                     <div class="aa-single-gallery mix apartment">                  
+               <div class="aa-single-gallery-item">
                  
-                          <div class="col-md-3 col-sm-3 col-xs-12 profile_left">
-                         <div class="profile_img">
-                   
-                             <div id="crop-avatar">
-                          <!-- Current avatar -->
-                          <img class="img-responsive avatar-view" src="<%=fp.getFilepath()%>" alt="Avatar" title="Change the avatar">
-                        </div>
-        <br/>
-                        <%}%>
-                      </div>                       
-                    </div> 
-                         </div>                       
+                    <div class="aa-single-gallery-img">
+               
+                             <!-- start single gallery image -->
+               <%
+               System.out.println("entrypic");
+                             HashSet<pictures> setpictures=cop.getimages();
+System.out.println("entrypic"+setfirstpage);                      
+                             Iterator<pictures> ittt=setpictures.iterator();
+System.out.println("entrpic"+it);                            
+                             while(ittt.hasNext())
+                              {
+                                  pictures p=ittt.next();
+                           
+%>                 
+<a href="#"  style="padding-left: 30px; padding-bottom: 30px;"> <img src="<%=p.getImagepath()%>" vspace="20" width="100px" height="100px" alt="img"></a>
+                <% }%>               
+                    </div>
+<!--                    <div class="aa-single-gallery-info">
+                   <a class="fancybox" data-fancybox-group="gallery" href="">
+                      <a class="aa-link" href="#"><span class="fa fa-link"></span></a>
+                    </div>-->
+ </div>
+                </div>
+                  
+                
+                         </div>
+			</section>                     
                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Update Image<span class="required">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Add Image<span class="required">
                         </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="file" id="UpdateImage" name="updatedlogo" class="date-picker form-control col-md-7 col-xs-12">
-                        </div>
+                        <div class="col-md-6 col-sm-6 col-xs-12" id="mydiv">
+                         </div>
                       </div>
                       <br/>
-                      
+                 
+                    </form>
                         <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <center><button type="submit" name="submit" class="btn btn-success">Submit</button></center>
+                            <button type="submit"  name="Add Image" id="submit" class="btn btn-success">Add Image</button>
+                            
+                          <button type="submit"  name="submit" id="submit" class="btn btn-success">Submit</button>
                         </div>
                       </div>
 

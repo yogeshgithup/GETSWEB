@@ -50,9 +50,53 @@
                                 %>
         
 						<div class="single-popular-carusel col-lg-3 col-md-6">
-                                                    <a class="primary-btn " href="#"><%=course.getC_name()%></a>
-				
-                                                    	
+                                                    <a class="primary-btn " id="button" href="#"   data-toggle="modal" data-target="#myModal" ><%=course.getC_name()%></a>
+                                                    <%
+                                                        String n=course.getC_name();
+                                                           Iterator<Course> iitt=setcourse.iterator();
+                                                          System.out.println("78"+iitt);
+                              while(iitt.hasNext())
+                              {
+                                    System.out.println("82");
+                                  Course coursee=iitt.next();
+                                  if(coursee.getC_name().equals(n))
+                                  {
+                                                    %>
+                                                   
+                                                        <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+                                                     <div class="modal-content">
+        <div class="modal-header">
+         
+        </div>
+        <div class="modal-body">
+             <div class="modal-header">
+        
+        <h4 class="modal-title">Course Name :- <%=course.getC_name()%>Course Id:-<%=course.getC_id()%></h4>
+      </div>
+      <div>  
+            <p>
+                <b> Course Fees:- <%=course.getC_fees()%> </b>
+            </p>
+            <p>
+                <b> Course duration:-  <%=course.getDuration()%></b>
+            </p>
+            <p>
+                <b> Hours_per_week:-  <%=course.getHours_per_week()%></b>
+            </p>
+            <p>
+                <b>  Days_per_week:- <%=course.getDays_per_week()%> </b>
+            </p>
+      </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+      <% }}%>                                              	
 
                                                 </div>
 					 
