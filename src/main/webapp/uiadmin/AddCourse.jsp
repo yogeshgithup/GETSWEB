@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
 
-    <title>AddCourse</title>
+    <title>Add Course</title>
     <%@include file="adminHeaders.jsp" %>
 
   </head>
@@ -45,9 +45,7 @@ $(document).ready(function(){
           <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
-              <div class="title_left">
-                <h3>ADD COURSE</h3>
-              </div>
+              
 
             </div>
                <div id="msg" align="center" style="color:red">

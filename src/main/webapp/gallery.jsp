@@ -25,10 +25,14 @@
 				
 			<!-- Start gallery Area -->
 			<section cleeyass="gallery-area section-gap">
-				<div class="container">
-					<div class="row">
-						<div class="col-lg-7">
-		<%
+                         <div id="mixit-container" class="aa-gallery-body">
+                     <div class="aa-single-gallery mix apartment">                  
+               <div class="aa-single-gallery-item">
+                 
+                    <div class="aa-single-gallery-img">
+               
+                             <!-- start single gallery image -->
+               <%
                System.out.println("entrypic");
                              HashSet<pictures> setpictures=cop.getimages();
 System.out.println("entrypic"+setfirstpage);                      
@@ -38,24 +42,22 @@ System.out.println("entrpic"+it);
                               {
                                   pictures p=ittt.next();
                            
-%> 
-
-                                                    <a href="#" class="img-gal">
-								<div class="single-imgs relative">		
-									<div class="overlay overlay-bg"></div>
-									<div class="relative">				
-                                                                            <img class="img-fluid" height="100" width="100" src=<%=p.getImagepath()%> >		
-									</div>
-								</div>
-							</a>
-						</div>
-                                        			</div>
-							</a>
-						</div>					
-					
+%>                 
+<a href="#"  style="padding-left: 50px; padding-bottom: 30px;"> <img src="<%=p.getImagepath()%>" vspace="20" width="300px" height="250px" alt="img"></a>
+                <% }%>               
+                    </div>
+<!--                    <div class="aa-single-gallery-info">
+                   <a class="fancybox" data-fancybox-group="gallery" href="">
+                      <a class="aa-link" href="#"><span class="fa fa-link"></span></a>
+                    </div>-->
+ </div>
+                </div>
+                  
+                
+                         </div>
 			</section>
 			<!-- End gallery Area -->
-					<%}%>								
+										
 	 <%@include file="homepagefooters.jsp" %>
 	
 		</body>

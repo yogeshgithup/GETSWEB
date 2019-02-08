@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>SendIndividual</title>
+    <title>Send Individual</title>
     <%@include file="adminHeaders.jsp" %>
 
   </head>
@@ -41,27 +41,14 @@ $(document).ready(function(){
           <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
-              <div class="title_left">
-                <h3>Send Notification Individually</h3>
-              </div>
-
-              <div class="title_right">
-                <div class="col-md-5 col-sm-5 col-xs-12 form-group pull-right top_search">
-                  <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search for...">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button">Go!</button>
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+             
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-               
+                      <h2>Send Notification Individually</h2>
+             
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -79,7 +66,7 @@ $(document).ready(function(){
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerSendIndividual">
 
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rollno">RollNo
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rollno">Roll No
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                              <input type="text" id="updatecontactus" name="rollno" class="form-control col-md-7 col-xs-12">
