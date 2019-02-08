@@ -127,13 +127,17 @@
         <servlet-name>SerAndroidGallery</servlet-name>
         <servlet-class>ser.SerAndroidGallery</servlet-class>
     </servlet>
-    <servlet>      
+    <servlet>
         <servlet-name>SerViewManageDetail</servlet-name>
         <servlet-class>ser.SerViewManageDetail</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SerEditLayout</servlet-name>
         <servlet-class>ser.SerEditLayout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerAssignAttribute</servlet-name>
+        <servlet-class>ser.SerAssignAttribute</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
@@ -219,7 +223,6 @@
         <servlet-name>SerAssignRole</servlet-name>
         <url-pattern>/SerAssignRole</url-pattern>
     </servlet-mapping>
-   
     <servlet-mapping>
         <servlet-name>SerPersonAndroid</servlet-name>
         <url-pattern>/SerPersonAndroid</url-pattern>
@@ -236,20 +239,21 @@
         <servlet-name>SerAndroidDetails</servlet-name>
         <url-pattern>/SerAndroidDetails</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>SerAndroidGallery</servlet-name>
         <url-pattern>/SerAndroidGallery</url-pattern>
     </servlet-mapping>
-   
     <servlet-mapping>
-           <servlet-name>SerViewManageDetail</servlet-name>
+        <servlet-name>SerViewManageDetail</servlet-name>
         <url-pattern>/SerViewManageDetail</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SerEditLayout</servlet-name>
         <url-pattern>/SerEditLayout</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAssignAttribute</servlet-name>
+        <url-pattern>/SerAssignAttribute</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

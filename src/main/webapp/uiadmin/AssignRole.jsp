@@ -53,13 +53,15 @@
                               while(is.hasNext())
                               {
                                   Person person=is.next();
-        //                          System.out.println("67"+person);
-                                  
-                                %>
-                                  
-                                
+                                  System.out.println("id to be checked       "+person.getP_id());
+                                  String checkperson=cso.getselectedpersonfromuserrole(person.getP_id());
+                                  System.out.println(person.getP_id()+"  personnnn   "+checkperson);
+                                  if(checkperson.equals("AlotRole"))
+                                  {
+                                  %>
+                                                                 
                                   <option value="<%=person.getP_id()%>"><%=person.getP_id()%>       <%=person.getF_name()%>      <%=person.getM_name()%>      <%=person.getL_name()%></option>
-                                  <% } %>
+                                  <% }} %>
       </select>
       <br /> <br />
      <h2>Assign Role</h2>   

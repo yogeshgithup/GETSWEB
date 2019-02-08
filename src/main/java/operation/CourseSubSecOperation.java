@@ -638,6 +638,42 @@ return msg;
         return setperson;
     }
       
+       public String getselectedpersonfromuserrole(String pid)
+       {
+           String a = null;
+       Statement stmt = null;
+        System.out.println("");
+       ResultSet rs=null;
+       String sql="select * from user_role";
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+          
+           while(rs.next())  
+           {
+               String p=rs.getString("p_id");
+               System.out.println("pp"+p);
+               if(p.equals(pid))
+               {
+                    a="RoleAloted";
+                   System.out.println(a);
+                   break;              
+          
+               }
+               else
+               {
+                   a="AlotRole";
+                   System.out.println(a);        
+               }
+           }
+       }catch(Exception e)
+       {
+           return(e.getMessage());
+       }
+           return a;
+       }
+       
        
        public String insertuser_role(user_role ur) {
 

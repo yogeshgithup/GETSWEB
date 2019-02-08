@@ -11,7 +11,6 @@
     <%@include file="adminHeaders.jsp" %>
 
   </head>
-
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
@@ -31,12 +30,60 @@ String msg=(String)session.getAttribute("msg");
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 $(document).ready(function(){
-    //alert("Hello");
+    alert("Hello");
     //$('#msg').load(function(){
       //      alert("how are you");
        $('#msg').fadeOut(5000);
+       
         //    });
 //    
+$("#submit").click(function()
+{
+   // alert("helloooooo");
+   alen=$("#artlength").val();
+   //alert(alen);
+   qlen=$("#artlen").val();
+   cval="[";
+for(i=0;i<parseInt(alen);i++)
+{
+    colval="[";
+    var cs="a"+i;
+   
+    ctrl=$("."+cs);
+    len=ctrl.length;
+    for(j=0;j<len;j++)
+    {
+       
+        if(j===0)
+        {
+        val=$(ctrl[j]).html();
+    colval=colval+" \""+val+"\""+","; 
+                }
+       else
+       {
+          if(j===(len-1)){
+               val=$(ctrl[j]).val();
+            colval=colval+" \""+val+"\"";
+          }
+          else
+          {
+           val=$(ctrl[j]).val();
+            colval=colval+" \""+val+"\""+",";
+        }
+       }
+       
+    }
+    colval=colval+"],";
+     alert(colval);
+ cval=cval+colval;
+} 
+alert(cval);
+String c = cval.substring(0, cval.length() - 1);
+        
+cval=cval+"]";
+alert(c);
+});
+
 });      
 
 </script>
@@ -67,6 +114,8 @@ $(document).ready(function(){
                   </div>
                   <div class="x_content">
                     <!-- start project list -->
+                       <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post">
+
                     <table class="table table-striped projects">
                       <thead>
                         <tr>
@@ -80,7 +129,7 @@ $(document).ready(function(){
                                    for(int i=0;i<PA.length;i++)
                                   {
                               %>        
-                                    <th><%=PA[i]%></th>
+                                    <th class="b<%=i%>"><%=PA[i]%></th>
                               <%        
                                   }
                                 %>                         
@@ -93,23 +142,31 @@ $(document).ready(function(){
                                    {                                     
                             %>
                                        <tr>
-                          <td>  
-                              <a><%=P_id[j]%></a>
-                          </td>
+                          <td class="a<%=j%>"><%=P_id[j]%></td>
                            <%
                                   for(int ii=0;ii<PA.length;ii++)
                                   {
                           %>
-                          <td >
-                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="ValueAttribute" name="ValueAttribute"  class="form-control col-md-7 col-xs-12">
-                        </div>
-               
+                          <td>
+                          <input type="text" id="ValueAttribute" name="ValueAttribute"  class="a<%=j%>">                                      
                           </td>
                             <%}%>                                      
                          </tr>
                         <%}%>
-
+                      </tbody>
+                    </table>
+  <input type="hidden" name="artlength" id="artlength" value="<%=P_id.length%>">
+ <input type="hidden" name="artlen" id="artlen" value="<%=PA.length%>">
+ 
+                                           
+   <div class="ln_solid"></div>
+                      <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                            <center> <input type="submit" name="submit" id="submit" class="btn btn-success" value="submit">Submit</button></center>
+                        </div>
+                      </div>
+                  </form>
+  
                   </div>
                 </div>
               </div>
