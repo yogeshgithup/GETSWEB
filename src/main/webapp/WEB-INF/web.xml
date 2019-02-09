@@ -139,6 +139,10 @@
         <servlet-name>SerAssignAttribute</servlet-name>
         <servlet-class>ser.SerAssignAttribute</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerEditCourse</servlet-name>
+        <servlet-class>ser.SerEditCourse</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -254,6 +258,10 @@
     <servlet-mapping>
         <servlet-name>SerAssignAttribute</servlet-name>
         <url-pattern>/SerAssignAttribute</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerEditCourse</servlet-name>
+        <url-pattern>/SerEditCourse</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
