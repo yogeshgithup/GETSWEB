@@ -1329,6 +1329,37 @@ return msg;
 
     }
 
+       public String updatecourse(Course c) {
+ try{
+        
+         PreparedStatement pstmt = null;
+            System.out.println("in========");
+         String sql = "UPDATE course SET c_name=?,c_fees=?,duration=?,hours_per_week=?,days_per_week=? where c_id=?";
+       pstmt = con.prepareStatement(sql);
+       System.out.println(sql);
+       pstmt.setString(1,c.getC_name());
+      // System.out.println(updatedc_name);
+       pstmt.setInt(2,c.getC_fees()); 
+      // System.out.println(updatec_fees);
+       pstmt.setInt(3,c.getDuration());
+       //System.out.println(updateduration);
+       pstmt.setInt(4,c.getHours_per_week());
+      // System.out.println(updatehours_per_week);
+       pstmt.setInt(5,c.getDays_per_week());
+       //System.out.println(updatedays_per_week);
+       pstmt.setString(6,c.getC_id());
+       //System.out.println(cid);
+       pstmt.executeUpdate();
+       System.out.println("12345");
+        return "success";
+        }catch(Exception e)
+        {
+            System.out.println("msg======"+e.getMessage());
+            return "error";
+        }
+   
+    }
+
 
     public String insertinpictures(pictures p, String Institutename) {
       System.out.println("hello in insert pictures");
@@ -1467,4 +1498,5 @@ return msg;
     }
     
      
+
 }
