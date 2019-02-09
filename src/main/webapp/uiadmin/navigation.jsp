@@ -76,7 +76,7 @@ String loginid=(String)session.getAttribute("loginid");
                       <li><a href="EditLogo.jsp">Edit Logo</a></li>
                       <li><a href="EditInstituteName.jsp">Edit Institute Name</a></li>
                       <li><a href="EditLocation.jsp">Edit Location</a></li>
-                      <li><a href="UpdateGallery.jsp">Update Gallery</a></li>
+                      <li><a href="EditGallery.jsp">Update Gallery</a></li>
                       <li><a href="EditAboutUs.jsp">Edit AboutUs</a></li>
                       <li><a href="EditContactUs.jsp">Edit ContactUs</a></li>
                     </ul>

@@ -270,6 +270,29 @@ if(id1.equals("deleterole"))
         }
 }
 
+if(id1.equals("deleteimage"))
+{
+    System.out.println("insidecopdeleteimage");
+    
+      String sql = "DELETE FROM pictures where imagepath=?";
+        try {
+            con.setAutoCommit(false);
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.executeUpdate();
+            con.commit();
+            msg = "Record Deleted";
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+}
+
 
 return msg;
     }
@@ -1305,9 +1328,143 @@ return msg;
    
 
     }
+
+
+    public String insertinpictures(pictures p, String Institutename) {
+      System.out.println("hello in insert pictures");
+        String msg = "hi";
+  PreparedStatement pstmtq = null;
+         System.out.println("1");
+        String sqlq="insert into pictures values(?,?,?)";
+         System.out.println("2");
+        try {
+            System.out.println("cone----"+con);
+            con.setAutoCommit(false);
+            System.out.println("3");
+            pstmtq=con.prepareStatement(sqlq); 
+            System.out.println("4");
+ 
+            ArrayList<String> imname=p.getIimagename();
+            System.out.println("inname"+imname.toString());
+             ArrayList<String> impath=p.getIimagepath();
+             System.out.println("impath"+impath.toString());
+          
+            for(int i=0;i<impath.size();i++)
+             {
+                         pstmtq.setString(1,Institutename);
+                     System.out.println("poilkujyhtgrf");
+                         pstmtq.setString(2,impath.get(i)); 
+                     System.out.println("1234456678");
+                         pstmtq.setString(3,imname.get(i));
+                         System.out.println("2132thrty435ggd"); 
+                           int r=pstmtq.executeUpdate();
+             }
+
+  System.out.println("14");
+            System.out.println("19");
+                 con.commit();
+            System.out.println("20");
+            msg = "Image inserted";
+            
+     
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());            
+        }
+       
+        
+ 
+        return msg;
+    }
     
     
 
+ public String adminemail(String email) throws SQLException,ServletException,IOException{
+           JSONArray ja=new JSONArray();   
+              
+       System.out.println("12");
+           PreparedStatement stmt = null;
+            System.out.println("13");
+       ResultSet rs;
+        System.out.println("14");
+       
+      
+        String sql="select * from person WHERE email=?";
+           System.out.println("15");
+           //try
+       //{
+           con.setAutoCommit(false);
+           stmt=con.prepareStatement(sql);
+           stmt.setString(1,email);
+           rs =stmt.executeQuery();
+           System.out.println(rs);
+       while(rs.next())
+         
+               {
+     
+                   JSONObject obj=new JSONObject();
+       
+                   System.out.println("19");
+                    String f_name=rs.getString("f_name");
+                      System.out.println("20");
+                   Long contact_no=rs.getLong("contact_no");
+                     System.out.println("21");
+                 String emailp=rs.getString("email");
+                    System.out.println("22");
+                     String home_no=rs.getString("home_no");
+                   System.out.println("23");
+                    String street_no=rs.getString("street_no");
+                   System.out.println("233");
+                    String street_name=rs.getString("street_name");
+                   System.out.println("234");
+                   String area=rs.getString("area");
+                   System.out.println("235");
+                   
+                  String city=rs.getString("city");
+                   System.out.println("236");
+//                  String area=rs.getString("area"); 
+//                   System.out.println("22");
+//                  String city=rs.getString("city");
+               
+                  obj.put("f_name",f_name);
+                   obj.put("contact_no",contact_no);
+                     System.out.println("23");
+                     obj.put("email",emailp);
+                      System.out.println("24");
+                      obj.put("home_no",home_no);
+                      System.out.println("24");
+                       obj.put("street_no",street_no);
+                      System.out.println("24");
+                      obj.put("street_name",street_name);
+                      System.out.println("24");
+                       obj.put("area",area);
+                      System.out.println("24");
+                    obj.put("city",city);
+                     System.out.println("25");
+//                    obj.put("area",area);
+//                    
+//                   obj.put("city",city);  
+                     String address=home_no+" "+street_no+" "+street_name+" "+area+" "+city;
+                   System.out.println(address);
+                   obj.put("address",address);                      
+                     
+                    ja.put(obj);
+                 con.commit();       
+            
+               }
+              stmt.close();
+                
+           //catch(Exception e)
+       //{
+        //System.out.println(e.getMessage());
+       //}
+            System.out.println("27");
+           
+                  String s=ja.toString();
+                 System.out.println(s);
+                    return s;
+         
+    }
     
      
 }

@@ -5,6 +5,8 @@
  */
 package data;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author harshjainn
@@ -13,6 +15,25 @@ public class pictures {
     String institutename;
     String imagepath;
     String imagename;
+ 
+    ArrayList<String> iimagepath;
+    ArrayList<String> iimagename;
+
+    public ArrayList<String> getIimagepath() {
+        return iimagepath;
+    }
+
+    public void setIimagepath(ArrayList<String> iimagepath) {
+        this.iimagepath = iimagepath;
+    }
+
+    public ArrayList<String> getIimagename() {
+        return iimagename;
+    }
+
+    public void setIimagename(ArrayList<String> iimagename) {
+        this.iimagename = iimagename;
+    }
 
     public pictures(String institutename, String imagepath, String imagename) {
         this.institutename = institutename;
@@ -46,6 +67,8 @@ public class pictures {
     public void setImagename(String imagename) {
         this.imagename = imagename;
     }
+
+ 
     
     
 }

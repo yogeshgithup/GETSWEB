@@ -9,6 +9,7 @@ import data.AddAttribute;
 import data.AddDesignation;
 import data.AddRole;
 import data.Course;
+import data.pictures;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -113,6 +114,19 @@ if(id1.equals("deleterole"))
               hs.setAttribute("setRole",setRole);
               hs.setAttribute("msg",msg);
        res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddRole.jsp");
+        }
+
+if(id1.equals("deleteimage"))
+        {
+    System.out.println("insidedeleteimage---------");
+    
+            String msg = null;
+                msg = cop.deleteCourse(id,id1);
+                System.out.println("deletedmsgforimage------"+msg);
+                    HttpSession hs=req.getSession(true);
+           
+              hs.setAttribute("msg",msg);
+       res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"EditGallery.jsp");
         }
     }
 }

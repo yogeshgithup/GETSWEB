@@ -14,7 +14,7 @@
     </context-param>
     <context-param>
         <param-name>password</param-name>
-        <param-value>asad</param-value>
+        <param-value>ajava</param-value>
     </context-param>
     <context-param>
         <param-name>accesstoken</param-name>
@@ -139,6 +139,14 @@
         <servlet-name>SerAssignAttribute</servlet-name>
         <servlet-class>ser.SerAssignAttribute</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerEditGallery</servlet-name>
+        <servlet-class>ser.SerEditGallery</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerDetailsAndroid</servlet-name>
+        <servlet-class>ser.SerDetailsAndroid</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -254,6 +262,14 @@
     <servlet-mapping>
         <servlet-name>SerAssignAttribute</servlet-name>
         <url-pattern>/SerAssignAttribute</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerEditGallery</servlet-name>
+        <url-pattern>/SerEditGallery</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerDetailsAndroid</servlet-name>
+        <url-pattern>/SerDetailsAndroid</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
