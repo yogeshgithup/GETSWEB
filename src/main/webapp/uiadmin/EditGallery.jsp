@@ -19,24 +19,43 @@
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
  <script>
-function createImage(name,id)
+function createImage(id)
 {
-      var ctrl=$("<input/>").attr({type:'file',id:'file',value:'file',class:'date-picker form-control col-md-7 col-xs-12'});
-   return ctrl;
+      var ctrl=$("<input/>").attr({type:'file',id:id,value:'file',name:'file',class:'date-picker form-control '});
+    
+        return ctrl;
 }
+function createButton(id)
+{
+      var ct=$("<input/>").attr({type:'button',id:id,value:'Delete',name:'file',class:'btn btn-danger btn-xs'});
+   return ct;
+}
+
 </script>
 <script>
 //alert("3");
 
     $(document).ready(function(){
-     alert("4");
-     c=0;
-    
-$("#submit").click(function(){
-    c=c+1;
+     $("#l").hide();
+     d=0;
+    c=1;
+$("#AddImage").click(function(e){
+   d=d+1;
+        if(c===1)
+   {
+       $("#l").show(); 
+   }
+        e.preventDefault();
+        //ctrl=createImage('name'+c,'id'+c);
+       ctrl=createImage('id'+d);
+        ct=createButton('id'+d);  
         
-        ctrl=createImage('name'+c,'id'+c);
         $("#mydiv").append(ctrl);
+        $("#mydiv").append(ct);
+               
+               $("#ct").click(function(){
+                   $(this).parent().remove();
+               });
     });
     });
         </script>
@@ -65,7 +84,7 @@ String msg=(String)session.getAttribute("msg");
 
 <script>
 $(document).ready(function(){
-    //alert("Hello");
+    //alert("Hello"); 
     //$('#msg').load(function(){
       //      alert("how are you");
        $('#msg').fadeOut(5000);
@@ -97,7 +116,7 @@ $(document).ready(function(){
                   </div>
                   <div class="x_content">
                     <br />
-                    <form enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+                    <form enctype="multipart/form-data" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerEditGallery">
                     <section cleeyass="gallery-area section-gap">
                          <div id="mixit-container" class="aa-gallery-body">
                      <div class="aa-single-gallery mix apartment">                  
@@ -116,9 +135,12 @@ System.out.println("entrpic"+it);
                               {
                                   pictures p=ittt.next();
                            
-%>                 
+%>        
+
 <a href="#"  style="padding-left: 30px; padding-bottom: 30px;"> <img src="<%=p.getImagepath()%>" vspace="20" width="100px" height="100px" alt="img"></a>
-                <% }%>               
+<a href="<%=application.getContextPath()%>/SerDelete?id=<%=p.getImagepath()%>&id1=deleteimage" class="btn btn-danger btn-xs"  ><i class="fa fa-trash-o"></i> Delete </a>
+
+     <% }%>               
                     </div>
 <!--                    <div class="aa-single-gallery-info">
                    <a class="fancybox" data-fancybox-group="gallery" href="">
@@ -131,22 +153,22 @@ System.out.println("entrpic"+it);
                          </div>
 			</section>                     
                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12">Add Image<span class="required">
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12 " id="l">Add Image<span class="required">
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12" id="mydiv">
                          </div>
                       </div>
                       <br/>
                  
-                    </form>
                         <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <button type="submit"  name="Add Image" id="submit" class="btn btn-success">Add Image</button>
+                            <button type="submit"  name="AddImage" id="AddImage" class="btn btn-success">Add Image</button>
                             
                           <button type="submit"  name="submit" id="submit" class="btn btn-success">Submit</button>
                         </div>
                       </div>
-
+                    </form>
+                
                   </div>
                 </div>
               </div>
