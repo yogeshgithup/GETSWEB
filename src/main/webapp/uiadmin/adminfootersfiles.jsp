@@ -1,6 +1,6 @@
   <!-- jQuery -->
  
-  <script src="<%=application.getContextPath()%>/uiadmin/vendors/jquery/dist/jquery.min.js"></script>
+  <!--<script src="<//%=application.getContextPath()%>/uiadmin/vendors/jquery/dist/jquery.min.js"></script>-->
     <!-- Bootstrap -->
     <script src="<%=application.getContextPath()%>/uiadmin/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- FastClick -->
