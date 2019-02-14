@@ -4,7 +4,8 @@
 
     <title>SignUP</title>
     <%@include file="adminHeaders.jsp" %>
-<script language = "Javascript">
+
+    <script language = "Javascript">
     function validateEmail()  
 {  
 var x=document.frmSample.email.value;  
@@ -113,6 +114,25 @@ return false;
  
 </script>
 
+<script>
+$(document).ready(function(){
+     alert("1");
+     d=0;
+    c=1;
+$("#AddImage").click(function(e){
+   d=d+1;
+         e.preventDefault();
+                $("#mydiv").append('<div class="form-group" id="id'+d+'"><label class="control-label col-md-3 col-sm-3 col-xs-12"></label><div class="col-md-5 col-sm-6 col-xs-12" id="id'+d+'"><input id="id'+d+'" name="qualification" type="text" class="form-control"></div><a id="id'+d+'"class="remove_this btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a></div>');  
+         
+jQuery(document).on('click','.remove_this', function() {
+        jQuery(this).parent().remove();
+        return false;
+    
+               });
+    });
+    });
+        </script>
+
   </head>
 
   <body class="nav-md">
@@ -157,9 +177,7 @@ return false;
    
        %>
        
-                    <form id="demo-form2"  action="<%=application.getContextPath()%>/SerPerson" name="frmSample" data-parsley-validate class="form-horizontal form-label-left" method="post" onsubmit="return ValidateForm() && validateEmail() && matchpass()"
-                          
-                               enctype="multipart/form-data">
+             <form id="demo-form2"  action="<%=application.getContextPath()%>/SerPerson" name="frmSample" data-parsley-validate class="form-horizontal form-label-left" method="post" onsubmit="return ValidateForm() && validateEmail() && matchpass()" enctype="multipart/form-data">
                       
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="f_name">First Name <span class="required">*</span>
@@ -167,7 +185,7 @@ return false;
                         <div class="col-md-5 col-sm-6 col-xs-12">
                             <input type="text" id="firstname" required name="f_name" class="form-control col-md-7 col-xs-12">
                         </div>
-                      </div>
+                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="m_name">Middle Name <span class="required">*</span>
                         </label>
@@ -202,8 +220,7 @@ return false;
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Date Of Birth <span class="required">*</span>
                         </label>
-                               <div class='col-sm-4'>
-                  
+               <div class='col-sm-4'>                 
                     <div class="form-group">
                         <div class='input-group date' id='myDatepicker2'>
                             <input type='text' name='dob'class="form-control" />
@@ -215,8 +232,7 @@ return false;
                 </div>
             
                       </div>
-                       
-                        
+                                              
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact_no">Contact Number <span class="required">*</span>
                         </label>
@@ -292,7 +308,7 @@ return false;
                           <input type="file"  id="middle-name" name="Image"  class="form-control col-md-7 col-xs-12">
                         </div>
                       </div> 
- 
+                 
         
                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="qualification">Qualification<span class="required"></span>
@@ -300,68 +316,33 @@ return false;
                         <div class="col-md-5 col-sm-6 col-xs-12">
                           <input type="text"  id="qualification" name="qualification"  class="form-control col-md-7 col-xs-12">
                          </div>
+                        <button type="button"  name="AddImage" id="AddImage" class="btn btn-success">Add Qualification</button>                                                  
+                        </div> 
+                        
+                        <div  id="mydiv">
+
+                        </div>
                       
-                         </div> 
- 
-                          <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="qualification"><span class="required"></span>
-                        </label>
-                        <div class="col-md-5 col-sm-6 col-xs-12">
-                          <input type="text"  id="qualification" name="qualification"  class="form-control col-md-7 col-xs-12">
-                         </div>
-                        
-                         </div> 
-                           
-                          <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="qualification"><span class="required"></span>
-                        </label>
-                        <div class="col-md-5 col-sm-6 col-xs-12">
-                          <input type="text"  id="qualification" name="qualification"  class="form-control col-md-7 col-xs-12">
-                         </div>
-                        
-                         </div> 
-<!--                        <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="password">Password<span class="required"></span>
-                        </label>
-                        <div class="col-md-5 col-sm-6 col-xs-12">
-                          <input type="text"  id="password" name="password"  class="form-control col-md-7 col-xs-12">
-                         </div>-->
-                        
-                        
-<!--                        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
- <script>
-$(document).ready(function(){    
-$("input[type='button' ]").click(function(){
-    
-          $("#f2").append("<input type='text' id='Section_Id' name='Section_Id'>");    
-    });  
-});
-</script>-->
-
-
-
-
-
-  <div id="f2"> </div>
-      
+       
 <div class="ln_solid"></div>
-                      <div class="form-group">
+                     
+                    <div class="form-group">
                         <div class="col-md-5 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="button">Cancel</button>
 						  <button class="btn btn-primary" type="reset">Reset</button>
                           <button type="submit" value="submit" name="submit" class="btn btn-success">Submit</button>
                         </div>
                       </div>
-   </div>
+             </form>
+                    </div>
                 </div>
                  
-                    </form>
+                    
                   </div>
                 </div>
               </div>
             </div>
-
+ 
             
 
         <!-- /page content -->

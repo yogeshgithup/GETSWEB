@@ -18,20 +18,6 @@
    <%@include file="adminHeaders.jsp" %>
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
- <script>
-function createImage(id)
-{
-      var ctrl=$("<input/>").attr({type:'file',id:id,value:'file',name:'file',class:'date-picker form-control '});
-    
-        return ctrl;
-}
-function createButton(id)
-{
-      var ct=$("<input/>").attr({type:'button',id:id,value:'Delete',name:'file',class:'btn btn-danger btn-xs'});
-   return ct;
-}
-
-</script>
 <script>
 //alert("3");
 
@@ -46,15 +32,12 @@ $("#AddImage").click(function(e){
        $("#l").show(); 
    }
         e.preventDefault();
-        //ctrl=createImage('name'+c,'id'+c);
-       ctrl=createImage('id'+d);
-        ct=createButton('id'+d);  
-        
-        $("#mydiv").append(ctrl);
-        $("#mydiv").append(ct);
-               
-               $("#ct").click(function(){
-                   $(this).parent().remove();
+                $("#mydiv").append('<div id="id'+d+'"><label class="control-label col-md-3 col-sm-3 col-xs-12"></label><input id="id'+d+'" name="file" type="file" class="form-control"><a id="id'+d+'"class="remove_this btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a></div>');  
+         
+jQuery(document).on('click', '.remove_this', function() {
+        jQuery(this).parent().remove();
+        return false;
+    
                });
     });
     });
@@ -142,10 +125,6 @@ System.out.println("entrpic"+it);
 
      <% }%>               
                     </div>
-<!--                    <div class="aa-single-gallery-info">
-                   <a class="fancybox" data-fancybox-group="gallery" href="">
-                      <a class="aa-link" href="#"><span class="fa fa-link"></span></a>
-                    </div>-->
  </div>
                 </div>
                   
@@ -153,16 +132,17 @@ System.out.println("entrpic"+it);
                          </div>
 			</section>                     
                      <div class="form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12 " id="l">Add Image<span class="required">
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12" id="mydiv">
-                         </div>
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12 " id="l">Add Image</label>                      
+                        <div class="col-md-6 col-sm-6 col-xs-12" id="mydiv">                         
+                        <div class="controls">
+                        </div>
+                        </div>
                       </div>
                       <br/>
                  
                         <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            <button type="submit"  name="AddImage" id="AddImage" class="btn btn-success">Add Image</button>
+                            <button type="button"  name="AddImage" id="AddImage" class="btn btn-success">Add Image</button>
                             
                           <button type="submit"  name="submit" id="submit" class="btn btn-success">Submit</button>
                         </div>
