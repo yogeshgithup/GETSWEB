@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="<%=application.getContextPath()%>/uiadmin/images/favicon.ico" type="image/ico" />
+  <script src="<%=application.getContextPath()%>/uiadmin/vendors/jquery/dist/jquery.min.js"></script>
 
      <!-- Bootstrap -->
     <link href="<%=application.getContextPath()%>/uiadmin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">

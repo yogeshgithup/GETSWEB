@@ -32,6 +32,7 @@
     <link href="<%=application.getContextPath()%>/uiadmin/build/css/custom.min.css" rel="stylesheet">
   </head>
   <body>
+      
          <%
 session.setMaxInactiveInterval(2);
 String msg=(String)session.getAttribute("msg");
@@ -57,7 +58,30 @@ $(document).ready(function(){
 });      
 
 </script>  
- 
+ <script>
+    $(document).ready(function(){
+     $("#l").hide();
+     d=0;
+    c=1;
+$("#AddImage").click(function(e){
+   d=d+1;
+        if(c===1)
+   {
+       $("#l").show(); 
+   }
+        e.preventDefault();
+                       // $("#mmd").append('<label class="control-label col-md-3 col-sm-3 col-xs-12">Image</label>');          
+        $("#mydiv").append('<div class="form-group"><label class="control-label col-md-3 col-sm-3 col-xs-12"></label><div class="col-md-6 col-sm-6 col-xs-12" id="id'+d+'"><input id="id'+d+'" name="pic" type="text" class="form-control col-md-7 col-xs-12"></div><a id="id'+d+'"class="remove_this btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a></div>');  
+                    
+                    
+jQuery(document).on('click', '.remove_this', function() {
+        jQuery(this).parent().remove();
+        return false;
+    
+               });
+    });
+    });
+</script>
  <div class="right_col" role="main">
           <div class="">
             <div class="page-title">
@@ -93,36 +117,10 @@ $(document).ready(function(){
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">LOGO
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="file" id="image" name="image" required="required" class="form-control col-md-7 col-xs-12">
+                          <input type="file" id="image" name="image"  class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-                        
-                         <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Images
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="file" id="pic" name="pic"  class="form-control col-md-7 col-xs-12">
-                        </div>
-                  
-                         </div>
-
-                        <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="file" id="pic" name="pic"  class="form-control col-md-7 col-xs-12">
-                        </div>
-                  
-                         </div>
-                         <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="file" id="pic" name="pic"  class="form-control col-md-7 col-xs-12">
-                        </div>
-                  
-                         </div>
-
+                       
                       <div class="form-group">
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">About US</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -138,7 +136,7 @@ $(document).ready(function(){
                         </div>
                       </div>
 
-                         <div class="f orm-group">
+                         <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">E-mail
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -160,12 +158,22 @@ $(document).ready(function(){
                         </div>
                       </div>
                     
+                       
+                         <div class="form-group">
+                      <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Image
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="file" id="pic" name="pic"  class="form-control col-md-7 col-xs-12">
+                        </div>
+                        </div>     
+                        <div id="mydiv">
 
-                      <div class="ln_solid"></div>
+                        </div>
+                        <center> <button type="submit"  name="AddImage" id="AddImage" class="btn btn-success">Add Image</button> </center>                                                 
+                        <div class="ln_solid"></div>
                       <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                            
-                            <center><button type="submit" value="submit" name="submit" class="btn btn-success">Add Admin Details</button></center>
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">             
+                        <center><button type="submit" value="submit" name="submit" class="btn btn-success">Add Admin Details</button></center>
                         </div>
                       
                       </div>
