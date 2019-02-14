@@ -3,7 +3,9 @@
 	<html lang="zxx" class="no-js">
 	          <head>
                 		<title>Homepage</title>
-
+                                   <script>
+                                       
+                                       </script>
                                  <%@include file="homepageheaders.jsp" %>
             </head>
 	            
@@ -50,23 +52,13 @@
                                 %>
         
 						<div class="single-popular-carusel col-lg-3 col-md-6">
-                                                    <a class="primary-btn " id="button" href="#"   data-toggle="modal" data-target="#myModal" ><%=course.getC_name()%></a>
-                                                       <%
-                                                        String n=course.getC_name();
-                                                           Iterator<Course> iitt=setcourse.iterator();
-                                                          System.out.println("78"+iitt);
-                              while(iitt.hasNext())
-                              {
-                                    System.out.println("82");
-                                  Course coursee=iitt.next();
-                                  if(coursee.getC_name().equals(n))
-                                  {
-                                                    %>
+                                                    <a class="primary-btn " id="<%=course.getC_id()%>" href=""   data-toggle="modal" data-target="#myModal" ><%=course.getC_name()%></a>
+                                                      
       
                                                         <div class="modal fade" id="myModal" role="dialog">
                                                             <div class="modal-dialog">
                                                                  <div class="modal-content">
-                                                                    <div class="modal-header"></div>
+                                                                     <div class="modal-header"></div>
                                                                          <div class="modal-body">
                                                                                <div class="modal-header">
         
@@ -95,7 +87,7 @@
       
     </div>
   </div>
-      <% }}%>                                              	
+                                                    	
 
                                                 </div>
 					 
