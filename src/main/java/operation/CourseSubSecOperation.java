@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.management.relation.Role;
 import javax.servlet.ServletException;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -350,6 +349,52 @@ return msg;
         
         return setcourse;
     }
+    public JSONArray getSelectedCourse(String op)
+    {
+        
+         JSONArray ja=new JSONArray();
+         JSONObject jo=new JSONObject();
+         
+       PreparedStatement pstmt = null; 
+       ResultSet rs=null;
+       String sql="select * from course where c_id=?";
+        System.out.println(sql);
+       try
+       {
+           pstmt=con.prepareStatement(sql);
+           pstmt.setString(1,op); 
+           rs=pstmt.executeQuery();
+           System.out.println(rs);
+           while(rs.next())
+           {
+               System.out.println(rs.getString("c_id"));
+                    jo.put("c_id", rs.getString("c_id"));
+               System.out.println(rs.getString(2));               
+                    jo.put("c_name", rs.getString(2));
+                    System.out.println(rs.getString(3));
+               
+                    jo.put("c_fees", rs.getInt(3));
+                    System.out.println(rs.getString(4));
+               
+                    jo.put("duration", rs.getInt(4));
+                    System.out.println(rs.getString(5));
+               
+                    jo.put("hpw", rs.getInt(5));
+                    System.out.println(rs.getString(6));
+               
+                    jo.put("dpw", rs.getInt(6));
+                    ja.put(jo);
+                    
+           }
+       }catch(Exception e)
+       {
+                ja=null;
+       }
+       
+    
+      return ja;
+    }
+    
     
     public HashSet<Course> getCourseId()
     {
@@ -851,7 +896,7 @@ return msg;
            String msg="hi";
         PreparedStatement pstmt;
         PreparedStatement pstmtt;
-        ResultSet rs,rs1;
+        ResultSet rs=null,rs1;
         String sql = "SELECT email,password,p_id FROM person WHERE email=? and password=?";
         String sqlq="select p_id from user_role where role_id=?";
         String id = null,id1 = null;
@@ -860,12 +905,19 @@ return msg;
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1,l.getLoginId());
             pstmt.setString(2,l.getPassword());
+            
             rs = pstmt.executeQuery(); 
-           while (rs.next()) {                                             
+          
+              while (rs.next()) {                                             
                id=rs.getString("p_id");
                System.out.println("6534----"+id);
-           }
            
+            }
+            if(id==null)
+            {
+                System.out.println("djhskgfhksdgfhsdgf");
+                return "Reenter Password Correctly";
+            }
             pstmtt= con.prepareStatement(sqlq);
             pstmtt.setString(1,"1");
             rs1 = pstmtt.executeQuery(); 
@@ -876,7 +928,7 @@ return msg;
             System.out.println("550"+id);
             System.out.println("551"+id1);
 
-                 if(id.equals(id1))
+                 if(id.contains("A"))
                  {
                      msg="Admin";
                  }
@@ -890,7 +942,8 @@ return msg;
                  }
                  else
                  {
-                     msg="other";
+                     System.out.println("opopopopo");
+                     msg="Reenter";
                  }
            
            con.commit();
@@ -899,7 +952,7 @@ return msg;
      
             
         } catch (SQLException e) {
-            System.out.println(e.getMessage());            
+            System.out.println("e1ee1e1e1e"+e.getMessage());            
         }
        
            

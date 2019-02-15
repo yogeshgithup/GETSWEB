@@ -152,12 +152,18 @@
         <servlet-class>ser.SerDetailsAndroid</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>SerCourseAndroid</servlet-name>
         <servlet-class>ser.SerCourseAndroid</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SerAllBatchAndroid</servlet-name>
         <servlet-class>ser.SerAllBatchAndroid</servlet-class>
+</servlet>
+<servlet>
+        <servlet-name>SerSetCourse</servlet-name>
+        <servlet-class>ser.SerSetCourse</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
@@ -288,12 +294,18 @@
         <url-pattern>/SerDetailsAndroid</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>SerCourseAndroid</servlet-name>
         <url-pattern>/SerCourseAndroid</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SerAllBatchAndroid</servlet-name>
         <url-pattern>/SerAllBatchAndroid</url-pattern>
+</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerSetCourse</servlet-name>
+        <url-pattern>/SerSetCourse</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

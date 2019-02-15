@@ -1,4 +1,9 @@
 	<%@page import="data.Course"%>
+        <%@page import="org.json.JSONArray"%>"
+<%@page import="org.json.JSONTokener"%>"
+<%@page import="org.json.JSONObject"%>"
+
+
 <!DOCTYPE html>
 	<html lang="zxx" class="no-js">
 	          <head>
@@ -7,7 +12,17 @@
                                        
                                        </script>
                                  <%@include file="homepageheaders.jsp" %>
-            </head>
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script> 
+$(document).ready(function(){
+    alert("1");
+  $("#mybtn").click(function(){
+    $("#myModal").slideDown("slow");
+  });
+});
+</script>
+            
+                  </head>
 	            
 			<!-- start banner Area -->
 			<section class="banner-area relative about-banner" id="home">	
@@ -36,8 +51,7 @@
 							</div>
 						</div>
 					</div>						
-	
-                                    <div class="row">
+	<div class="row">
                                         
           <%
                                   System.out.println("75");
@@ -52,8 +66,8 @@
                                 %>
         
 						<div class="single-popular-carusel col-lg-3 col-md-6">
-                                                    <a class="primary-btn " id="<%=course.getC_id()%>" href=""   data-toggle="modal" data-target="#myModal" ><%=course.getC_name()%></a>
-                                                      
+              <a class="primary-btn" id="mybtn" value="myModal"  href="<%=application.getContextPath()%>/SerSetCourse?iid=<%=course.getC_id()%>" ><%=course.getC_name()%></a>                    	                                            
+                                            
       
                                                         <div class="modal fade" id="myModal" role="dialog">
                                                             <div class="modal-dialog">
@@ -61,30 +75,40 @@
                                                                      <div class="modal-header"></div>
                                                                          <div class="modal-body">
                                                                                <div class="modal-header">
-        
-            <h4 class="modal-title">Course Name :- <%=course.getC_name()%>Course Id:-<%=course.getC_id()%></h4>
+        <% 
+   JSONArray ja=(JSONArray)session.getAttribute("ja");
+   System.out.println("dgsgsdfsdfsdf"+ja+"fsdfdsfdsfsdf"+ja);
+       
+   JSONTokener js=new JSONTokener(String.valueOf(ja));
+   System.out.println("dgsgsdfsdfsdf"+ja+"fsdfdsfdsfsdf"+ja);
+           
+   JSONArray jaa=(JSONArray)js.nextValue();
+                JSONObject obj=(JSONObject)jaa.getJSONObject(0);
+                %>
+                <h4 class="modal-title">Course Name :- <%=obj.getString("c_name")%>Course Id:-<%=obj.getString("c_id")%></h4>
           </div>
           <div>  
                                                       
               <p>
-                <b> Course Fees:- <%=course.getC_fees()%> </b>
+                  <b> Course Fees:- <%=obj.getInt("c_fees")%> </b>
             </p>
             <p>
-                <b> Course duration:-  <%=course.getDuration()%></b>
+                <b> Course duration:-  <%=obj.getInt("duration")%></b>
             </p>
             <p>
-                <b> Hours_per_week:-  <%=course.getHours_per_week()%></b>
+                <b> Hours_per_week:-  <%=obj.getInt("dpw")%></b>
             </p>
             <p>
-                <b>  Days_per_week:- <%=course.getDays_per_week()%> </b>
+                <b>  Days_per_week:- <%=obj.getInt("hpw")%> </b>
             </p>
       </div>
-        </div>
+    
+                                                                         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
-      
+ 
     </div>
   </div>
                                                     	
@@ -95,8 +119,21 @@
                                     </div>
                                 </div>	
 			</section>
-                       
-			<!-- End popular-courses Area -->			
+               
+      <!--<script src="<%=application.getContextPath()%>/uiadmin/vendors/jquery/dist/jquery.min.js"></script>-->
+<!--<script>
+$(document).ready(function(){
+     alert("1");
+     $(".primary-btn").click(function(){
+      var x=$(this).attr('value');
+       alert("bjh  "+x);
+       $("#"+x).slideDown();
+ 
+});
+});
+ 
+
+</script>-->
 		 <%@include file="homepagefooters.jsp" %>
 	
         </body>

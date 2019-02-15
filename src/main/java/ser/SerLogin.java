@@ -119,10 +119,18 @@ public class SerLogin extends HttpServlet {
             {
                 response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AdminPanel.jsp");
             }
-            else
+            else if(msg.equals("Faculty"))
             {
                 response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"StaffPanel.jsp");
             }
+             else if(msg.equals("other"))
+            {
+                response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"StaffPanel.jsp");
+            }else
+             {
+                        response.sendRedirect(ctx.getContextPath()+"/"+"login.jsp");
+             }
+           
             out.println(msg);
             
   
