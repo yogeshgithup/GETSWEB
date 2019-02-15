@@ -14,7 +14,7 @@
     </context-param>
     <context-param>
         <param-name>password</param-name>
-      <param-value>asad</param-value>
+        <param-value>ajava</param-value>
     </context-param>
     <context-param>
         <param-name>accesstoken</param-name>
@@ -144,14 +144,20 @@
         <servlet-class>ser.SerEditCourse</servlet-class>
     </servlet>
     <servlet>
-        
-      <servlet-name>SerEditGallery</servlet-name>
+        <servlet-name>SerEditGallery</servlet-name>
         <servlet-class>ser.SerEditGallery</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SerDetailsAndroid</servlet-name>
         <servlet-class>ser.SerDetailsAndroid</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>SerCourseAndroid</servlet-name>
+        <servlet-class>ser.SerCourseAndroid</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerAllBatchAndroid</servlet-name>
+        <servlet-class>ser.SerAllBatchAndroid</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
@@ -270,18 +276,24 @@
         <url-pattern>/SerAssignAttribute</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-
         <servlet-name>SerEditCourse</servlet-name>
         <url-pattern>/SerEditCourse</url-pattern>
-</servlet-mapping>
-  <servlet-mapping>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SerEditGallery</servlet-name>
         <url-pattern>/SerEditGallery</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SerDetailsAndroid</servlet-name>
         <url-pattern>/SerDetailsAndroid</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerCourseAndroid</servlet-name>
+        <url-pattern>/SerCourseAndroid</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAllBatchAndroid</servlet-name>
+        <url-pattern>/SerAllBatchAndroid</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
