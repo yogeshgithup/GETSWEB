@@ -27,7 +27,6 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.management.relation.Role;
 import javax.servlet.ServletException;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -350,6 +349,52 @@ return msg;
         
         return setcourse;
     }
+    public JSONArray getSelectedCourse(String op)
+    {
+        
+         JSONArray ja=new JSONArray();
+         JSONObject jo=new JSONObject();
+         
+       PreparedStatement pstmt = null; 
+       ResultSet rs=null;
+       String sql="select * from course where c_id=?";
+        System.out.println(sql);
+       try
+       {
+           pstmt=con.prepareStatement(sql);
+           pstmt.setString(1,op); 
+           rs=pstmt.executeQuery();
+           System.out.println(rs);
+           while(rs.next())
+           {
+               System.out.println(rs.getString("c_id"));
+                    jo.put("c_id", rs.getString("c_id"));
+               System.out.println(rs.getString(2));               
+                    jo.put("c_name", rs.getString(2));
+                    System.out.println(rs.getString(3));
+               
+                    jo.put("c_fees", rs.getInt(3));
+                    System.out.println(rs.getString(4));
+               
+                    jo.put("duration", rs.getInt(4));
+                    System.out.println(rs.getString(5));
+               
+                    jo.put("hpw", rs.getInt(5));
+                    System.out.println(rs.getString(6));
+               
+                    jo.put("dpw", rs.getInt(6));
+                    ja.put(jo);
+                    
+           }
+       }catch(Exception e)
+       {
+                ja=null;
+       }
+       
+    
+      return ja;
+    }
+    
     
     public HashSet<Course> getCourseId()
     {
@@ -851,7 +896,7 @@ return msg;
            String msg="hi";
         PreparedStatement pstmt;
         PreparedStatement pstmtt;
-        ResultSet rs,rs1;
+        ResultSet rs=null,rs1;
         String sql = "SELECT email,password,p_id FROM person WHERE email=? and password=?";
         String sqlq="select p_id from user_role where role_id=?";
         String id = null,id1 = null;
@@ -860,12 +905,19 @@ return msg;
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1,l.getLoginId());
             pstmt.setString(2,l.getPassword());
+            
             rs = pstmt.executeQuery(); 
-           while (rs.next()) {                                             
+          
+              while (rs.next()) {                                             
                id=rs.getString("p_id");
                System.out.println("6534----"+id);
-           }
            
+            }
+            if(id==null)
+            {
+                System.out.println("djhskgfhksdgfhsdgf");
+                return "Reenter Password Correctly";
+            }
             pstmtt= con.prepareStatement(sqlq);
             pstmtt.setString(1,"1");
             rs1 = pstmtt.executeQuery(); 
@@ -876,7 +928,7 @@ return msg;
             System.out.println("550"+id);
             System.out.println("551"+id1);
 
-                 if(id.equals(id1))
+                 if(id.contains("A"))
                  {
                      msg="Admin";
                  }
@@ -890,7 +942,8 @@ return msg;
                  }
                  else
                  {
-                     msg="other";
+                     System.out.println("opopopopo");
+                     msg="Reenter";
                  }
            
            con.commit();
@@ -899,7 +952,7 @@ return msg;
      
             
         } catch (SQLException e) {
-            System.out.println(e.getMessage());            
+            System.out.println("e1ee1e1e1e"+e.getMessage());            
         }
        
            
@@ -1496,6 +1549,7 @@ return msg;
                     return s;
          
     }
+
     
  public String verifyuseremail(String LoginId)throws SQLException,ServletException,IOException{
          String pack =null;
@@ -1567,4 +1621,105 @@ return msg;
          return paswd;
  }
  }   
+
+
+ 
+  public String courseandroid() throws SQLException,ServletException,IOException{
+     JSONArray ja=new JSONArray();
+        System.out.println("3");
+        Statement stmt=null;
+        System.out.println("9");
+        ResultSet rs;
+        System.out.println("8");
+        //String sql="select c_name,c_fees";
+     //String sql="select c_name,c_fees,duration,sub_name,sec_name from course inner join course_subject  on course.c_id = course_subject.c_id inner join subject on course_subject.sub_id = subject.sub_id inner join section  on subject.sub_id = section.sub_id";
+     //String sql="select c_name,c_fees,duration from course";
+       
+        
+        
+        
+        
+        String sql= "SELECT c.c_name,c.c_fees,c.duration,s.sub_name,se.sec_name from course c inner join course_subject cs on c.c_id = cs.c_id inner join subject s on cs.sub_id = s.sub_id inner join section se on s.sub_id = se.sub_id";
+
+        try
+        {
+            con.setAutoCommit(false);
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           System.out.println(rs);
+       while(rs.next())
+              
+       {
+           System.out.println("11");
+          JSONObject obj=new JSONObject();
+             System.out.println("12");
+              String c_name=rs.getString("c_name");
+           System.out.println("21");
+            Integer c_fees=rs.getInt("c_fees");
+              System.out.println("22");
+             Integer duration=rs.getInt("duration");
+               System.out.println("23");
+        
+          String sub_name=rs.getString("sub_name");
+             System.out.println("24");
+            String sec_name=rs.getString("sec_name");  
+           System.out.println("25");
+            
+            
+             obj.put("c_name",c_name);
+               System.out.println("26");
+             obj.put("c_fees",c_fees);
+               System.out.println("27");
+             obj.put("duration",duration);
+               System.out.println("28");
+          obj.put("sub_name",sub_name);
+               System.out.println("29");
+             obj.put("sec_name",sec_name);
+               System.out.println("30");
+               ja.put(obj);
+                con.commit();   
+       }
+//              stmt.close();
+          }
+           catch(Exception e)
+       {
+        System.out.println("--error"+e.getMessage());
+       }
+            System.out.println("31");
+           
+                  String s=ja.toString();
+                 System.out.println(s);
+                    return s;
+    }
+
+    public String allbatchandroid(String message) {
+        
+                Statement stmt = null;
+       ResultSet rs=null;
+        String sql="SELECT p_id,contact_no FROM person where SUBSTRING(p_id,1,1)='S'";    
+       System.out.println("181------sql"+sql);
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           while(rs.next())  
+           {
+                 String mess=message;
+                 long num=rs.getLong("contact_no");
+                 String n = String.valueOf(num);
+                System.out.println(rs.getLong("contact_no"));
+                 SMSOperation sms=new SMSOperation();
+                 sms.sendSMS(n,mess);
+                 
+                 
+           }
+       }catch(Exception e)
+       {
+           System.out.println(e.getMessage());
+       }
+      
+       return "success";        
+    }
+  
+  }
 

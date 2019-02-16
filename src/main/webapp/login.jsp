@@ -6,6 +6,7 @@
                                 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
                                  <%@include file="homepageheaders.jsp" %>
+
                                 
                                 <%
                                 String msg= request.getParameter("msg");
@@ -45,20 +46,55 @@
                                      </script>
             </head>
 	
+
+            
+ </head>
+	<body>
+              <%
+              String msgg=null;
+              String msg1=(String)session.getAttribute("msgg");
+                    if(msg1!=null)
+                    {
+                        System.out.println("1"+msg1);
+                              msgg=msg1;
+                    }
+                  else if(msgg==null)
+                {
+                    System.out.println("2"+msgg);
+                             msgg="ABCCD";
+              }
+%>
+
+
+<script>
+$(document).ready(function(){
+    //alert("Hello");
+    //$('#msg').load(function(){
+      //      alert("how are you");
+       $('#msgg').fadeOut(5000);
+        //    });
+//    
+});      
+</script>
+
+
 			<!-- start banner Area -->
 			<section class="banner-area relative" id="home">
 				<div class="overlay overlay-bg"></div>	
 				<div class="container">
- 					<div class="row fullscreen d-flex align-items-center justify-content-between">
+
+                                    <div class="row fullscreen d-flex align-items-center justify-content-between">
 						<div class="banner-content col-lg-9 col-md-12">
 							<h1 class="text-uppercase">
 								We Ensure better education
 								for a better world			
 							</h1>
 							<br>
+
                                                         <h4 style="color:white;" id="msg"><%=m%></h4>                
 								<form  method="post" action="<%=application.getContextPath()%>/SerLogin">
 								
+
 									  <div class="form-group col-lg-6 col-md-12 name">
                                                                               <input type="text" class="form-control"  required name="LoginId" id="LoginId" placeholder="Enter Login Id" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Login Id'">
 									  </div>
