@@ -1549,6 +1549,80 @@ return msg;
                     return s;
          
     }
+
+    
+ public String verifyuseremail(String LoginId)throws SQLException,ServletException,IOException{
+         String pack =null;
+
+      JSONArray ja=new JSONArray();   
+              
+       System.out.println("12");
+           PreparedStatement stmt = null;
+            System.out.println("13");
+       ResultSet rs;
+      String sql="SELECT email from person where email=?";
+        con.setAutoCommit(false);
+           stmt=con.prepareStatement(sql);
+           stmt.setString(1,LoginId);
+           rs =stmt.executeQuery();
+           System.out.println("++++++"+rs);
+           try{
+      if(!rs.next())
+      {
+          System.out.println("noo");
+          pack="User Not Registered";
+      }
+      else
+      {
+       while(rs.next())
+       {
+            JSONObject obj=new JSONObject();
+       
+                   System.out.println("19");
+                   
+                  String emailp=rs.getString("email");
+                  obj.put("email",emailp);
+                  ja.put(obj);
+                  
+       }
+      }
+           }catch(Exception e)
+           {
+               pack="Enter Valid email";
+               System.out.println(e.getMessage());
+           }
+       return pack;
+ }
+ 
+ public String webforgotpassword(String LoginId) throws SQLException
+ {
+     
+     String paswd="null";
+        PreparedStatement pstmt = null;
+        
+         ResultSet rs;
+      String sql="SELECT password from person where email=?";
+        con.setAutoCommit(false);
+           pstmt=con.prepareStatement(sql);
+           pstmt.setString(1,LoginId);
+           rs =pstmt.executeQuery();
+           System.out.println("++++++"+rs);
+            
+            
+      
+           while (rs.next()) {               
+                 paswd=rs.getString("password");
+                System.out.println("---paswd"+paswd);
+                
+
+           }
+            
+         con.commit();
+         return paswd;
+ }
+ }   
+
+
  
   public String courseandroid() throws SQLException,ServletException,IOException{
      JSONArray ja=new JSONArray();
@@ -1648,3 +1722,4 @@ return msg;
     }
   
   }
+

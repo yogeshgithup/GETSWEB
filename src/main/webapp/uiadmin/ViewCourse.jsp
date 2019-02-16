@@ -119,15 +119,7 @@ Msg ="//(String)session.getAttribute("msg");
             }
 
 
-            $(document).ready(function() {
-                oTable = $("#tablecourse").dataTable({
-                    "bScrollCollapse": true,
-                    "bPaginate": true,
-                    "sPaginationType": "full_numbers",
-                 
-                    "aLengthMenu": [[3, 5, 10, -1], [3, 5, 10, "All"]],
-                    "iDisplayLength": 10
-                });
+           
 
 
 

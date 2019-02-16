@@ -1,7 +1,7 @@
 	<!DOCTYPE html>
 	<html lang="zxx" class="no-js">
              <head>
-                		<title>Homepage</title>
+                		<title>Home Page</title>
 
                                  <%@include file="homepageheaders.jsp" %>
             </head>
@@ -15,7 +15,7 @@
 							<h1 class="text-white">
 								Contact Us				
 							</h1>	
-							<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="contact.html"> Contact Us</a></p>
+							<p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>Contact Us</p>
 						</div>	
 					</div>
 				</div>

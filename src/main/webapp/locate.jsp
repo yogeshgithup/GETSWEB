@@ -15,7 +15,7 @@
                             <h1 class="text-white">
                                 Locate Us               
                             </h1>   
-                            <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span>  <a href="contact.html"> Locate Us</a></p>
+                            <p class="text-white link-nav"><a href="index.html">Home </a>  <span class="lnr lnr-arrow-right"></span> Locate Us</p>
                         </div>  
                     </div>
                 </div>
