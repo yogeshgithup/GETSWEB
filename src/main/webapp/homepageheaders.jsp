@@ -59,8 +59,8 @@
                             </ul>           
                         </div>
                         <div class="col-lg-6 col-sm-6 col-4 header-top-right no-padding">
-                         <a href="#"><span class="lnr lnr-phone-handset"></span> <span class="text"><%=fp.getContactno()%></span></a>
-	                <a href="#"><span class="lnr lnr-envelope"></span> <span class="text"><%=fp.getEmail()%></span></a>		
+                         <a href="#" class="lnr lnr-phone-handset"> <span class="text"><%=fp.getContactno()%></span></a>
+	                <a href="#" class="lnr lnr-envelope"> <span class="text"><%=fp.getEmail()%></span></a>		
                         </div>
                     </div>                              
                 </div> 

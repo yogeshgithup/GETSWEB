@@ -99,17 +99,41 @@ function ValidateForm(){
  }
    
 function matchpass(){  
-var email=document.frmSample.email.value;  
-var renteremail=document.frmSample.renenteremail.value;  
+var email=document.getElementById("email").value;
+var reenteremail=document.getElementById("re-email").value;  
   
-if(email===renteremail){  
-return true;  
+if(email!==reenteremail){  
+    alert("Email do not match!");
+    $("#re-email").val("");
+return false;  
+
 }  
 else{  
-alert("Email must be same!");  
-return false;  
+  
+return true;  
+
 }  
-}  
+}
+function isNumber(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+        alert("Enter number only");
+        return false;
+        
+    }
+    return true;
+}
+function isAlfa(evt) {
+    evt = (evt) ? evt : window.event;
+    var charCode = (evt.which) ? evt.which : evt.keyCode;
+    if (charCode > 31 && (charCode < 65 || charCode > 90) && (charCode < 97 || charCode > 122)) {
+        alert("Enter alphabet only!!");
+        return false;
+    }
+    return true;
+}
+
 
  
 </script>
@@ -119,6 +143,11 @@ $(document).ready(function(){
      alert("1");
      d=0;
     c=1;
+  $('#re-email').focusout(function(){
+    matchpass();
+  
+});
+
 $("#AddImage").click(function(e){
    d=d+1;
          e.preventDefault();
@@ -132,7 +161,15 @@ jQuery(document).on('click','.remove_this', function() {
     });
     });
         </script>
-
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script>
+  $( function() {
+    $( "#myDatepicker2" ).datepicker();
+  } );
+  </script>
   </head>
 
   <body class="nav-md">
@@ -177,27 +214,27 @@ jQuery(document).on('click','.remove_this', function() {
    
        %>
        
-             <form id="demo-form2"  action="<%=application.getContextPath()%>/SerPerson" name="frmSample" data-parsley-validate class="form-horizontal form-label-left" method="post" onsubmit="return ValidateForm() && validateEmail() && matchpass()" enctype="multipart/form-data">
+             <form id="demo-form2"  action="<%=application.getContextPath()%>/SerPerson" name="frmSample" data-parsley-validate class="form-horizontal form-label-left" method="post"  enctype="multipart/form-data">
                       
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="f_name">First Name <span class="required">*</span>
                         </label>
                         <div class="col-md-5 col-sm-6 col-xs-12">
-                            <input type="text" id="firstname" required name="f_name" class="form-control col-md-7 col-xs-12">
+                            <input type="text" id="firstname" required name="f_name" class="form-control col-md-7 col-xs-12" onkeypress="return isAlfa(event)">
                         </div>
                        </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="m_name">Middle Name <span class="required">*</span>
                         </label>
                         <div class="col-md-5 col-sm-6 col-xs-12">
-                          <input type="text" id="middlename" required name="m_name"  class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="middlename" required name="m_name"  class="form-control col-md-7 col-xs-12" onkeypress="return isAlfa(event)">
                         </div>
                       </div>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="l_name">Last Name <span class="required">*</span>
                         </label>
                         <div class="col-md-5 col-sm-6 col-xs-12">
-                          <input type="text" id="lastname" required name="l_name"  class="form-control col-md-7 col-xs-12">
+                          <input type="text" id="lastname" required name="l_name"  class="form-control col-md-7 col-xs-12" onkeypress="return isAlfa(event)">
                         </div>
                       </div>
                             
@@ -222,22 +259,19 @@ jQuery(document).on('click','.remove_this', function() {
                         </label>
                <div class='col-sm-4'>                 
                     <div class="form-group">
-                        <div class='input-group date' id='myDatepicker2'>
-                            <input type='text' name='dob'class="form-control" />
-                            <span class="input-group-addon">
-                               <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
-                        </div>
+                        <div  >
+                            <input type='text' id='myDatepicker2' name='dob'class="form-control" />
+                          </div>
                     </div>
                 </div>
             
                       </div>
                                               
                         <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="contact_no">Contact Number <span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="contact_no">Contact Number <span class="required">*</span>
                         </label>
                         <div class="col-md-5 col-sm-6 col-xs-12">
-                          <input type="text" id="contactnumber" name="contact_no"  class="form-control col-md-7 col-xs-12">
+                          <input type="number" id="contactnumber" name="contact_no"  class="form-control col-md-7 col-xs-12" onkeypress="return isNumber(event)">
                         </div>
                       </div>
                         
@@ -245,7 +279,7 @@ jQuery(document).on('click','.remove_this', function() {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="email">Email <span class="required">*</span>
                         </label>
                         <div class="col-md-5 col-sm-6 col-xs-12">
-                          <input type="email" id="middle-name" required name="email"  class="form-control col-md-7 col-xs-12">
+                            <input type="email" id="email" required name="email"  class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                     
@@ -253,7 +287,7 @@ jQuery(document).on('click','.remove_this', function() {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="reenteremail">Re-Enter Email <span class="required">*</span>
                         </label>
                         <div class="col-md-5 col-sm-6 col-xs-12">
-                          <input type="email" id="middle-name" required name="reenteremail"  class="form-control col-md-7 col-xs-12">
+                            <input type="email" id="re-email" required name="reenteremail" class="form-control col-md-7 col-xs-12">
                         </div>
                       </div> 
 
@@ -261,7 +295,7 @@ jQuery(document).on('click','.remove_this', function() {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="address">Address <span class="required">*</span>
                         </label>
                       <div class="col-md-2">
-                          <input placeholder="Home NO" type="text" id="middle-name" name="home_no"  class="form-control col-md-7 col-xs-12">
+                          <input placeholder="Home NO" type="text" id="middle-name" name="home_no"  class="form-control col-md-7 col-xs-12" >
                       </div>
                     <div class="col-md-2">
                       <input placeholder="Street No" type="text" id="middle-name" name="street_no"  class="form-control col-md-7 col-xs-12">
@@ -295,7 +329,7 @@ jQuery(document).on('click','.remove_this', function() {
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="pincode"><span class="required"></span>
                         </label>
                         <div class="col-md-5 col-sm-6 col-xs-12">
-                          <input type="text" placeholder="pincode" id="middle-name" name="pincode"  class="form-control col-md-7 col-xs-12">
+                          <input type="number" placeholder="pincode" id="middle-name" name="pincode"  class="form-control col-md-7 col-xs-12" onkeypress="return isNumber(event)">
                         </div>
                       </div> 
  
@@ -330,7 +364,7 @@ jQuery(document).on('click','.remove_this', function() {
                         <div class="col-md-5 col-sm-6 col-xs-12 col-md-offset-3">
                           <button class="btn btn-primary" type="button">Cancel</button>
 						  <button class="btn btn-primary" type="reset">Reset</button>
-                          <button type="submit" value="submit" name="submit" class="btn btn-success">Submit</button>
+                          <button type="submit" value="submit" name="submit" class="btn btn-success" >Submit</button>
                         </div>
                       </div>
              </form>
