@@ -27,12 +27,12 @@ import operation.CourseSubSecOperation;
 public class SerSection extends HttpServlet {
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res)
+    protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        
+        doPost(req,res);
     }
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res)
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
        System.out.println("38----------");
         res.setContentType("text/html");

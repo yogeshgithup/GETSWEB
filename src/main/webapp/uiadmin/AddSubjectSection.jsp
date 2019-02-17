@@ -28,47 +28,77 @@ function createButton()
     
 $("#submit").click(function(){
         alert("4");
+var val = [];
+        $(':checkbox:checked').each(function(i){
+          val[i] = $(this).val();
+          alert(val[i]);
+        
+   });
 
-        var radioValue = $("input[name='radio']:checked").val();
-             alert("5"+radioValue);
-
-        if(radioValue==="section"){
-            
+        if(val[0]==="section"){
+                 $("#f1").empty();
             
               
                      $("#f1").append("Section_Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"<input type='text' id='Section_Id' name='Section_Id'>"+"<br><br>").append("Section_Name&nbsp;&nbsp;"+" "+"<input type='text' id='Section_Name' name='Section_name'>"+"<br><br>"); 
                       var btnsubmit=createButton();
                      $(btnsubmit).click(function(){
-                  var course_id= $("#course").val();   
-                  var section_id=$("#Section_Id").val();
-                  var section_name=$("#Section_Name").val();       
-                  location.href="<%=application.getContextPath()%>/SerSection?cid="+course_id+"&section_id="+section_id+"&section_name="+section_name;
+                  var c_id= $("#course").val();   
+                  var sec_id=$("#Section_Id").val();
+                  var sec_name=$("#Section_Name").val();       
+                  location.href="<%=application.getContextPath()%>/SerSection?cid="+c_id+"&sec_id="+sec_id+"&sec_name="+sec_name;
                   
-           //       alert("Course_id="+course_id+"Section_Id="+section_id+"Section_Name="+section_name);
+           //       alert("Course_id="+c_id+"Section_Id="+sec_id+"Section_Name="+sec_name);
                                                   });
                      $("#f1").append(btnsubmit);
                      $("#f1").append("<br><br>");
                     }
-        if(radioValue==="subject")
+                   if(!val[1])
+                   {
+        if(val[0]==="subject")
         {
+            $("#f1").empty();
         $("#f1").append("Subject_Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"<input type='text' id='Subject_Id' name='Subject_Id'>"+"<br><br>").append("Subject_Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"<input type='text' id='Subject_Name' name='Subject_name'>"+"<br><br>").append("Hours_per_week&nbsp;&nbsp;"+"<input type='text' id='Hours_per_week' name='Hours_per_week'>"+"<br><br>").append("Days_per_week&nbsp;&nbsp;&nbsp;"+"<input type='text' id='Days_per_week' name='Days_per_week'>"+"<br><br>"); 
                      var btnsubmit=createButton();
                      $(btnsubmit).click(function(){
-                   var course_id= $("#course").val();   
-                    var subject_id=$("#Subject_Id").val();
-                    var subject_name=$("#Subject_Name").val();       
+                         alert("jjjjj");
+                   var c_id= $("#course").val();   
+                    var sub_id=$("#Subject_Id").val();
+                    var sub_name=$("#Subject_Name").val();       
                   var hours_per_week=$("#Hours_per_week").val();       
                   var days_per_week=$("#Days_per_week").val();       
           
-        location.href="<%=application.getContextPath()%>/SerSubject?cid="+course_id+"&subject_id="+subject_id+"&subject_name="+subject_name+"&hours_per_week="+hours_per_week+"&days_per_week="+days_per_week;
+        location.href="<%=application.getContextPath()%>/SerSubject?cid="+c_id+"&sub_id="+sub_id+"&sub_name="+sub_name+"&hours_per_week="+hours_per_week+"&days_per_week="+days_per_week;
                   
-                 alert("Course_id="+course_id+"Subject_Id="+section_id+"Subject_Name="+section_name);
+                 alert("Course_id="+c_id+"Subject_Id="+sec_id+"Subject_Name="+sec_name);
     });
                      $("#f1").append(btnsubmit);
                      $("#f1").append("<br><br>");
                                
 }       
-                    
+                   }
+           if(val[0]==="subject"  &&  val[1]==="section")
+           {
+                $("#f1").empty();
+           $("#f1").append("Subject_Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"<input type='text' id='Subject_Id' name='Subject_Id'>"+"<br><br>").append("Subject_Name&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"<input type='text' id='Subject_Name' name='Subject_name'>"+"<br><br>").append("Hours_per_week&nbsp;&nbsp;"+"<input type='text' id='Hours_per_week' name='Hours_per_week'>"+"<br><br>").append("Days_per_week&nbsp;&nbsp;&nbsp;"+"<input type='text' id='Days_per_week' name='Days_per_week'>"+"<br><br>").append("Section_Id&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+"<input type='text' id='Section_Id' name='Section_Id'>"+"<br><br>").append("Section_Name&nbsp;&nbsp;"+" "+"<input type='text' id='Section_Name' name='Section_name'>"+"<br><br>");
+                      var btnsubmit=createButton();
+                     $(btnsubmit).click(function(){
+                     alert("lllll");
+                   var c_id= $("#course").val();   
+                    var sub_id=$("#Subject_Id").val();
+                    var sub_name=$("#Subject_Name").val();       
+                  var hours_per_week=$("#Hours_per_week").val(); 
+                  
+                  var days_per_week=$("#Days_per_week").val();  
+                   var sec_id=$("#Section_Id").val();
+                  var sec_name=$("#Section_Name").val();
+          
+       location.href="<%=application.getContextPath()%>/SerSubSec?c_id="+c_id+"&sub_id="+sub_id+"&sub_name="+sub_name+"&hours_per_week="+hours_per_week+"&days_per_week="+days_per_week+"&sec_id="+sec_id+"&sec_name="+sec_name;
+              //   alert("Course_id="+c_id+"Subject_Id="+sub_id+"Subject_Name="+sub_name);
+    });
+                     $("#f1").append(btnsubmit);
+                     $("#f1").append("<br><br>");
+                     }
+
                     });
                     
         });       

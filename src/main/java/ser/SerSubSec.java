@@ -24,56 +24,58 @@ import operation.CourseSubSecOperation;
 public class SerSubSec extends HttpServlet {
     
         @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse res)
+    protected void doGet(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
-        
+        doPost(req,res);
     }
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse res)
+    protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
         res.setContentType("text/html");
         PrintWriter out=res.getWriter();
         ServletContext ctx=this.getServletContext();
         Connection con=(Connection)ctx.getAttribute("MyConn");
-          HttpSession hs=req.getSession(true);
-         String cid=(String)hs.getAttribute("cid");
-           
-        if(req.getParameter("submit")!=null)
-        {
-        
+
+         
+//          
+//        if(req.getParameter("op")!=null)
+//        {
+            String cid=req.getParameter("c_id");
+            System.out.println("---cid"+cid);
+          String sub_id=req.getParameter("sub_id");
+            System.out.println("----subid"+sub_id);
+           String sub_name=req.getParameter("sub_name");
+            System.out.println("----subname"+sub_name);
+            Integer hours_per_week=Integer.parseInt(req.getParameter("hours_per_week"));
             
-          String subid=req.getParameter("Subject_Id");
-           String subname=req.getParameter("Subject_Name");
-            int e=Integer.parseInt(req.getParameter("Hours_Per_Week"));
-            int f=Integer.parseInt(req.getParameter("Days_Per_Week"));
+            System.out.println("----hours"+hours_per_week);
+            Integer days_per_week=Integer.parseInt(req.getParameter("days_per_week"));
+            System.out.println("----days"+days_per_week);
             Course course=new Course();
             course.setC_id(cid);
             HashSet<Course> setcourse=new HashSet<Course>();
             setcourse.add(course);
-           Subject s=new Subject(subid,subname,e,f,setcourse);
+           Subject s=new Subject(sub_id,sub_name,hours_per_week,days_per_week,setcourse);
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
          String msg = null;
          String m=null;
          msg = cop.insertSubject(s);
          
             
-             String secid=req.getParameter("Section_Id");
-             String secname=req.getParameter("Section_Name");
+             String sec_id=req.getParameter("sec_id");
+             String sec_name=req.getParameter("sec_name");
              Subject subject=new Subject();
-             subject.setSub_id(subid);
-            Section se=new Section(secid,secname);
+             subject.setSub_id(sub_id);
+            Section se=new Section(sec_id,sec_name);
             se.setSubject(subject);
             msg=cop.insertSection(se);
            
           
-        }
-    res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddSubSec.jsp");
+//        }
+//    res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddSubjectSection.jsp");
      
     }
-  @Override
-    public String getServletInfo() {
-        return "Short description";
-    }
+ 
 
 
 }

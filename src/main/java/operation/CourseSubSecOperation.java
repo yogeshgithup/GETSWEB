@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package operation;
-
+  
 import data.AddAttribute;
 import data.AddDesignation;
 import data.AddRole;
@@ -102,7 +102,9 @@ public class CourseSubSecOperation {
         String sqlsubject = "insert into subject value(?,?,?,?)";
         String sqlsubcourse = "insert into course_subject value(?,?)";       
         HashSet<Course> setcourse;
+        System.out.println("---in subject");
         try {
+            System.out.println("---in tryy");
             con.setAutoCommit(false);
             pstmtsub = con.prepareStatement(sqlsubject);
             pstmtsub.setString(1, s.getSub_id());
@@ -110,13 +112,14 @@ public class CourseSubSecOperation {
             pstmtsub.setInt(3, s.getHours_per_week());
             pstmtsub.setInt(4, s.getDays_per_week());
             pstmtsub.executeUpdate();
-
+            System.out.println("subject complete");
             setcourse = s.getSetcourse();
             Iterator<Course> it = setcourse.iterator();
             Course course = it.next();
-
+            System.out.println("123456789");
             pstmtsubcourse = con.prepareStatement(sqlsubcourse);
             pstmtsubcourse.setString(1, course.getC_id());
+            System.out.println("inn cid"+course.getC_id());
             pstmtsubcourse.setString(2, s.getSub_id());
             pstmtsubcourse.executeUpdate();
             con.commit();
@@ -1620,7 +1623,7 @@ return msg;
          con.commit();
          return paswd;
  }
- }   
+    
 
 
  
