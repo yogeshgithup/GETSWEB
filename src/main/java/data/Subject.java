@@ -7,8 +7,8 @@ import java.util.Objects;
 public class Subject {
     private String sub_id;
     private String sub_name;
-    private int hours_per_week;
-    private int days_per_week;
+    private Integer hours_per_week;
+    private Integer days_per_week;
      private HashSet<Course> setcourse;
    private HashSet<Section> setsection;
 
@@ -39,19 +39,19 @@ public class Subject {
         this.sub_name = sub_name;
     }
 
-    public int getHours_per_week() {
+    public Integer getHours_per_week() {
         return hours_per_week;
     }
 
-    public void setHours_per_week(int hours_per_week) {
+    public void setHours_per_week(Integer hours_per_week) {
         this.hours_per_week = hours_per_week;
     }
 
-    public int getDays_per_week() {
+    public Integer getDays_per_week() {
         return days_per_week;
     }
 
-    public void setDays_per_week(int days_per_week) {
+    public void setDays_per_week(Integer days_per_week) {
         this.days_per_week = days_per_week;
     }
 
@@ -90,7 +90,7 @@ public class Subject {
         return "Subject{" + "sub_id=" + sub_id + ", sub_name=" + sub_name + ", hours_per_week=" + hours_per_week + ", days_per_week=" + days_per_week + ", setcourse=" + setcourse + '}';
     }
 
-    public Subject(String sub_id, String sub_name, int hours_per_week, int days_per_week, HashSet<Course> setcourse) {
+    public Subject(String sub_id, String sub_name, Integer hours_per_week, Integer days_per_week, HashSet<Course> setcourse) {
         this.sub_id = sub_id;
         this.sub_name = sub_name;
         this.hours_per_week = hours_per_week;

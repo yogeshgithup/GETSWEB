@@ -96,10 +96,10 @@ $(document).ready(function(){
                 <b> Course duration:-  <%=obj.getInt("duration")%></b>
             </p>
             <p>
-                <b> Hours_per_week:-  <%=obj.getInt("dpw")%></b>
+                <b> Hours_per_week:-  <%=obj.getInt("hpw")%></b>
             </p>
             <p>
-                <b>  Days_per_week:- <%=obj.getInt("hpw")%> </b>
+                <b>  Days_per_week:- <%=obj.getInt("dpw")%> </b>
             </p>
       </div>
     
