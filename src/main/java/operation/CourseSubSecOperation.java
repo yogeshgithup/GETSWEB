@@ -1,4 +1,4 @@
-/*
+/*[[
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -1722,6 +1722,61 @@ return msg;
        }
       
        return "success";        
+    }
+
+    public String getproattridaccordingproattr(String keyy) {
+         String paid=null;
+           
+        try {
+            PreparedStatement pstmt = null;
+            
+            ResultSet rs;
+            String sql="select pa_id from profileattribute where profile_attribute=?";
+            pstmt=con.prepareStatement(sql);
+            pstmt.setString(1,keyy);
+            rs =pstmt.executeQuery();
+            
+            while (rs.next()) {
+                paid=rs.getString("pa_id");
+            }
+            
+            con.commit();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return paid;
+  
+    }
+
+    public String insertinusers_profileattr(String key, ArrayList<String> a, ArrayList<String> b) {
+    String msg = "hi";
+ 
+        try {
+                    PreparedStatement pstmt = null;
+            
+            String sql = "insert into users _pro-attribute value(?,?,?)";
+            for(int i=0;i<a.size();i++)
+            {
+                try {
+                      con.setAutoCommit(false);       
+                    pstmt.setString(1,key);
+                    pstmt.setString(2, a.get(i));
+                    pstmt.setString(3,b.get(i));
+                    int r=pstmt.executeUpdate();
+                    //    System.out.println("---result--"+r);
+                } catch (SQLException ex) {
+                    Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            con.commit();
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            return msg;
+                   
     }
   
   }

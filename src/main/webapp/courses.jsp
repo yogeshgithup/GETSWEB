@@ -13,11 +13,25 @@
                                        </script>
                                  <%@include file="homepageheaders.jsp" %>
      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+     
+     
 <script> 
 $(document).ready(function(){
     alert("1");
-  $("#mybtn").click(function(){
-    $("#myModal").slideDown("slow");
+    // $( "#dialog" ).dialog();
+  $("a.primary-btn").click(function(e){
+      e.preventDefault();
+     alert($(this).attr("href"));
+      $.ajax( {
+                  url:$(this).attr("href"),
+                  success:function(data) {
+                     alert(data);
+                     obj=JSON.parse(data);
+                     alert("Duration="+obj.duration+"\nCourse_fees="+obj.c_fees+"\nCourse_id="+obj.c_id+"\nCourse_name="+obj.c_name+"\nhpw="+obj.hpw+"\ndpw"+obj.dpw);
+                     $("#mydiv").html(obj.duration);
+                          
+    }
+               });
   });
 });
 </script>
@@ -41,13 +55,16 @@ $(document).ready(function(){
 			<!-- End banner Area -->	
 
 			<!-- Start popular-courses Area --> 
+                         
 			<section class="popular-courses-area section-gap courses-page">
 				<div class="container">
 					<div class="row d-flex justify-content-center">
 						<div class="menu-content pb-70 col-lg-8">
 							<div class="title text-center">
 								<h1 class="mb-10">Courses we offer</h1>
-								<p>There is a moment in the life of any aspiring.</p>
+		           <div id="dialog">hello</div>
+             
+                                                                <p>There is a moment in the life of any aspiring.</p>
 							</div>
 						</div>
 					</div>						
@@ -66,75 +83,19 @@ $(document).ready(function(){
                                 %>
         
 						<div class="single-popular-carusel col-lg-3 col-md-6">
-              <a class="primary-btn" id="mybtn" value="myModal"  href="<%=application.getContextPath()%>/SerSetCourse?iid=<%=course.getC_id()%>" ><%=course.getC_name()%></a>                    	                                            
-                                            
-      
-                                                        <div class="modal fade" id="myModal" role="dialog">
-                                                            <div class="modal-dialog">
-                                                                 <div class="modal-content">
-                                                                     <div class="modal-header"></div>
-                                                                         <div class="modal-body">
-                                                                               <div class="modal-header">
-        <% 
-   JSONArray ja=(JSONArray)session.getAttribute("ja");
-   System.out.println("dgsgsdfsdfsdf"+ja+"fsdfdsfdsfsdf"+ja);
-       
-   JSONTokener js=new JSONTokener(String.valueOf(ja));
-   System.out.println("dgsgsdfsdfsdf"+ja+"fsdfdsfdsfsdf"+ja);
-           
-   JSONArray jaa=(JSONArray)js.nextValue();
-                JSONObject obj=(JSONObject)jaa.getJSONObject(0);
-                %>
-                <h4 class="modal-title">Course Name :- <%=obj.getString("c_name")%>Course Id:-<%=obj.getString("c_id")%></h4>
-          </div>
-          <div>  
-                                                      
-              <p>
-                  <b> Course Fees:- <%=obj.getInt("c_fees")%> </b>
-            </p>
-            <p>
-                <b> Course duration:-  <%=obj.getInt("duration")%></b>
-            </p>
-            <p>
-                <b> Hours_per_week:-  <%=obj.getInt("hpw")%></b>
-            </p>
-            <p>
-                <b>  Days_per_week:- <%=obj.getInt("dpw")%> </b>
-            </p>
-      </div>
-    
-                                                                         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
- 
-    </div>
-  </div>
-                                                    	
-
+              <a class="primary-btn" id="mybtn"  value="myModal"   href="<%=application.getContextPath()%>/SerSetCourse?iid=<%=course.getC_id()%>" ><%=course.getC_name()%></a>                    	                                            
+              <!--<a class="primary-btn" id="mybtn" value="myModal" data-toggle="modal" data-target="#myModal"   ><%=course.getC_name()%></a>-->                    	                                            
+              
                                                 </div>
 					 
-		<%}%>	
+		<% } %>	
+                                      
                                     </div>
                                 </div>	
-			</section>
-               
-      <!--<script src="<%=application.getContextPath()%>/uiadmin/vendors/jquery/dist/jquery.min.js"></script>-->
-<!--<script>
-$(document).ready(function(){
-     alert("1");
-     $(".primary-btn").click(function(){
-      var x=$(this).attr('value');
-       alert("bjh  "+x);
-       $("#"+x).slideDown();
- 
-});
-});
- 
-
-</script>-->
+			</section>                                          
+                    
+     
 		 <%@include file="homepagefooters.jsp" %>
 	
-        </body>
+        </body>  
 	</html>
