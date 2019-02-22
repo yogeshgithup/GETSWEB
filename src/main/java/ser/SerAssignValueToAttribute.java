@@ -17,6 +17,7 @@ import org.json.JSONObject;
 import org.json.JSONTokener;
 import java.util.Iterator;
 import java.util.ArrayList;
+import javax.servlet.http.HttpSession;
 import operation.CourseSubSecOperation;
 /**
  *
@@ -42,8 +43,6 @@ public class SerAssignValueToAttribute extends HttpServlet {
               String data=request.getParameter("data");
               System.out.println("data----"+data);
          
-         ArrayList<String> a = new ArrayList<>();       
-         ArrayList<String> b = new ArrayList<>();       
           
          JSONObject object = (JSONObject) new JSONTokener(data).nextValue();
          Iterator<String> keysItr = object.keys();
@@ -57,16 +56,16 @@ public class SerAssignValueToAttribute extends HttpServlet {
          while (keysitr.hasNext()) {
            String keyy = keysitr.next();
             String pa_id=cop.getproattridaccordingproattr(keyy);
-            a.add(pa_id);
             //   System.out.println("key2"+keyy+"paid"+pa_id);
          Object val = obj.get(keyy); 
-            b.add(val.toString());
          //     System.out.println("value2"+val);
-         String insertinusersprofileattr=cop.insertinusers_profileattr(key,a,b);
+             String insertinusersprofileattr=cop.insertinusers_profileattr(key,pa_id,val.toString());
              System.out.println(insertinusersprofileattr);
+       
          }
+       
  }
 out.println("Servelet");        
-
+            
     }
 }

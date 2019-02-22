@@ -8,6 +8,7 @@ package operation;
 import data.AddAttribute;
 import data.AddDesignation;
 import data.AddRole;
+import data.AssignDesignation;
 import data.Assign_role;
 import data.Course;
 import data.FirstPage;
@@ -709,10 +710,13 @@ return msg;
         return setperson;
     }
       
-       public String getselectedpersonfromuserrole(String pid)
+       public String getselectedperson(String pid,String l)
        {
+           
            String a = null;
-       Statement stmt = null;
+       if(l.equals("userrole"))
+       {
+           Statement stmt = null;
         System.out.println("");
        ResultSet rs=null;
        String sql="select * from user_role";
@@ -741,6 +745,41 @@ return msg;
        }catch(Exception e)
        {
            return(e.getMessage());
+       }
+       }
+       if(l.equals("userdesignation"))
+       {
+                  Statement stmt = null;
+        System.out.println("");
+       ResultSet rs=null;
+       String sql="select * from users";
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+          
+           while(rs.next())  
+           {
+               String p=rs.getString("p_id");
+               System.out.println("pp"+p);
+               if(p.equals(pid))
+               {
+                    a="DesignationAloted";
+                   System.out.println(a);
+                   break;              
+          
+               }
+               else
+               {
+                   a="AlotDesignation";
+                   System.out.println(a);        
+               }
+           }
+       }catch(Exception e)
+       {
+           return(e.getMessage());
+       }
+    
        }
            return a;
        }
@@ -1749,26 +1788,30 @@ return msg;
   
     }
 
-    public String insertinusers_profileattr(String key, ArrayList<String> a, ArrayList<String> b) {
+    public String insertinusers_profileattr(String key, String a, String b) {
     String msg = "hi";
  
         try {
                     PreparedStatement pstmt = null;
             
-            String sql = "insert into users _pro-attribute value(?,?,?)";
-            for(int i=0;i<a.size();i++)
-            {
+            String sql = "insert into users_proattribute value(?,?,?)";
                 try {
+                    System.out.println("1");
                       con.setAutoCommit(false);       
-                    pstmt.setString(1,key);
-                    pstmt.setString(2, a.get(i));
-                    pstmt.setString(3,b.get(i));
+            pstmt=con.prepareStatement(sql);
+                    System.out.println("2");
+                      pstmt.setString(1,key);
+                      System.out.println("3");
+                    pstmt.setString(2, a);
+                    System.out.println("4");
+                    pstmt.setString(3,b);
+                    System.out.println("5");
                     int r=pstmt.executeUpdate();
+                    System.out.println("6");
                     //    System.out.println("---result--"+r);
                 } catch (SQLException ex) {
                     Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            }
             con.commit();
             
             
@@ -1778,6 +1821,92 @@ return msg;
             return msg;
                    
     }
+
+    public String assign_designation(AssignDesignation ad) {
+    String msg = "success";
+        PreparedStatement pstmt = null;
+        PreparedStatement pstmtt= null;
+           ResultSet rs;
+      String des_id = null;
+        String sql= "select des_id from designation where designation=?";
+        String sqll = "insert into users value(?,?)";
+        try {
+            con.setAutoCommit(false);
+            pstmt=con.prepareStatement(sql);
+            pstmtt= con.prepareStatement(sqll);
+            pstmt.setString(1, ad.getDesignation());
+             rs = pstmt.executeQuery(); 
+           while (rs.next()) {                                             
+              des_id=rs.getString("des_id");
+               System.out.println("6534----"+des_id);
+           }
+       
+            String p_id[]=ad.getP_id();
+             for(int i=0;i<p_id.length;i++)
+             {
+                 pstmtt.setString(1,p_id[i]);
+                 pstmtt.setString(2,des_id);
+                 int r=pstmtt.executeUpdate();
+             //    System.out.println("---result--"+r);
+             }       
+            con.commit();
+            msg = "Designation Assigned";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return msg;
+    }
   
+    public JSONArray getusersdetails()
+    {
+        
+         JSONArray ja=new JSONArray();
+         
+       Statement stmt = null; 
+       ResultSet rs=null;
+       String sql="select p.p_id,p.f_name,d.designation,r.role from person p inner join users u on p.p_id=u.p_id inner join designation d on u.des_id=d.des_id inner join user_role ur on p.p_id=ur.p_id inner join role r on ur.role_id=r.role_id;";
+        System.out.println(sql);
+       try
+       {
+              stmt=con.createStatement();
+              rs=stmt.executeQuery(sql);
+             System.out.println(rs);
+           while(rs.next())
+           {
+         JSONObject jo=new JSONObject();
+   
+               System.out.println(rs.getString("p_id"));
+                    jo.put("p_id", rs.getString("p_id"));
+               System.out.println(rs.getString("f_name"));               
+                    jo.put("f_name", rs.getString("f_name"));
+                    System.out.println(rs.getString("designation"));
+               
+                    jo.put("designation", rs.getString("designation"));
+                    System.out.println(rs.getString("role"));
+               
+                    jo.put("role", rs.getString("role"));
+               
+             ja.put(jo);
+           
+           }
+             System.out.println("1"+ja);      
+              System.out.println("2"+ja.toString());    
+       }catch(Exception e)
+       { 
+                ja=null;
+       }
+       
+    
+      return ja;
+    }
+
+    
+    
   }
 

@@ -1,3 +1,7 @@
+ <%@page import="org.json.JSONArray"%>
+ <%@page import="org.json.JSONTokener"%>
+ <%@page import="org.json.JSONObject"%>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -43,88 +47,54 @@
                     <table class="table table-striped projects">
                       <thead>
                         <tr>
-                          <th style="width: 10%">ID</th>
+                          <th style="width: 10%">P_ID</th>
                           <th>Name</th>
-                          <th>Profile Attribute</th>
-                          <th>Designation</th>
                           <th>Role</th>
+                          <th>Designation</th>
                           <th>Priority</th>
+                          <th>Profile Attribute</th>
                           <th style="width: 20%">#Edit</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <tr>
+                           <%
+                           CourseSubSecOperation cso=new CourseSubSecOperation(con);
+                            JSONArray ja=cso.getusersdetails();
+                               JSONTokener js=new JSONTokener(ja.toString());
+                                   JSONArray jaa=(JSONArray)js.nextValue();
+                                 System.out.println("89");
+                                   JSONObject obj=(JSONObject)jaa.getJSONObject(0);
+                                System.out.println("46"+obj.toString());
+        
+                            System.out.println("ja.length()"+ja.length());
+                            for(int i=0;i<ja.length();i++)
+                            {
+                            %>
+                         
+                          <tr>
                           <td>
-                            <a>1</a>
+                              <%=obj.getString("p_id")%>
                           </td>
-                          <td>XYZ
+                          <td><%=obj.getString("f_name")%>
                           </td>
-                          <td >Experience of 2 years
+                          <td><%=obj.getString("designation")%>
                           </td>
-                          <td>PQR
-                          </td>
-                          <td>
-                            Faculty
+                          <td><%=obj.getString("role")%>
                           </td>
                           <td>
-                            1
+                                 <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>                       
+                          </td>
+                          <td>
+                                 <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>                       
                           </td>
                            <td>
-                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
                             <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
                             <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
-                        </tr>
-                        <tr>
-                      
-                        <tr>
-                          <td>
-                            <a>2</a>
-                          </td>
-                          <td>ABC
-                          </td>
-                          <td >Experience of 5 years
-                          </td>
-                          <td>MNO
-                          </td>
-                          <td>
-                            Staff
-                          </td>
-                          <td>
-                            3
-                          </td>
-                          <td>
-                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
-                        </tr>
-                        <tr>
                          
-                           <tr>
-                          <td>
-                            <a>3</a>
-                          </td>
-                          <td>UZI
-                          </td>
-                          <td >Experience of 1 years
-                          </td>
-                          <td>JKL
-                          </td>
-                          <td>
-                            FACULTY
-                          </td>
-                          <td>
-                            2
-                          </td>
-                          <td>
-                            <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>
-                            <a href="#" class="btn btn-info btn-xs"><i class="fa fa-pencil"></i> Edit </a>
-                            <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
                         </tr>
-                        <tr>
-                      
+                         <%}%>
+                        
                       </tbody>
                     </table>
                     <!-- end project list -->
