@@ -85,8 +85,8 @@ String loginid=(String)session.getAttribute("loginid");
                     <ul class="nav child_menu">
                       <li><a href="ViewUserDetail.jsp">View User Detail</a></li>
                       <li><a href="<%=application.getContextPath()%>/SerAssignRole">Assign Role</a></li>
-                      <li><a href="Attribute.jsp">Assign Attribute</a></li>
-                       <li><a href="">Add Designation</a></li>
+                    <!--//   <li><a href="Attribute.jsp">Assign Attribute</a></li>-->
+                       <li><a href="AssignDesignation.jsp">Assign Designation</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i>Manage Detail<span class="fa fa-chevron-down"></span></a>

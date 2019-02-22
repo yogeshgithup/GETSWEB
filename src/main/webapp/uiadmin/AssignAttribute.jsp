@@ -40,7 +40,7 @@ $(document).ready(function(){
 $("#submit").click(function(e)
 {
    // alert("helloooooo");
-   e.preventDefault();
+  // e.preventDefault();
    alen=$("#artlength").val();
    //alert(alen);
    qlen=$("#artlen").val();
