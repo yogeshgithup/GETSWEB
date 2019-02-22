@@ -7,7 +7,7 @@
 <html lang="en">
   <head>
 
-    <title>ViewUserDetail</title>
+    <title>Assign Attribute</title>
     <%@include file="adminHeaders.jsp" %>
 
   </head>
@@ -37,51 +37,73 @@ $(document).ready(function(){
        
         //    });
 //    
-$("#submit").click(function()
+$("#submit").click(function(e)
 {
    // alert("helloooooo");
+   e.preventDefault();
    alen=$("#artlength").val();
    //alert(alen);
    qlen=$("#artlen").val();
-   cval="[";
+   
+   colval="{";
 for(i=0;i<parseInt(alen);i++)
 {
-    colval="[";
-    var cs="a"+i;
-   
+    var c="c"+i;
+    ct=$("."+c);
+    l=ct.length;
+    
+    var cs="a0";
     ctrl=$("."+cs);
     len=ctrl.length;
-    for(j=0;j<len;j++)
+   vl=$(ctrl[i]).html();
+    
+    colval=colval+" \""+vl+"\""+":{";
+    for(j=0;j<l;j++)
     {
+        
+        // alert("in");           
+         cv=$("."+"b0");
+         
+        v=$(cv[j]).html();
+       colval=colval+" \""+v+"\""+":";
        
-        if(j===0)
-        {
-        val=$(ctrl[j]).html();
-    colval=colval+" \""+val+"\""+","; 
-                }
+       val=$(ct[j]).val();
+       if(j===l-1)
+       {
+       colval=colval+" \""+val+"\"";              
+       }
        else
        {
-          if(j===(len-1)){
-               val=$(ctrl[j]).val();
-            colval=colval+" \""+val+"\"";
-          }
-          else
-          {
-           val=$(ctrl[j]).val();
-            colval=colval+" \""+val+"\""+",";
-        }
+           colval=colval+" \""+val+"\""+",";         
        }
-       
+      // alert(colval);         
+     }  
+     if(i===parseInt(alen)-1)
+     {   
+         colval=colval+"}";
+     }
+     else
+     {
+       colval=colval+"},";
+     }
+  }     
+  colval=colval+"}";
+    alert(colval);
+    
+     $.ajax( {
+                  url:'http://localhost:8084/GETSWEB/SerAssignValueToAttribute?data='+colval,
+                  success:function(data) {
+                     alert("data"+data);
+                    
+                          
+    },
+    error:function(data) {
+                     alert("error"+data);
+                    
+                          
     }
-    colval=colval+"],";
-     alert(colval);
- cval=cval+colval;
-} 
-alert(cval);
-String c = cval.substring(0, cval.length() - 1);
-        
-cval=cval+"]";
-alert(c);
+               });
+
 });
 
 });      
@@ -129,7 +151,7 @@ alert(c);
                                    for(int i=0;i<PA.length;i++)
                                   {
                               %>        
-                                    <th class="b<%=i%>"><%=PA[i]%></th>
+                                    <th class="b0"><%=PA[i]%></th>
                               <%        
                                   }
                                 %>                         
@@ -142,13 +164,13 @@ alert(c);
                                    {                                     
                             %>
                                        <tr>
-                          <td class="a<%=j%>"><%=P_id[j]%></td>
+                          <td class="a0"><%=P_id[j]%></td>
                            <%
                                   for(int ii=0;ii<PA.length;ii++)
                                   {
                           %>
                           <td>
-                          <input type="text" id="ValueAttribute" name="ValueAttribute"  class="a<%=j%>">                                      
+                          <input type="text" id="ValueAttribute" name="ValueAttribute"  class="c<%=j%>">                                      
                           </td>
                             <%}%>                                      
                          </tr>

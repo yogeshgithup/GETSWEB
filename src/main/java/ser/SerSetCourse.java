@@ -38,9 +38,9 @@ public class SerSetCourse extends HttpServlet {
           
          JSONArray ja=(JSONArray)cop.getSelectedCourse(op);
                      System.out.println("jaaa"+ja);
-                     System.out.println("jaaaaaaaaa"+ja.toString());
-         hs.setAttribute("ja", ja);
-         res.sendRedirect(ctx.getContextPath()+"/"+"courses.jsp");
+                     out.println((JSONObject)ja.get(0));
+        // hs.setAttribute("ja", ja);
+       //  res.sendRedirect(ctx.getContextPath()+"/"+"courses.jsp");
 
      //   res.sendRedirect(ctx.getContextPath()+"/"+"courses.jsp");
            

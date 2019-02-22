@@ -5,8 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <link rel="icon" href="<%=application.getContextPath()%>/uiadmin/images/favicon.ico" type="image/ico" />
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
   <script src="<%=application.getContextPath()%>/uiadmin/vendors/jquery/dist/jquery.min.js"></script>
-
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  
      <!-- Bootstrap -->
     <link href="<%=application.getContextPath()%>/uiadmin/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome -->

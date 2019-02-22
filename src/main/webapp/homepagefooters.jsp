@@ -31,7 +31,11 @@ String quote;
                     </div>
                 </div>  
             </section>
-          
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="/resources/demos/style.css">
+
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+            
             <!-- End cta-two Area -->
             <script src="<%=application.getContextPath()%>/js/vendor/jquery-2.2.4.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
