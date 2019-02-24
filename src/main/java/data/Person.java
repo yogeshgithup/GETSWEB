@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 
+
 public class Person {
     String quali[];
     private String p_id;
@@ -29,6 +30,9 @@ public class Person {
     private String file_name;
     private String password; 
     HashSet<FirstPage> setfirstpage;
+
+    public Person() {
+    }
     public String[] getQuali() {
 
         return quali;

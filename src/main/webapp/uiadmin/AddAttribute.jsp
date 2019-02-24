@@ -22,7 +22,7 @@
        
     <%@include file="navigation.jsp" %>
   <%
-session.setMaxInactiveInterval(2);
+
 String msg=(String)session.getAttribute("msg");
                     if(msg!=null)
                     {
@@ -38,7 +38,7 @@ String msg=(String)session.getAttribute("msg");
 <script>
 $(document).ready(function(e){
     //alert("Hello");
-    e.preventDefault();
+    
     //$('#msg').load(function(){
       //      alert("how are you");
        $('#msg').fadeOut(5000);
