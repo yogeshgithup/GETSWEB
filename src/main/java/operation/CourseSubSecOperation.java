@@ -143,7 +143,8 @@ public class CourseSubSecOperation {
         PreparedStatement pstmt = null;
         PreparedStatement pstmtt = null;
         String sqlseccid = "insert into section (sec_id,sec_name,c_id)value(?,?,?)";
-        String sqlsubsid = "insert into section (sec_id,sec_name,s_id)value(?,?,?)";
+        String sqlsubsid = "insert into section (sec_id,sec_name,sub_id)value(?,?,?)";
+        String sql="insert into section(sec_id,sub_id,sec_name,c_id)value(?,?,?,?)";
 
         try {
             con.setAutoCommit(false);

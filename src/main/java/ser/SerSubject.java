@@ -45,23 +45,24 @@ public class SerSubject extends HttpServlet {
 //         String cid=(String)hs.getAttribute("cid");   
 //          if(req.getParameter("submit")!=null)
 //        {
-         String cid=req.getParameter("cid");
+         String cid=req.getParameter("c_id");
         System.out.println("--------------------"+cid);
-         String a=req.getParameter("subject_id");
-           String b=req.getParameter("subject_name");
-            int e=Integer.parseInt(req.getParameter("hours_per_week"));
-            int f=Integer.parseInt(req.getParameter("days_per_week"));
+         String sub_id=req.getParameter("sub_id");
+           String sub_name=req.getParameter("sub_name");
+            Integer hours_per_week=Integer.parseInt(req.getParameter("hours_per_week"));
+            Integer days_per_week=Integer.parseInt(req.getParameter("days_per_week"));
           
             Course course=new Course();
             course.setC_id(cid);
+            System.out.println("in sersub"+course.getC_id());
             HashSet<Course> setcourse=new HashSet<Course>();
             setcourse.add(course);
-           Subject s=new Subject(a,b,e,f,setcourse);
+           Subject s=new Subject(sub_id,sub_name,hours_per_week,days_per_week,setcourse);
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
          String msg = null;
          String m=null;
          msg = cop.insertSubject(s);
-         out.println("Sucesss");
+        // out.println("Sucesss");
 //        }
          }
   @Override

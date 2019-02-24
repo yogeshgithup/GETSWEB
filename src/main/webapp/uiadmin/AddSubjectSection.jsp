@@ -45,13 +45,14 @@ var val = [];
                   var c_id= $("#course").val();   
                   var sec_id=$("#Section_Id").val();
                   var sec_name=$("#Section_Name").val();       
-                  location.href="<%=application.getContextPath()%>/SerSection?cid="+c_id+"&sec_id="+sec_id+"&sec_name="+sec_name;
+                  location.href="<%=application.getContextPath()%>/SerSection?c_id="+c_id+"&sec_id="+sec_id+"&sec_name="+sec_name;
                   
            //       alert("Course_id="+c_id+"Section_Id="+sec_id+"Section_Name="+sec_name);
                                                   });
                      $("#f1").append(btnsubmit);
                      $("#f1").append("<br><br>");
                     }
+                    
                    if(!val[1])
                    {
         if(val[0]==="subject")
@@ -67,9 +68,9 @@ var val = [];
                   var hours_per_week=$("#Hours_per_week").val();       
                   var days_per_week=$("#Days_per_week").val();       
           
-        location.href="<%=application.getContextPath()%>/SerSubject?cid="+c_id+"&sub_id="+sub_id+"&sub_name="+sub_name+"&hours_per_week="+hours_per_week+"&days_per_week="+days_per_week;
+        location.href="<%=application.getContextPath()%>/SerSubject?c_id="+c_id+"&sub_id="+sub_id+"&sub_name="+sub_name+"&hours_per_week="+hours_per_week+"&days_per_week="+days_per_week;
                   
-                 alert("Course_id="+c_id+"Subject_Id="+sec_id+"Subject_Name="+sec_name);
+              //   alert("Course_id="+c_id+"Subject_Id="+sec_id+"Subject_Name="+sec_name);
     });
                      $("#f1").append(btnsubmit);
                      $("#f1").append("<br><br>");

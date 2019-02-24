@@ -60,16 +60,21 @@ public class SerSubSec extends HttpServlet {
          String msg = null;
          String m=null;
          msg = cop.insertSubject(s);
-         
+         System.out.println("sub execute");
             
              String sec_id=req.getParameter("sec_id");
+             System.out.println("1sec_id--"+sec_id);
              String sec_name=req.getParameter("sec_name");
+             System.out.println("2sec_name--"+sec_name);
              Subject subject=new Subject();
              subject.setSub_id(sub_id);
+             System.out.println("3sub_id--"+subject.getSub_id());
+             
             Section se=new Section(sec_id,sec_name);
             se.setSubject(subject);
+            System.out.println("se---"+se.toString());
             msg=cop.insertSection(se);
-           
+           System.out.println("section execute");
           
 //        }
 //    res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddSubjectSection.jsp");

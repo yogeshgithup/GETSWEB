@@ -117,7 +117,7 @@ String loginid=(String)session.getAttribute("loginid");
                       <li><a href="AddCourse.jsp">Add Course</a></li>
                       <li><a href="<%=application.getContextPath()%>/ServletViewCourse?op=view">View Course</a></li>
                       <li><a href="<%=application.getContextPath()%>/ServletViewCourse?op=add">Add SUBJECT SECTION</a></li>
-                  
+                      <li><a href="<%=application.getContextPath()%>/ServletViewCourse?op=minus">Add SECTION</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-desktop"></i>Send Notification<span class="fa fa-chevron-down"></span></a>

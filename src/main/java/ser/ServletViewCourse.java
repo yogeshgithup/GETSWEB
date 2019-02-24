@@ -66,7 +66,12 @@ public class ServletViewCourse extends HttpServlet {
               {
                        
                   response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddSubjectSection.jsp");
-              } else {
+              } 
+              if(op.equals("minus"))
+              {
+                              response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddSection.jsp");          
+              }
+              else {
               }
               
     }
