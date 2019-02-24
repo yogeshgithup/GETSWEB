@@ -142,14 +142,7 @@ public class SerPersonAndroid extends HttpServlet {
               //  System.out.println("12");
                 sms.sendSMS(num,mess);
                //s System.out.println("3");
-                if(op.equals("a"))
-                {          
-                    String addrole_id=(String)hs.getAttribute("addrole_id");
-                   user_role ur= new user_role(pid,addrole_id);
-                   msg = cop.insertuser_role(ur);
-                } 
-                
-                
+               
             } catch (ParseException ex) {
                 Logger.getLogger(SerPerson.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {

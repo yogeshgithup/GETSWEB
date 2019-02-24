@@ -16,7 +16,7 @@
    // HttpSession hs=request.getSession();
 //System.out.println("in navigation"+hs.getId()+hs.isNew());
 String loginid=(String)session.getAttribute("loginid");
-//System.out.println(loginid);
+System.out.println("--------------------------------------------------------------------------------"+loginid);
                                  ServletContext ctx=this.getServletContext();
                                   Connection con=(Connection)ctx.getAttribute("MyConn");
                                 

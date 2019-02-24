@@ -84,8 +84,7 @@ $(document).ready(function(){
         
 						<div class="single-popular-carusel col-lg-3 col-md-6">
               <a class="primary-btn" id="mybtn"  value="myModal"   href="<%=application.getContextPath()%>/SerSetCourse?iid=<%=course.getC_id()%>" ><%=course.getC_name()%></a>                    	                                            
-              <!--<a class="primary-btn" id="mybtn" value="myModal" data-toggle="modal" data-target="#myModal"   ><%=course.getC_name()%></a>-->                    	                                            
-              
+                  
                                                 </div>
 					 
 		<% } %>	
