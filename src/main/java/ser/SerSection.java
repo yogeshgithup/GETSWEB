@@ -43,13 +43,13 @@ public class SerSection extends HttpServlet {
         // String d=(String)hs.getAttribute("cid");
   //      if(req.getParameter("submit")!=null)
     //    {
-            String cid=req.getParameter("cid");
+            String cid=req.getParameter("c_id");
             
-            String a=req.getParameter("section_id");
-            String b=req.getParameter("section_name");
+            String sec_id=req.getParameter("sec_id");
+            String sec_name=req.getParameter("sec_name");
             Course course= new Course();
             course.setC_id(cid);
-            Section se=new Section(a,b);
+            Section se=new Section(sec_id,sec_name);
             se.setCourse(course);
             CourseSubSecOperation cop=new CourseSubSecOperation(con); 
         

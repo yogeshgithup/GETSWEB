@@ -1,3 +1,5 @@
+<%@page import="data.Subject"%>
+<%@page import="data.Course"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -31,7 +33,36 @@
                   <div class="x_content">
                     <br />
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="get" action="<%=application.getContextPath()%>/SerSection">
+                             <h>Select Course</h>   
+      <select  id="course" name="course">
+        
+  
+                      <%
+                      System.out.println("1");
+                              HashSet<Course> setcourse=(HashSet<Course>)session.getAttribute("setcourse");
+                      System.out.println("2"+setcourse);
+                             
+                              Iterator<Course> ittt=setcourse.iterator();
+                                  System.out.println("3");
+                 
+                              while(ittt.hasNext())
+                              {
+                                  Course course=ittt.next();
+                                  
+                                %>
+                                  
+                                
+                                  <option value="<%=course.getC_id()%>"><%=course.getC_id()%></option>
+                                  <% } %>
 
+          
+      </select>
+                             <h>Select Subject</h>
+                             <select id="subject" name="subject">
+                                 <% 
+                                    HashSet<Subject> setsubject=(HashSet<Subject>)session.getAttribute("setsubject");
+                                 %> 
+                             </select>
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Section_Id">Section_Id
                         </label>

@@ -71,9 +71,9 @@ Msg ="//(String)session.getAttribute("msg");
 -->
 <script type="text/javascript">
 
-            function editRow(oTable, nRow)
+            function editRow(Table, nRow)
             {
-                var Data = oTable.fnGetData(nRow);
+                var Data = Table.fnGetData(nRow);
                 var Td = $('>td', nRow);
                 alert(Td.length + "-------");
                 //jqTds[0].innerHTML = '<input type="text" value="' + aData[0] + '" readOnly>';
@@ -89,7 +89,7 @@ Msg ="//(String)session.getAttribute("msg");
             }
 
 
-            function saveRow(oTable, nRow)
+            function saveRow(Table, nRow)
             {
                 var Inputs = $('input', nRow);
 
@@ -104,21 +104,29 @@ Msg ="//(String)session.getAttribute("msg");
                 alert(c_name);
                 location.href = "<%=application.getContextPath()%>/SerEditCourse?c_id="+ c_id + "&c_name=" + c_name + "&c_fees=" + c_fees + "&duration=" + duration + "&hours_per_week="+ hours_per_week+"&days_per_week="+days_per_week;
                     
-                oTable.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 1, false);
-                oTable.fnDraw();
+                Table.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 1, false);
+                Table.fnDraw();
             }
 
-            function restoreRow(oTable, nRow) {
-                var Data = oTable.fnGetData(nRow);
+            function restoreRow(Table, nRow) {
+                var Data = Table.fnGetData(nRow);
                 var Td = $('>td', nRow);
 
                 for (var i = 0, iLen = Td.length; i < iLen; i++) {
-                    oTable.fnUpdate(Data[i], nRow, i, false);
+                    Table.fnUpdate(Data[i], nRow, i, false);
                 }
-                oTable.fnDraw();
+                Table.fnDraw();
             }
 
-
+ $(document).ready(function() {
+                Table = $("#tablecourse").dataTable({
+                    "bScrollCollapse": true,
+                    "bPaginate": true,
+                    "sPaginationType": "full_numbers",
+                 
+                    "aLengthMenu": [[3, 5, 10, -1], [3, 5, 10, "All"]],
+                    "iDisplayLength": 10
+                });
            
 
 
@@ -136,27 +144,27 @@ Msg ="//(String)session.getAttribute("msg");
                     if (nEditing!== null && nEditing!== nRow) {
                         /* Currently editing - but not this row - restore the old before continuing to edit mode */
                         alert("inif");
-                        restoreRow(oTable, nEditing);
-                        editRow(oTable, nRow);
+                        restoreRow(Table, nEditing);
+                        editRow(Table, nRow);
                         nEditing = nRow;
                     }
                     else if (nEditing === nRow && this.innerHTML === "Save") {
                         alert(nRow);
                         /* Editing this row and want to save it */
                         alert("inelseif");
-                        saveRow(oTable, nEditing);
+                        saveRow(Table, nEditing);
                         nEditing = null;
                     }
                     else {
                         /* No edit in progress - let's start one */
                        alert("inelse");
-                        editRow(oTable, nRow);
+                        editRow(Table, nRow);
                         nEditing = nRow;
                     }
                 });
 
-            });
 
+});
         </script>
   <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" >
              
