@@ -52,11 +52,11 @@
   <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="get"action="<%=application.getContextPath()%>/SerAddDesignation" >
       <h>Select User</h>   
       <select  id="person" name="p_id">
-           <%  Connection con=(Connection)application.getAttribute("MyConn");
+           <%              con=(Connection)application.getAttribute("MyConn");
                                   // System.out.println("1"+con);
                                    CourseSubSecOperation cso=new CourseSubSecOperation(con);
                                    //System.out.println("2"+cso);
-                              HashSet<Person > setperson=cso.getPerson();
+                               setperson=cso.getPerson();
                               //System.out.println("3"+setperson);
                               Iterator<Person> is=setperson.iterator();
                                 //System.out.println("4"+is);
@@ -81,17 +81,16 @@
                                    //System.out.println("2"+cso);
                               HashSet<AddDesignation > setdes_id=csd.getDesignation();
                               //System.out.println("3"+setperson);
-                              Iterator<AddDesignation> it=setdes_id.iterator();
+                              Iterator<AddDesignation> ioit=setdes_id.iterator();
                                 //System.out.println("4"+is);
-                              while(it.hasNext())
+                              while(ioit.hasNext())
                               {
-                                  AddDesignation designation=it.next();
+                                  AddDesignation designation=ioit.next();
                                   //System.out.println("67"+person);
                                   
                                 %>
                                   
                                 
-                                  <option value="<%=designation.getDes_id()%>"><%=designation.getDes_id()%></option>
                                   <% } %>
       </select>
      <br /><br />

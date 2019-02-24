@@ -63,15 +63,15 @@
                                JSONTokener js=new JSONTokener(ja.toString());
                                    JSONArray jaa=(JSONArray)js.nextValue();
                                  System.out.println("89");
-                                   JSONObject obj=(JSONObject)jaa.getJSONObject(0);
-                                System.out.println("46"+obj.toString());
-        
-                            System.out.println("ja.length()"+ja.length());
+                         
+                                    System.out.println("ja.length()"+ja.length());
                             for(int i=0;i<ja.length();i++)
-                            {
-                            %>
+                            {  
+                                   JSONObject obj=(JSONObject)jaa.getJSONObject(i);
+                              %>
                          
                           <tr>
+                          
                           <td>
                               <%=obj.getString("p_id")%>
                           </td>
@@ -82,7 +82,7 @@
                           <td><%=obj.getString("role")%>
                           </td>
                           <td>
-                                 <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>                       
+                                 <%=i+1%>                       
                           </td>
                           <td>
                                  <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>                       
@@ -92,8 +92,8 @@
                             <a href="#" class="btn btn-danger btn-xs"><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
                          
-                        </tr>
-                         <%}%>
+                          </tr>
+                         <% }%>
                         
                       </tbody>
                     </table>

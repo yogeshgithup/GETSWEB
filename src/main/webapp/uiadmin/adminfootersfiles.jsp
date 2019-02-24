@@ -3,6 +3,7 @@
   <!--<script src="<//%=application.getContextPath()%>/uiadmin/vendors/jquery/dist/jquery.min.js"></script>-->
     <!-- Bootstrap -->
     <script src="<%=application.getContextPath()%>/uiadmin/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+ 
     <!-- FastClick -->
     <script src="<%=application.getContextPath()%>/uiadmin/vendors/fastclick/lib/fastclick.js"></script>
     <!-- NProgress -->

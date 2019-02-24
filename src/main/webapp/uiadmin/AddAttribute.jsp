@@ -34,10 +34,11 @@ String msg=(String)session.getAttribute("msg");
               }
 %>
  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
 <script>
-$(document).ready(function(){
+$(document).ready(function(e){
     //alert("Hello");
+    e.preventDefault();
     //$('#msg').load(function(){
       //      alert("how are you");
        $('#msg').fadeOut(5000);
