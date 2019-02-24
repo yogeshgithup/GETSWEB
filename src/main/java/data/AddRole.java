@@ -6,6 +6,9 @@ public class AddRole {
     private String role_id;
     private String role;
 
+    public AddRole() {
+    }
+
     public AddRole(String addrole_id, String role) {
         this.role_id = addrole_id;
         this.role = role;
