@@ -24,7 +24,6 @@
 
   
    <%
-session.setMaxInactiveInterval(2);
 String msg=(String)session.getAttribute("msg");
                     if(msg!=null)
                     {

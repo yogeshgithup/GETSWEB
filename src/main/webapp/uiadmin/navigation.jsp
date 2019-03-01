@@ -161,7 +161,7 @@ System.out.println("------------------------------------------------------------
                     <li>
                       <a href="javascript:;"> Add Email </a>
                     </li>
-                    <li><a href="HomePage.jsp"><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
+                    <li><a href=""><i class="fa fa-sign-out pull-right"></i> Log Out</a></li>
                   </ul>
                 </li>
 

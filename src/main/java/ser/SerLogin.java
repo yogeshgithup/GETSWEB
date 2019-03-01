@@ -106,7 +106,6 @@ public class SerLogin extends HttpServlet {
             System.out.println("welcome2");
             String LoginId=request.getParameter("LoginId");
             System.out.println(LoginId);
-            
             hs.setAttribute("loginid",LoginId);
             String Password=request.getParameter("Password");
             System.out.println(Password);

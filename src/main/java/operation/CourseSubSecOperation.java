@@ -401,6 +401,44 @@ return msg;
     }
     
     
+    
+    public JSONArray getSelectedSubject(String op)
+    {
+           JSONArray ja=new JSONArray();
+        
+       try
+       {
+                     
+           PreparedStatement pstmt = null;
+           ResultSet rs=null;
+           String sql="select s.sub_name from subject s inner join course_subject cs on s.sub_id=cs.sub_id where c_id=?";
+           System.out.println(sql);
+               con.setAutoCommit(false);
+               pstmt=con.prepareStatement(sql);
+            
+               System.out.println("1");
+               pstmt.setString(1, op);
+             System.out.println("2");
+               rs = pstmt.executeQuery();
+               while (rs.next()) {
+                   String sub_name=rs.getString("sub_name");
+                   System.out.println("6534----"+sub_name);
+                   ja.put(sub_name);
+               }
+               
+               con.commit();
+           return ja;
+           
+           
+       }           
+        catch (SQLException ex) {       
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+           return ja;
+   
+    }
+    
+    
     public HashSet<Course> getCourseId()
     {
         
