@@ -37,7 +37,6 @@ String msg=(String)session.getAttribute("msg");
 <script>
 $(document).ready(function(){
     //alert("Hello");
-
     //$('#msg').load(function(){
       //      alert("how are you");
        $('#msg').fadeOut(5000);

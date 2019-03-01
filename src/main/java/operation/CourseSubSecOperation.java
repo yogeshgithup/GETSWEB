@@ -14,6 +14,7 @@ import data.Course;
 import data.FirstPage;
 import data.Login;
 import data.Person;
+import data.Priority;
 import data.Section;
 import data.Student;
 import data.Subject;
@@ -1944,8 +1945,72 @@ return msg;
     
       return ja;
     }
-
     
+    public String updatepriority(Priority pr){
+     try{
+        
+         PreparedStatement pstmt = null;
+            System.out.println("in========");
+         String sql = "UPDATE priority SET priority=? where p_id=?";
+       pstmt = con.prepareStatement(sql);
+       System.out.println("1");
+       pstmt.setString(1,pr.getPriority());
+       pstmt.setString(2,pr.getP_id());
+         System.out.println("-------op");
+       pstmt.executeUpdate();
+         System.out.println("op---------");
+        return "success";
+        }catch(Exception e)
+        {
+            System.out.println("msg======"+e.getMessage());
+            return "error";
+        }
+        
+     
+    }
+    public String prioritycheck(String p_id){
+       String p = null;
+        try{
+            con.setAutoCommit(false);
+            PreparedStatement pstmt = null;
+            ResultSet rs=null;
+            System.out.println("in========pro");
+         String sql = "Select priority from priority where p_id=?";
+          pstmt = con.prepareStatement(sql);
+       System.out.println("1");
+       pstmt.setString(1, p_id);
+            System.out.println("22");
+         rs=pstmt.executeQuery();
+            System.out.println("33");
+             System.out.println(rs);
+           while(rs.next())
+           {
+               p=rs.getString("priority");
+             
+           } con.commit();       
+        }catch(Exception e){
+            System.out.println("msg======"+e.getMessage());
+            return e.getMessage();
+        }
+        return p;
+    }
+     public String assignpriority(String p_id,String p){
+        try{
+            PreparedStatement pstmt = null;
+            System.out.println("in========assign");
+         String sql = "insert into priority values(?,?)";
+       pstmt = con.prepareStatement(sql);
+       System.out.println("1");
+       pstmt.setString(1, p);
+       pstmt.setString(2,p_id);
+       pstmt.executeUpdate();
+        return "success";
+            
+        }catch(Exception e){
+            System.out.println("msg======"+e.getMessage());
+            return "error";
+        }
+    }
     
   }
 
