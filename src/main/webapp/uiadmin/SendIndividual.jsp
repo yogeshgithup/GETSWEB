@@ -11,7 +11,6 @@
       <div class="main_container">
     <%@include file="navigation.jsp" %>
    <%
-session.setMaxInactiveInterval(2);
 String msg=(String)session.getAttribute("msg");
                     if(msg!=null)
                     {
@@ -23,8 +22,7 @@ String msg=(String)session.getAttribute("msg");
               }
 %>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
+ <script>
 $(document).ready(function(){
     //alert("Hello");
     //$('#msg').load(function(){

@@ -14,7 +14,7 @@
     </context-param>
     <context-param>
         <param-name>password</param-name>
-        <param-value>asad</param-value>
+        <param-value>ajava</param-value>
     </context-param>
     <context-param>
         <param-name>accesstoken</param-name>
@@ -172,9 +172,13 @@
         <servlet-class>ser.SerAssignValueToAttribute</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SerGetSubject</servlet-name>
+        <servlet-class>ser.SerGetSubject</servlet-class>
+    </servlet>
+  <servlet>
         <servlet-name>SerEditUserDetail</servlet-name>
         <servlet-class>ser.SerEditUserDetail</servlet-class>
-    </servlet>
+  </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -324,6 +328,10 @@
         <url-pattern>/SerAssignValueToAttribute</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SerGetSubject</servlet-name>
+        <url-pattern>/SerGetSubject</url-pattern>
+     </servlet-mapping>
+    <servlet-mapping>  
         <servlet-name>SerEditUserDetail</servlet-name>
         <url-pattern>/SerEditUserDetail</url-pattern>
     </servlet-mapping>

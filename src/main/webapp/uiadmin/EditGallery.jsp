@@ -16,12 +16,18 @@
   <head>
     <title>Update Gallery</title>
    <%@include file="adminHeaders.jsp" %>
+    </head>
+
+  <body class="nav-md">
+    <div class="container body">
+      <div class="main_container">
+           <%@include file="navigation.jsp" %>
 
 <script>
-//alert("3");
-
     $(document).ready(function(){
-     $("#l").hide();
+       $('#msg').fadeOut(5000);
+
+        $("#l").hide();
      d=0;
     c=1;
 $("#AddImage").click(function(e){
@@ -41,13 +47,6 @@ jQuery(document).on('click', '.remove_this', function() {
     });
     });
         </script>
-    </head>
-
-  <body class="nav-md">
-    <div class="container body">
-      <div class="main_container">
-     <%//HttpSession hs=request.getSession();%>
-           <%@include file="navigation.jsp" %>
  
           
    <%
@@ -64,17 +63,6 @@ String msg=(String)session.getAttribute("msg");
 %>
 
 
-<script>
-$(document).ready(function(){
-    //alert("Hello"); 
-    //$('#msg').load(function(){
-      //      alert("how are you");
-       $('#msg').fadeOut(5000);
-        //    });
-//    
-});      
-
-</script>  
  
   <!-- page content -->
           <div class="right_col" role="main">
@@ -108,6 +96,7 @@ $(document).ready(function(){
                
                              <!-- start single gallery image -->
                <%
+     
                System.out.println("entrypic");
                              HashSet<pictures> setpictures=cop.getimages();
 System.out.println("entrypic"+setfirstpage);                      

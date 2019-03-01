@@ -36,7 +36,7 @@ public class SerAddAttribute extends HttpServlet {
                 HttpSession hs=req.getSession(true);
         ServletContext ctx=this.getServletContext();
         Connection con=(Connection)ctx.getAttribute("MyConn");
-        
+          System.out.println("-----------session-----------"+hs.getAttribute("loginid"));
         if(req.getParameter("submit")!=null)
         {
               String AddPA_ID=req.getParameter("AddPA_ID");

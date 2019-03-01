@@ -7,7 +7,33 @@
     <%@include file="adminHeaders.jsp" %>
 
   </head>
-
+<script>
+    $(document).ready(function() {
+//     alert("hello");
+     $("#course").focusout(function(){
+         $('#subject').empty();
+        var n= $("#course option:selected").val();  
+  alert(n);  
+   $.post("<%=application.getContextPath()%>/SerGetSubject?id="+n,function(data,status){
+     //                   alert(data) ;
+                     obj=JSON.parse(data);
+//                     alert(obj.length);
+                      for(i=0;i<obj.length;i++)
+                      {
+//                     alert(obj[i]);
+                          $('#subject')
+         .append($("<option></option>")
+                     .attr("value",obj[i])
+                    .text(obj[i]));
+                   }
+                  
+   });       
+              
+     });
+        
+       });
+   
+</script>
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
@@ -38,10 +64,7 @@
         
   
                       <%
-                      System.out.println("1");
-                              HashSet<Course> setcourse=(HashSet<Course>)session.getAttribute("setcourse");
-                      System.out.println("2"+setcourse);
-                             
+                                 HashSet<Course> setcourse=(HashSet<Course>)cop.getCourse();
                               Iterator<Course> ittt=setcourse.iterator();
                                   System.out.println("3");
                  
@@ -52,7 +75,7 @@
                                 %>
                                   
                                 
-                                  <option value="<%=course.getC_id()%>"><%=course.getC_id()%></option>
+                                  <option value="<%=course.getC_id()%>"><%=course.getC_name()%></option>
                                   <% } %>
 
           
@@ -60,7 +83,7 @@
                              <h>Select Subject</h>
                              <select id="subject" name="subject">
                                  <% 
-                                    HashSet<Subject> setsubject=(HashSet<Subject>)session.getAttribute("setsubject");
+                                   
                                  %> 
                              </select>
                       <div class="form-group">
