@@ -572,7 +572,7 @@ return msg;
       }
 
       public String insertinPerson(Person p) {
-          System.out.println("-"+p);
+          System.out.println("-aajoa hamre andar"+p);
         String msg = "Success";
         PreparedStatement pstmt = null,pstmtq=null;
          java.util.Date date=p.getDob();
@@ -680,7 +680,7 @@ return msg;
       public HashSet<AddRole> getRole()
     {
         
-       HashSet<AddRole> setrole=new HashSet<AddRole>();
+       HashSet<AddRole> setrole=new HashSet<>();
        Statement stmt = null;
        ResultSet rs=null;
        String sql="select * from role";
@@ -1197,21 +1197,22 @@ return msg;
        
 
   
-        public String insertinstudent(Student st) {
+        public String insertinstudent(Student st,String pid) {
 
         String msg1 = "success";
         PreparedStatement pstmt = null;
- 
-        String sql = "insert into Student value(?,?,?,?,?)";
+            System.out.println("-----pid---"+pid);
+        String sql = "insert into student value(?,?,?,?,?,?,?)";
         try {
             con.setAutoCommit(false);
             pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, st.getGuardian_contact_no());
-            
-            pstmt.setString(2, st.getParent_name());
-            pstmt.setString(3, st.getParent_contact_no());
-            pstmt.setString(4, st.getGuardian_contact_no());
-            pstmt.setString(5, st.getCourse());
+            pstmt.setString(1, pid);           
+            pstmt.setString(2, st.getGuardian_contact_no());           
+            pstmt.setString(3, st.getParent_name());
+            pstmt.setString(4, st.getParent_contact_no());
+            pstmt.setString(5, st.getGuardian_contact_no());
+            pstmt.setString(6, st.getCourse());
+            pstmt.setString(7,"0");
             pstmt.executeUpdate();
 
             con.commit();
@@ -2010,6 +2011,111 @@ return msg;
             System.out.println("msg======"+e.getMessage());
             return "error";
         }
+    }
+    
+     public JSONArray getStatus()
+    {
+        
+         JSONArray ja=new JSONArray();
+          
+       PreparedStatement pstmt = null; 
+       ResultSet rs=null;
+       String sql="select p_id from student where status=?";
+        System.out.println(sql);
+       try
+       {
+           pstmt=con.prepareStatement(sql);
+           pstmt.setString(1,"0"); 
+           rs=pstmt.executeQuery();
+           System.out.println(rs);
+           while(rs.next())
+           {
+             JSONObject jo=new JSONObject();
+         
+               System.out.println("............................"+jo.put("p_id",rs.getString("p_id")));
+               
+               jo.put("p_id",rs.getString("p_id"));
+                    ja.put(jo);
+                    
+           }
+       }catch(Exception e)
+       {
+                ja=null;
+       }
+       
+    
+      return ja;
+    }
+
+    public String verifyuser(ArrayList<String> ar,String s) {
+                    String msg=null;
+                    if(s.equals("accept"))
+                    {
+        PreparedStatement pstmt = null;
+        String sql = "UPDATE student SET status=? WHERE p_id=?";
+      System.out.println(sql);
+      try {
+            con.setAutoCommit(false);
+            for (int i = 0; i < ar.size(); i++) {
+              
+          
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1,"1");
+            pstmt.setString(2, ar.get(i));
+          System.out.println("789");
+         int r = pstmt.executeUpdate();
+         System.out.println("r=="+r);
+         
+            } 
+          con.commit();
+          msg="User Approved Succesfully";
+      }
+        catch (SQLException ex) {
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("795"+ex.getMessage()); 
+             try {
+                 con.rollback();
+             } catch (SQLException ex1) {
+                 Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex1);
+             }
+            msg=ex.getMessage();
+
+        }
+    }
+                    if(s.equals("reject"))
+                    {
+                      PreparedStatement pstmt = null;
+        String sql = "Delete * from person WHERE p_id=?";
+      System.out.println(sql);
+      try {
+            con.setAutoCommit(false);
+            for (int i = 0; i < ar.size(); i++) {
+              
+          
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, ar.get(i));
+          System.out.println("789");
+         int r = pstmt.executeUpdate();
+         System.out.println("r=="+r);
+         
+            } 
+          con.commit();
+          msg="Record Deleted";
+      }
+        catch (SQLException ex) {
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("795"+ex.getMessage()); 
+             try {
+                 con.rollback();
+             } catch (SQLException ex1) {
+                 Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex1);
+             }
+            msg=ex.getMessage();
+
+        }                 
+                    }
+        return msg;
+            
     }
     
   }

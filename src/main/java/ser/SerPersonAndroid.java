@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -123,26 +123,34 @@ public class SerPersonAndroid extends HttpServlet {
                 System.out.println(mess);
                 String num= "9586622091";
                 String guardian_contact_no=obj.getString("guardian_contact_no");
+                System.out.println("gcn"+guardian_contact_no);
                 String parent_name=obj.getString("parent_name");
+                System.out.println("pname"+parent_name);
                 String parent_contact_no=obj.getString("parent_contact_no");
+                System.out.println("pcn"+parent_contact_no);
                 String guardian_name=obj.getString("guardian_name");
+                System.out.println("gnamw"+guardian_name);
                 String course=obj.getString("course");
-                
+                System.out.println("course"+course);   
                  
-                
-                
-             
-                out.println(msg);
+               // out.println(msg);
                 
                 System.out.println("116"+op);
                 Student st=new Student(guardian_contact_no,parent_name,parent_contact_no,guardian_name,course);
                 String msgg=null;
-                msgg=cop.insertinstudent(st);
+                msgg=cop.insertinstudent(st,pid);
                    SMSOperation sms=new SMSOperation();
               //  System.out.println("12");
                 sms.sendSMS(num,mess);
                //s System.out.println("3");
-               
+                if(op.equals("a"))
+                {          
+                    String addrole_id=(String)hs.getAttribute("addrole_id");
+                   user_role ur= new user_role(pid,addrole_id);
+                   msg = cop.insertuser_role(ur);
+                } 
+                
+                
             } catch (ParseException ex) {
                 Logger.getLogger(SerPerson.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {
@@ -205,4 +213,4 @@ public class SerPersonAndroid extends HttpServlet {
  
 
 }
- 
+  
