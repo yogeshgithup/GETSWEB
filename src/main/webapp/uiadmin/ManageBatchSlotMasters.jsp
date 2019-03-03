@@ -31,7 +31,8 @@ String msg=(String)session.getAttribute("msg");
                 {
                     msg="";
               }
-%>
+
+  %>
  
 
 <script>
@@ -53,7 +54,7 @@ $(document).ready(function(){
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Add Attributes</h2>
+                    <h2>Batch Slot Master</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -68,20 +69,21 @@ $(document).ready(function(){
                   </div>
                    <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerAddAttribute">
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerBatchSlottMaster">
 
+                      
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Add PA_ID">Add PA_ID<span class="required">*</span>
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Start Time
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="AddPA_ID" name="AddPA_ID" class="form-control col-md-7 col-xs-12">
+                          <input type="time" id="starttime" name="starttime"  class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Profile Attribute<span class="required">*</span>
+                        <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">End Time
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="ProfileAttribute" name="ProfileAttribute"  class="form-control col-md-7 col-xs-12">
+                          <input type="time" id="endtime" name="endtime"  class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
                       <div class="form-group">
@@ -91,37 +93,6 @@ $(document).ready(function(){
                       </div>
 
                     </form>
-                       <table class="table table-striped projects">
-                      <thead>
-                        <tr>
-                          <th>PA_ID</th>
-                          <th>Profile Attribute</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-     <%
-                              HashSet<AddAttribute> setAttribute=cop.getProfileAttribute();
-              
-                              Iterator<AddAttribute> ittt=setAttribute.iterator();
-                                System.out.println("78");
-                              while(ittt.hasNext())
-                              {
-                                    System.out.println("82");
-                                    AddAttribute aa=ittt.next();
-                                %>
-                          <tr>
-                          <td><%=aa.getPA_ID()%>
-                          </td>
-                          <td><%=aa.getProfileAttribute()%>
-                          </td>
-                          <td>
-                            <a href="<%=application.getContextPath()%>/SerDelete?id=<%=aa.getPA_ID()%>&id1=deleteattribute" class="btn btn-danger btn-xs"  ><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
-                        </tr>
-                        
-  <%}%>
-                      </tbody>
-                    </table>
                     
 
                   </div>
