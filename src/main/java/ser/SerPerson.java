@@ -90,7 +90,7 @@ public class SerPerson extends HttpServlet {
                 String f_name=request.getParameter("f_name");
                 String m_name=request.getParameter("m_name");
                 String l_name=request.getParameter("l_name");    
-                String quali[]=request.getParameterValues("qualification");
+                 String quali[]=request.getParameterValues("qualification");
                 for(int i=0;i<quali.length;i++)
                 {
                     System.out.println("--90"+quali[i]);

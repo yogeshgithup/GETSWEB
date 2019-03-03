@@ -46,6 +46,7 @@ public class SerVerifyUser extends HttpServlet {
     
         if(request.getParameter("submit")!=null)
         {
+            
             if(request.getParameter("id").equals("remove"))
              {
                  System.out.println("1");

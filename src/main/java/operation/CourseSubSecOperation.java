@@ -10,6 +10,7 @@ import data.AddDesignation;
 import data.AddRole;
 import data.AssignDesignation;
 import data.Assign_role;
+import data.BatchSlotMaster;
 import data.Course;
 import data.FirstPage;
 import data.Login;
@@ -978,10 +979,13 @@ return msg;
            String msg="hi";
         PreparedStatement pstmt;
         PreparedStatement pstmtt;
-        ResultSet rs=null,rs1;
+        Statement stmt;
+        ResultSet rs=null,rs1,rss;
         String sql = "SELECT email,password,p_id FROM person WHERE email=? and password=?";
         String sqlq="select p_id from user_role where role_id=?";
-        String id = null,id1 = null;
+        String qlq="select status from student where p_id=?";
+    
+        String id = null,id1 = null,status=null;
         try {
             con.setAutoCommit(false);
             pstmt = con.prepareStatement(sql);
@@ -1019,8 +1023,21 @@ return msg;
                      msg="Faculty";
                  }
                  else if(id.contains("S"))
-                 {
-                     msg="Student";
+                 {                      
+                     stmt=con.createStatement();
+                     rss=stmt.executeQuery(qlq);
+                     while(rss.next())
+                     {
+                          status=rss.getString(1);
+                     }
+                     if(status=="1")
+                     {
+                        msg="Student";  
+                     }else
+                     {
+                         msg="User Not Approved Yet"; 
+                     }
+                    
                  }
                  else
                  {
@@ -2117,6 +2134,80 @@ return msg;
         return msg;
             
     }
+
+    public String insertBatchSlotMaster(BatchSlotMaster bsm) {
+         String msg="",slot_id=null;
+        PreparedStatement pstmt = null;
+        Statement stmtt = null;
+        ResultSet rss;
+        String sql = "insert into batch_slot_master value(?,?,?)";
+        String sqll = "select max(slot_id)+1 from batch_slot_master";
+      
+        
+        try {
+            stmtt=con.createStatement();
+            con.setAutoCommit(false);
+           rss=stmtt.executeQuery(sqll);
+           while(rss.next())
+           {
+               slot_id=rss.getString(1);
+               if(slot_id==null)
+               {
+                   slot_id="1";
+               }
+           }
+            
+            
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, slot_id);
+            pstmt.setString(2, bsm.getStart_Time());
+            pstmt.setString(3, bsm.getEnd_Time());
+            
+            pstmt.executeUpdate();
+
+            con.commit();
+            msg = "Data Entered Succesfully";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return msg;
+        
+         
+    }
     
+       public HashSet<BatchSlotMaster> getBacthSlotMaster() {
+     
+        HashSet<BatchSlotMaster> setBSM=new HashSet<>();
+        System.out.println("BSM-------");
+       Statement stmt = null;
+       ResultSet rs=null;
+       String sql="select * from batch_slot_master";
+        System.out.println("181------sql"+sql);
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           while(rs.next())  
+           {
+            BatchSlotMaster bsm=new BatchSlotMaster(rs.getString("slot_id"),rs.getString("start_time"),rs.getString("end_time"));
+              
+               System.out.println("189----aa="+bsm);
+                       setBSM.add(bsm);
+                       System.out.println("191-----");
+           }
+       }catch(Exception e)
+       {
+           setBSM=null;
+       }
+        
+        return setBSM;
+    
+    }
   }
 

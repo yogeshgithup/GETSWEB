@@ -183,6 +183,26 @@
         <servlet-name>SerVerifyUser</servlet-name>
         <servlet-class>ser.SerVerifyUser</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerBatchSlottMaster</servlet-name>
+        <servlet-class>ser.SerBatchSlottMaster</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerAndroidFeedback</servlet-name>
+        <servlet-class>ser.SerAndroidFeedback</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerFeesStatusAndroid</servlet-name>
+        <servlet-class>ser.SerFeesStatusAndroid</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerIndividualAndroid</servlet-name>
+        <servlet-class>ser.SerIndividualAndroid</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerSpinnerAndroid</servlet-name>
+        <servlet-class>ser.SerSpinnerAndroid</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -342,6 +362,26 @@
     <servlet-mapping>
         <servlet-name>SerVerifyUser</servlet-name>
         <url-pattern>/SerVerifyUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerBatchSlottMaster</servlet-name>
+        <url-pattern>/SerBatchSlottMaster</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAndroidFeedback</servlet-name>
+        <url-pattern>/SerAndroidFeedback</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerFeesStatusAndroid</servlet-name>
+        <url-pattern>/SerFeesStatusAndroid</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerIndividualAndroid</servlet-name>
+        <url-pattern>/SerIndividualAndroid</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerSpinnerAndroid</servlet-name>
+        <url-pattern>/SerSpinnerAndroid</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
