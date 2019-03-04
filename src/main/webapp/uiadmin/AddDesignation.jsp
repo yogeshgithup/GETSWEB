@@ -22,11 +22,27 @@
     <div class="container body">
       <div class="main_container">
           <%@include file="navigation.jsp" %>
-   <%
-session.setMaxInactiveInterval(2);
+<%
 String msg=(String)session.getAttribute("msg");
+                    if(msg!=null)
+                    {
+                 //      out.println(msg);
+                    }
+                  else if(msg==null)
+                {
+                    msg="";
+              }
 %>
 
+
+<script>
+$(document).ready(function(){
+       $('#msg').fadeOut(5000);
+    
+});
+ </script>
+
+ 
     
   <!-- page content -->
           <div class="right_col" role="main">
@@ -45,6 +61,11 @@ String msg=(String)session.getAttribute("msg");
                       <li><a class="close-link"><i class="fa fa-close"></i></a>
                       </li>
                     </ul>
+              <div id="msg" align="center" style="color:red">
+                        <h3><%=msg%></h3>
+               </div>
+               <%session.removeAttribute("msg");%>
+ 
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">

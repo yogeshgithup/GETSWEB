@@ -11,6 +11,7 @@ import data.AddRole;
 import data.AssignDesignation;
 import data.Assign_role;
 import data.BatchSlotMaster;
+import data.BreakTime;
 import data.Course;
 import data.FirstPage;
 import data.Login;
@@ -19,6 +20,8 @@ import data.Priority;
 import data.Section;
 import data.Student;
 import data.Subject;
+import data.WorkingDays;
+import data.WorkingShifts;
 import data.pictures;
 import data.user_role;
 import java.io.IOException;
@@ -180,7 +183,7 @@ public class CourseSubSecOperation {
         return msg;
     }
 
-    public String deleteCourse(String id,String id1) {
+    public String delete(String id,String id1) {
 
         String msg = "hi";
         PreparedStatement pstmt = null;
@@ -281,6 +284,77 @@ if(id1.equals("deleteimage"))
     System.out.println("insidecopdeleteimage");
     
       String sql = "DELETE FROM pictures where imagepath=?";
+        try {
+            con.setAutoCommit(false);
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.executeUpdate();
+            con.commit();
+            msg = "Record Deleted";
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+}
+
+
+if(id1.equals("deleteslot"))
+{
+    System.out.println("insidecopdeleteslot");
+    
+      String sql = "DELETE FROM batch_slot_master where slot_id=?";
+        try {
+            con.setAutoCommit(false);
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.executeUpdate();
+            con.commit();
+            msg = "Record Deleted";
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+}
+
+if(id1.equals("deletebreaktime"))
+{
+    System.out.println("insidecopdeletebreaktime");
+    
+      String sql = "DELETE FROM break_time where break_id=?";
+        try {
+            con.setAutoCommit(false);
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.executeUpdate();
+            con.commit();
+            msg = "Record Deleted";
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+}
+
+
+if(id1.equals("deleteWorkingShifts"))
+{
+    System.out.println("insidecopdeleteWorkingShifts");
+    
+      String sql = "DELETE FROM working_shift where ws_id=?";
         try {
             con.setAutoCommit(false);
 
@@ -414,7 +488,7 @@ return msg;
            PreparedStatement pstmt = null;
            ResultSet rs=null;
            String sql="select s.sub_name from subject s inner join course_subject cs on s.sub_id=cs.sub_id where c_id=?";
-           System.out.println(sql);
+             System.out.println(sql);
                con.setAutoCommit(false);
                pstmt=con.prepareStatement(sql);
             
@@ -973,6 +1047,7 @@ return msg;
         return setdes_id;
     }
        
+      
        public String LoginProcess(Login l)
        {
       
@@ -2180,6 +2255,146 @@ return msg;
         
          
     }
+
+    public String insertWorkingShifts(WorkingShifts ws) {
+      String msg="",ws_id=null;
+        PreparedStatement pstmt = null;
+        Statement stmtt = null;
+        ResultSet rss;
+        String sql ="insert into working_shift value(?,?,?,?)";
+        String sqll ="select max(ws_id)+1 from working_shift";
+      
+        
+        try {
+            stmtt=con.createStatement();
+            con.setAutoCommit(false);
+           rss=stmtt.executeQuery(sqll);
+           while(rss.next())
+           {
+               ws_id=rss.getString(1);
+               if(ws_id==null)
+               {
+                   ws_id="1";
+               }
+           }
+            
+            
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, ws_id);
+            pstmt.setString(2, ws.getWorking_Hours());            
+            pstmt.setString(3, ws.getStart_Time());
+            pstmt.setString(4, ws.getEnd_Time());
+            
+            pstmt.executeUpdate();
+
+            con.commit();
+            msg = "Data Entered Succesfully";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return msg;
+    
+    }
+ 
+    public String insertWorkingDays(ArrayList<String> d) {
+             String msg="",day_id=null;
+        PreparedStatement pstmt = null;
+        Statement stmtt = null;
+        ResultSet rss;
+        String sql = "insert into working_days value(?,?,?)";
+        String sqll = "select max(break_id)+1 from working_days";
+      
+        
+        try {
+            stmtt=con.createStatement();
+            con.setAutoCommit(false);
+          for (int i = 0; i < d.size(); i++) {
+                
+            rss=stmtt.executeQuery(sqll);
+           while(rss.next())
+           {
+               day_id=rss.getString(1);
+               if(day_id==null)
+               {
+                   day_id="1";
+               }
+           }
+            
+         
+            
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, day_id);
+            pstmt.setString(2, d.get(i));
+            
+            pstmt.executeUpdate();
+                }
+            con.commit();
+            msg = "Data Entered Succesfully";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return msg;
+    
+    }
+          
+    public String insertBreakTime(BreakTime bt) {
+         String msg="",break_id=null;
+        PreparedStatement pstmt = null;
+        Statement stmtt = null;
+        ResultSet rss;
+        String sql = "insert into break_time value(?,?,?)";
+        String sqll = "select max(break_id)+1 from break_time";
+      
+        
+        try {
+            stmtt=con.createStatement();
+            con.setAutoCommit(false);
+           rss=stmtt.executeQuery(sqll);
+           while(rss.next())
+           {
+               break_id=rss.getString(1);
+               if(break_id==null)
+               {
+                   break_id="1";
+               }
+           }
+            
+            
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, break_id);
+            pstmt.setString(2, bt.getStart_Time());
+            pstmt.setString(3, bt.getEnd_Time());
+            
+            pstmt.executeUpdate();
+
+            con.commit();
+            msg = "Data Entered Succesfully";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return msg;
+    
+    }
+    
+
     
        public HashSet<BatchSlotMaster> getBacthSlotMaster() {
      
@@ -2209,5 +2424,292 @@ return msg;
         return setBSM;
     
     }
-  }
+
+       
+       public HashSet<WorkingShifts> getWorkingShifts() {
+     
+        HashSet<WorkingShifts> setWs=new HashSet<>();
+        System.out.println("WS-------");
+       Statement stmt = null;
+       ResultSet rs=null;
+       String sql="select * from working_shift";
+        System.out.println("181------sql"+sql);
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           while(rs.next())  
+           {
+            WorkingShifts ws=new WorkingShifts(rs.getString("ws_id"),rs.getString("working_hours"),rs.getString("start_time"),rs.getString("end_time"));
+              
+               System.out.println("189----aa="+ws);
+                       setWs.add(ws);
+                       System.out.println("191-----");
+           }
+       }catch(Exception e)
+       {
+           setWs=null;
+       }
+        
+        return setWs;
+    
+    }
+         public HashSet<WorkingDays> getWorkingDays() {
+     
+        HashSet<WorkingDays> setWd=new HashSet<>();
+        System.out.println("WD-------");
+       Statement stmt = null;
+       ResultSet rs=null;
+       String sql="select * from working_days";
+        System.out.println("181------sql"+sql);
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           while(rs.next())  
+           {
+            WorkingDays wd=new WorkingDays(rs.getString("day_id"),rs.getString("week_day"));
+              
+               System.out.println("189----aa="+wd);
+                       setWd.add(wd);
+                       System.out.println("191-----");
+           }
+       }catch(Exception e)
+       {
+           setWd=null;
+       }
+        
+        return setWd;
+    
+    }
+       
+       public HashSet<BreakTime> getBreakTime() {
+     
+        HashSet<BreakTime> setbt=new HashSet<>();
+        System.out.println("BSM-------");
+       Statement stmt = null;
+       ResultSet rs=null;
+       String sql="select * from break_time";
+        System.out.println("181------sql"+sql);
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           while(rs.next())  
+           {
+            BreakTime bt=new BreakTime(rs.getString("break_id"),rs.getString("start_time"),rs.getString("end_time"));
+              
+               System.out.println("189----aa="+bt);
+                       setbt.add(bt);
+                       System.out.println("191-----");
+           }
+       }catch(Exception e)
+       {
+           setbt=null;
+       }
+        
+        return setbt;
+    
+    }
+
+   
+ public String androidnotification(String message,String pid, String a) {
+        
+           if(a.equals("forall"))
+        {
+         Statement stmt = null;
+       ResultSet rs=null;
+        String sql="SELECT p_id,contact_no FROM person where SUBSTRING(p_id,1,1)='S'";    
+       System.out.println("181------sql"+sql);
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           while(rs.next())  
+           {
+                 String mess=message;
+                 long num=rs.getLong("contact_no");
+                 String n = String.valueOf(num);
+                System.out.println(rs.getLong("contact_no"));
+                 SMSOperation sms=new SMSOperation();
+                 sms.sendSMS(n,mess);
+                 
+                 
+           }
+       }catch(Exception e)
+       {
+           System.out.println(e.getMessage());
+       }
+        } 
+           
+           
+           
+       if(a.equals("forindividual"))
+       {
+           try  
+           {
+               PreparedStatement stmt = null;
+               ResultSet rs;
+               String sql="SELECT contact_no FROM person where p_id=?";
+               
+               con.setAutoCommit(false);
+               stmt=con.prepareStatement(sql);
+               stmt.setString(1,pid);
+               rs =stmt.executeQuery();
+               System.out.println(rs);
+               System.out.println("181------sql"+sql);
+                   while(rs.next())
+                   {
+                       String mess=message;
+                       long num=rs.getLong("contact_no");
+                       String n = String.valueOf(num);
+                       System.out.println(rs.getLong("contact_no"));
+                       SMSOperation sms=new SMSOperation();
+                       sms.sendSMS(n,mess);
+                       
+                       
+                   }
+              
+           }catch(SQLException ex)  
+           {
+                   Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+           }  
+       }
+       return "success";
+       
+    }
+    
+    public String androidfeesstatus(String email) throws SQLException,ServletException,IOException {
+     JSONArray ja=new JSONArray();
+        System.out.println("3");
+        PreparedStatement stmt=null;
+          PreparedStatement stmtt=null;
+        System.out.println("9");
+        ResultSet rs;
+        ResultSet rss;
+        
+        String p_id=null;
+        System.out.println("8");
+       
+        
+        String sqll="select p_id from person where email=?";
+        String qll="select course from student where p_id=?";
+      String sql= "SELECT c.c_name,c.c_fees,f.fees_paid from course c inner join fees_payment f on c.c_id=f.c_id";
+          
+        try
+        {
+            
+             con.setAutoCommit(false);
+           stmtt=con.prepareStatement(sqll);
+           stmt=con.prepareStatement(sql);
+           stmtt.setString(1,email);
+           rss =stmtt.executeQuery();
+           System.out.println(rss);
+           while(rss.next())
+           {
+               p_id=rss.getString("p_id");
+               System.out.println("1234-----------"+p_id);
+                       
+           }
+        
+           rs=stmt.executeQuery();
+           System.out.println(rs);
+       while(rs.next())
+              
+       {
+           System.out.println("11");
+          JSONObject obj=new JSONObject();
+             System.out.println("12");
+              String c_name=rs.getString("c_name");
+           System.out.println("21");
+            Integer c_fees=rs.getInt("c_fees");
+              System.out.println("22");
+            Integer fees_paid=rs.getInt("fees_paid");
+              System.out.println("22");
+            
+             obj.put("c_name",c_name);
+               System.out.println("26");
+             obj.put("c_fees",c_fees);
+               System.out.println("27");
+             obj.put("fees_paid",fees_paid);
+               System.out.println("28");
+          
+               ja.put(obj);
+                con.commit();   
+       }
+//              stmt.close();
+          }
+           catch(Exception e)
+       {
+        System.out.println("--error"+e.getMessage());
+       }
+            System.out.println("31");
+           
+                  String s=ja.toString();
+                 System.out.println(s);
+                    return s;
+    }
+
+   
+
+    public String androidfeedbak(String email, String f_rating, String f_comment) {
+        String msg = "success";
+        PreparedStatement pstmt = null;
+        PreparedStatement pstmtt= null;
+        Statement stmtt= null;
+      
+         ResultSet rs;
+        ResultSet rss;
+      String p_id = null;
+      String f_id=null;
+      String sql= "select p_id from person where email=?";
+        String sqll = "insert into feedback values(?,?,?,?)";
+        String qll = "select max(f_id)+1 from feedback";
+ 
+        try {
+            con.setAutoCommit(false);
+            pstmt=con.prepareStatement(sql);
+            pstmtt= con.prepareStatement(sqll);
+            stmtt= con.createStatement();         
+            pstmt.setString(1, email);
+             rs = pstmt.executeQuery(); 
+           while (rs.next()) {                                             
+              p_id=rs.getString("p_id");
+               System.out.println("6534----"+p_id);
+           }
+           
+           rss=stmtt.executeQuery(qll);
+           while (rss.next())
+           {
+               f_id=rss.getString(1); 
+               System.out.println(f_id+"-----------");
+               if(f_id==null)
+               {
+                   f_id="1";
+               }
+           }
+                 pstmtt.setString(1,f_id);
+                 pstmtt.setString(2,p_id);
+                 pstmtt.setString(3,f_rating);
+                 pstmtt.setString(4,f_comment);
+               
+                 int r=pstmtt.executeUpdate();
+            con.commit();
+            msg = "Data Inserted";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return msg;
+    }
+
+    
+ 
+       
+}
 

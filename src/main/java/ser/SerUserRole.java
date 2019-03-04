@@ -39,7 +39,7 @@ public class SerUserRole extends HttpServlet {
         {
              if(request.getParameter("id").equals("rol"))
              {
-              String p_id[]=request.getParameterValues("p_id");
+               String p_id[]=request.getParameterValues("p_id");
               String role=request.getParameter("role");
              Assign_role ar= new Assign_role(role);
          CourseSubSecOperation cop=new CourseSubSecOperation(con);

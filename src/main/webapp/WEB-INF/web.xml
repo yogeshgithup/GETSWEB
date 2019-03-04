@@ -203,6 +203,18 @@
         <servlet-name>SerSpinnerAndroid</servlet-name>
         <servlet-class>ser.SerSpinnerAndroid</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerBreakTime</servlet-name>
+        <servlet-class>ser.SerBreakTime</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerWorkingShift</servlet-name>
+        <servlet-class>ser.SerWorkingShift</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerWorkingDays</servlet-name>
+        <servlet-class>ser.SerWorkingDays</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -382,6 +394,18 @@
     <servlet-mapping>
         <servlet-name>SerSpinnerAndroid</servlet-name>
         <url-pattern>/SerSpinnerAndroid</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerBreakTime</servlet-name>
+        <url-pattern>/SerBreakTime</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerWorkingShift</servlet-name>
+        <url-pattern>/SerWorkingShift</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerWorkingDays</servlet-name>
+        <url-pattern>/SerWorkingDays</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
