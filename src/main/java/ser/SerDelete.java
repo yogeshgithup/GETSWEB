@@ -54,7 +54,7 @@ public class SerDelete extends HttpServlet {
 if(id1.equals("deletecourse"))
 {
         String msg = null;
-                msg = cop.deleteCourse(id,id1);
+                msg = cop.delete(id,id1);
                 System.out.println(msg);
                     HttpSession hs=req.getSession(true);
    
@@ -70,7 +70,7 @@ if(id1.equals("deleteattribute"))
     System.out.println("insidedeleteattribute---------");
     
             String msg = null;
-                msg = cop.deleteCourse(id,id1);
+                msg = cop.delete(id,id1);
                 System.out.println("deletedmsgforattribute"+msg);
                     HttpSession hs=req.getSession(true);
    
@@ -87,7 +87,7 @@ if(id1.equals("deletedesignation"))
     System.out.println("insidedeletedesignation---------");
     
             String msg = null;
-                msg = cop.deleteCourse(id,id1);
+                msg = cop.delete(id,id1);
                 System.out.println("deletedmsgforsdesignation------"+msg);
                     HttpSession hs=req.getSession(true);
    
@@ -104,7 +104,7 @@ if(id1.equals("deleterole"))
     System.out.println("insidedeletedesignation---------");
     
             String msg = null;
-                msg = cop.deleteCourse(id,id1);
+                msg = cop.delete(id,id1);
                 System.out.println("deletedmsgforrole------"+msg);
                     HttpSession hs=req.getSession(true);
    
@@ -121,12 +121,52 @@ if(id1.equals("deleteimage"))
     System.out.println("insidedeleteimage---------");
     
             String msg = null;
-                msg = cop.deleteCourse(id,id1);
+                msg = cop.delete(id,id1);
                 System.out.println("deletedmsgforimage------"+msg);
                     HttpSession hs=req.getSession(true);
            
               hs.setAttribute("msg",msg);
        res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"EditGallery.jsp");
         }
+
+ if(id1.equals("deleteslot"))
+        {
+             System.out.println("insidedeleteslot---------");
+    
+            String msg = null;
+                msg = cop.delete(id,id1);
+                System.out.println("deletedmsgforslot------"+msg);
+                    HttpSession hs=req.getSession(true);
+           
+              hs.setAttribute("msg",msg);
+       res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"ManageBatchSlotMasters.jsp");   
+        }
+ 
+ if(id1.equals("deletebreaktime"))
+        {
+             System.out.println("insidedeletebreaktime---------");
+    
+            String msg = null;
+                msg = cop.delete(id,id1);
+                System.out.println("deletedmsgforbreaktime------"+msg);
+                    HttpSession hs=req.getSession(true);
+           
+              hs.setAttribute("msg",msg);
+       res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"ManageBreakTime.jsp");   
+        }
+ 
+ if(id1.equals("deleteWorkingShifts"))
+        {
+             System.out.println("insidedeleteWorkingShifts---------");
+    
+            String msg = null;
+                msg = cop.delete(id,id1);
+                System.out.println("deletedmsgforWS------"+msg);
+                    HttpSession hs=req.getSession(true);
+           
+              hs.setAttribute("msg",msg);
+       res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"ManageWorkingShifts.jsp");   
+        }
+ 
     }
 }

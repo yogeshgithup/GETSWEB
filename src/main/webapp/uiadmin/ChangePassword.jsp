@@ -53,6 +53,7 @@ $(document).ready(function(){
                <div id="msg" align="center" style="color:red">
                         <h3><%=msg%></h3>
                </div>
+               <%session.removeAttribute("msg");%>
 
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerChangePassword">
                     <div class="form-group">

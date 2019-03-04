@@ -130,7 +130,8 @@ for(i=0;i<parseInt(alen);i++)
     <div id="msg" align="center" style="color:red">
                         <h3><%=msg%></h3>
                </div>
-           
+                    <%session.removeAttribute("msg");%>
+      
                       <div class="clearfix"></div>
                   </div>
                   <div class="x_content">

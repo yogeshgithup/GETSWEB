@@ -1,3 +1,5 @@
+<%@page import="data.WorkingShifts"%>
+<%@page import="data.BreakTime"%>
 <%@page import="data.BatchSlotMaster"%>
 <%@page import="operation.CourseSubSecOperation"%>
 <%@page import="data.AddAttribute"%>
@@ -11,7 +13,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Manage Batch Slot Masters</title>
+    <title>Manage Working Shifts</title>
     <%@include file="adminHeaders.jsp" %>
  
   </head>
@@ -55,7 +57,7 @@ $(document).ready(function(){
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Batch Slot Master</h2>
+                    <h2>Working Shifts</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -70,8 +72,15 @@ $(document).ready(function(){
                   </div>
                    <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerBatchSlottMaster">
-
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerWorkingShift">
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Working Hours
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="text" id="workinghours" name="workinghours"  class="form-control col-md-7 col-xs-12">
+                        </div>
+                      </div>
+                  
                       
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="last-name">Start Time
@@ -97,36 +106,38 @@ $(document).ready(function(){
                                         <table class="table table-striped projects">
                       <thead>
                         <tr>
-                          <th>Slot_Id</th>
+                          <th>Ws_Id</th>
+                          <th>Working Hours</th>
                           <th>Start Time</th>
                           <th>End Time</th>                    
                         </tr>
                       </thead>
                       <tbody>
      <%
-                              HashSet<BatchSlotMaster> setBSM=cop.getBacthSlotMaster();
-              
-                              Iterator<BatchSlotMaster> ittt=setBSM.iterator();
+                              HashSet<WorkingShifts> setws=cop.getWorkingShifts();                
+                              Iterator<WorkingShifts> ittt=setws.iterator();
                                 System.out.println("78");
                               while(ittt.hasNext())
                               {
                                     System.out.println("82");
-                                    BatchSlotMaster bsm=ittt.next();
+                                    WorkingShifts ws=ittt.next();
                                 %>
                           <tr>
-                          <td><%=bsm.getSlot_Id()%>
+                          <td><%=ws.getWs_Id()%>
                           </td>
-                          <td><%=bsm.getStart_Time()%>
+                          <td><%=ws.getWorking_Hours()%>
+                          </td>                      
+                          <td><%=ws.getStart_Time()%>
                           </td>
-                          <td><%=bsm.getEnd_Time()%>
+                          <td><%=ws.getEnd_Time()%>
                           </td>
                          
                           <td>
-                            <a href="<%=application.getContextPath()%>/SerDelete?id=<%=bsm.getSlot_Id()%>&id1=deleteslot" class="btn btn-danger btn-xs"  ><i class="fa fa-trash-o"></i> Delete </a>
+                            <a href="<%=application.getContextPath()%>/SerDelete?id=<%=ws.getWs_Id()%>&id1=deleteWorkingShifts" class="btn btn-danger btn-xs"  ><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
                         </tr>
                         
-  <%}%>
+  <% }%>
                       </tbody>
                     </table>
    

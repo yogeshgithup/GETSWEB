@@ -21,7 +21,6 @@
       <div class="main_container">
      <%@include file="navigation.jsp" %>
   <%
-session.setMaxInactiveInterval(2);
 String msg=(String)session.getAttribute("msg");
                     if(msg!=null)
                     {
@@ -69,7 +68,8 @@ $(document).ready(function(){
   <div id="msg" align="center" style="color:red">
                         <h3><%=msg%></h3>
                     </div>
-
+               <%session.removeAttribute("msg");%>
+ 
                     <div class="clearfix"></div>
                   </div>
                     

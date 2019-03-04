@@ -46,6 +46,7 @@ $(document).ready(function(){
                <div id="msg" align="center" style="color:red">
                         <h3><%=msg%></h3>
                </div>
+               <%session.removeAttribute("msg");%>
             <div class="clearfix"></div>
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">

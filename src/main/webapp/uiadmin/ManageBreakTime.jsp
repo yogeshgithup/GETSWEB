@@ -1,3 +1,4 @@
+<%@page import="data.BreakTime"%>
 <%@page import="data.BatchSlotMaster"%>
 <%@page import="operation.CourseSubSecOperation"%>
 <%@page import="data.AddAttribute"%>
@@ -11,7 +12,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Manage Batch Slot Masters</title>
+    <title>Manage Break Time</title>
     <%@include file="adminHeaders.jsp" %>
  
   </head>
@@ -55,7 +56,7 @@ $(document).ready(function(){
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Batch Slot Master</h2>
+                    <h2>Break Time </h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -70,7 +71,7 @@ $(document).ready(function(){
                   </div>
                    <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerBatchSlottMaster">
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerBreakTime">
 
                       
                       <div class="form-group">
@@ -97,32 +98,32 @@ $(document).ready(function(){
                                         <table class="table table-striped projects">
                       <thead>
                         <tr>
-                          <th>Slot_Id</th>
+                          <th>Break_Id</th>
                           <th>Start Time</th>
                           <th>End Time</th>                    
                         </tr>
                       </thead>
                       <tbody>
      <%
-                              HashSet<BatchSlotMaster> setBSM=cop.getBacthSlotMaster();
+                              HashSet<BreakTime> setbt=cop.getBreakTime();
               
-                              Iterator<BatchSlotMaster> ittt=setBSM.iterator();
+                              Iterator<BreakTime> ittt=setbt.iterator();
                                 System.out.println("78");
                               while(ittt.hasNext())
                               {
                                     System.out.println("82");
-                                    BatchSlotMaster bsm=ittt.next();
+                                    BreakTime bt=ittt.next();
                                 %>
                           <tr>
-                          <td><%=bsm.getSlot_Id()%>
+                          <td><%=bt.getBreak_Id()%>
                           </td>
-                          <td><%=bsm.getStart_Time()%>
+                          <td><%=bt.getStart_Time()%>
                           </td>
-                          <td><%=bsm.getEnd_Time()%>
+                          <td><%=bt.getEnd_Time()%>
                           </td>
                          
                           <td>
-                            <a href="<%=application.getContextPath()%>/SerDelete?id=<%=bsm.getSlot_Id()%>&id1=deleteslot" class="btn btn-danger btn-xs"  ><i class="fa fa-trash-o"></i> Delete </a>
+                            <a href="<%=application.getContextPath()%>/SerDelete?id=<%=bt.getBreak_Id()%>&id1=deletebreaktime" class="btn btn-danger btn-xs"  ><i class="fa fa-trash-o"></i> Delete </a>
                           </td>
                         </tr>
                         

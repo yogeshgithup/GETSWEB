@@ -45,21 +45,12 @@ String msg=(String)session.getAttribute("msg");
                     msg="";
               }
 %>
-
-<script>
-$(document).ready(function(){
-    //alert("Hello");
-    //$('#msg').load(function(){
-      //      alert("how are you");
-       $('#msg').fadeOut(5000);
-        //    });
-//    
-});      
-
-</script>  
+  
  <script>
     $(document).ready(function(){
-     $("#l").hide();
+       $('#msg').fadeOut(5000);
+     
+        $("#l").hide();
      d=0;
     c=1;
 $("#AddImage").click(function(e){
@@ -98,7 +89,8 @@ jQuery(document).on('click', '.remove_this', function() {
                  <h2>ADD INSTITUTE DETAILs</h2>
                            <div id="msg" align="center" style="color:red">
                         <h3><%=msg%></h3>
-                
+ <%session.removeAttribute("msg");%>
+                 
                  <div class="clearfix"></div>
                   </div>
                   <div class="x_content">

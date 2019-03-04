@@ -1,4 +1,4 @@
-<%@page import="data.Person"%>
+ <%@page import="data.Person"%>
 <%@page import="operation.CourseSubSecOperation"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="data.FirstPage"%>
