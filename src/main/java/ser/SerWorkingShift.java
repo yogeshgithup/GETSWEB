@@ -37,16 +37,18 @@ public class SerWorkingShift extends HttpServlet {
               System.out.println("StartTime-----"+WorkingHours);
      
             String StartTime=req.getParameter("starttime");
-              System.out.println("StartTime-----"+StartTime);
+            System.out.println("StartTime-----"+StartTime);
               String EndTime=req.getParameter("endtime");
               System.out.println("EndTime"+EndTime);
-            WorkingShifts ws=new WorkingShifts(WorkingHours,StartTime,EndTime);       
+            hs.setAttribute("shift", StartTime+"-"+EndTime);
+          
+              WorkingShifts ws=new WorkingShifts(WorkingHours,StartTime,EndTime);       
           CourseSubSecOperation cop=new CourseSubSecOperation(con);
          String msg = null;
          msg = cop.insertWorkingShifts(ws);
          out.println(msg);
-                      hs.setAttribute("msg", msg);                      
-       res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"ManageWorkingShifts.jsp");
+                      hs.setAttribute("wsid", msg);                      
+       res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"ManageBreakTime.jsp");
                   }
     }
 }

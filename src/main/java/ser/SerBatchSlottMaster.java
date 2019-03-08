@@ -33,7 +33,9 @@ public class SerBatchSlottMaster extends HttpServlet {
         Connection con=(Connection)ctx.getAttribute("MyConn");
         if(req.getParameter("submit")!=null)
         {
-              String StartTime=req.getParameter("starttime");
+            String wsid=req.getParameter("wsid");
+            System.out.println("wsiddddddd--------"+wsid);  
+            String StartTime=req.getParameter("starttime");
               System.out.println("StartTime-----"+StartTime);
               String EndTime=req.getParameter("endtime");
               System.out.println("EndTime"+EndTime);
@@ -41,7 +43,8 @@ public class SerBatchSlottMaster extends HttpServlet {
           CourseSubSecOperation cop=new CourseSubSecOperation(con);
          String msg = null;
          msg = cop.insertBatchSlotMaster(bsm);
-         out.println(msg);
+       
+         String WsSlot=cop.insertinWsSlot(wsid,msg);
                       hs.setAttribute("msg", msg);                      
        res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"ManageBatchSlotMasters.jsp");
                   }

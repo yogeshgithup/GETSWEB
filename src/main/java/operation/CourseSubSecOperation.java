@@ -373,6 +373,29 @@ if(id1.equals("deleteWorkingShifts"))
         }
 }
 
+if(id1.equals("deleteWorkingDays"))
+{
+    System.out.println("insidecopdeleteWorkingDays");
+    
+      String sql = "DELETE FROM working_days where day_id=?";
+        try {
+            con.setAutoCommit(false);
+
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, id);
+            pstmt.executeUpdate();
+            con.commit();
+            msg = "Record Deleted";
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+}
+
 
 return msg;
     }
@@ -2251,7 +2274,7 @@ return msg;
             }
             msg = cnfe.getMessage();
         }
-        return msg;
+        return slot_id;
         
          
     }
@@ -2298,7 +2321,7 @@ return msg;
             }
             msg = cnfe.getMessage();
         }
-        return msg;
+        return ws_id;
     
     }
  
@@ -2307,8 +2330,8 @@ return msg;
         PreparedStatement pstmt = null;
         Statement stmtt = null;
         ResultSet rss;
-        String sql = "insert into working_days value(?,?,?)";
-        String sqll = "select max(break_id)+1 from working_days";
+        String sql = "insert into working_days value(?,?)";
+        String sqll = "select max(day_id)+1 from working_days";
       
         
         try {
@@ -2708,6 +2731,35 @@ return msg;
         return msg;
     }
 
+    public String insertinWsSlot(String wsid, String msg) {
+        PreparedStatement pstmt = null;
+      
+        String sql = "insert into workingshift_batchslot values(?,?)";
+    
+        try {
+            con.setAutoCommit(false);
+            pstmt=con.prepareStatement(sql);
+            pstmt.setString(1, wsid);
+            pstmt.setString(2, msg);
+            
+               
+                 int r=pstmt.executeUpdate();
+            con.commit();
+            msg = "Data Inserted";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return msg;
+
+    }
+
+    
     
  
        

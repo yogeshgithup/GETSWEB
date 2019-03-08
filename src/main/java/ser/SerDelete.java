@@ -168,5 +168,20 @@ if(id1.equals("deleteimage"))
        res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"ManageWorkingShifts.jsp");   
         }
  
+    
+    if(id1.equals("deleteWorkingDays"))
+        {
+             System.out.println("insidedeleteWorkingDays---------");
+    
+            String msg = null;
+                msg = cop.delete(id,id1);
+                System.out.println("deletedmsgforWD------"+msg);
+                    HttpSession hs=req.getSession(true);
+           
+              hs.setAttribute("msg",msg);
+       res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"ManageWorkingDays.jsp");   
+        }
+    
     }
-}
+ }
+

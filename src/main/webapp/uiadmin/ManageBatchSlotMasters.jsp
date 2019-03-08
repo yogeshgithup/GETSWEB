@@ -70,7 +70,8 @@ $(document).ready(function(){
                   </div>
                    <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerBatchSlottMaster">
+                    <%String wsid=(String)session.getAttribute("wsid");%>
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerBatchSlottMaster?wsid=<%=wsid%>">
 
                       
                       <div class="form-group">
