@@ -99,7 +99,7 @@ System.out.println("------------------------------------------------------------
                   </li>
                   <li><a><i class="fa fa-table"></i> Manage Batch<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="ManageSchedule.jsp">Manage Schedule</a></li>
+                      <li><a href="ScheduleForDay.jsp">Manage Schedule</a></li>
                       <li><a href="AllocateBatch.jsp">Allocate Bacth</a></li>
                     </ul>
                   </li>

@@ -40,8 +40,7 @@ public class SerWorkingDays extends HttpServlet {
                 d.add(days[i]);
             }
             WorkingDays wd=new WorkingDays();
-           wd.setDays(days);
-          CourseSubSecOperation cop=new CourseSubSecOperation(con);
+           CourseSubSecOperation cop=new CourseSubSecOperation(con);
          String msg = null;
          msg = cop.insertWorkingDays(d);
          out.println(msg);

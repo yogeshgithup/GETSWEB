@@ -14,7 +14,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Manage Working Body</title>
+    <title>Manage Schedule</title>
     <%@include file="adminHeaders.jsp" %>
  
   </head>
@@ -58,7 +58,7 @@ $(document).ready(function(){
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                    <h2>Working Days</h2>
+                    <h2>Manage Schedule</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -74,19 +74,57 @@ $(document).ready(function(){
                    <div class="x_content">
                     <br />
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerWorkingDays">
-            <h3>Select Working Days</h3>
-            <select style="width:25%" id="days" name="days" multiple>
-                        <option value="Monday">Monday</option>
-                        <option value="Tuesday">Tuesday</option>
-                        <option value="Wednesday">Wednesday</option>
-                        <option value="Thursday">Thursday</option>
-                        <option value="Friday">Friday</option>
-                        <option value="Satarday">Satarday</option>
-                        <option value="Sunday">Sunday</option>
-                 
-                        </select>
-                        
-                        
+            <h3>Select Day</h3>
+            <select style="width:25%" id="days" name="days" >
+             <%   System.out.println("1"+con);
+                                   CourseSubSecOperation cso=new CourseSubSecOperation(con);
+                              HashSet<WorkingDays> setwd=cop.getWorkingDays();                
+                              Iterator<WorkingDays> ittt=setwd.iterator();
+                          
+                                   while(ittt.hasNext())
+                              {
+                                      WorkingDays wd=ittt.next();
+                                  %> 
+                                                                 
+                                  <option value="<%=wd.getDay_Id()%>"><%=wd.getDay()%></option>
+                                  <% } %>
+      </select>
+      <br /> <br />     
+
+         <h3>Select BreakTime</h3>
+            <select style="width:25%" id="days" name="days" >
+             <%   System.out.println("1"+con);
+                              HashSet<BreakTime> setbt=cop.getBreakTime();                
+                              Iterator<BreakTime> btit=setbt.iterator();
+                          
+                                   while(btit.hasNext())
+                              {
+                                      BreakTime bt=btit.next();
+                                  %> 
+                                                                 
+                                  <option value="<%=bt.getBreak_Id()%>"><%=bt.getStart_Time()+"-"+bt.getEnd_Time()%></option>
+                                  <% } %>
+      </select>
+      <br /> <br />     
+
+      
+            <h3>Appoint Shift</h3>
+                           <% 
+        HashSet<WorkingShifts> setws=cop.getWorkingShifts();                
+                              Iterator<WorkingShifts> mit=setws.iterator();
+                                System.out.println("78");
+                              while(mit.hasNext())
+                              {
+                                    System.out.println("82");
+                                    WorkingShifts ws=mit.next();
+                                           
+     %>
+                   
+     <p style="padding: 5px;">
+                          <input type="checkbox" name="shift" id="shift" value="<%=ws.getWs_Id()%>" data-parsley-mincheck="2"   class="flat" /><%=ws.getWs_Id()+")   "+ws.getStart_Time()+"-"+ws.getEnd_Time()%>
+                        <br />
+                     <p>
+<%}%>
                         <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <center><button type="submit" name="submit" class="btn btn-success">Submit</button></center>
@@ -94,38 +132,7 @@ $(document).ready(function(){
                       </div>
 
                     </form>
-                                        <table class="table table-striped projects">
-                      <thead>
-                        <tr>
-                          <th>Day_Id</th>
-                          <th>Working Hours</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-     <%
-                              HashSet<WorkingDays> setwd=cop.getWorkingDays();                
-                              Iterator<WorkingDays> ittt=setwd.iterator();
-                                System.out.println("78");
-                              while(ittt.hasNext())
-                              {
-                                    System.out.println("82");
-                                    WorkingDays wd=ittt.next();
-                                %>
-                          <tr>
-                          <td><%=wd.getDay_Id()%>
-                          </td>
-                          <td><%=wd.getDay()%>
-                          </td>                      
-                         
-                          <td>
-                            <a href="<%=application.getContextPath()%>/SerDelete?id=<%=wd.getDay_Id()%>&id1=deleteWorkingDays" class="btn btn-danger btn-xs"  ><i class="fa fa-trash-o"></i> Delete </a>
-                          </td>
-                        </tr>
                         
-  <% }%>
-                      </tbody>
-                    </table>
-   
 
                   </div>
                 </div>
