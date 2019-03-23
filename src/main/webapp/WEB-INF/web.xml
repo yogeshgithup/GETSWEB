@@ -215,6 +215,18 @@
         <servlet-name>SerWorkingDays</servlet-name>
         <servlet-class>ser.SerWorkingDays</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerScehdule</servlet-name>
+        <servlet-class>ser.SerScehdule</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerGetSlot</servlet-name>
+        <servlet-class>ser.SerGetSlot</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerGetShift</servlet-name>
+        <servlet-class>ser.SerGetShift</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -406,6 +418,18 @@
     <servlet-mapping>
         <servlet-name>SerWorkingDays</servlet-name>
         <url-pattern>/SerWorkingDays</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerScehdule</servlet-name>
+        <url-pattern>/SerScehdule</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerGetSlot</servlet-name>
+        <url-pattern>/SerGetSlot</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerGetShift</servlet-name>
+        <url-pattern>/SerGetShift</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

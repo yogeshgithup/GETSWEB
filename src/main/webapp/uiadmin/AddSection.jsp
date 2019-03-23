@@ -61,9 +61,7 @@
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="get" action="<%=application.getContextPath()%>/SerSection">
                              <h>Select Course</h>   
       <select  id="course" name="course">
-        
-  
-                      <%
+                                <%
                                  HashSet<Course> setcourse=(HashSet<Course>)cop.getCourse();
                               Iterator<Course> ittt=setcourse.iterator();
                                   System.out.println("3");
@@ -77,8 +75,6 @@
                                 
                                   <option value="<%=course.getC_id()%>"><%=course.getC_name()%></option>
                                   <% } %>
-
-          
       </select>
                              <h>Select Subject</h>
                              <select id="subject" name="subject">

@@ -67,15 +67,15 @@ $(document).ready(function(){
                     </ul>
                       <div id="msg" align="center" style="color:red">
                         <h3><%=msg%></h3>
-                    </div>
+                    </div> 
 <%session.removeAttribute("msg");%>
                     <div class="clearfix"></div>
                   </div>
                    <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerWorkingDays">
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerScehdule">
             <h3>Select Day</h3>
-            <select style="width:25%" id="days" name="days" >
+            <select style="width:25%" id="day" name="day" >
              <%   System.out.println("1"+con);
                                    CourseSubSecOperation cso=new CourseSubSecOperation(con);
                               HashSet<WorkingDays> setwd=cop.getWorkingDays();                
@@ -90,23 +90,7 @@ $(document).ready(function(){
                                   <% } %>
       </select>
       <br /> <br />     
-
-         <h3>Select BreakTime</h3>
-            <select style="width:25%" id="days" name="days" >
-             <%   System.out.println("1"+con);
-                              HashSet<BreakTime> setbt=cop.getBreakTime();                
-                              Iterator<BreakTime> btit=setbt.iterator();
-                          
-                                   while(btit.hasNext())
-                              {
-                                      BreakTime bt=btit.next();
-                                  %> 
-                                                                 
-                                  <option value="<%=bt.getBreak_Id()%>"><%=bt.getStart_Time()+"-"+bt.getEnd_Time()%></option>
-                                  <% } %>
-      </select>
-      <br /> <br />     
-
+     
       
             <h3>Appoint Shift</h3>
                            <% 
@@ -125,7 +109,24 @@ $(document).ready(function(){
                         <br />
                      <p>
 <%}%>
-                        <div class="form-group">
+
+            <h3>Select BreakTime</h3>
+            <select style="width:25%" id="bt" name="bt" >
+             <%   System.out.println("1"+con);
+                              HashSet<BreakTime> setbt=cop.getBreakTime();                
+                              Iterator<BreakTime> btit=setbt.iterator();
+                          
+                                   while(btit.hasNext())
+                              {
+                                      BreakTime bt=btit.next();
+                                  %> 
+                                                                 
+                                  <option value="<%=bt.getBreak_Id()%>"><%=bt.getStart_Time()+"-"+bt.getEnd_Time()%></option>
+                                  <% } %>
+      </select>
+      <br /> <br />     
+             
+                     <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <center><button type="submit" name="submit" class="btn btn-success">Submit</button></center>
                         </div>
@@ -151,3 +152,4 @@ $(document).ready(function(){
       
   
 </html>
+ 
