@@ -8,56 +8,42 @@ package ser;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import operation.CourseSubSecOperation;
+import org.json.JSONArray;
 
 /**
  *
- * @author Asadali
+ * @author harshjainn
  */
-public class SerUserChecking extends HttpServlet {
+public class SerGetSlot extends HttpServlet {
 
-    
-
-    
-    @Override
+@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        doPost(request,response);
-    }
-
-   
+   doPost(request,response);
+    }   
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html");
+        PrintWriter out=response.getWriter();
+        System.out.println("calleeddd seervelet----------------");
         ServletContext ctx=this.getServletContext();
         Connection con=(Connection)ctx.getAttribute("MyConn");
         CourseSubSecOperation cop=new CourseSubSecOperation(con);
-         PrintWriter out=response.getWriter();
-        // out.println("hellooo");
-        if(request.getParameter("LoginId")!=null)
-        {
-            
-            try {
-                String login= request.getParameter("LoginId");
-                String answer=cop.verifyuseremail(login);
-                    out.println(answer);
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(SerUserChecking.class.getName()).log(Level.SEVERE, null, ex);
-            }
-         
         
-    }
-
-  
-
-  }
+              String s_name=request.getParameter("id");
+              System.out.println("s_name----"+s_name);
+                 
+           //   JSONArray ja=cop.getSelectedSlot(s_name);
+         //     System.out.println(ja.toString());
+           // out.println(ja);        
+                
+         }
+ 
 }

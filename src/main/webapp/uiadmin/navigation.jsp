@@ -18,7 +18,7 @@
 String loginid=(String)session.getAttribute("loginid");
 System.out.println("--------------------------------------------------------------------------------"+loginid);
                                  ServletContext ctx=this.getServletContext();
-                                  Connection con=(Connection)ctx.getAttribute("MyConn");
+                                   Connection con=(Connection)ctx.getAttribute("MyConn");
                                 
                                   CourseSubSecOperation cop=new CourseSubSecOperation(con);
                                HashSet<FirstPage> setfirstpage=cop.getfirstpage();

@@ -503,7 +503,7 @@ return msg;
     
     public JSONArray getSelectedSubject(String op)
     {
-           JSONArray ja=new JSONArray();
+        JSONArray ja=new JSONArray();
         
        try
        {
@@ -1774,14 +1774,7 @@ return msg;
       {
        while(rs.next())
        {
-            JSONObject obj=new JSONObject();
-       
-                   System.out.println("19");
-                   
-                  String emailp=rs.getString("email");
-                  obj.put("email",emailp);
-                  ja.put(obj);
-                  
+            pack="";      
        }
       }
            }catch(Exception e)
@@ -2756,6 +2749,148 @@ return msg;
             msg = cnfe.getMessage();
         }
         return msg;
+
+    }
+
+
+    public String insertDayWS(ArrayList<String> ar, String day) {
+PreparedStatement pstmt = null;
+      String msg="hi";
+        String sql = "insert into workingshift_workingdays values(?,?)";
+    
+        try {
+            con.setAutoCommit(false);
+            for (int i = 0; i < ar.size(); i++) {
+                
+            
+            pstmt=con.prepareStatement(sql);
+            pstmt.setString(1, ar.get(i));
+            pstmt.setString(2, day);
+            
+               
+                 int r=pstmt.executeUpdate();
+            } 
+                 con.commit();
+            
+           msg = "Data Inserted";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return msg;
+
+        
+    }
+
+    public String insertinWSday(String day, String BreakTime) {
+PreparedStatement pstmt = null;
+      String msg="hi";
+        String sql = "insert into workingdays_breaktime values(?,?)";
+    
+        try {
+            con.setAutoCommit(false);
+                
+            
+            pstmt=con.prepareStatement(sql);
+            pstmt.setString(1, day);
+            pstmt.setString(2, BreakTime);
+            
+               
+                 int r=pstmt.executeUpdate();
+                 con.commit();
+            
+           msg = "Data Inserted";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return msg;
+
+
+    }
+
+//    public JSONArray getSelectedSlot(String s_name) {
+//
+//           JSONArray ja=new JSONArray();
+//        
+//       try
+//       {
+//                     
+//           PreparedStatement pstmt = null;
+//           ResultSet rs=null;
+//           String sql="select w.start_time,w.end_time from working_shift w inner join workingshift_workingdays ww on w.ws_id=ww.ws_id where day_id=?";
+//             System.out.println(sql);
+//               con.setAutoCommit(false);
+//               pstmt=con.prepareStatement(sql);
+//            
+//               System.out.println("1");
+//               pstmt.setString(1, op);
+//             System.out.println("2");
+//               rs = pstmt.executeQuery();
+//               while (rs.next()) {
+//                   String sub_name=rs.getString("sub_name");
+//                   System.out.println("6534----"+sub_name);
+//                   ja.put(sub_name);
+//               }
+//               
+//               con.commit();
+//           return ja;
+//           
+//           
+//       }           
+//        catch (SQLException ex) {       
+//            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+//        }       
+//           return ja;
+//    
+//    }
+
+    public JSONArray getSelectedShift(String s_name) {
+ 
+    
+           JSONArray ja=new JSONArray();
+        
+       try
+       {
+                     
+           PreparedStatement pstmt = null;
+           ResultSet rs=null;
+           String sql="select w.start_time,w.end_time from working_shift w inner join workingshift_workingdays ww on w.ws_id=ww.ws_id where day_id=?";
+             System.out.println(sql);
+               con.setAutoCommit(false);
+               pstmt=con.prepareStatement(sql);
+            
+               System.out.println("1");
+               pstmt.setString(1, s_name);
+             System.out.println("2");
+               rs = pstmt.executeQuery();
+               while (rs.next()) {
+                   String start_time=rs.getString("start_time");
+                   String end_time=rs.getString("end_time");
+                   
+                   System.out.println("6534----"+start_time);
+                   ja.put(start_time+"-"+end_time);
+               }
+               
+               con.commit();
+           return ja;
+           
+           
+       }           
+        catch (SQLException ex) {       
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+           return ja;
 
     }
 
