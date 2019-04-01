@@ -1801,7 +1801,7 @@ return msg;
             stmt=con.prepareStatement(sql);
            // stmt.setString(1,email);
             rs =stmt.executeQuery();
-            System.out.println(rs);
+            System.out.println("rs"+rs);
             while(rs.next())
                 
             {
@@ -2184,7 +2184,7 @@ return msg;
            pstmt=con.prepareStatement(sql);
            
            rs=pstmt.executeQuery();
-           System.out.println(rs);
+           System.out.println("rs"+rs);
            while(rs.next())
            {
              JSONObject jo=new JSONObject();
@@ -2222,7 +2222,7 @@ return msg;
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1,"1");
             pstmt.setString(2, p_id);
-          System.out.println("789");
+          System.out.println("789"+p_id);
          int r = pstmt.executeUpdate();
          System.out.println("r=="+r);
          
