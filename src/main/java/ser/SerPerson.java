@@ -124,8 +124,10 @@ public class SerPerson extends HttpServlet {
                    response.sendRedirect(ctx.getContextPath()+"/"+"HomePage.jsp");
             
                 }
+                else
+                {
                    response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"SignupPage.jsp");
-             
+                }
             } catch (ParseException ex) {
                 Logger.getLogger(SerPerson.class.getName()).log(Level.SEVERE, null, ex);
             } catch (SQLException ex) {

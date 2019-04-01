@@ -1784,6 +1784,55 @@ return msg;
            }
        return pack;
  }
+ public JSONArray getverifiedstudents() throws SQLException,ServletException,IOException{
+        
+            JSONArray ja = new JSONArray();
+            PreparedStatement stmt = null;
+            System.out.println("13");
+            ResultSet rs;
+            System.out.println("14");
+            
+            
+            String sql="SELECT s.p_id,p.f_name,p.contact_no,p.file_path,s.course from student s inner join person p on s.p_id=p.p_id where s.status='1'";
+            System.out.println("15");
+            //try
+            //{
+            con.setAutoCommit(false);
+            stmt=con.prepareStatement(sql);
+           // stmt.setString(1,email);
+            rs =stmt.executeQuery();
+            System.out.println(rs);
+            while(rs.next())
+                
+            {
+                
+                JSONObject obj=new JSONObject();
+                String p_id=rs.getString("p_id");
+                String f_name=rs.getString("f_name");
+                String contact_no=rs.getString("contact_no");
+                String file_path=rs.getString("file_path");
+                String course=rs.getString("course");
+                obj.put("p_id",p_id);
+                obj.put("f_name",f_name);
+                obj.put("contact_no",contact_no);
+                obj.put("file_path",file_path);
+                obj.put("course",course);
+                   ja.put(obj);
+                 con.commit();       
+            
+               }
+              stmt.close();
+                
+       
+            System.out.println("27");
+           
+               //   String s=ja.toString();
+                // System.out.println(s);
+                    return ja;
+         
+                  
+ }    
+       
  
  public String webforgotpassword(String LoginId) throws SQLException
  {
@@ -2121,28 +2170,32 @@ return msg;
         }
     }
     
-     public JSONArray getStatus()
+     public JSONArray getunverifiedstudents()
     {
         
          JSONArray ja=new JSONArray();
           
        PreparedStatement pstmt = null; 
        ResultSet rs=null;
-       String sql="select p_id from student where status=?";
+       String sql="SELECT s.p_id,p.f_name,p.contact_no,p.file_path,s.course from student s inner join person p on s.p_id=p.p_id where s.status='0'";
         System.out.println(sql);
        try
        {
            pstmt=con.prepareStatement(sql);
-           pstmt.setString(1,"0"); 
+           
            rs=pstmt.executeQuery();
            System.out.println(rs);
            while(rs.next())
            {
              JSONObject jo=new JSONObject();
          
-               System.out.println("............................"+jo.put("p_id",rs.getString("p_id")));
+            
                
                jo.put("p_id",rs.getString("p_id"));
+               jo.put("f_name",rs.getString("f_name"));
+               jo.put("contact_no",rs.getString("contact_no"));
+               jo.put("file_path",rs.getString("file_path"));
+               jo.put("course",rs.getString("course"));
                     ja.put(jo);
                     
            }
@@ -2155,7 +2208,7 @@ return msg;
       return ja;
     }
 
-    public String verifyuser(ArrayList<String> ar,String s) {
+    public String verifyuser(String p_id,String s) {
                     String msg=null;
                     if(s.equals("accept"))
                     {
@@ -2164,17 +2217,15 @@ return msg;
       System.out.println(sql);
       try {
             con.setAutoCommit(false);
-            for (int i = 0; i < ar.size(); i++) {
               
           
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1,"1");
-            pstmt.setString(2, ar.get(i));
+            pstmt.setString(2, p_id);
           System.out.println("789");
          int r = pstmt.executeUpdate();
          System.out.println("r=="+r);
          
-            } 
           con.commit();
           msg="User Approved Succesfully";
       }
@@ -2197,16 +2248,14 @@ return msg;
       System.out.println(sql);
       try {
             con.setAutoCommit(false);
-            for (int i = 0; i < ar.size(); i++) {
               
           
             pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, ar.get(i));
+            pstmt.setString(1, p_id);
           System.out.println("789");
          int r = pstmt.executeUpdate();
          System.out.println("r=="+r);
          
-            } 
           con.commit();
           msg="Record Deleted";
       }
@@ -2232,8 +2281,8 @@ return msg;
         Statement stmtt = null;
         ResultSet rss;
         String sql = "insert into batch_slot_master value(?,?,?)";
-        String sqll = "select max(slot_id)+1 from batch_slot_master";
-      
+        String sqll = "select max(cast(slot_id as SIGNED))+1 from batch_slot_master";
+        System.out.println("2131321321");
         
         try {
             stmtt=con.createStatement();
@@ -2248,7 +2297,7 @@ return msg;
                }
            }
             
-            
+            System.out.println("slotid"+slot_id);
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, slot_id);
             pstmt.setString(2, bsm.getStart_Time());
@@ -2262,7 +2311,7 @@ return msg;
         } catch (SQLException cnfe) {
             try {
                 con.rollback();
-            } catch (SQLException ex) {
+               } catch (SQLException ex) {
                 Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
             }
             msg = cnfe.getMessage();
@@ -2278,7 +2327,7 @@ return msg;
         Statement stmtt = null;
         ResultSet rss;
         String sql ="insert into working_shift value(?,?,?,?)";
-        String sqll ="select max(ws_id)+1 from working_shift";
+        String sqll ="select max(cast(ws_id as SIGNED))+1 from working_shift";
       
         
         try {
@@ -2324,7 +2373,7 @@ return msg;
         Statement stmtt = null;
         ResultSet rss;
         String sql = "insert into working_days value(?,?)";
-        String sqll = "select max(day_id)+1 from working_days";
+        String sqll = "select max(cast(day_id as SIgned))+1 from working_days";
       
         
         try {
@@ -2371,7 +2420,7 @@ return msg;
         Statement stmtt = null;
         ResultSet rss;
         String sql = "insert into break_time value(?,?,?)";
-        String sqll = "select max(break_id)+1 from break_time";
+        String sqll = "select max(cast(break_id as SIGNED))+1 from break_time";
       
         
         try {
@@ -2406,10 +2455,41 @@ return msg;
             }
             msg = cnfe.getMessage();
         }
-        return msg;
+        return break_id;
     
     }
     
+
+    public String insertintoWSBT(String wsid, String btid) {
+ 
+         String msg="";
+        PreparedStatement pstmt = null;
+        String sql = "insert into workingshift_breaktime value(?,?)";
+      
+        
+        try {
+            
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, wsid);
+            pstmt.setString(2, btid);
+            
+            pstmt.executeUpdate();
+
+            con.commit();
+            msg = "Data Entered Succesfully";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return msg;
+     
+        
+    }
 
     
        public HashSet<BatchSlotMaster> getBacthSlotMaster() {
@@ -2527,7 +2607,7 @@ return msg;
         return setbt;
     
     }
-
+    
    
  public String androidnotification(String message,String pid, String a) {
         
@@ -2680,7 +2760,7 @@ return msg;
       String f_id=null;
       String sql= "select p_id from person where email=?";
         String sqll = "insert into feedback values(?,?,?,?)";
-        String qll = "select max(f_id)+1 from feedback";
+        String qll = "select max(cast(f_id as SIGNED))+1 from feedback";
  
         try {
             con.setAutoCommit(false);
@@ -2891,6 +2971,15 @@ PreparedStatement pstmt = null;
             Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
         }       
            return ja;
+
+    }
+
+    public JSONArray getSelectedSlot(String s_name) {
+     
+        
+        
+        
+        return null;
 
     }
 

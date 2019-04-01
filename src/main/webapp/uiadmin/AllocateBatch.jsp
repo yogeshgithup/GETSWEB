@@ -66,10 +66,10 @@ String msg=(String)session.getAttribute("msg");
    });       
               
      });
-        
-        $("#days").focusout(function(){
+  
+    $("#day").focusout(function(){
          $('#shift').empty();
-        var n= $("#days option:selected").val();  
+        var n= $("#day option:selected").val();  
   alert(n);  
    $.post("<%=application.getContextPath()%>/SerGetShift?id="+n,function(data,status){
      //                   alert(data) ;
@@ -78,7 +78,7 @@ String msg=(String)session.getAttribute("msg");
                       for(i=0;i<obj.length;i++)
                       {
 //                     alert(obj[i]);
-                           $('#shift')
+                          $('#shift')
          .append($("<option></option>")
                      .attr("value",obj[i])
                     .text(obj[i]));
@@ -87,10 +87,9 @@ String msg=(String)session.getAttribute("msg");
    });       
               
      });
-        
-        
-        
-       });
+  
+
+    });
    
 </script>
 
@@ -120,8 +119,7 @@ String msg=(String)session.getAttribute("msg");
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerScehdule">
             <h3>Select Course</h3>
       <select  id="course" name="course">
-                                <%
-                
+                                <%               
                                 HashSet<Course> setcourse=(HashSet<Course>)cop.getCourse();
                               Iterator<Course> ittt=setcourse.iterator();
                                   System.out.println("3");
@@ -140,17 +138,10 @@ String msg=(String)session.getAttribute("msg");
       <h2>Select Subject</h2>
                              <select id="subject" name="subject">
                                  <% 
-                                   
+                                                          
                                  %> 
                              </select>
       </br></br>
-                     <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Batch_Id">Batch_Id
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="Batch_Id" name="Batch_Id"  class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div> 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Batch_Name">Batch_Name
                         </label>
@@ -160,7 +151,7 @@ String msg=(String)session.getAttribute("msg");
                       </div>
 
                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Start_Date">Start_Date
+                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Start_Date">Start_Date
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                           <input type="text" id="Start_Date" name="Start_Date"  class="form-control col-md-7 col-xs-12">
@@ -168,7 +159,7 @@ String msg=(String)session.getAttribute("msg");
                       </div>
 
                   <h3>Select Day</h3>
-      <select  id="course" name="day">
+      <select  id="day" name="day">
                                 <%
                                  HashSet<WorkingDays> setdays=(HashSet<WorkingDays>)cop.getWorkingDays();
                               Iterator<WorkingDays> wit=setdays.iterator();
@@ -194,7 +185,6 @@ String msg=(String)session.getAttribute("msg");
       </br></br>
 
       
-      
                      <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <center><button type="submit" name="submit" class="btn btn-success">Submit</button></center>
@@ -209,7 +199,7 @@ String msg=(String)session.getAttribute("msg");
               </div>
             </div>
   <!-- /page content -->
-  
+      
       </div>
     </div>
       </div>

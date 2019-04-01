@@ -50,25 +50,25 @@ public class SerVerifyUser extends HttpServlet {
             if(request.getParameter("id").equals("remove"))
              {
                  System.out.println("1");
-                        String p_id[]=request.getParameterValues("status");
-         ArrayList<String> ar = new ArrayList<>();
-                 for (int i = 0; i < p_id.length; i++) {
-                           ar.add(p_id[i]);
-                 }
+                        String p_id=request.getParameter("p_id");
+//         ArrayList<String> ar = new ArrayList<>();
+//                 for (int i = 0; i < p_id.length; i++) {
+//                           ar.add(p_id[i]);
+//                 }
          String msg = null;
-         msg = cop.verifyuser(ar,"reject");
+         msg = cop.verifyuser(p_id,"reject");
                  
              }
             if(request.getParameter("id").equals("accept"))
             {
                 System.out.println("11");
-              String p_id[]=request.getParameterValues("status");
-         ArrayList<String> ar = new ArrayList<>();
-                 for (int i = 0; i < p_id.length; i++) {
-                           ar.add(p_id[i]);
-                 }
+              String p_id=request.getParameter("p_id");
+//         ArrayList<String> ar = new ArrayList<>();
+//                 for (int i = 0; i < p_id.length; i++) {
+//                           ar.add(p_id[i]);
+//                 }
          String msg = null;
-         msg = cop.verifyuser(ar,"accept");
+         msg = cop.verifyuser(p_id,"accept");
              }
          response.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"VerifyUsers.jsp");
              
