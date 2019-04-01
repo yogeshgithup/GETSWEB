@@ -102,7 +102,7 @@
                                        <td>
                                          <%=obj.getString("course")%>
                                        </td>
-                                        <td 
+                                       <td>
                                             <img class="mySlides" src="<%=obj.getString("file_path")%>" width="100px" height="100px" >
                                        </td>
                                        <td>
