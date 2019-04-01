@@ -1784,6 +1784,55 @@ return msg;
            }
        return pack;
  }
+ public JSONArray getverifiedstudents() throws SQLException,ServletException,IOException{
+        
+            JSONArray ja = new JSONArray();
+            PreparedStatement stmt = null;
+            System.out.println("13");
+            ResultSet rs;
+            System.out.println("14");
+            
+            
+            String sql="SELECT s.p_id,p.f_name,p.contact_no,p.file_path,s.course from student s inner join person p on s.p_id=p.p_id where s.status='1'";
+            System.out.println("15");
+            //try
+            //{
+            con.setAutoCommit(false);
+            stmt=con.prepareStatement(sql);
+           // stmt.setString(1,email);
+            rs =stmt.executeQuery();
+            System.out.println(rs);
+            while(rs.next())
+                
+            {
+                
+                JSONObject obj=new JSONObject();
+                String p_id=rs.getString("p_id");
+                String f_name=rs.getString("f_name");
+                String contact_no=rs.getString("contact_no");
+                String file_path=rs.getString("file_path");
+                String course=rs.getString("course");
+                obj.put("p_id",p_id);
+                obj.put("f_name",f_name);
+                obj.put("contact_no",contact_no);
+                obj.put("file_path",file_path);
+                obj.put("course",course);
+                   ja.put(obj);
+                 con.commit();       
+            
+               }
+              stmt.close();
+                
+       
+            System.out.println("27");
+           
+               //   String s=ja.toString();
+                // System.out.println(s);
+                    return ja;
+         
+                  
+ }    
+       
  
  public String webforgotpassword(String LoginId) throws SQLException
  {
@@ -2121,28 +2170,32 @@ return msg;
         }
     }
     
-     public JSONArray getStatus()
+     public JSONArray getunverifiedstudents()
     {
         
          JSONArray ja=new JSONArray();
           
        PreparedStatement pstmt = null; 
        ResultSet rs=null;
-       String sql="select p_id from student where status=?";
+       String sql="SELECT s.p_id,p.f_name,p.contact_no,p.file_path,s.course from student s inner join person p on s.p_id=p.p_id where s.status='0'";
         System.out.println(sql);
        try
        {
            pstmt=con.prepareStatement(sql);
-           pstmt.setString(1,"0"); 
+           
            rs=pstmt.executeQuery();
            System.out.println(rs);
            while(rs.next())
            {
              JSONObject jo=new JSONObject();
          
-               System.out.println("............................"+jo.put("p_id",rs.getString("p_id")));
+            
                
                jo.put("p_id",rs.getString("p_id"));
+               jo.put("f_name",rs.getString("f_name"));
+               jo.put("contact_no",rs.getString("contact_no"));
+               jo.put("file_path",rs.getString("file_path"));
+               jo.put("course",rs.getString("course"));
                     ja.put(jo);
                     
            }
@@ -2155,7 +2208,7 @@ return msg;
       return ja;
     }
 
-    public String verifyuser(ArrayList<String> ar,String s) {
+    public String verifyuser(String p_id,String s) {
                     String msg=null;
                     if(s.equals("accept"))
                     {
@@ -2164,17 +2217,15 @@ return msg;
       System.out.println(sql);
       try {
             con.setAutoCommit(false);
-            for (int i = 0; i < ar.size(); i++) {
               
           
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1,"1");
-            pstmt.setString(2, ar.get(i));
+            pstmt.setString(2, p_id);
           System.out.println("789");
          int r = pstmt.executeUpdate();
          System.out.println("r=="+r);
          
-            } 
           con.commit();
           msg="User Approved Succesfully";
       }
@@ -2197,16 +2248,14 @@ return msg;
       System.out.println(sql);
       try {
             con.setAutoCommit(false);
-            for (int i = 0; i < ar.size(); i++) {
               
           
             pstmt = con.prepareStatement(sql);
-            pstmt.setString(1, ar.get(i));
+            pstmt.setString(1, p_id);
           System.out.println("789");
          int r = pstmt.executeUpdate();
          System.out.println("r=="+r);
          
-            } 
           con.commit();
           msg="Record Deleted";
       }
@@ -2527,7 +2576,7 @@ return msg;
         return setbt;
     
     }
-
+    
    
  public String androidnotification(String message,String pid, String a) {
         
