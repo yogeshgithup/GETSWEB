@@ -40,9 +40,9 @@ public class SerGetSlot extends HttpServlet {
               String s_name=request.getParameter("id");
               System.out.println("s_name----"+s_name);
                  
-           //   JSONArray ja=cop.getSelectedSlot(s_name);
-         //     System.out.println(ja.toString());
-           // out.println(ja);        
+              JSONArray ja=cop.getSelectedSlot(s_name);
+              System.out.println(ja.toString());
+            out.println(ja);        
                 
          }
  
