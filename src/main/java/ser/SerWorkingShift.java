@@ -44,10 +44,10 @@ public class SerWorkingShift extends HttpServlet {
           
               WorkingShifts ws=new WorkingShifts(WorkingHours,StartTime,EndTime);       
           CourseSubSecOperation cop=new CourseSubSecOperation(con);
-         String msg = null;
-         msg = cop.insertWorkingShifts(ws);
-         out.println(msg);
-                      hs.setAttribute("wsid", msg);                      
+         String ws_id = null;
+         ws_id = cop.insertWorkingShifts(ws);
+         out.println(ws_id);
+                      hs.setAttribute("wsid", ws_id);                      
        res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"ManageBreakTime.jsp");
                   }
     }

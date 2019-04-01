@@ -105,7 +105,7 @@ public class SMSOperation {
                     post.addParameter("password", "bankofbaroda");
                     post.addParameter("msisdn", mob);
                     post.addParameter("msg", msg);
-                    post.addParameter("sid","WebSMS");
+                    post.addParameter("sid","DEMOOO");
                     post.addParameter("fl", "0");
 
                     /* PUSH the URL */

@@ -43,9 +43,27 @@ public class SerBreakTime extends HttpServlet {
           CourseSubSecOperation cop=new CourseSubSecOperation(con);
          String btid = null;
          btid = cop.insertBreakTime(bt);
+         String ws_bt_id=cop.insertintoWSBT(wsid,btid);
                       hs.setAttribute("wsid", wsid);  
                       
        res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"ManageBatchSlotMasters.jsp");
+                  }
+        
+           if(req.getParameter("sub")!=null)
+        {
+            String wsid=req.getParameter("wsid");
+              String StartTime=req.getParameter("starttime");
+              System.out.println("StartTime-----"+StartTime);
+              String EndTime=req.getParameter("endtime");
+              System.out.println("EndTime"+EndTime);
+            BreakTime bt=new BreakTime(StartTime,EndTime);       
+          CourseSubSecOperation cop=new CourseSubSecOperation(con);
+         String btid = null;
+         btid = cop.insertBreakTime(bt);
+         String ws_bt_id=cop.insertintoWSBT(wsid,btid);
+                      hs.setAttribute("wsid", wsid);  
+                      
+       res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"ManageBreakTime.jsp");
                   }
     }
 }

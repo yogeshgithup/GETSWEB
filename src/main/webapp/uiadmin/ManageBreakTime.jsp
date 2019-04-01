@@ -95,6 +95,12 @@ $(document).ready(function(){
                         </div>
                       </div>
 
+                       <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <center><button type="submit" name="sub" class="btn btn-success">Add More</button></center>
+                        </div>
+                      </div>
+
                     </form>
                                         <table class="table table-striped projects">
                       <thead>

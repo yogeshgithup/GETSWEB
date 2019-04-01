@@ -2281,8 +2281,8 @@ return msg;
         Statement stmtt = null;
         ResultSet rss;
         String sql = "insert into batch_slot_master value(?,?,?)";
-        String sqll = "select max(slot_id)+1 from batch_slot_master";
-      
+        String sqll = "select max(cast(slot_id as SIGNED))+1 from batch_slot_master";
+        System.out.println("2131321321");
         
         try {
             stmtt=con.createStatement();
@@ -2297,7 +2297,7 @@ return msg;
                }
            }
             
-            
+            System.out.println("slotid"+slot_id);
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, slot_id);
             pstmt.setString(2, bsm.getStart_Time());
@@ -2311,7 +2311,7 @@ return msg;
         } catch (SQLException cnfe) {
             try {
                 con.rollback();
-            } catch (SQLException ex) {
+               } catch (SQLException ex) {
                 Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
             }
             msg = cnfe.getMessage();
@@ -2327,7 +2327,7 @@ return msg;
         Statement stmtt = null;
         ResultSet rss;
         String sql ="insert into working_shift value(?,?,?,?)";
-        String sqll ="select max(ws_id)+1 from working_shift";
+        String sqll ="select max(cast(ws_id as SIGNED))+1 from working_shift";
       
         
         try {
@@ -2373,7 +2373,7 @@ return msg;
         Statement stmtt = null;
         ResultSet rss;
         String sql = "insert into working_days value(?,?)";
-        String sqll = "select max(day_id)+1 from working_days";
+        String sqll = "select max(cast(day_id as SIgned))+1 from working_days";
       
         
         try {
@@ -2420,7 +2420,7 @@ return msg;
         Statement stmtt = null;
         ResultSet rss;
         String sql = "insert into break_time value(?,?,?)";
-        String sqll = "select max(break_id)+1 from break_time";
+        String sqll = "select max(cast(break_id as SIGNED))+1 from break_time";
       
         
         try {
@@ -2455,10 +2455,41 @@ return msg;
             }
             msg = cnfe.getMessage();
         }
-        return msg;
+        return break_id;
     
     }
     
+
+    public String insertintoWSBT(String wsid, String btid) {
+ 
+         String msg="";
+        PreparedStatement pstmt = null;
+        String sql = "insert into workingshift_breaktime value(?,?)";
+      
+        
+        try {
+            
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, wsid);
+            pstmt.setString(2, btid);
+            
+            pstmt.executeUpdate();
+
+            con.commit();
+            msg = "Data Entered Succesfully";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return msg;
+     
+        
+    }
 
     
        public HashSet<BatchSlotMaster> getBacthSlotMaster() {
@@ -2729,7 +2760,7 @@ return msg;
       String f_id=null;
       String sql= "select p_id from person where email=?";
         String sqll = "insert into feedback values(?,?,?,?)";
-        String qll = "select max(f_id)+1 from feedback";
+        String qll = "select max(cast(f_id as SIGNED))+1 from feedback";
  
         try {
             con.setAutoCommit(false);
@@ -2940,6 +2971,15 @@ PreparedStatement pstmt = null;
             Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
         }       
            return ja;
+
+    }
+
+    public JSONArray getSelectedSlot(String s_name) {
+     
+        
+        
+        
+        return null;
 
     }
 
