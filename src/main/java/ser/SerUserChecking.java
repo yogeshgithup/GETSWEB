@@ -49,7 +49,13 @@ public class SerUserChecking extends HttpServlet {
                 String login= request.getParameter("LoginId");
                 String answer=cop.verifyuseremail(login);
                     out.println(answer);
-                
+                     String ans=answer;
+                  System.out.println("-----"+answer);
+                if(answer.equals(ans))
+                {
+                    System.out.println("----"+answer);
+                    out.println(answer);
+                }
             } catch (SQLException ex) {
                 Logger.getLogger(SerUserChecking.class.getName()).log(Level.SEVERE, null, ex);
             }

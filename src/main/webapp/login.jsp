@@ -34,8 +34,8 @@
                                            //   alert("1234");
                                              $.post("<%=application.getContextPath()%>/SerUserChecking",{"LoginId":login},function(data,status){
                                           //   alert("heloooo");
-                                            // alert(data);
-                                             $("#LoginId").val("");
+                                             alert(data);
+                                            $("#LoginId").val("");
                                          });
                                           }
                                        }); 
