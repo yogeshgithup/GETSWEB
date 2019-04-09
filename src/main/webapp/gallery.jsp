@@ -3,7 +3,7 @@
 <!DOCTYPE html> 
 	<html lang="zxx" class="no-js">
 	   <head>
-                		<title>Homepage</title>
+                		<title>Home Page</title>
 
                                  <%@include file="homepageheaders.jsp" %>
             </head>

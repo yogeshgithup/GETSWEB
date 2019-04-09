@@ -142,34 +142,35 @@ public class CourseSubSecOperation {
         return msg;
     }
 
-    public String insertSection(Section se) {
+    public String insertSection(Section se,Subject s) {
 
         String msg = "hi";
         PreparedStatement pstmt = null;
-        PreparedStatement pstmtt = null;
-        String sqlseccid = "insert into section (sec_id,sec_name,c_id)value(?,?,?)";
-        String sqlsubsid = "insert into section (sec_id,sec_name,sub_id)value(?,?,?)";
+     //   PreparedStatement pstmtt = null;
+//        String sqlseccid = "insert into section (sec_id,sec_name,c_id)value(?,?,?)";
+//        String sqlsubsid = "insert into section (sec_id,sec_name,sub_id)value(?,?,?)";
         String sql="insert into section(sec_id,sub_id,sec_name,c_id)value(?,?,?,?)";
 
         try {
             con.setAutoCommit(false);
-            if (se.getCourse() != null) {
-                pstmt = con.prepareStatement(sqlseccid);
+           // if (se.getCourse() != null) {
+                pstmt = con.prepareStatement(sql);
                 pstmt.setString(1, se.getSec_id());
-                pstmt.setString(2, se.getSec_name());
+                pstmt.setString(2, s.getSub_id());
+                pstmt.setString(3, se.getSec_name());
                 Course course = se.getCourse();
-                pstmt.setString(3, course.getC_id());
+                pstmt.setString(4, course.getC_id());
                 pstmt.executeUpdate();
-            }
-            if (se.getSubject() != null) {
-                pstmtt = con.prepareStatement(sqlsubsid);
-                pstmtt.setString(1, se.getSec_id());
-                pstmtt.setString(2, se.getSec_name());
-                Subject subject = se.getSubject();
-                pstmtt.setString(3, subject.getSub_id());
-                pstmtt.executeUpdate();
+          //  }
+         //   if (se.getSubject() != null) {
+//                pstmtt = con.prepareStatement(sqlsubsid);
+//                pstmtt.setString(1, se.getSec_id());
+//                pstmtt.setString(2, se.getSec_name());
+//                Subject subject = se.getSubject();
+//                pstmtt.setString(3, subject.getSub_id());
+//                pstmtt.executeUpdate();
 
-            }
+         //   }
             con.commit();
             msg = "Data Entered Successfully";
         } catch (SQLException cnfe) {
@@ -504,13 +505,12 @@ return msg;
     public JSONArray getSelectedSubject(String op)
     {
         JSONArray ja=new JSONArray();
-        
        try
        {
                      
            PreparedStatement pstmt = null;
            ResultSet rs=null;
-           String sql="select s.sub_name from subject s inner join course_subject cs on s.sub_id=cs.sub_id where c_id=?";
+           String sql="select s.sub_name,s.sub_id from subject s inner join course_subject cs on s.sub_id=cs.sub_id where c_id=?";
              System.out.println(sql);
                con.setAutoCommit(false);
                pstmt=con.prepareStatement(sql);
@@ -520,9 +520,16 @@ return msg;
              System.out.println("2");
                rs = pstmt.executeQuery();
                while (rs.next()) {
+        JSONObject jo=new JSONObject();
+      
                    String sub_name=rs.getString("sub_name");
                    System.out.println("6534----"+sub_name);
-                   ja.put(sub_name);
+                   String sub_id=rs.getString("sub_id");
+                   System.out.println("987----"+sub_id);
+                   jo.put("sub_name",sub_name);
+                   jo.put("sub_id",sub_id);
+                   ja.put(jo);
+                   System.out.println("jaaaaa"+ja.toString());
                }
                
                con.commit();
