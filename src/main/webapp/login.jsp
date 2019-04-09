@@ -35,7 +35,7 @@
                                              $.post("<%=application.getContextPath()%>/SerUserChecking",{"LoginId":login},function(data,status){
 
                                           // alert("heloooo");
-                                            // alert(data);
+                                             alert(data);
 
                                          
                                              $("#LoginId").val("");

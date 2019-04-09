@@ -38,7 +38,8 @@ public class SerGetSlot extends HttpServlet {
         CourseSubSecOperation cop=new CourseSubSecOperation(con);
         
               String s_name=request.getParameter("id");
-              System.out.println("s_name----"+s_name);
+              
+              System.out.println("slott_name----"+s_name);
                  
               JSONArray ja=cop.getSelectedSlot(s_name);
               System.out.println(ja.toString());
