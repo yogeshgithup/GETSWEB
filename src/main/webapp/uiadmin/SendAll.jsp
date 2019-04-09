@@ -73,7 +73,7 @@ $(document).ready(function(){
                   </div>
                   <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerSendAll">
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerAllBatch">
 
                              <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="message">Message

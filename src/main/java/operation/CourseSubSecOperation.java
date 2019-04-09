@@ -2681,7 +2681,75 @@ return msg;
        return "success";
        
     }
-    
+ 
+ public String notification(String message,String pid, String a) {
+        
+           if(a.equals("forall"))
+        {
+         Statement stmt = null;
+       ResultSet rs=null;
+        String sql="SELECT p_id,contact_no FROM person where SUBSTRING(p_id,1,1)='S'";    
+       System.out.println("181------sql"+sql);
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           while(rs.next())  
+           {
+                 String mess=message;
+                 long num=rs.getLong("contact_no");
+                 String n = String.valueOf(num);
+                System.out.println(rs.getLong("contact_no"));
+                 SMSOperation sms=new SMSOperation();
+                 sms.sendSMS(n,mess);
+                 
+                 
+           }
+       }catch(Exception e)
+       {
+           System.out.println(e.getMessage());
+       }
+        } 
+           
+           
+           
+       if(a.equals("forindividual"))
+       {
+           try  
+           {
+               PreparedStatement stmt = null;
+               ResultSet rs;
+               String sql="SELECT contact_no FROM person where p_id=?";
+               
+               con.setAutoCommit(false);
+               stmt=con.prepareStatement(sql);
+               stmt.setString(1,pid);
+               rs =stmt.executeQuery();
+               System.out.println(rs);
+               System.out.println("181------sql"+sql);
+                   while(rs.next())
+                   {
+                       String mess=message;
+                       long num=rs.getLong("contact_no");
+                       String n = String.valueOf(num);
+                       System.out.println(rs.getLong("contact_no"));
+                       SMSOperation sms=new SMSOperation();
+                       sms.sendSMS(n,mess);
+                       
+                       
+                   }
+              
+           }catch(SQLException ex)  
+           {
+                   Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+           }  
+       }
+       return "success";
+       
+    }
+ 
+ 
+ 
     public String androidfeesstatus(String email) throws SQLException,ServletException,IOException {
      JSONArray ja=new JSONArray();
         System.out.println("3");
