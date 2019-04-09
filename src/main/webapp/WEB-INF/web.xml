@@ -227,6 +227,14 @@
         <servlet-name>SerGetShift</servlet-name>
         <servlet-class>ser.SerGetShift</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerIndividual</servlet-name>
+        <servlet-class>ser.SerIndividual</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerAllBatch</servlet-name>
+        <servlet-class>ser.SerAllBatch</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -430,6 +438,14 @@
     <servlet-mapping>
         <servlet-name>SerGetShift</servlet-name>
         <url-pattern>/SerGetShift</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerIndividual</servlet-name>
+        <url-pattern>/SerIndividual</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAllBatch</servlet-name>
+        <url-pattern>/SerAllBatch</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -7,6 +7,7 @@ package ser;
 
 import data.Course;
 import data.Section;
+import data.Subject;
 import java.io.IOException;
 import java.io.PrintWriter;
 import static java.lang.System.out;
@@ -43,18 +44,20 @@ public class SerSection extends HttpServlet {
         // String d=(String)hs.getAttribute("cid");
   //      if(req.getParameter("submit")!=null)
     //    {
-            String cid=req.getParameter("c_id");
-            
-            String sec_id=req.getParameter("sec_id");
-            String sec_name=req.getParameter("sec_name");
+            String cid=req.getParameter("course");
+            String sub_id=req.getParameter("subject");
+            String sec_id=req.getParameter("Section_Id");
+            String sec_name=req.getParameter("Section_Name");
             Course course= new Course();
             course.setC_id(cid);
             Section se=new Section(sec_id,sec_name);
             se.setCourse(course);
+            Subject s=new Subject();
+            s.setSub_id(sub_id);
             CourseSubSecOperation cop=new CourseSubSecOperation(con); 
         
             String msg = null;
-            msg = cop.insertSection(se);
+            msg = cop.insertSection(se,s);
             out.println(msg);
       //  }
 //res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AddSection.jsp");
