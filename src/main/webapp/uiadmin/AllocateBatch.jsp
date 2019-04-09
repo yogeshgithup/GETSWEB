@@ -64,29 +64,51 @@ String msg=(String)session.getAttribute("msg");
                    }
                   
    });       
-              
+               
      });
   
     $("#day").focusout(function(){
          $('#shift').empty();
         var n= $("#day option:selected").val();  
-  alert(n);  
+//  alert(n);  
    $.post("<%=application.getContextPath()%>/SerGetShift?id="+n,function(data,status){
-     //                   alert(data) ;
+                      //alert("1"+data) ;
                      obj=JSON.parse(data);
+                     
 //                     alert(obj.length);
                       for(i=0;i<obj.length;i++)
                       {
-//                     alert(obj[i]);
                           $('#shift')
          .append($("<option></option>")
-                     .attr("value",obj[i])
-                    .text(obj[i]));
+                     .attr("value",obj[i].ws_id)
+                    .text(obj[i].start_time+"-"+obj[i].end_time));
                    }
                   
    });       
               
      });
+  
+ $("#shift").focusout(function(){
+         $('#slot').empty();
+        var n= $("#shift option:selected").val();  
+//  alert(n);  
+   $.post("<%=application.getContextPath()%>/SerGetSlot?id="+n,function(data,status){
+                      //alert("1"+data) ;
+                     obj=JSON.parse(data);
+                     
+//                     alert(obj.length);
+                      for(i=0;i<obj.length;i++)
+                      {
+                          $('#slot')
+         .append($("<option></option>")
+                     .attr("value",obj[i].slot_id)
+                    .text(obj[i].start_time+"-"+obj[i].end_time));
+                   }
+                  
+   });       
+               
+     });
+  
   
 
     });
@@ -184,6 +206,13 @@ String msg=(String)session.getAttribute("msg");
                              </select>
       </br></br>
 
+      <h2>Select Slot</h2> 
+                             <select id="slot" name="slot">
+                                 <% 
+                                   
+                                 %> 
+                             </select>
+      </br></br>
       
                      <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">

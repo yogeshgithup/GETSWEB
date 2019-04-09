@@ -1853,7 +1853,7 @@ return msg;
            pstmt=con.prepareStatement(sql);
            pstmt.setString(1,LoginId);
            rs =pstmt.executeQuery();
-           System.out.println("++++++"+rs);
+           System.out.println("++++"+rs);
             
             
       
@@ -2974,45 +2974,8 @@ PreparedStatement pstmt = null;
 
     }
 
-//    public JSONArray getSelectedSlot(String s_name) {
-//
-//           JSONArray ja=new JSONArray();
-//        
-//       try
-//       {
-//                     
-//           PreparedStatement pstmt = null;
-//           ResultSet rs=null;
-//           String sql="select w.start_time,w.end_time from working_shift w inner join workingshift_workingdays ww on w.ws_id=ww.ws_id where day_id=?";
-//             System.out.println(sql);
-//               con.setAutoCommit(false);
-//               pstmt=con.prepareStatement(sql);
-//            
-//               System.out.println("1");
-//               pstmt.setString(1, op);
-//             System.out.println("2");
-//               rs = pstmt.executeQuery();
-//               while (rs.next()) {
-//                   String sub_name=rs.getString("sub_name");
-//                   System.out.println("6534----"+sub_name);
-//                   ja.put(sub_name);
-//               }
-//               
-//               con.commit();
-//           return ja;
-//           
-//           
-//       }           
-//        catch (SQLException ex) {       
-//            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
-//        }       
-//           return ja;
-//    
-//    }
+    public JSONArray getSelectedSlot(String s_name) {
 
-    public JSONArray getSelectedShift(String s_name) {
- 
-    
            JSONArray ja=new JSONArray();
         
        try
@@ -3020,7 +2983,51 @@ PreparedStatement pstmt = null;
                      
            PreparedStatement pstmt = null;
            ResultSet rs=null;
-           String sql="select w.start_time,w.end_time from working_shift w inner join workingshift_workingdays ww on w.ws_id=ww.ws_id where day_id=?";
+           String sql="select b.slot_id,b.start_time,b.end_time from batch_slot_master b inner join workingshift_batchslot wb on b.slot_id=wb.slot_id where ws_id=?";
+             System.out.println(sql);
+               con.setAutoCommit(false);
+               pstmt=con.prepareStatement(sql);
+            
+               System.out.println("1");
+               pstmt.setString(1, s_name);
+             System.out.println("2");
+               rs = pstmt.executeQuery();
+              while (rs.next()) {
+                          JSONObject jo=new JSONObject();
+     
+                  String start_time=rs.getString("start_time");
+                   String end_time=rs.getString("end_time");
+                   String slot_id=rs.getString("slot_id");
+                   System.out.println("6534----"+start_time);
+                  jo.put("slot_id",slot_id);
+                   jo.put("start_time",start_time);
+                   jo.put("end_time", end_time);
+                  
+                   ja.put(jo);
+               }
+                
+               con.commit();
+           return ja;
+           
+           
+       }           
+        catch (SQLException ex) {       
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+           return ja;
+    
+    }
+
+    public JSONArray getSelectedShift(String s_name) {
+ 
+    
+           JSONArray ja=new JSONArray();
+      try
+       {
+                     
+           PreparedStatement pstmt = null;
+           ResultSet rs=null;
+           String sql="select w.ws_id,w.start_time,w.end_time from working_shift w inner join workingshift_workingdays ww on w.ws_id=ww.ws_id where day_id=?";
              System.out.println(sql);
                con.setAutoCommit(false);
                pstmt=con.prepareStatement(sql);
@@ -3030,11 +3037,16 @@ PreparedStatement pstmt = null;
              System.out.println("2");
                rs = pstmt.executeQuery();
                while (rs.next()) {
+            JSONObject jo=new JSONObject();
+    
+                   String ws_id=rs.getString("ws_id");
                    String start_time=rs.getString("start_time");
                    String end_time=rs.getString("end_time");
-                   
+                   jo.put("ws_id",ws_id);
+                   jo.put("start_time",start_time);
+                   jo.put("end_time", end_time);
                    System.out.println("6534----"+start_time);
-                   ja.put(start_time+"-"+end_time);
+                   ja.put(jo);
                }
                
                con.commit();
@@ -3046,15 +3058,6 @@ PreparedStatement pstmt = null;
             Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
         }       
            return ja;
-
-    }
-
-    public JSONArray getSelectedSlot(String s_name) {
-     
-        
-        
-        
-        return null;
 
     }
 

@@ -28,6 +28,7 @@ public class DbConnection  implements ServletContextListener{
   
     try
     {
+        
         ctx =sce.getServletContext();
       driver=ctx.getInitParameter("driver");
       un=ctx.getInitParameter("un");
@@ -36,7 +37,7 @@ public class DbConnection  implements ServletContextListener{
       Class.forName(driver);
       System.out.println("driver is loaded");
       con=DriverManager.getConnection(url,un,password);
-      System.out.println("connected");
+      System.out.println("connected"); 
   
     ctx.setAttribute("MyConn",con);
     }
@@ -65,3 +66,4 @@ public class DbConnection  implements ServletContextListener{
     }
     
 }
+ 
