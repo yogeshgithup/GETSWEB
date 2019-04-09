@@ -15,7 +15,7 @@
     <context-param>
         <param-name>password</param-name>
 
-        <param-value></param-value>
+        <param-value>asad</param-value>
 
       
     </context-param>

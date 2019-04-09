@@ -1,9 +1,9 @@
 <%@page import="data.Subject"%>
 <%@page import="data.Course"%>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en"> 
   <head>
-    <title>AddSection</title>
+    <title>Add Section</title>
     <%@include file="adminHeaders.jsp" %>
 
   </head>
@@ -15,16 +15,16 @@
         var n= $("#course option:selected").val();  
   alert(n);  
    $.post("<%=application.getContextPath()%>/SerGetSubject?id="+n,function(data,status){
-     //                   alert(data) ;
+                        alert(data) ;
                      obj=JSON.parse(data);
-//                     alert(obj.length);
+//                  alert(obj.length);
                       for(i=0;i<obj.length;i++)
                       {
-//                     alert(obj[i]);
+                     alert(obj[i]);
                           $('#subject')
          .append($("<option></option>")
-                     .attr("value",obj[i])
-                    .text(obj[i]));
+                     .attr("value",obj[i].sub_id)
+                    .text(obj[i].sub_name));
                    }
                   
    });       
