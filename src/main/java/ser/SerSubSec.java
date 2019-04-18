@@ -73,7 +73,7 @@ public class SerSubSec extends HttpServlet {
             Section se=new Section(sec_id,sec_name);
             se.setSubject(subject);
             System.out.println("se---"+se.toString());
-            msg=cop.insertSection(se);
+            msg=cop.insertSection(se,s);
            System.out.println("section execute");
           
 //        }

@@ -1,7 +1,11 @@
+<%@page import="data.Student"%>
+<%@page import="org.json.JSONObject"%>
+<%@page import="org.json.JSONTokener"%>
+<%@page import="org.json.JSONArray"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>SendIndividual</title>
+    <title>Send Individual</title>
     <%@include file="adminHeaders.jsp" %>
 
   </head>
@@ -40,7 +44,7 @@ $(document).ready(function(){
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Send Notification to All</h3>
+                <h3>Send Individual Notification</h3>
               </div>
 
               <div class="title_right">
@@ -80,7 +84,25 @@ $(document).ready(function(){
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rollno">Roll No
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                             <input type="text" id="updatecontactus" name="rollno" class="form-control col-md-7 col-xs-12">
+                               <h>Select Student</h>   
+      <select  id="student" name="student">
+                             <%
+                           CourseSubSecOperation cso=new CourseSubSecOperation(con);
+                            JSONArray ja=cso.individualweb(s_name,s_id);
+                               JSONTokener js=new JSONTokener(ja.toString());
+                                   JSONArray jaa=(JSONArray)js.nextValue();
+                                 System.out.println("89");
+                         
+                                    System.out.println("ja.length()"+ja.length());
+                            for(int i=0;i<ja.length();i++)
+                            {  
+                                   JSONObject obj=(JSONObject)jaa.getJSONObject(i);
+                              %>
+                         
+                              <option value="<%=obj.getString("s_name")%>"><%=obj.getString("s_id")%></option>
+                                 
+                                  <% } %>
+      </select>
                         </div>
                       </div>
                              <div class="form-group">
