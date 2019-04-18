@@ -235,6 +235,10 @@
         <servlet-name>SerAllBatch</servlet-name>
         <servlet-class>ser.SerAllBatch</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerAllocateBatch</servlet-name>
+        <servlet-class>ser.SerAllocateBatch</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -446,6 +450,10 @@
     <servlet-mapping>
         <servlet-name>SerAllBatch</servlet-name>
         <url-pattern>/SerAllBatch</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAllocateBatch</servlet-name>
+        <url-pattern>/SerAllocateBatch</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

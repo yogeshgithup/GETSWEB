@@ -5,16 +5,11 @@
  */
 package ser;
 
-import data.Course;
-import data.FirstPage;
 import data.Person;
-import data.Student;
-import data.pictures;
 import data.user_role;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
-import static java.lang.System.out;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.*;
@@ -34,7 +29,6 @@ import javax.servlet.http.Part;
 import operation.CourseSubSecOperation;
 import operation.DropBoxOperation;
 import operation.SMSOperation;
-import org.json.JSONTokener;
 
 @MultipartConfig(fileSizeThreshold=1024*1024*2, // 2MB
                  maxFileSize=1024*1024*10,      // 10MB
@@ -82,7 +76,7 @@ public class SerPerson extends HttpServlet {
                 Date  date= sdf.parse(dob);
                 String home_no=request.getParameter("home_no");
                 String street_no=request.getParameter("street_no");
-                String street_name=request.getParameter("street_name");
+                 String street_name=request.getParameter("street_name");
                 String area=request.getParameter("area");
                 String city=request.getParameter("city");
                 int pincode=Integer.parseInt(request.getParameter("pincode"));
