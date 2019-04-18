@@ -82,12 +82,18 @@ $(document).ready(function(){
                               Iterator<WorkingDays> ittt=setwd.iterator();
                           
                                    while(ittt.hasNext())
-                              {
+                              {                                 
                                       WorkingDays wd=ittt.next();
+                                       System.out.println("day to be checked       "+wd.getDay_Id());
+                                  String checkday=cso.getselectedperson(wd.getDay_Id(),"days");
+                                  System.out.println(wd.getDay_Id()+"  day   "+checkday);
+                                  if(checkday.equals("AlotDay"))
+                                  {
+                                 
                                   %> 
                                                                  
                                   <option value="<%=wd.getDay_Id()%>"><%=wd.getDay()%></option>
-                                  <% } %>
+                                  <% } } %>
       </select>
       <br /> <br />     
      

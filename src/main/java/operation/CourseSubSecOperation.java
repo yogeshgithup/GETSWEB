@@ -894,7 +894,7 @@ return msg;
        }
        if(l.equals("userdesignation"))
        {
-                  Statement stmt = null;
+                Statement stmt = null;
         System.out.println("");
        ResultSet rs=null;
        String sql="select * from users";
@@ -926,7 +926,78 @@ return msg;
        }
     
        }
-           return a;
+       
+       if(l.equals("days"))
+       {
+           Statement stmt = null;
+        System.out.println("");
+       ResultSet rs=null;
+       String sql="select * from workingshift_workingdays";
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+          
+           while(rs.next())  
+           {
+               String p=rs.getString("day_id");
+               System.out.println("dayidintable--"+p);
+               if(p.equals(pid))
+               {
+                    a="DayAloted";
+                   System.out.println(a);
+                   break;              
+          
+               }
+               else
+               {
+                   a="AlotDay";
+                   System.out.println(a);        
+               }
+           }
+       }catch(Exception e)
+       {
+           return(e.getMessage());
+       }
+       }
+      
+        if(l.equals("slot"))
+       {
+           Statement stmt = null;
+        System.out.println("");
+       ResultSet rs=null;
+       String sql="select * from batchallocation_batchslot";
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+          
+           while(rs.next())  
+           {
+               String p=rs.getString("slot_id");
+               System.out.println("slotintable--"+p);
+               if(p.equals(pid))
+               {
+                    a="SlotAloted";
+                   System.out.println(a);
+                   break;              
+          
+               }
+               else
+               {
+                   a="AlotSlot";
+                   System.out.println(a);        
+               }
+           }
+       }catch(Exception e)
+       {
+           return(e.getMessage());
+       }
+       }
+      
+       
+       
+       return a;
        }
        
        
@@ -2980,14 +3051,15 @@ PreparedStatement pstmt = null;
         
        try
        {
-                     
+               
            PreparedStatement pstmt = null;
            ResultSet rs=null;
            String sql="select b.slot_id,b.start_time,b.end_time from batch_slot_master b inner join workingshift_batchslot wb on b.slot_id=wb.slot_id where ws_id=?";
              System.out.println(sql);
                con.setAutoCommit(false);
                pstmt=con.prepareStatement(sql);
-            
+              CourseSubSecOperation cop=new CourseSubSecOperation(con);
+       
                System.out.println("1");
                pstmt.setString(1, s_name);
              System.out.println("2");
@@ -2998,13 +3070,22 @@ PreparedStatement pstmt = null;
                   String start_time=rs.getString("start_time");
                    String end_time=rs.getString("end_time");
                    String slot_id=rs.getString("slot_id");
-                   System.out.println("6534----"+start_time);
-                  jo.put("slot_id",slot_id);
+                   System.out.println("6534--slotfromui--"+slot_id);
+            
+                                  String checkslot=cop.getselectedperson(slot_id,"slot");
+                                  System.out.println(slot_id+"  slotttt   "+checkslot);
+                                  if(checkslot.equals("AlotSlot"))
+                                      {
+                                 
+                   
+                   jo.put("slot_id",slot_id);
                    jo.put("start_time",start_time);
                    jo.put("end_time", end_time);
                   
-                   ja.put(jo);
-               }
+                   ja.put(jo);         
+                                  }
+           }
+     
                 
                con.commit();
            return ja;
@@ -3061,6 +3142,86 @@ PreparedStatement pstmt = null;
 
     }
 
+
+    public String insertinbatchallocation(String course, String sub, String batchname,java.util.Date startdate) {
+       java.util.Date d=startdate;
+         long sec=d.getTime();
+         Date sqldate=new Date(sec);
+        System.out.println("date"+sqldate);
+        String msg="",batch_id=null;
+        PreparedStatement pstmt = null;
+        Statement stmtt = null;
+        ResultSet rss;
+        String sql = "insert into batch_allocation values(?,?,?,?,?)";
+        String sqll = "select max(cast(batch_id as SIGNED))+1 from batch_allocation";
+        System.out.println("1212313");
+        
+        try {
+            stmtt=con.createStatement();
+            con.setAutoCommit(false);
+           rss=stmtt.executeQuery(sqll);
+           while(rss.next())
+           {
+               batch_id=rss.getString(1);
+               if(batch_id==null)
+               {
+                   batch_id="1";
+               }
+           }
+            
+            System.out.println("batchid--+--"+batch_id);
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1,batch_id);
+            pstmt.setString(2,course);
+            pstmt.setString(3,sub);
+            System.out.println("qwertyuiopkjhgfds----"+sqldate);
+            pstmt.setDate(4,sqldate);
+            pstmt.setString(5,batchname);
+            
+            int r=pstmt.executeUpdate();
+            System.out.println("r--------------"+r);
+            con.commit();
+            msg = "Data Entered Succesfully";
+            
+        } catch (SQLException cnfe) {
+            
+            msg = cnfe.getMessage();
+            System.out.println("msg"+msg);
+        }
+        return batch_id;
+        
+         
+    }
+
+    public String appointslot(String batch_id, String slot) {
+String msg="";
+        PreparedStatement pstmt = null;
+        String sql = "insert into batchallocation_batchslot value(?,?)";
+        System.out.println("1212313");
+        
+        try {
+            con.setAutoCommit(false);
+            
+            System.out.println("batchid----"+batch_id);
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, batch_id);
+            pstmt.setString(2, slot);
+            
+            pstmt.executeUpdate();
+
+            con.commit();
+            msg = "Data Entered Succesfully";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+               } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return batch_id;
+
     public JSONArray individualweb(String s_name,String s_id) {
  
     
@@ -3103,6 +3264,158 @@ PreparedStatement pstmt = null;
            return ja;
     
     
+    }
+
+    
+    public JSONArray getBatchDetail() {
+
+           JSONArray ja=new JSONArray();
+       try
+       {
+               
+           PreparedStatement pstmt = null;
+           ResultSet rs=null;
+           String sql="select b.batch_id,c.c_name,s.sub_name,b.start_date,b.batch_name,bb.slot_id,ws.ws_id,ww.day_id from course c inner join  batch_allocation b on c.c_id=b.c_id inner join subject s on b.sub_id=s.sub_id inner join batchallocation_batchslot bb on b.batch_id=bb.batch_id inner join workingshift_batchslot ws on bb.slot_id=ws.slot_id inner join workingshift_workingdays ww on ws.ws_id=ww.ws_id";
+             System.out.println(sql);
+               con.setAutoCommit(false);
+               pstmt=con.prepareStatement(sql);
+            
+               rs = pstmt.executeQuery();
+              while (rs.next()) {
+             JSONObject jo=new JSONObject();
+         CourseSubSecOperation cop=new CourseSubSecOperation(con);
+        
+                  String course=rs.getString("c_name");
+                   String subject=rs.getString("sub_name");
+                   String batch_name=rs.getString("batch_name");
+                   String startdate=rs.getString("start_date");
+                   String slot_id=rs.getString("slot_id");
+                   String slot=cop.getdata(slot_id,"slot");
+                   String ws_id=rs.getString("ws_id");
+                   String shift=cop.getdata(ws_id,"shift");
+                   String day_id=rs.getString("day_id");
+                   String day=cop.getdata(day_id,"day");
+                   jo.put("batchname",batch_name);
+                  jo.put("course",course);
+                   jo.put("subject",subject);
+                   jo.put("startdate",startdate);
+                   jo.put("day",day);
+                  jo.put("slot",slot);
+                  jo.put("shift",shift);
+                   ja.put(jo);         
+              
+           }
+     
+                
+               con.commit();
+           return ja;
+           
+           
+       }           
+        catch (SQLException ex) {       
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+           return ja;
+    
+    }
+
+    private String getdata(String id, String a) {
+     String ans="";
+        if(a.equals("slot"))
+       {
+        PreparedStatement stmt=null;
+        ResultSet rs;
+        
+        String sql="select start_time,end_time from batch_slot_master where slot_id=?";
+          
+        try
+        {
+            
+             con.setAutoCommit(false);
+           stmt=con.prepareStatement(sql);
+           stmt.setString(1,id);
+           rs =stmt.executeQuery();
+           System.out.println(rs);
+           while(rs.next())
+           {
+                ans=rs.getString("start_time")+"-"+rs.getString("end_time");
+              
+               System.out.println("1234--slot---------"+ans);
+                       
+           }
+        
+          }
+           catch(Exception e)
+       {
+        System.out.println("--error"+e.getMessage());
+       }
+            
+       }
+        
+          if(a.equals("shift"))
+       {
+        PreparedStatement stmt=null;
+        ResultSet rs;
+        
+        String sql="select start_time,end_time from working_shift where ws_id=?";
+          
+        try
+        {
+            
+             con.setAutoCommit(false);
+           stmt=con.prepareStatement(sql);
+           stmt.setString(1,id);
+           rs =stmt.executeQuery();
+           System.out.println(rs);
+           while(rs.next())
+           {
+                ans=rs.getString("start_time")+"-"+rs.getString("end_time");
+              
+               System.out.println("1234--shift---------"+ans);
+                       
+           }
+        
+          }
+           catch(Exception e)
+       {
+        System.out.println("--error"+e.getMessage());
+       }
+            
+       }
+        
+          
+           if(a.equals("day"))
+       {
+        PreparedStatement stmt=null;
+        ResultSet rs;
+        
+        String sql="select week_day from working_days where day_id=?";
+          
+        try
+        {
+            
+             con.setAutoCommit(false);
+           stmt=con.prepareStatement(sql);
+           stmt.setString(1,id);
+           rs =stmt.executeQuery();
+           System.out.println(rs);
+           while(rs.next())
+           {
+                ans=rs.getString("week_day");
+              
+               System.out.println("1234--shift---------"+ans);
+                       
+           }
+        
+          }
+           catch(Exception e)
+       {
+        System.out.println("--error"+e.getMessage());
+       }
+            
+       }
+    return ans;
+    }
  
        
 }

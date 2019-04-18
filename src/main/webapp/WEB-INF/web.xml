@@ -236,8 +236,14 @@
         <servlet-class>ser.SerAllBatch</servlet-class>
     </servlet>
     <servlet>
+
+        <servlet-name>SerAllocateBatch</servlet-name>
+        <servlet-class>ser.SerAllocateBatch</servlet-class>
+  </servlet>
+    <servlet>
         <servlet-name>SerFeedback</servlet-name>
         <servlet-class>ser.SerFeedback</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
@@ -451,6 +457,11 @@
         <servlet-name>SerAllBatch</servlet-name>
         <url-pattern>/SerAllBatch</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+
+        <servlet-name>SerAllocateBatch</servlet-name>
+        <url-pattern>/SerAllocateBatch</url-pattern>
+ </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SerFeedback</servlet-name>
         <url-pattern>/SerFeedback</url-pattern>

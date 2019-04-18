@@ -101,6 +101,8 @@ System.out.println("------------------------------------------------------------
                     <ul class="nav child_menu">
                       <li><a href="ScheduleForDay.jsp">Manage Schedule</a></li>
                       <li><a href="AllocateBatch.jsp">Allocate Bacth</a></li>
+                      <li><a href="ViewBatchList.jsp">View Bacth List</a></li>
+             
                     </ul>
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i>Manage WS <span class="fa fa-chevron-down"></span></a>
