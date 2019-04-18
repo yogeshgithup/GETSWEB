@@ -53,8 +53,9 @@ public class SerUserChecking extends HttpServlet {
                 if(answer.equals(ans))
                 {
                     System.out.println("----"+answer);
+
                     out.println(answer);                    
-                
+
 }
                     
  

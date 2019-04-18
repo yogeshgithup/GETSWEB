@@ -3142,6 +3142,7 @@ PreparedStatement pstmt = null;
 
     }
 
+
     public String insertinbatchallocation(String course, String sub, String batchname,java.util.Date startdate) {
        java.util.Date d=startdate;
          long sec=d.getTime();
@@ -3220,6 +3221,47 @@ String msg="";
             msg = cnfe.getMessage();
         }
         return batch_id;
+
+    public JSONArray individualweb(String s_name,String s_id) {
+ 
+    
+           JSONArray ja=new JSONArray();
+      try
+       {
+                     
+           PreparedStatement pstmt = null;
+           ResultSet rs=null;
+           String sql="SELECT p.f_name,p.p_id from person p inner join student s on p.p_id=s.p_id";
+             System.out.println(sql);
+               con.setAutoCommit(false);
+               pstmt=con.prepareStatement(sql);
+            
+               System.out.println("1");
+               pstmt.setString(1, s_name);
+               pstmt.setString(2,s_id);
+             System.out.println("2");
+               rs = pstmt.executeQuery();
+               while (rs.next()) {
+            JSONObject jo=new JSONObject();
+    
+                   String sname=rs.getString("s_name");
+                   String sid=rs.getString("s_id");
+                 
+                   jo.put("s_name",sname);
+                   jo.put("s_id",sid);
+                 
+                   ja.put(jo);
+               }
+               
+               con.commit();
+           return ja;
+           
+           
+       }           
+        catch (SQLException ex) {       
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+           return ja;
     
     
     }
@@ -3377,4 +3419,52 @@ String msg="";
  
        
 }
-
+public JSONArray getfeedback() throws SQLException,ServletException,IOException{
+        
+            JSONArray ja = new JSONArray();
+            PreparedStatement stmt = null;
+            System.out.println("13");
+            ResultSet rs;
+            System.out.println("14");
+            
+            
+            String sql="select f.f_id,f.p_id,p.f_name,f.f_rating,f_comment from feedback f inner join person p on p.p_id=f.p_id";
+            System.out.println("15");
+            //try
+            //{
+            con.setAutoCommit(false);
+            stmt=con.prepareStatement(sql);
+           // stmt.setString(1,email);
+            rs =stmt.executeQuery();
+            System.out.println("rs"+rs);
+            while(rs.next())
+                
+            {
+                
+                JSONObject obj=new JSONObject();
+                String f_id=rs.getString("f_id");
+                String p_id=rs.getString("p_id");
+                String f_name=rs.getString("f_name");
+                String rating=rs.getString("f_rating");
+                String comment=rs.getString("f_comment");
+                obj.put("f_id",f_id);
+                obj.put("p_id",p_id);
+                obj.put("f_name",f_name);
+                obj.put("f_rating",rating);
+                obj.put("f_comment",comment);
+                   ja.put(obj);
+                 con.commit();       
+            
+               }
+              stmt.close();
+                
+       
+            System.out.println("27");
+           
+               //   String s=ja.toString();
+                // System.out.println(s);
+                    return ja;
+         
+                  
+ }    
+}
