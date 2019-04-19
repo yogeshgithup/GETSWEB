@@ -2816,8 +2816,34 @@ return msg;
                    Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
            }  
        }
-       return "success";
        
+        if(a.equals("forbatch"))
+        {
+         Statement stmt = null;
+       ResultSet rs=null;
+        String sql="select p.p_id,p.contact_no from person p inner join student_batchallocation b on b.p_id=p.p_id";    
+       System.out.println("181------sql"+sql);
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           while(rs.next())  
+           {
+                 String mess=message;
+                 long num=rs.getLong("contact_no");
+                 String n = String.valueOf(num);
+                System.out.println(rs.getLong("contact_no"));
+                 SMSOperation sms=new SMSOperation();
+                 sms.sendSMS(n,mess);
+                 
+                 
+           }
+       }catch(Exception e)
+       {
+           System.out.println(e.getMessage());
+       }
+        } 
+       return "success";
     }
  
  
@@ -3239,7 +3265,7 @@ String msg="";
             
                System.out.println("1");
               
-             System.out.println("2");
+             //System.out.println("2");
                rs = pstmt.executeQuery();
                while (rs.next()) {
             JSONObject jo=new JSONObject();
@@ -3255,9 +3281,8 @@ String msg="";
                
                con.commit();
            return ja;
-           
-           
-       }           
+              
+       }
         catch (SQLException ex) {       
             Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
         }       
@@ -3466,5 +3491,47 @@ public JSONArray getfeedback() throws SQLException,ServletException,IOException{
                     return ja;
          
                   
- }    
+ }
+ public JSONArray sendbatchweb() {
+ 
+    
+           JSONArray ja=new JSONArray();
+      try
+       {
+                     
+           PreparedStatement pstmt = null;
+           ResultSet rs=null;
+           String sql="SELECT batch_id,batch_name from batch_allocation";
+             System.out.println(sql);
+               con.setAutoCommit(false);
+               pstmt=con.prepareStatement(sql);
+            
+               System.out.println("1");
+              
+             System.out.println("2");
+               rs = pstmt.executeQuery();
+               while (rs.next()) {
+            JSONObject jo=new JSONObject();
+    
+                  String  batch_id=rs.getString("batch_id");
+                   String batch_name=rs.getString("batch_name");
+                   jo.put("batch_id",batch_id);
+                   jo.put("batch_name",batch_name);
+                   
+                 
+                   ja.put(jo);
+               }
+               
+               con.commit();
+           return ja;
+              
+       }
+        catch (SQLException ex) {       
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+           return ja;
+    
+    
+    }
+
 }
