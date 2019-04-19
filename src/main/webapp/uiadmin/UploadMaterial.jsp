@@ -1,4 +1,4 @@
- <%@page import="data.Course"%>
+  <%@page import="data.Course"%>
 <%@page import="data.WorkingDays"%>
 <%@page import="data.WorkingShifts"%>
 <%@page import="data.BreakTime"%>
@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Allocate Batch</title>
+    <title>Upload Material</title>
     <%@include file="adminHeaders.jsp" %>
  
   </head>
@@ -46,27 +46,27 @@ String msg=(String)session.getAttribute("msg");
 //     alert("hello");
        $('#msg').fadeOut(5000);
   
-        $("#course").focusout(function(){
+       $("#course").focusout(function(){
          $('#subject').empty();
         var n= $("#course option:selected").val();  
-  alert(n);  
+  //alert(n);  
    $.post("<%=application.getContextPath()%>/SerGetSubject?id="+n,function(data,status){
-     //                   alert(data) ;
+                        alert(data) ;
                      obj=JSON.parse(data);
-//                     alert(obj.length);
+//                  alert(obj.length);
                       for(i=0;i<obj.length;i++)
                       {
-//                     alert(obj[i]);
+    //                 alert(obj[i]);
                           $('#subject')
          .append($("<option></option>")
-                     .attr("value",obj[i])
-                    .text(obj[i]));
+                     .attr("value",obj[i].sub_id)
+                    .text(obj[i].sub_name));
                    }
                   
    });       
-               
+              
      });
-  
+     
     $("#day").focusout(function(){
          $('#shift').empty();
         var n= $("#day option:selected").val();  
@@ -138,7 +138,7 @@ String msg=(String)session.getAttribute("msg");
                   </div>
                    <div class="x_content">
                     <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerScehdule">
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerAllocateBatch">
             <h3>Select Course</h3>
       <select  id="course" name="course">
                                 <%               
@@ -164,25 +164,38 @@ String msg=(String)session.getAttribute("msg");
                                  %> 
                              </select>
       </br></br>
-                     
-                      </br></br>
-                            <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Batch_Name">Upload Material
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Upload Material">Upload Material
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="file" id="Batch_Name" name="Batch_Name"  class="form-control col-md-7 col-xs-12">
+                          <input type="file" id="Upload Material" name="Upload Material"  class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
-
-                     <div class="form-group">
+      
+                    <div class="form-group">
                         <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
                           <center><button type="submit" name="submit" class="btn btn-success">Submit</button></center>
                         </div>
                       </div>
 
+                    
+<div class="form-group">
+                     
+                
+
                     </form>
                         
-                
+
+                  </div>
+                </div>  
+              </div>
+            </div>
+  <!-- /page content -->
+      
+      </div>
+    </div>
+      </div>
+                      </div>
 </body>
   
      <%@include file="adminfootersfiles.jsp" %>

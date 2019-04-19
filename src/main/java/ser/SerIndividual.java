@@ -40,13 +40,24 @@ public class SerIndividual extends HttpServlet {
         Connection con=(Connection)ctx.getAttribute("MyConn");
         CourseSubSecOperation cop=new CourseSubSecOperation(con);
         
-        String s_name=request.getParameter("s_name");
-        String s_id=request.getParameter("s_id");
-        
-       JSONArray ja= cop.individualweb(s_name,s_id);
-       System.out.println(ja.toString());
-            out.println(ja);
+        String student=request.getParameter("student");
+        String msg=request.getParameter("message");
                
+//          CourseSubSecOperation cop=new CourseSubSecOperation(con);
+        System.out.println("6789----");
+        
+               try {
+                
+                String individual;
+                individual= cop.notification(msg,student,"forindividual");
+                
+               }
+               catch(Exception e)
+               {
+                   System.out.println("123--------"+e);
+               }
+            out.println("Message sent");
+        
     }
 
    

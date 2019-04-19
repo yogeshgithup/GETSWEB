@@ -1899,6 +1899,7 @@ return msg;
                  con.commit();       
             
                }
+            System.out.println("ja---"+ja);
               stmt.close();
                 
        
@@ -2279,7 +2280,7 @@ return msg;
            }
        }catch(Exception e)
        {
-                ja=null;
+           e.getMessage();
        }
        
     
@@ -2322,7 +2323,7 @@ return msg;
                     if(s.equals("reject"))
                     {
                       PreparedStatement pstmt = null;
-        String sql = "Delete * from person WHERE p_id=?";
+        String sql = "Delete  from person WHERE p_id=?";
       System.out.println(sql);
       try {
             con.setAutoCommit(false);
@@ -3221,8 +3222,8 @@ String msg="";
             msg = cnfe.getMessage();
         }
         return batch_id;
-
-    public JSONArray individualweb(String s_name,String s_id) {
+    }
+    public JSONArray individualweb() {
  
     
            JSONArray ja=new JSONArray();
@@ -3237,18 +3238,17 @@ String msg="";
                pstmt=con.prepareStatement(sql);
             
                System.out.println("1");
-               pstmt.setString(1, s_name);
-               pstmt.setString(2,s_id);
+              
              System.out.println("2");
                rs = pstmt.executeQuery();
                while (rs.next()) {
             JSONObject jo=new JSONObject();
     
-                   String sname=rs.getString("s_name");
-                   String sid=rs.getString("s_id");
+                String    f_name=rs.getString("f_name");
+                   String p_id=rs.getString("p_id");
                  
-                   jo.put("s_name",sname);
-                   jo.put("s_id",sid);
+                   jo.put("f_name",f_name);
+                   jo.put("p_id",p_id);
                  
                    ja.put(jo);
                }
@@ -3418,7 +3418,7 @@ String msg="";
     }
  
        
-}
+
 public JSONArray getfeedback() throws SQLException,ServletException,IOException{
         
             JSONArray ja = new JSONArray();

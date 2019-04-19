@@ -78,7 +78,7 @@ $(document).ready(function(){
                   <div class="x_content">
                     <br />
                     
-<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerSendIndividual">
+<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerIndividual">
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rollno">Roll No
@@ -88,7 +88,7 @@ $(document).ready(function(){
       <select  id="student" name="student">
                              <%
                            CourseSubSecOperation cso=new CourseSubSecOperation(con);
-                            JSONArray ja=cso.individualweb(s_name,s_id);
+                            JSONArray ja=cso.individualweb();
                                JSONTokener js=new JSONTokener(ja.toString());
                                    JSONArray jaa=(JSONArray)js.nextValue();
                                  System.out.println("89");
@@ -99,7 +99,7 @@ $(document).ready(function(){
                                    JSONObject obj=(JSONObject)jaa.getJSONObject(i);
                               %>
                          
-                              <option value="<%=obj.getString("s_name")%>"><%=obj.getString("s_id")%></option>
+                                  <option value="<%=obj.getString("p_id")%>"><%=obj.getString("p_id")%>--<%=obj.getString("f_name")%></option>
                                  
                                   <% } %>
       </select>
@@ -109,7 +109,7 @@ $(document).ready(function(){
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="message">Message
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                              <textarea id="updateaboutus" name="message" class="form-control" rows="6" ></textarea>
+                              <textarea id="message" name="message" class="form-control" rows="6" ></textarea>
                         
                         </div>
                       </div>

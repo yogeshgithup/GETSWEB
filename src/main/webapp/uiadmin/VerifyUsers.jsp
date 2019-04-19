@@ -106,7 +106,7 @@
                                             <img class="mySlides" src="<%=obj.getString("file_path")%>" width="100px" height="100px" >
                                        </td>
                                        <td>
-                                            <button type="submit" value="accept" name="submit" class="btn btn-success">Accept </button>
+                                           <a href="<%=application.getContextPath()%>/SerVerifyUser?id=accept&p_id=<%=obj.getString("p_id")%>" class="btn btn-danger btn-xs"><i class="btn-xs">Accept</i></a>
                                        </td>
                                        <td>
                                            <a href="<%=application.getContextPath()%>/SerVerifyUser?id=remove&p_id=<%=obj.getString("p_id")%>" class="btn btn-danger btn-xs"  ><i class="fa fa-trash-o"></i> Delete </a> 
