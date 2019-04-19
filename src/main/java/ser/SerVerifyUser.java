@@ -36,7 +36,7 @@ public class SerVerifyUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-            
+            System.out.println("entereeededdddd");
          
         response.setContentType("text/html");
         PrintWriter out=response.getWriter();
@@ -44,13 +44,13 @@ public class SerVerifyUser extends HttpServlet {
         Connection con=(Connection)ctx.getAttribute("MyConn");
          CourseSubSecOperation cop=new CourseSubSecOperation(con);
     
-        if(request.getParameter("submit")!=null)
-        {
+       
             
             if(request.getParameter("id").equals("remove"))
              {
-                 System.out.println("1");
+                 System.out.println("1-- entereedd in removeeee");
                         String p_id=request.getParameter("p_id");
+                        System.out.println("----"+p_id);
 //         ArrayList<String> ar = new ArrayList<>();
 //                 for (int i = 0; i < p_id.length; i++) {
 //                           ar.add(p_id[i]);
@@ -74,5 +74,5 @@ public class SerVerifyUser extends HttpServlet {
              
 
     }
- }
+ 
 }

@@ -75,10 +75,10 @@ System.out.println("------------------------------------------------------------
                     <ul class="nav child_menu">
                       <li><a href="EditLogo.jsp">Edit Logo</a></li>
                       <li><a href="EditInstituteName.jsp">Edit Institute Name</a></li>
-                      <li><a href="EditLocation.jsp">Edit Location</a></li>
+<!--                      <li><a href="EditLocation.jsp">Edit Location</a></li>-->
                       <li><a href="EditGallery.jsp">Update Gallery</a></li>
-                      <li><a href="EditAboutUs.jsp">Edit AboutUs</a></li>
-                      <li><a href="EditContactUs.jsp">Edit ContactUs</a></li>
+                      <li><a href="EditAboutUs.jsp">Edit About Us</a></li>
+                      <li><a href="EditContactUs.jsp">Edit Contact Us</a></li>
                     </ul>
                   </li>
                   <li><a><i class="fa fa-edit"></i> Manage Users Value <span class="fa fa-chevron-down"></span></a>
@@ -100,8 +100,8 @@ System.out.println("------------------------------------------------------------
                   <li><a><i class="fa fa-table"></i> Manage Batch<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
                       <li><a href="ScheduleForDay.jsp">Manage Schedule</a></li>
-                      <li><a href="AllocateBatch.jsp">Allocate Bacth</a></li>
-                      <li><a href="ViewBatchList.jsp">View Bacth List</a></li>
+                      <li><a href="AllocateBatch.jsp">Allocate Batch</a></li>
+                      <li><a href="ViewBatchList.jsp">View Batch List</a></li>
              
                     </ul>
                   </li>
@@ -115,7 +115,7 @@ System.out.println("------------------------------------------------------------
                   </li>
                   <li><a><i class="fa fa-clone"></i>Course<span class="fa fa-chevron-down"></span></a>
                     <ul class="nav child_menu">
-                      <li><a href="ManageCourseFees.jsp">Manage Course</a></li>
+<!--                      <li><a href="ManageCourseFees.jsp">Manage Course</a></li>-->
                       <li><a href="AddCourse.jsp">Add Course</a></li>
                       <li><a href="<%=application.getContextPath()%>/ServletViewCourse?op=view">View Course</a></li>
                       <li><a href="<%=application.getContextPath()%>/ServletViewCourse?op=add">Add SUBJECT SECTION</a></li>
@@ -129,7 +129,7 @@ System.out.println("------------------------------------------------------------
                       <li><a href="SendAll.jsp">Send All</a></li>
                        </ul>
                   <li><a href="Feedbacks.jsp"><i class="fa fa-laptop"></i> Feedbacks </a></li>
-                  <li><a href="UpdateMaterial.jsp"><i class="fa fa-edit"></i> Update Material </a>
+                  <li><a href="UploadMaterial.jsp"><i class="fa fa-edit"></i> Upload Material </a>
                   <li><a href="ViewListOfStudents.jsp"><i class="fa fa-table"></i> View List of Students </a>
                   <li><a href="VerifyUsers.jsp"><i class="fa fa-bug"></i> Verify Users </a>
                
