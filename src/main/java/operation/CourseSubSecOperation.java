@@ -3221,7 +3221,8 @@ String msg="";
             msg = cnfe.getMessage();
         }
         return batch_id;
-
+    }
+    
     public JSONArray individualweb(String s_name,String s_id) {
  
     
@@ -3418,8 +3419,9 @@ String msg="";
     }
  
        
-}
-public JSONArray getfeedback() throws SQLException,ServletException,IOException{
+
+public JSONArray getfeedback() throws SQLException,ServletException,IOException
+{
         
             JSONArray ja = new JSONArray();
             PreparedStatement stmt = null;
@@ -3464,7 +3466,8 @@ public JSONArray getfeedback() throws SQLException,ServletException,IOException{
                //   String s=ja.toString();
                 // System.out.println(s);
                     return ja;
-         
-                  
- }    
+        
+
+ }
+
 }

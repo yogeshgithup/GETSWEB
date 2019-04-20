@@ -40,12 +40,12 @@ String msg=(String)session.getAttribute("msg");
   %>
  
 
-
+ <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
  <script>
     $(document).ready(function() {
 //     alert("hello");
        $('#msg').fadeOut(5000);
-  
+      var m="";
        $("#course").focusout(function(){
          $('#subject').empty();
         var n= $("#course option:selected").val();  
@@ -66,7 +66,7 @@ String msg=(String)session.getAttribute("msg");
    });       
               
      });
-     
+      
     $("#day").focusout(function(){
          $('#shift').empty();
         var n= $("#day option:selected").val();  
@@ -108,10 +108,28 @@ String msg=(String)session.getAttribute("msg");
    });       
                
      });
-  
-  
+  var jarray="[";
+  $("#addnextday").click(function(){
+        var d= "\"Day\":\""+$("#day option:selected").val()+"\"";  
+        var sh= "\"shift\":\""+$("#shift option:selected").val()+"\"";  
+        var sl= "\"slot\":\""+$("#slot option:selected").val()+"\"";  
+      alert("n--"+d+"nn---"+sh+"nnn----"+sl);
+      
+      var jsondata="{";
+      jsondata=jsondata+d+","+sh+","+sl+"}";
+      alert(jsondata);
+    
+        jarray=jarray+jsondata+",";
+      alert("jsonarray----"+jarray);
+         $('#shift').empty();
+         $('#slot').empty();
+       
+        $("#day option[value='"+$("#day option:selected").val()+"']").remove();
+       //  $('#day').find("'"+d+"'").remove();
+     // $('.ct option[value='+d+']').remove();
+  });
 
-    });
+    }); 
    
 </script>
 
@@ -122,7 +140,7 @@ String msg=(String)session.getAttribute("msg");
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                  <div class="x_title">
+                   <div class="x_title">
                     <h2>Allocate Batch</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -137,8 +155,8 @@ String msg=(String)session.getAttribute("msg");
                     <div class="clearfix"></div>
                   </div>
                    <div class="x_content">
-                    <br />
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerAllocateBatch">
+                    <br /> 
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" >
             <h3>Select Course</h3>
       <select  id="course" name="course">
                                 <%               
@@ -182,7 +200,7 @@ String msg=(String)session.getAttribute("msg");
 <div class="form-group">
                      
                   <h3>Select Day</h3>
-      <select  id="day" name="day">
+      <select  id="day" name="day" class="ct">
                                 <%
                                  HashSet<WorkingDays> setdays=(HashSet<WorkingDays>)cop.getWorkingDays();
                               Iterator<WorkingDays> wit=setdays.iterator();
@@ -212,9 +230,9 @@ String msg=(String)session.getAttribute("msg");
                                  <% 
                                    
                                  %> 
-                             </select>
-      </br></br>
-                          <button type="submit" name="submit" class="btn btn-success"></button>
+                             </select> 
+      </br></br>  
+                          <button type="button" id="addnextday" name="addnextday" class="btn btn-success">Add NEXT Day</button>
       
       </div>
                      
