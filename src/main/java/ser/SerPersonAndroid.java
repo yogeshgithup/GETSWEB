@@ -5,6 +5,7 @@
  */
 package ser;
 
+import data.Course;
 import data.Person;
 import data.Student;
 import data.user_role;
@@ -132,13 +133,15 @@ public class SerPersonAndroid extends HttpServlet {
                 System.out.println("gnamw"+guardian_name);
                 String course=obj.getString("course");
                 System.out.println("course"+course);   
-                 
+                 Course c=new Course();
                // out.println(msg);
                 
                 System.out.println("116"+op);
                 Student st=new Student(guardian_contact_no,parent_name,parent_contact_no,guardian_name,course);
                 String msgg=null;
                 msgg=cop.insertinstudent(st,pid);
+                String msggg=null;
+                msggg=cop.insertinstudentcourse(pid,c.getC_id());
                    SMSOperation sms=new SMSOperation();
               //  System.out.println("12");
                 sms.sendSMS(num,mess);
