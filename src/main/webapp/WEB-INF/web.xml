@@ -247,6 +247,10 @@
         <servlet-name>SerBatchWise</servlet-name>
         <servlet-class>ser.SerBatchWise</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerGiveFeedback</servlet-name>
+        <servlet-class>ser.SerGiveFeedback</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -470,6 +474,10 @@
     <servlet-mapping>
         <servlet-name>SerBatchWise</servlet-name>
         <url-pattern>/SerBatchWise</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerGiveFeedback</servlet-name>
+        <url-pattern>/SerGiveFeedback</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
