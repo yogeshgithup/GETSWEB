@@ -46,7 +46,7 @@ public class ServletViewCourse extends HttpServlet {
               CourseSubSecOperation cop=new CourseSubSecOperation(con);
               System.out.println("46");
    
-              HttpSession hs=request.getSession(true);
+               HttpSession hs=request.getSession(true);
               System.out.println("47");
    
               HashSet<Course> setcourse=cop.getCourse();

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Send Individual</title>
+    <title>Send Batch-Wise</title>
     <%@include file="adminHeaders.jsp" %>
 
   </head>
@@ -44,7 +44,7 @@ $(document).ready(function(){
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Send Individual Notification</h3>
+                <h3>Send Batch-Wise Notification</h3>
               </div>
 
               <div class="title_right">
@@ -78,17 +78,17 @@ $(document).ready(function(){
                   <div class="x_content">
                     <br />
                     
-<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerIndividual">
+<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerBatchWise">
 
                       <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rollno">Roll No
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                               <h>Select Student</h>   
-      <select  id="student" name="student">
+                               <h>Select Batch</h>   
+      <select  id="batch" name="batch">
                              <%
                            CourseSubSecOperation cso=new CourseSubSecOperation(con);
-                            JSONArray ja=cso.individualweb();
+                            JSONArray ja=cso.sendbatchweb();
                                JSONTokener js=new JSONTokener(ja.toString());
                                    JSONArray jaa=(JSONArray)js.nextValue();
                                  System.out.println("89");
@@ -99,7 +99,7 @@ $(document).ready(function(){
                                    JSONObject obj=(JSONObject)jaa.getJSONObject(i);
                               %>
                          
-                                  <option value="<%=obj.getString("p_id")%>"><%=obj.getString("p_id")%>--<%=obj.getString("f_name")%></option>
+                                  <option value="<%=obj.getString("batch_id")%>"><%=obj.getString("batch_id")%>--<%=obj.getString("batch_name")%></option>
                                  
                                   <% } %>
       </select>

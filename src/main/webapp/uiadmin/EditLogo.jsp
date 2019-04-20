@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>EditLogo</title>
+    <title>Edit Logo</title>
    <%@include file="adminHeaders.jsp" %>
  
     </head>

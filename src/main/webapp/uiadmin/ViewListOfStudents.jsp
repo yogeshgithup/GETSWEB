@@ -76,6 +76,7 @@
                              JSONArray ja = (JSONArray)cop.getverifiedstudents();
                              JSONTokener js= new JSONTokener(ja.toString()); 
                              JSONArray jaa=(JSONArray)js.nextValue();
+                             System.out.println("jaaa--"+jaa);
                              System.out.println("77");
                            for (int i = 0; i < ja.length(); i++) {
                                    JSONObject obj=(JSONObject)jaa.getJSONObject(i);

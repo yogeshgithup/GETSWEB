@@ -20,7 +20,7 @@ import org.json.JSONArray;
  *
  * @author harshjainn
  */
-public class SerIndividual extends HttpServlet {
+public class SerBatchWise extends HttpServlet {
 
   
     @Override
@@ -40,7 +40,7 @@ public class SerIndividual extends HttpServlet {
         Connection con=(Connection)ctx.getAttribute("MyConn");
         CourseSubSecOperation cop=new CourseSubSecOperation(con);
         
-        String student=request.getParameter("student");
+        String batch=request.getParameter("batch");
         String msg=request.getParameter("message");
                
 //          CourseSubSecOperation cop=new CourseSubSecOperation(con);
@@ -48,8 +48,8 @@ public class SerIndividual extends HttpServlet {
         
                try {
                 
-                String individual;
-                individual= cop.notification(msg,student,"forindividual");
+                String batchh;
+                batchh= cop.notification(msg,batch,"forbatch");
                 
                }
                catch(Exception e)
