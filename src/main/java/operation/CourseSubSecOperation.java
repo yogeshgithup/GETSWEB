@@ -3249,10 +3249,9 @@ String msg="";
         }
         return batch_id;
     }
-    public JSONArray individualweb() {
- 
-    
-           JSONArray ja=new JSONArray();
+  
+    public JSONArray individualweb() {     
+          JSONArray ja=new JSONArray();
       try
        {
                      
@@ -3489,8 +3488,6 @@ public JSONArray getfeedback() throws SQLException,ServletException,IOException{
                //   String s=ja.toString();
                 // System.out.println(s);
                     return ja;
-         
-                  
  }
  public JSONArray sendbatchweb() {
  

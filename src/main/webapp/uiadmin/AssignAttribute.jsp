@@ -90,7 +90,7 @@ for(i=0;i<parseInt(alen);i++)
     alert(colval);
     
      $.ajax( {
-                  url:'http://localhost:8084/GETSWEB/SerAssignValueToAttribute?data='+colval,
+                   url:'http://localhost:8084/GETSWEB/SerAssignValueToAttribute?data='+colval,
                   success:function(data) {
                      alert("data"+data);
                     
