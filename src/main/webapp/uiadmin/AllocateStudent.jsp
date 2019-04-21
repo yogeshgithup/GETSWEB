@@ -67,113 +67,54 @@ String msg=(String)session.getAttribute("msg");
               
      });
       
-    $("#day").focusout(function(){
-         $('#shift').empty();
-        var n= $("#day option:selected").val();  
-//  alert(n);  
-   $.post("<%=application.getContextPath()%>/SerGetShift?id="+n,function(data,status){
-                      //alert("1"+data) ;
+       $("#course").focusout(function(){
+         $('#student').empty();
+        var n= $("#course option:selected").val();  
+  //alert(n);  
+   $.post("<%=application.getContextPath()%>/SerGetStudentbycourse?id="+n,function(data,status){
+                        alert(data) ;
                      obj=JSON.parse(data);
-                     
-//                     alert(obj.length);
+//                  alert(obj.length);
                       for(i=0;i<obj.length;i++)
                       {
-                          $('#shift')
+    //                 alert(obj[i]);
+                          $('#student')
          .append($("<option></option>")
-                     .attr("value",obj[i].ws_id)
-                    .text(obj[i].start_time+"-"+obj[i].end_time));
+                     .attr("value",obj[i].p_id)
+                    .text(obj[i].p_fname));
                    }
                   
    });       
               
      });
-  
- $("#shift").focusout(function(){
-         $('#slot').empty();
-        var n= $("#shift option:selected").val();  
+    
+    
+ $("#subject").focusout(function(){
+         $('#batch').empty();
+        var n= $("#subject option:selected").val();  
 //  alert(n);  
-   $.post("<%=application.getContextPath()%>/SerGetSlot?id="+n,function(data,status){
+   $.post("<%=application.getContextPath()%>/SerGetbatchbysubject?id="+n,function(data,status){
                       //alert("1"+data) ;
                      obj=JSON.parse(data);
                      
 //                     alert(obj.length);
                       for(i=0;i<obj.length;i++)
                       {
-                          $('#slot')
+                          $('#batch')
          .append($("<option></option>")
-                     .attr("value",obj[i].slot_id)
-                    .text(obj[i].start_time+"-"+obj[i].end_time));
+                     .attr("value",obj[i].batch_id)
+                    .text(obj[i].batchname));
                    }
                   
    });       
                
      });
-  var jarray="[";
-  var c=0;
-  $("#addnextday").click(function(){
-       c++;
-        var d= "\"Day\":\""+$("#day option:selected").val()+"\"";  
-        var sh= "\"shift\":\""+$("#shift option:selected").val()+"\"";  
-        var sl= "\"slot\":\""+$("#slot option:selected").val()+"\"";  
-      alert("n--"+d+"nn---"+sh+"nnn----"+sl);      
-      if(c===1)
-      {
-        var jsondata="{";
-      jsondata=jsondata+d+","+sh+","+sl+"}";
-      alert(jsondata);
-    
-        jarray=jarray+jsondata;
-      alert("jsonarray----"+jarray);
-         $('#shift').empty();
-         $('#slot').empty();
-       
-        $("#day option[value='"+$("#day option:selected").val()+"']").remove();
-       }
-       else
-       {
-          var jsondata=",{";
-      jsondata=jsondata+d+","+sh+","+sl+"}";
-      alert(jsondata);
-    
-        jarray=jarray+jsondata;
-      alert("jsonarray----"+jarray);
-         $('#shift').empty();
-         $('#slot').empty();
-       
-        $("#day option[value='"+$("#day option:selected").val()+"']").remove();
-           
-       }    
-  });
-var mainarray="[";
-  $("#submit").click(function(){
-     
-        var c= "\"Course\":\""+$("#course option:selected").val()+"\"";  
-        var s= "\"subject\":\""+$("#subject option:selected").val()+"\"";  
-        var b= "\"batchname\":\""+$("#Batch_Name").val()+"\"";  
-        var sd= "\"startdate\":\""+$("#Start_Date").val()+"\"";
-        var araaayy= "\"days\":"+jarray;
-           var jsonupardata="{"+c+","+s+","+b+","+sd+","+araaayy+"]"+"}";
-           mainarray=mainarray+jsonupardata+"]";
-           alert("mainarray------"+mainarray);
-           
-           $.ajax( {
-                   url:'http://localhost:8084/GETSWEB/SerAllocateBatch?data='+mainarray,
-                  success:function(data) {
-                     alert("data"+data);
-                    
-                          
-    },
-    error:function(data) {
-                     alert("error"+data);
-                    
-                          
-    }
-               });
+  
            
            
     });  
 
-    }); 
+   
    
 </script>
 
@@ -185,7 +126,7 @@ var mainarray="[";
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                    <div class="x_title">
-                    <h2>Allocate Batch</h2>
+                    <h2>Allocate Student</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -203,7 +144,7 @@ var mainarray="[";
                     <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" >
             <h3>Select Course</h3>
       <select  id="course" name="course">
-                                <%                     
+                                <%               
                                 HashSet<Course> setcourse=(HashSet<Course>)cop.getCourse();
                               Iterator<Course> ittt=setcourse.iterator();
                                   System.out.println("3");
@@ -226,57 +167,24 @@ var mainarray="[";
                                  %> 
                              </select>
       </br></br>
-                      <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Batch_Name">Batch_Name
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="Batch_Name" name="Batch_Name"  class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
-
-                     <div class="form-group">
-                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Start_Date">Start_Date
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                          <input type="text" id="Start_Date" name="Start_Date"  class="form-control col-md-7 col-xs-12">
-                        </div>
-                      </div>
 <div class="form-group">
                      
-                  <h3>Select Day</h3>
-      <select  id="day" name="day" class="ct">
-                                <%
-                                 HashSet<WorkingDays> setdays=(HashSet<WorkingDays>)cop.getWorkingDays();
-                              Iterator<WorkingDays> wit=setdays.iterator();
-                                  System.out.println("3");
-                 
-                              while(wit.hasNext())
-                              {
-                                  WorkingDays days=wit.next();
-                                  
-                                %>
-                                  
-                                
-                                  <option value="<%=days.getDay_Id()%>"><%=days.getDay()%></option>
-                                  <% } %>
-      </select>
+          
       </br></br>
-      <h2>Select Shift</h2> 
-                             <select id="shift" name="shift">
+      <h2>Select Student</h2> 
+                             <select id="student" name="student">
                                  <% 
                                    
                                  %> 
                              </select>
       </br></br>
 
-      <h2>Select Slot</h2> 
-                             <select id="slot" name="slot">
+      <h2>Select Batch</h2> 
+                             <select id="batch" name="batch">
                                  <% 
                                    
                                  %> 
                              </select> 
-      </br></br>  
-                          <button type="button" id="addnextday" name="addnextday" class="btn btn-success">Add Day</button>
       
       </div>
                      
