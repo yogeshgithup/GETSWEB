@@ -454,6 +454,7 @@ return msg;
         
         return setcourse;
     }
+    
     public JSONArray getSelectedCourse(String op)
     {
         
@@ -1363,10 +1364,10 @@ return msg;
       try {
           System.out.println("784"+loginid+"  "+loginid.length());
             con.setAutoCommit(false);
-            pstmt = con.prepareStatement(sql);
-            pstmt.setString(1,newpassword);
-            pstmt.setString(2,loginid);
-          System.out.println("789");
+               pstmt = con.prepareStatement(sql);
+            pstmt.setString(1,loginid);
+            pstmt.setString(2,newpassword);
+                System.out.println("789");
          int r = pstmt.executeUpdate();
           System.out.println(r);
           con.commit();
@@ -2750,9 +2751,45 @@ return msg;
                    Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
            }  
        }
+       
+    
+       if(a.equals("forbatchwise"))
+       {
+           try  
+           {
+               PreparedStatement stmt = null;
+               ResultSet rs;
+               String sql="SELECT contact_no FROM person where p_id=?";
+               
+               con.setAutoCommit(false);
+               stmt=con.prepareStatement(sql);
+               stmt.setString(1,pid);
+               rs =stmt.executeQuery();
+               System.out.println(rs);
+               System.out.println("181------sql"+sql);
+                   while(rs.next())
+                   {
+                       String mess=message;
+                       long num=rs.getLong("contact_no");
+                       String n = String.valueOf(num);
+                       System.out.println(rs.getLong("contact_no"));
+                       SMSOperation sms=new SMSOperation();
+                       sms.sendSMS(n,mess);
+                       
+                       
+                   }
+              
+           }catch(SQLException ex)  
+           {
+                   Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+           }  
+       }
+       
+       
        return "success";
        
     }
+
  
  public String notification(String message,String pid, String a) {
         
@@ -2848,11 +2885,12 @@ return msg;
  
  
  
-    public String androidfeesstatus(String email) throws SQLException,ServletException,IOException {
+ public String androidfeesstatus(String email) throws SQLException,ServletException,IOException {
      JSONArray ja=new JSONArray();
         System.out.println("3");
         PreparedStatement stmt=null;
           PreparedStatement stmtt=null;
+          PreparedStatement stmy=null;
         System.out.println("9");
         ResultSet rs;
         ResultSet rss;
@@ -2921,7 +2959,7 @@ return msg;
 
    
 
-    public String androidfeedbak(String email, String f_rating, String f_comment) {
+   public String androidfeedbak(String email, String f_rating, String f_comment) {
         String msg = "success";
         PreparedStatement pstmt = null;
         PreparedStatement pstmtt= null;
@@ -2933,7 +2971,7 @@ return msg;
       String f_id=null;
       String sql= "select p_id from person where email=?";
         String sqll = "insert into feedback values(?,?,?,?)";
-        String qll = "select max(cast(f_id as SIGNED))+1 from feedback";
+        String qll = "select max(f_id)+1 from feedback";
  
         try {
             con.setAutoCommit(false);
@@ -2976,6 +3014,7 @@ return msg;
         }
         return msg;
     }
+
 
     public String insertinWsSlot(String wsid, String msg) {
         PreparedStatement pstmt = null;
@@ -3314,11 +3353,14 @@ String msg="";
                    String batch_name=rs.getString("batch_name");
                    String startdate=rs.getString("start_date");
                    String slot_id=rs.getString("slot_id");
+                   
+                   
                    String slot=cop.getdata(slot_id,"slot");
                    String ws_id=rs.getString("ws_id");
                    String shift=cop.getdata(ws_id,"shift");
                    String day_id=rs.getString("day_id");
                    String day=cop.getdata(day_id,"day");
+                  System.out.println("1234567890======================");
                    jo.put("batchname",batch_name);
                   jo.put("course",course);
                    jo.put("subject",subject);
@@ -3364,7 +3406,7 @@ String msg="";
            {
                 ans=rs.getString("start_time")+"-"+rs.getString("end_time");
               
-               System.out.println("1234--slot---------"+ans);
+               System.out.println("123--slot---------"+ans);
                        
            }
         
@@ -3395,7 +3437,7 @@ String msg="";
            {
                 ans=rs.getString("start_time")+"-"+rs.getString("end_time");
               
-               System.out.println("1234--shift---------"+ans);
+               System.out.println("12--shift---------"+ans);
                        
            }
         
@@ -3427,7 +3469,7 @@ String msg="";
            {
                 ans=rs.getString("week_day");
               
-               System.out.println("1234--shift---------"+ans);
+               System.out.println("1--day---------"+ans);
                        
            }
         
@@ -3531,4 +3573,363 @@ public JSONArray getfeedback() throws SQLException,ServletException,IOException{
     
     }
 
+   
+    public JSONArray getSelectedStudent(String coursename) {
+       
+    JSONArray ja=new JSONArray();
+       try
+       {
+                     
+           PreparedStatement pstmt = null;
+           ResultSet rs=null;
+           String sql="select s.p_id,p.f_name from student s inner join person p on p.p_id=s.p_id where s.course=?";
+             System.out.println(sql);
+               con.setAutoCommit(false);
+               pstmt=con.prepareStatement(sql);
+            
+               System.out.println("1");
+               pstmt.setString(1, coursename);
+             System.out.println("2");
+               rs = pstmt.executeQuery();
+               while (rs.next()) {
+        JSONObject jo=new JSONObject();
+      
+                   String p_id=rs.getString("p_id");
+                   System.out.println("6534----"+p_id);
+                   String p_fname=rs.getString("f_name");
+                   System.out.println("987----"+p_fname);
+                   jo.put("p_fname",p_id+"  "+p_fname);
+                   jo.put("p_id",p_id);
+                   ja.put(jo);
+                   System.out.println("jaaaaa"+ja.toString());
+               }
+               
+               con.commit();
+           return ja;
+           
+           
+       }           
+        catch (SQLException ex) {       
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+           return ja;
+   
+    
+   
+    }
+
+    public JSONArray getSelectedbatch(String subject) {
+  JSONArray ja=new JSONArray();
+       try
+       {
+                     
+           PreparedStatement pstmt = null;
+           ResultSet rs=null;
+           String sql="select batchname,batch_id from batch_allocation where sub_id=?";
+             System.out.println(sql);
+               con.setAutoCommit(false);
+               pstmt=con.prepareStatement(sql);
+            
+               System.out.println("1");
+               pstmt.setString(1, subject);
+             System.out.println("2");
+               rs = pstmt.executeQuery();
+               while (rs.next()) {
+        JSONObject jo=new JSONObject();
+      
+                   String batch_id=rs.getString("batch_id");
+                   System.out.println("6534----"+batch_id);
+                   String batchname=rs.getString("batchname");
+                   System.out.println("987----"+batchname);
+                   jo.put("batchname",batchname);
+                   jo.put("batch_id",batch_id);
+                   ja.put(jo);
+                   System.out.println("jaaaaa"+ja.toString());
+               }
+               
+               con.commit();
+           return ja;
+           
+           
+       }           
+        catch (SQLException ex) {       
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+           return ja;
+   
+    
+    }
+
+    public String coursespinnerandroid() throws SQLException,ServletException,IOException{
+     JSONArray ja=new JSONArray();
+        System.out.println("3");
+        Statement stmt=null;
+        System.out.println("9");
+        ResultSet rs;
+        System.out.println("8");
+       
+    
+        String sql= "select c_name from course";
+
+        try
+        {
+            con.setAutoCommit(false);
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           System.out.println(rs);
+       while(rs.next())
+              
+       {
+           System.out.println("11");
+          JSONObject obj=new JSONObject();
+             System.out.println("12");
+              String c_name=rs.getString("c_name");
+           System.out.println("21");
+           
+            
+            
+             obj.put("c_name",c_name);
+               System.out.println("26");
+            
+               ja.put(obj);
+                con.commit();   
+       }
+//              stmt.close();
+          }
+           catch(Exception e)
+       {
+        System.out.println("--error"+e.getMessage());
+       }
+            System.out.println("31");
+           
+                  String s=ja.toString();
+                 System.out.println(s);
+                    return s;
+    }
+     
+     
+      public String androidlayout() throws SQLException,ServletException,IOException {
+     JSONArray ja=new JSONArray();
+        Statement stmt=null;
+        ResultSet rs;
+        String sql="select * from layout";
+        try
+        {
+              con.setAutoCommit(false);
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           System.out.println(rs);
+       while(rs.next())
+       {
+           JSONObject obj=new JSONObject();
+           
+           String institutename=rs.getString("institutename");
+            String filepath=rs.getString("filepath");
+             String filename=rs.getString("filename");
+             
+             obj.put("institutename",institutename);
+                 
+             obj.put("filepath",filepath);
+                 
+             obj.put("filename",filename);
+               ja.put(obj);
+                 con.commit();   
+       }
+              stmt.close();
+                }
+           catch(Exception e)
+       {
+        System.out.println(e.getMessage());
+       }
+            System.out.println("27");
+           
+                  String s=ja.toString();
+                 System.out.println("30");
+                    return s;
+    }
+      
+      
+      
+      public String androidforgotpswd(String email) {
+                  try  
+           {
+               
+               PreparedStatement stmt = null;
+               System.out.println("123");
+               ResultSet rs;
+               System.out.println("124");
+               String sql="SELECT contact_no,password FROM person where email=?";
+               System.out.println("125");
+               con.setAutoCommit(false);
+               System.out.println("126");
+               stmt=con.prepareStatement(sql);
+               System.out.println("127");
+               stmt.setString(1,email);
+               System.out.println("128");
+               rs =stmt.executeQuery();
+               System.out.println("129");
+               System.out.println(rs);
+               System.out.println("181------sql"+sql);
+                   while(rs.next())
+                   {
+                       String mess=rs.getString("password");
+                       System.out.println("130");
+                       long num=rs.getLong("contact_no");
+                       System.out.println("131");
+                       String n = String.valueOf(num);
+                       System.out.println("132");
+                       System.out.println(rs.getLong("contact_no"));
+                       System.out.println("133");
+                       SMSOperation sms=new SMSOperation();
+                       System.out.println("134");
+                       sms.sendSMS(n,mess);
+                       System.out.println("135");
+                       
+                   }
+              
+           }catch(SQLException ex)  
+           {
+                   Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+           }  
+       
+       
+    
+       
+       return "success";
+         
+      }
+
+    public String androidupload(String course, String subject, String title, String materialtype,String file_path,String contenttype) {
+        System.out.println("1");
+        String msg1 = "success";
+        System.out.println("2");
+        PreparedStatement pstmt = null;
+        System.out.println("3");
+          
+        String sql = "insert into materialupload values(?,?,?,?,?,?)";
+        System.out.println("4");
+        try {
+            con.setAutoCommit(false);
+            System.out.println("5");
+            pstmt = con.prepareStatement(sql);
+            System.out.println("6");
+            
+            pstmt.setString(1,course); 
+            System.out.println(course);
+            System.out.println("7");
+            pstmt.setString(2,subject) ;
+            System.out.println(subject);
+            System.out.println("8");
+            pstmt.setString(3,title);
+            System.out.println(title);
+            System.out.println("9");
+            pstmt.setString(4, materialtype);
+            System.out.println(materialtype);
+            System.out.println("10");
+            pstmt.setString(5, file_path);
+            System.out.println(file_path);
+             pstmt.setString(6,contenttype);
+            System.out.println(contenttype);
+            System.out.println("11");
+               pstmt.executeUpdate();
+               System.out.println("12");
+            con.commit();
+            System.out.println("13");
+            msg1 = "Data Inserted";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg1 = cnfe.getMessage();
+        }
+        return msg1;
+    }
+
+    public String androiddownload() throws SQLException,ServletException,IOException{
+       JSONArray ja=new JSONArray();
+        Statement stmt=null;
+        ResultSet rs;
+        String sql="select * from materialupload";
+        try
+        {
+              con.setAutoCommit(false);
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           System.out.println(rs);
+       while(rs.next())
+       {
+           JSONObject obj=new JSONObject();
+           
+           String course=rs.getString("course");
+            String subject=rs.getString("subject");
+             String title=rs.getString("title");
+             String materialtype=rs.getString("materialtype");
+             String file_path=rs.getString("file_path");
+              String contenttype=rs.getString("contenttype");
+             
+             obj.put("c_name",course);
+                 
+             obj.put("sub_name",subject);
+                 
+             obj.put("title",title);
+              obj.put("materialtype",materialtype);
+                 
+             obj.put("file_path",file_path);
+             obj.put("contenttype",contenttype);
+               ja.put(obj);
+                 con.commit();   
+       }
+              stmt.close();
+                }
+           catch(Exception e)
+       {
+        System.out.println(e.getMessage());
+       }
+            System.out.println("27");
+           
+                  String s=ja.toString();
+                 System.out.println("30");
+                    return s;
+    }    
+
+    public String androidbatchspinner() throws SQLException,ServletException,IOException{
+       JSONArray ja=new JSONArray();
+        Statement stmt=null;
+        ResultSet rs;
+        String sql="select batch_name from batch_allocation";
+        try
+        {
+            con.setAutoCommit(false);
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           System.out.println(rs);
+       while(rs.next())
+       {
+           JSONObject obj=new JSONObject();
+           
+           String batch_name=rs.getString("batch_name");
+          
+             obj.put("batch_name",batch_name);
+                 
+               ja.put(obj);
+                 con.commit();   
+       }
+              stmt.close();
+                }
+           catch(Exception e)
+       {
+        System.out.println(e.getMessage());
+       }
+            System.out.println("27");
+           
+                  String s=ja.toString();
+                 System.out.println("30");
+                    return s;
+    }
+
+    
+    
 }

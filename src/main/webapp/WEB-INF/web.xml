@@ -247,6 +247,38 @@
         <servlet-name>SerBatchWise</servlet-name>
         <servlet-class>ser.SerBatchWise</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerGetStudentbycourse</servlet-name>
+        <servlet-class>ser.SerGetStudentbycourse</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerGetbatchbysubject</servlet-name>
+        <servlet-class>ser.SerGetbatchbysubject</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AndroidDownload</servlet-name>
+        <servlet-class>ser.AndroidDownload</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AndroidUploadd</servlet-name>
+        <servlet-class>ser.AndroidUploadd</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerSpinnerBatchAndroid</servlet-name>
+        <servlet-class>ser.SerSpinnerBatchAndroid</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerAndroidLayout</servlet-name>
+        <servlet-class>ser.SerAndroidLayout</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerBatchwiseAndroid</servlet-name>
+        <servlet-class>ser.SerBatchwiseAndroid</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerCourseSpinner</servlet-name>
+        <servlet-class>ser.SerCourseSpinner</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -470,6 +502,38 @@
     <servlet-mapping>
         <servlet-name>SerBatchWise</servlet-name>
         <url-pattern>/SerBatchWise</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerGetStudentbycourse</servlet-name>
+        <url-pattern>/SerGetStudentbycourse</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerGetbatchbysubject</servlet-name>
+        <url-pattern>/SerGetbatchbysubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AndroidDownload</servlet-name>
+        <url-pattern>/AndroidDownload</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AndroidUploadd</servlet-name>
+        <url-pattern>/AndroidUploadd</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerSpinnerBatchAndroid</servlet-name>
+        <url-pattern>/SerSpinnerBatchAndroid</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAndroidLayout</servlet-name>
+        <url-pattern>/SerAndroidLayout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerBatchwiseAndroid</servlet-name>
+        <url-pattern>/SerBatchwiseAndroid</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerCourseSpinner</servlet-name>
+        <url-pattern>/SerCourseSpinner</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

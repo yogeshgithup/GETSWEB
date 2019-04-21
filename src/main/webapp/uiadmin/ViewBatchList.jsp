@@ -102,21 +102,28 @@ $(document).ready(function(){
                                JSONTokener js=new JSONTokener(ja.toString());
                                    JSONArray jaa=(JSONArray)js.nextValue();
                                  System.out.println("89");
-                         
+                                String BN="";
+                                   
                                     System.out.println("ja.length()"+ja.length());
                             for(int i=0;i<ja.length();i++)
                             {  
                                    JSONObject obj=(JSONObject)jaa.getJSONObject(i);
-                              %>
+                                    System.out.println("out if");
+                                   %>
                          
                           <tr>
                           
+                          <% 
+                             if(obj.getString("batchname").equals(BN))
+                             {
+                                           System.out.println("in if");
+                          
+                           %>      
                           <td>
-                              <%=obj.getString("batchname")%>
+                          </td>                      
+                           <td>
                           </td>
-                          <td><%=obj.getString("course")%>
-                          </td>
-                          <td><%=obj.getString("subject")%>
+                          <td>
                           </td>
                           <td><%=obj.getString("shift")%>
                           </td>
@@ -129,8 +136,39 @@ $(document).ready(function(){
  
                          
                           </tr>
-                         <% }%>
-         
+                           <%
+                             }
+                             
+                             else
+                             {
+                                           System.out.println("in else");                          
+                            %>
+                          <td>
+                              <%=obj.getString("batchname")%>
+                          </td>                      
+                           <td><%=obj.getString("course")%>
+                          </td>
+                          <td><%=obj.getString("subject")%>
+                          </td>
+                          <td><%=obj.getString("shift")%>
+                          </td>
+                          <td><%=obj.getString("slot")%>
+                          </td>
+                          <td><%=obj.getString("day")%>
+                          </td>                          
+                          <td><%=obj.getString("startdate")%>
+                          </td>
+   
+                          </tr>
+                            
+                            <%
+                             }
+                             
+                           BN=obj.getString("batchname");
+                           System.out.println("bn-----------"+BN);
+                            } 
+                          %>
+                      
   </tbody>
                     </table>
                     

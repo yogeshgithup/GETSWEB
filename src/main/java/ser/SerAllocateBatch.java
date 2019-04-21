@@ -20,6 +20,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import operation.CourseSubSecOperation;
 import java.text.SimpleDateFormat;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 /**
  *
@@ -32,7 +35,7 @@ public class SerAllocateBatch extends HttpServlet {
             throws ServletException, IOException {
         doPost(req,res);       
     }
-    @Override
+    @Override  
     protected void doPost(HttpServletRequest req, HttpServletResponse res)
             throws ServletException, IOException {
       res.setContentType("text/html");
@@ -41,24 +44,50 @@ public class SerAllocateBatch extends HttpServlet {
         ServletContext ctx=this.getServletContext();
         Connection con=(Connection)ctx.getAttribute("MyConn");
         
-        if(req.getParameter("submit")!=null)
-        {
             try{ 
-              String course=req.getParameter("course");
-              String sub=req.getParameter("subject");
-              String batchname=req.getParameter("Batch_Name");
-              String startdate=req.getParameter("Start_Date");
-                 SimpleDateFormat sdf=new SimpleDateFormat("MM/dd/yyyy");
+              String data=req.getParameter("data");
+                
+              JSONTokener js=new JSONTokener(data);
+            System.out.println("113");       
+        JSONArray ja=(JSONArray)js.nextValue();
+             System.out.println("53----jarray----"+ja);
+           JSONObject obj=(JSONObject)ja.getJSONObject(0);
+            System.out.println("55--obj--"+obj.toString());
+          
+
+                     String course=obj.getString("Course");
+        System.out.println("coursee--"+course);
+                     String subject=obj.getString("subject");
+        System.out.println("subject--"+subject);
+                     String batchname=obj.getString("batchname");
+        System.out.println("batchname--"+batchname);
+                      String startdate=obj.getString("startdate");
+                                 SimpleDateFormat sdf=new SimpleDateFormat("MM/dd/yyyy");
                 Date date= sdf.parse(startdate);
-             String day=req.getParameter("day");
-             String shift=req.getParameter("shift");
-             String slot=req.getParameter("slot");
-             
-         CourseSubSecOperation cop=new CourseSubSecOperation(con);
-         String batch_id = null;
-         batch_id = cop.insertinbatchallocation(course,sub,batchname,date);
+      
+        System.out.println("startdate--"+startdate);
         
-         String appointslot=cop.appointslot(batch_id,slot);    
+        CourseSubSecOperation cop=new CourseSubSecOperation(con);
+         String batch_id = null;
+         batch_id = cop.insertinbatchallocation(course,subject,batchname,date);
+        
+              JSONTokener jss=new JSONTokener(obj.getJSONArray("days").toString());
+                    JSONArray jaa=(JSONArray)jss.nextValue();
+                             System.out.println("jaa.length()"+jaa.length());
+                            for(int i=0;i<jaa.length();i++)
+                            {
+                                         JSONObject objj=(JSONObject)jaa.getJSONObject(i);
+                                         String Day=objj.getString("Day");
+                                         System.out.println("day"+i+1+"---"+Day);
+                                         String shift=objj.getString("shift");
+                                         System.out.println("shift"+i+1+"---"+shift);                                      
+                                         String slot=objj.getString("slot");
+                                         System.out.println("slot"+i+1+"---"+slot);
+                                            String appointslot=cop.appointslot(batch_id,slot);    
+        
+                            }
+              
+        
          
          hs.setAttribute("msg", batch_id);
           res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AllocateBatch.jsp");
@@ -70,6 +99,5 @@ public class SerAllocateBatch extends HttpServlet {
          
         }
 
-    }
     
 }
