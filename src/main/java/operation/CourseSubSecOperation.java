@@ -1422,6 +1422,34 @@ return msg;
         }
         return msg1;
       }    
+ public String insertinstudentcourse(String pid,String cid) {
+
+        String msg1 = "success";
+        PreparedStatement pstmt = null;
+            System.out.println("-----pid---"+pid);
+            System.out.println("----cid---"+cid);
+        String sql = "insert into student_course value(?,?)";
+        try {
+            con.setAutoCommit(false);
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, pid);           
+            pstmt.setString(2, cid);           
+           
+            pstmt.executeUpdate();
+
+            con.commit();
+            msg1 = "Data Entered Succesfully";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg1 = cnfe.getMessage();
+        }
+        return msg1;
+      }    
 
 
         public String editviewcourse(Course c){
@@ -2858,7 +2886,7 @@ return msg;
         {
          Statement stmt = null;
        ResultSet rs=null;
-        String sql="select p.p_id,p.contact_no from person p inner join student_batchallocation b on b.p_id=p.p_id";    
+        String sql="select p.p_id,p.contact_no from person p inner join student_batchallocation b on b.p_id=p.p_id where b.batch_id=?";    
        System.out.println("181------sql"+sql);
        try
        {
@@ -3572,6 +3600,28 @@ public JSONArray getfeedback() throws SQLException,ServletException,IOException{
     
     
     }
+public String givefeedback(String p_id, String rating,String message) {
+String msg="";
+        PreparedStatement pstmt = null;
+        String sql = "insert into feedback value(?,?,?,?)";
+        System.out.println("1212313");
+        Statement stmtt = null;
+        ResultSet rss;
+         String f_id=null;
+          String sqll = "select max(cast(f_id as SIGNED))+1 from feedback";
+          
+        try {
+            con.setAutoCommit(false);
+             rss=stmtt.executeQuery(sqll);
+           while(rss.next())
+           {
+               f_id=rss.getString(1);
+               if(f_id==null)
+               {
+                   f_id="1";
+               }
+           }
+
 
    
     public JSONArray getSelectedStudent(String coursename) {
@@ -3840,6 +3890,7 @@ public JSONArray getfeedback() throws SQLException,ServletException,IOException{
         } catch (SQLException cnfe) {
             try {
                 con.rollback();
+
             } catch (SQLException ex) {
                 Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -3931,5 +3982,4 @@ public JSONArray getfeedback() throws SQLException,ServletException,IOException{
     }
 
     
-    
-}
+    }
