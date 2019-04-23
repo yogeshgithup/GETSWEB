@@ -279,6 +279,10 @@
         <servlet-name>SerCourseSpinner</servlet-name>
         <servlet-class>ser.SerCourseSpinner</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerTimeTable</servlet-name>
+        <servlet-class>ser.SerTimeTable</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -534,6 +538,10 @@
     <servlet-mapping>
         <servlet-name>SerCourseSpinner</servlet-name>
         <url-pattern>/SerCourseSpinner</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerTimeTable</servlet-name>
+        <url-pattern>/SerTimeTable</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
