@@ -16,7 +16,7 @@
 <html lang="en">
   <head>
 
-    <title>ViewBatchList</title>
+    <title>View BatchList</title>
     <%@include file="adminHeaders.jsp" %>
 
   </head>

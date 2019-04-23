@@ -2787,7 +2787,7 @@ return msg;
            {
                PreparedStatement stmt = null;
                ResultSet rs;
-               String sql="SELECT contact_no FROM person where p_id=?";
+               String sql="select p.p_id,p.contact_no from person p inner join student_batchallocation sb on sb.p_id=p.p_id inner join batch_allocation b on b.batch_id=sb.batch_id where b.batch_name=?;";
                
                con.setAutoCommit(false);
                stmt=con.prepareStatement(sql);
@@ -3622,7 +3622,12 @@ String msg="";
                }
            }
 
-
+        }catch(Exception e)
+        {
+            e.getMessage();
+        }
+        return "success";
+}
    
     public JSONArray getSelectedStudent(String coursename) {
        
@@ -3980,6 +3985,72 @@ String msg="";
                  System.out.println("30");
                     return s;
     }
-
+        
+        public JSONArray timetable(){
+              JSONArray ja=new JSONArray();
+              JSONObject jo=new JSONObject();
+        Statement stmt=null;
+        PreparedStatement pstmt=null,pstmtt=null;
+        ResultSet rs,rss,rsss;
+        String sql="Select day_id,week_day from working_days";
+        String sqll="SELECT ws.ws_id,ws.start_time,ws.end_time from working_shift ws inner join workingshift_workingdays ww on ww.ws_id=ws.ws_id where ww.day_id=?";
+        String sqlll="SELECT wsl.slot_id,wsl.start_time,wsl.end_time,bb.batch_id,ba.batch_name from batch_slot_master wsl inner join workingshift_batchslot ww on ww.slot_id=wsl.slot_id inner join batchallocation_batchslot bb on bb.slot_id=wsl.slot_id inner join batch_allocation ba on ba.batch_id=bb.batch_id where ww.ws_id=?";
+        try
+        {
+            con.setAutoCommit(false);
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           System.out.println(rs);
+       while(rs.next())
+       {
+           JSONObject obj=new JSONObject();
+            String week_day=rs.getString("week_day");
+           obj.put("day",week_day);
+            JSONArray jk= new JSONArray();
+            pstmt=con.prepareStatement(sqll);
+            pstmt.setString(1, rs.getString("day_id"));
+            rss=pstmt.executeQuery();
+            while(rss.next())
+            {
+                 JSONObject obj1=new JSONObject();
+                 String shift=rss.getString("start_time")+"-"+rss.getString("end_time");
+                 obj1.put("shift",shift);
+                 JSONArray jl=new JSONArray();
+                 pstmtt=con.prepareStatement(sqlll);
+                 pstmtt.setString(1, rss.getString("ws_id"));
+                 rsss=pstmtt.executeQuery();
+                  while(rsss.next())
+                   {
+                         JSONObject obj2=new JSONObject();
+                         String slot=rsss.getString("start_time")+"-"+rsss.getString("end_time");
+                         
+                         obj2.put("slot",slot);
+                         obj2.put("batchname",rsss.getString("batch_name"));
+                   
+                         jl.put(obj2);
+                         obj1.put("shiftdetail",jl);
+                   }
+            
+                 jk.put(obj1);
+               obj.put("daydetail", jk);
+           
+            }
+               ja.put(obj);
+               System.out.println("jaaafinal-------"+ja);
+                 con.commit();   
+       }
+              stmt.close();
+                }
+           catch(Exception e)
+       {
+        System.out.println(e.getMessage());
+       }
+            System.out.println("27");
+           
+                  String s=ja.toString();
+                 System.out.println("30");
+                    
+         return ja;   
+        }
     
     }
