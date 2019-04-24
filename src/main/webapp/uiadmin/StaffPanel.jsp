@@ -10,7 +10,7 @@
     <div class="container body">
       <div class="main_container">
         
-    <%@include file="navigation.jsp" %>
+    <%@include file="navigationfaculty.jsp" %>
            
         <!-- /page content -->
           <div class="right_col" role="main">

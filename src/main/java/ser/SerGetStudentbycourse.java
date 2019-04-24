@@ -40,16 +40,19 @@ public class SerGetStudentbycourse extends HttpServlet {
         CourseSubSecOperation cop=new CourseSubSecOperation(con);
         
               String course=request.getParameter("id");
+              String subject=request.getParameter("id1");
+              System.out.println("subid-----"+subject);
               System.out.println("course_id----"+course);
              JSONArray ja=cop.getSelectedCourse(course);
                          
               JSONTokener js=new JSONTokener(ja.toString());
               JSONArray jaa=(JSONArray)js.nextValue();
               JSONObject obj=(JSONObject)jaa.getJSONObject(0);
-               String coursename=obj.getString("c_name");    
-              JSONArray jaaa=cop.getSelectedStudent(coursename);
+               String coursename=obj.getString("c_name");  
+               System.out.println("cnameeeeeee---------------------------------"+coursename);
+              JSONArray jaaa=cop.getSelectedStudent(coursename,subject);
               System.out.println(jaaa.toString());
-            out.println(ja);        
+            out.println(jaaa);        
                 
          }
 

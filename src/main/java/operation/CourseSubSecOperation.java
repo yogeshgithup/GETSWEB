@@ -630,7 +630,7 @@ return msg;
               String p_id = "nill";
           if(op.equals("a"))
           {
-             String sql="SELECT concat('A',max(SUBSTRING(p_id,2,2))+1) FROM person where SUBSTRING(p_id,1,1)='A'";
+             String sql="SELECT concat('A',max(cast(SUBSTRING(p_id,2,2) as SIGNED))+1) FROM person where SUBSTRING(p_id,1,1)='A'";
              Statement stmt=con.createStatement();
              ResultSet rs=stmt.executeQuery(sql);
              while(rs.next())
@@ -645,7 +645,7 @@ return msg;
       
               if(op.equals("b"))
           {
-             String sql="SELECT concat('F',max(SUBSTRING(p_id,2,2))+1) FROM person where SUBSTRING(p_id,1,1)='F'";
+             String sql="SELECT concat('F',max(cast(SUBSTRING(p_id,2,2) as SIGNED))+1) FROM person where SUBSTRING(p_id,1,1)='F'";
              Statement stmt=con.createStatement();
              ResultSet rs=stmt.executeQuery(sql);
              while(rs.next())
@@ -660,7 +660,7 @@ return msg;
       
                 if(op.equals("s"))
           {
-             String sql="SELECT concat('S',max(SUBSTRING(p_id,2,2))+1) FROM person where SUBSTRING(p_id,1,1)='S'";
+             String sql="SELECT concat('S',max(cast(SUBSTRING(p_id,2,2) as SIGNED))+1) FROM person where SUBSTRING(p_id,1,1)='S'";
              Statement stmt=con.createStatement();
              ResultSet rs=stmt.executeQuery(sql);
              while(rs.next())
@@ -858,7 +858,7 @@ return msg;
       
        public String getselectedperson(String pid,String l)
        {
-           
+                             
            String a = null;
        if(l.equals("userrole"))
        {
@@ -996,6 +996,29 @@ return msg;
        }
        }
       
+       if(l.equals("checkapointedsubject"))
+       {
+           PreparedStatement pstmt = null;
+        System.out.println("in check apointed slot");
+       ResultSet rs=null;
+       String sql="select p_id from student_subject where sub_id=?";
+       try
+       {
+           pstmt=con.prepareStatement(sql);
+           pstmt.setString(1,pid);
+           rs=pstmt.executeQuery();
+          
+           while(rs.next())  
+           {
+               a=rs.getString("p_id");
+               System.out.println("pp"+a);
+               
+           }
+       }catch(Exception e)
+       {
+           return(e.getMessage());
+       }
+       }
        
        
        return a;
@@ -1156,13 +1179,13 @@ return msg;
            String msg="hi";
         PreparedStatement pstmt;
         PreparedStatement pstmtt;
-        Statement stmt;
+        PreparedStatement pstmttt;
         ResultSet rs=null,rs1,rss;
         String sql = "SELECT email,password,p_id FROM person WHERE email=? and password=?";
         String sqlq="select p_id from user_role where role_id=?";
         String qlq="select status from student where p_id=?";
     
-        String id = null,id1 = null,status=null;
+        String id = null,id1 = null,status="";
         try {
             con.setAutoCommit(false);
             pstmt = con.prepareStatement(sql);
@@ -1200,21 +1223,26 @@ return msg;
                      msg="Faculty";
                  }
                  else if(id.contains("S"))
-                 {                      
-                     stmt=con.createStatement();
-                     rss=stmt.executeQuery(qlq);
+                 {           
+                     String s="1";
+                     pstmttt=con.prepareStatement(qlq);
+                     pstmttt.setString(1,id);
+                     rss=pstmttt.executeQuery();
                      while(rss.next())
                      {
                           status=rss.getString(1);
+                            System.out.println("1--"+status);  
                      }
-                     if(status=="1")
+                     if(status.equals(s))
                      {
-                        msg="Student";  
+                         CourseSubSecOperation cop=new CourseSubSecOperation(con);
+                         msg="Student";  
+                         String sendmsg=cop.notification("Now you are able to LOGIN",id,"forindividual");
                      }else
-                     {
+                     { 
                          msg="User Not Approved Yet"; 
                      }
-                    
+                      System.out.println("1----"+msg);  
                  }
                  else
                  {
@@ -1422,18 +1450,32 @@ return msg;
         }
         return msg1;
       }    
- public String insertinstudentcourse(String pid,String cid) {
-
+ public String insertinstudentcourse(String pid,String cname) {
+        String c_id=null;
         String msg1 = "success";
         PreparedStatement pstmt = null;
+        PreparedStatement pstmtt=null;
+        ResultSet rs;
             System.out.println("-----pid---"+pid);
-            System.out.println("----cid---"+cid);
+            System.out.println("----cname---"+cname);
         String sql = "insert into student_course value(?,?)";
+        String sqll="select c_id from course where c_name=?";
         try {
             con.setAutoCommit(false);
+            pstmtt = con.prepareStatement(sqll);
+            pstmtt.setString(1, cname);           
+           rs = pstmtt.executeQuery(); 
+      
+           while (rs.next()) {               
+                               
+              c_id=rs.getString("c_id");
+           
+           }
+            
+            
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, pid);           
-            pstmt.setString(2, cid);           
+            pstmt.setString(2, c_id);           
            
             pstmt.executeUpdate();
 
@@ -1867,29 +1909,20 @@ return msg;
        ResultSet rs;
       String sql="SELECT email from person where email=?";
         con.setAutoCommit(false);
-           stmt=con.prepareStatement(sql);
+           stmt=con.prepareStatement(sql); 
            stmt.setString(1,LoginId);
            rs =stmt.executeQuery();
-           System.out.println("++++++"+rs);
-           try{
-      if(!rs.next())
-      {
-          System.out.println("noo");
-          pack="User Not Registered";
-      }
-      else
-      {
-       while(rs.next())
-       {
-            pack="";      
-       }
-      }
-           }catch(Exception e)
-           {
-               pack="Enter Valid email";
-               System.out.println(e.getMessage());
-           }
-       return pack;
+           System.out.println("++++++"+rs+"rs.next()----------"+rs.next());
+          while(rs.next())
+          {
+              String emailindb=rs.getString("email");
+              System.out.println("-+_+_+_+"+emailindb);
+          } 
+           
+           
+           
+           
+           return pack;
  }
  public JSONArray getverifiedstudents() throws SQLException,ServletException,IOException{
         
@@ -2214,7 +2247,7 @@ return msg;
     
     public String updatepriority(Priority pr){
      try{
-        
+           
          PreparedStatement pstmt = null;
             System.out.println("in========");
          String sql = "UPDATE priority SET priority=? where p_id=?";
@@ -3622,14 +3655,31 @@ String msg="";
                }
            }
 
-        }catch(Exception e)
-        {
-            e.getMessage();
+            System.out.println("pid----"+p_id);
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1,f_id );
+            pstmt.setString(2,p_id );
+            pstmt.setString(3,rating);
+            pstmt.setString(4,message);
+            
+            pstmt.executeUpdate();
+
+            con.commit();
+            msg = "Data Entered Succesfully";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+               } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
         }
-        return "success";
-}
-   
-    public JSONArray getSelectedStudent(String coursename) {
+        return f_id;
+    }
+
+        
+    public JSONArray getSelectedStudent(String coursename,String subject) {
        
     JSONArray ja=new JSONArray();
        try
@@ -3641,6 +3691,7 @@ String msg="";
              System.out.println(sql);
                con.setAutoCommit(false);
                pstmt=con.prepareStatement(sql);
+                      CourseSubSecOperation cop=new CourseSubSecOperation(con);
             
                System.out.println("1");
                pstmt.setString(1, coursename);
@@ -3650,6 +3701,11 @@ String msg="";
         JSONObject jo=new JSONObject();
       
                    String p_id=rs.getString("p_id");
+     
+                   String checkperson=cop.getselectedperson(subject,"checkapointedsubject");
+                   System.out.println("-=-=-=-=-=-="+checkperson);
+                   if(!p_id.equals(checkperson))
+                   {                  
                    System.out.println("6534----"+p_id);
                    String p_fname=rs.getString("f_name");
                    System.out.println("987----"+p_fname);
@@ -3657,8 +3713,8 @@ String msg="";
                    jo.put("p_id",p_id);
                    ja.put(jo);
                    System.out.println("jaaaaa"+ja.toString());
+                   }
                }
-               
                con.commit();
            return ja;
            
@@ -3680,7 +3736,7 @@ String msg="";
                      
            PreparedStatement pstmt = null;
            ResultSet rs=null;
-           String sql="select batchname,batch_id from batch_allocation where sub_id=?";
+           String sql="select batch_name,batch_id from batch_allocation where sub_id=?";
              System.out.println(sql);
                con.setAutoCommit(false);
                pstmt=con.prepareStatement(sql);
@@ -3694,7 +3750,7 @@ String msg="";
       
                    String batch_id=rs.getString("batch_id");
                    System.out.println("6534----"+batch_id);
-                   String batchname=rs.getString("batchname");
+                   String batchname=rs.getString("batch_name");
                    System.out.println("987----"+batchname);
                    jo.put("batchname",batchname);
                    jo.put("batch_id",batch_id);
@@ -3985,7 +4041,177 @@ String msg="";
                  System.out.println("30");
                     return s;
     }
+
+    public String allocatestudent(String student_id, String batch_id) {
+        PreparedStatement pstmt = null;
+        System.out.println("3");
+          String msg1;
+        String sql = "insert into student_batchallocation values(?,?)";
+        System.out.println("4");
+        try {
+            con.setAutoCommit(false);
+            System.out.println("5");
+            pstmt = con.prepareStatement(sql);
+            System.out.println("6");
+            
+            pstmt.setString(1,student_id); 
+            System.out.println(student_id);
+            System.out.println("7");
+            pstmt.setString(2,batch_id) ;
+            System.out.println(batch_id);
+            System.out.println("8");
+               pstmt.executeUpdate();
+               System.out.println("12");
+            con.commit();
+            System.out.println("13");
+             msg1 = "Data Inserted";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg1 = cnfe.getMessage();
+        }
+        return msg1;
+   
+    }
+
+    public String assignsubtostudent(String student_id, String sub_id) {
+        PreparedStatement pstmt = null;
+        System.out.println("3");
+          String msg1;
+        String sql = "insert into student_subject values(?,?)";
+        System.out.println("4");
+        try {
+            con.setAutoCommit(false);
+            System.out.println("5");
+            pstmt = con.prepareStatement(sql);
+            System.out.println("6");
+            
+            pstmt.setString(1,student_id); 
+            System.out.println(student_id);
+            System.out.println("7");
+            pstmt.setString(2,sub_id) ;
+            System.out.println(sub_id);
+            System.out.println("8");
+               pstmt.executeUpdate();
+               System.out.println("12");
+            con.commit();
+            System.out.println("13");
+             msg1 = "Data Inserted";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg1 = cnfe.getMessage();
+        }
+        return msg1;
+   
+   
+    }
+  
+    public int getcount(String a){
+        int c ;
         
+        if(a.equals("forstudent"));
+        {
+            c=0;
+            Statement stmt=null;
+        ResultSet rs;
+           String sql="select p_id from student"; 
+            try
+        {
+            System.out.println("qwertyu");
+            con.setAutoCommit(false);
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           System.out.println(rs);
+       while(rs.next())
+
+       {    
+           System.out.println("in whileeeee");
+          c++;
+           System.out.println("count==="+c);
+                 con.commit();   
+       }
+              stmt.close();
+                }
+           catch(Exception e)
+       {
+        System.out.println(e.getMessage());
+       }
+            System.out.println("27");
+       }
+        
+        
+        
+        if(a.equals("forbatch"))
+        {
+            c=0;
+            Statement stmtt=null;
+        ResultSet rss;
+           String sqlq="select batch_id from batch_allocation"; 
+            try
+        {
+            System.out.println("asdfgh");
+            con.setAutoCommit(false);
+           stmtt=con.createStatement();
+           rss=stmtt.executeQuery(sqlq);
+           System.out.println(rss);
+       while(rss.next())
+       {
+            System.out.println("in whileeeee");
+          c++;
+           System.out.println("count==="+c);
+                 con.commit();   
+       }
+              stmtt.close();
+                }
+           catch(Exception e)
+       {
+        System.out.println(e.getMessage());
+       }
+        }
+        
+        
+        if(a.equals("forusers"))
+        {
+            c=0;
+         Statement stmt2=null;
+        ResultSet rs2;
+           String sqlqq="select p_id from person"; 
+            try
+        {
+            con.setAutoCommit(false);
+           stmt2=con.createStatement();
+           rs2=stmt2.executeQuery(sqlqq);
+           System.out.println(rs2);
+       while(rs2.next())
+       {
+          c++;
+           System.out.println("c==="+c);
+                 con.commit();   
+       }
+              stmt2.close();
+                }
+           catch(Exception e)
+       {
+        System.out.println(e.getMessage());
+       }  
+          
+        }
+      return c;
+      
+    }  
+  
+          
         public JSONArray timetable(){
               JSONArray ja=new JSONArray();
               JSONObject jo=new JSONObject();
@@ -3997,11 +4223,6 @@ String msg="";
         String sqlll="SELECT wsl.slot_id,wsl.start_time,wsl.end_time,bb.batch_id,ba.batch_name from batch_slot_master wsl inner join workingshift_batchslot ww on ww.slot_id=wsl.slot_id inner join batchallocation_batchslot bb on bb.slot_id=wsl.slot_id inner join batch_allocation ba on ba.batch_id=bb.batch_id where ww.ws_id=?";
         try
         {
-            con.setAutoCommit(false);
-           stmt=con.createStatement();
-           rs=stmt.executeQuery(sql);
-           System.out.println(rs);
-       while(rs.next())
        {
            JSONObject obj=new JSONObject();
             String week_day=rs.getString("week_day");
@@ -4038,6 +4259,7 @@ String msg="";
                ja.put(obj);
                
                System.out.println("jaaafinal-------"+ja);
+
                  con.commit();   
        }
        
@@ -4049,10 +4271,13 @@ String msg="";
        }
             System.out.println("27");
            
+
                   String s=ja.toString();
                  System.out.println("30");
                     
          return ja;   
         }
     
+
+  
     }

@@ -141,7 +141,7 @@ public class SerPersonAndroid extends HttpServlet {
                 String msgg=null;
                 msgg=cop.insertinstudent(st,pid);
                 String msggg=null;
-                msggg=cop.insertinstudentcourse(pid,c.getC_id());
+                msggg=cop.insertinstudentcourse(pid,course);
                    SMSOperation sms=new SMSOperation();
               //  System.out.println("12");
                 sms.sendSMS(num,mess);
