@@ -13,7 +13,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>EditAboutUs</title>
+    <title>Edit About Us</title>
     <%@include file="adminHeaders.jsp" %>
 
   </head>
@@ -57,7 +57,7 @@ $(document).ready(function(){
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                   <div class="x_title">
-                         <h2>EditAboutus</h2>
+                         <h2>Edit About us</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -92,7 +92,7 @@ $(document).ready(function(){
                       </div><br/>
                                               <center><h2><bold><%=fp.getAboutus()%></bold></h2></center>
                       <div class="form-group">
-                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="updateaboutus">Update AboutUs
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="updateaboutus">Update About Us
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                               <textarea id="updateaboutus" name="updateaboutus" class="form-control" rows="6" ></textarea>

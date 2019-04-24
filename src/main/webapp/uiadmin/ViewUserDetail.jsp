@@ -53,106 +53,7 @@
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
-                      <script type="text/javascript">
-
-            function editRow(Table, nRow)
-            {
-                var Data = Table.fnGetData(nRow);
-                var Td = $('>td', nRow);
-                alert(Td.length + "-------");
-                //jqTds[0].innerHTML = '<input type="text" value="' + aData[0] + '" readOnly>';
-                Td[0].innerHTML = Data[0];
-//                Td[1].innerHTML = Data[1];
-//                Td[2].innerHTML = Data[2];
-//                Td[3].innerHTML = Data[3];
-                Td[4].innerHTML = '<input type="text" value="' + Data[4] + '">';
-                Td[5].innerHTML = '<a href="">View</a>';
-                
-                
-                Td[6].innerHTML = '<a class="edit" href="">Save</a>';
-            }
-
-
-            function saveRow(Table, nRow)
-            {
-                var Inputs = $('input', nRow);
-
-                alert(Inputs.length);
-               
-//                var f_name = Inputs[1].value;
-//                var role = Inputs[2].value;
-//                var designation = Inputs[3].value;
-                var priority = Inputs[0].value;
-                var p_id = Inputs[1].value;
-                alert("p_id--"+p_id);
-                alert("priority-----"+priority);
-//                alert("cid:"+c_id);
-//                alert(c_name);
-                location.href = "<%=application.getContextPath()%>/SerEditUserDetail?p_id="+ p_id + "&priority=" + priority;
-                    
-                Table.fnUpdate('<a class="edit" href="">Edit</a>', nRow, 1, false);
-                Table.fnDraw();
-            }
-
-            function restoreRow(Table, nRow) {
-                var Data = Table.fnGetData(nRow);
-                var Td = $('>td', nRow);
-
-                for (var i = 0, iLen = Td.length; i < iLen; i++) {
-                    Table.fnUpdate(Data[i], nRow, i, false);
-                }
-                Table.fnDraw();
-            }
-
- $(document).ready(function() {
-                Table = $("#tabledetail").dataTable({
-                    "bScrollCollapse": true,
-                    "bPaginate": true,
-                    "sPaginationType": "full_numbers",
-                 
-                    "aLengthMenu": [[3, 5, 10, -1], [3, 5, 10, "All"]],
-                    "iDisplayLength": 10
-                });
-           
-
-
-
-
-
-                var nEditing = null;
-
-                $(document).on('click', '#tabledetail a.edit', function(e) {
-                 alert("inedit");
-                    e.preventDefault();
-
-                    var nRow = $(this).parents('tr')[0];
-
-                    if (nEditing!== null && nEditing!== nRow) {
-                        /* Currently editing - but not this row - restore the old before continuing to edit mode */
-                        alert("inif");
-                        restoreRow(Table, nEditing);
-                        editRow(Table, nRow);
-                        nEditing = nRow;
-                    }
-                    else if (nEditing === nRow && this.innerHTML === "Save") {
-                        alert(nRow);
-                        /* Editing this row and want to save it */
-                        alert("inelseif");
-                        saveRow(Table, nEditing);
-                        nEditing = null;
-                    }
-                    else {
-                        /* No edit in progress - let's start one */
-                       alert("inelse");
-                        editRow(Table, nRow);
-                        nEditing = nRow;
-                    }
-                });
-
-
-});
-        </script>
-
+                      
                     <p>Simple table with User Detail with editing options</p>
  <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" >
                     <!-- start project list -->
@@ -163,9 +64,7 @@
                           <th>Name</th>
                           <th>Role</th>
                           <th>Designation</th>
-                          <th>Priority</th>
-                          <th>Profile Attribute</th>
-                          <th>Edit</th>
+                         
                         </tr>
                       </thead>
                       <tbody>
@@ -193,33 +92,7 @@
                           </td>
                           <td><%=obj.getString("designation")%>
                           </td>
-                          <td>
-                                 <%
-                                     String p_id = obj.getString("p_id");
-                                     String check = cso.prioritycheck(p_id);
-                                     System.out.println("check--------"+check);
-                                     if(check==null)
-                                     {
-                                        %>
-                                        0
-                                        <% 
-                                            String assignpriority=cso.assignpriority(p_id,"0");
-                                     }
-                                    else{
-                                            %>
-                                            <%=check%>
-                                            <%
-                                         }   
-
-                              %>                       
-                          </td>
-                          <td>
-                                 <a href="#" class="btn btn-primary btn-xs"><i class="fa fa-folder"></i> View </a>                       
-                          </td>
-                           <td>
-                            <a href="" class="edit"><i class="fa fa-pencil"></i> Edit Priority</a>
-                           </td>
-                          
+                         
                          
                           </tr>
                          <% }%>
