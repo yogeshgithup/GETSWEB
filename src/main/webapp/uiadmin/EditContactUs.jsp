@@ -12,7 +12,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>EditContactUs</title>
+    <title>Edit Contact Us</title>
     <%@include file="adminHeaders.jsp" %>
 
   </head>

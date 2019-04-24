@@ -23,7 +23,15 @@
  <script type="text/javascript">
                     $(document).ready(function() {
                        // alert("table");
-                        $('#tablecourse').DataTable();
+                        $('#tablecourse').DataTable({
+                             "bScrollCollapse": true,
+                    "bPaginate": true,
+                    "sPaginationType": "full_numbers",
+                 
+                    "aLengthMenu": [[3, 5, 10, -1], [3, 5, 10, "All"]],
+                    "iDisplayLength": 10
+                        });
+                        
                     });
                 </script>
   </head>
@@ -119,14 +127,7 @@ Msg ="//(String)session.getAttribute("msg");
             }
 
  $(document).ready(function() {
-                Table = $("#tablecourse").dataTable({
-                    "bScrollCollapse": true,
-                    "bPaginate": true,
-                    "sPaginationType": "full_numbers",
-                 
-                    "aLengthMenu": [[3, 5, 10, -1], [3, 5, 10, "All"]],
-                    "iDisplayLength": 10
-                });
+              
            
 
 

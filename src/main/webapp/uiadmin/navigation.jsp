@@ -93,7 +93,7 @@ System.out.println("------------------------------------------------------------
                     <ul class="nav child_menu">
                       <li><a href="AddAttribute.jsp">Profile Attribute</a></li>
                       <li><a href="AddDesignation.jsp">Designation</a></li>
-                      <li><a href="AddPriority.jsp">Priority</a></li>
+                   
                       <li><a href="AddRole.jsp">Role</a></li>
                        </ul>
                   </li>

@@ -2234,50 +2234,50 @@ return msg;
         
      
     }
-    public String prioritycheck(String p_id){
-       String p = null;
-        try{
-            con.setAutoCommit(false);
-            PreparedStatement pstmt = null;
-            ResultSet rs=null;
-            System.out.println("in========pro");
-         String sql = "Select priority from priority where p_id=?";
-          pstmt = con.prepareStatement(sql);
-       System.out.println("1");
-       pstmt.setString(1, p_id);
-            System.out.println("22");
-         rs=pstmt.executeQuery();
-            System.out.println("33");
-             System.out.println(rs);
-           while(rs.next())
-           {
-               p=rs.getString("priority");
-             
-           } con.commit();       
-        }catch(Exception e){
-            System.out.println("msg======"+e.getMessage());
-            return e.getMessage();
-        }
-        return p;
-    }
-     public String assignpriority(String p_id,String p){
-        try{
-            PreparedStatement pstmt = null;
-            System.out.println("in========assign");
-         String sql = "insert into priority values(?,?)";
-       pstmt = con.prepareStatement(sql);
-       System.out.println("1");
-       pstmt.setString(1, p);
-       pstmt.setString(2,p_id);
-       pstmt.executeUpdate();
-        return "success";
-            
-        }catch(Exception e){
-            System.out.println("msg======"+e.getMessage());
-            return "error";
-        }
-    }
-    
+//    public String prioritycheck(String p_id){
+//       String p = null;
+//        try{
+//            con.setAutoCommit(false);
+//            PreparedStatement pstmt = null;
+//            ResultSet rs=null;
+//            System.out.println("in========pro");
+//         String sql = "Select priority from priority where p_id=?";
+//          pstmt = con.prepareStatement(sql);
+//       System.out.println("1");
+//       pstmt.setString(1, p_id);
+//            System.out.println("22");
+//         rs=pstmt.executeQuery();
+//            System.out.println("33");
+//             System.out.println(rs);
+//           while(rs.next())
+//           {
+//               p=rs.getString("priority");
+//             
+//           } con.commit();       
+//        }catch(Exception e){
+//            System.out.println("msg======"+e.getMessage());
+//            return e.getMessage();
+//        }
+//        return p;
+//    }
+//     public String assignpriority(String p_id,String p){
+//        try{
+//            PreparedStatement pstmt = null;
+//            System.out.println("in========assign");
+//         String sql = "insert into priority values(?,?)";
+//       pstmt = con.prepareStatement(sql);
+//       System.out.println("1");
+//       pstmt.setString(1, p);
+//       pstmt.setString(2,p_id);
+//       pstmt.executeUpdate();
+//        return "success";
+//            
+//        }catch(Exception e){
+//            System.out.println("msg======"+e.getMessage());
+//            return "error";
+//        }
+//    }
+//    
      public JSONArray getunverifiedstudents()
     {
         
@@ -4036,9 +4036,11 @@ String msg="";
            
             }
                ja.put(obj);
+               
                System.out.println("jaaafinal-------"+ja);
                  con.commit();   
        }
+       
               stmt.close();
                 }
            catch(Exception e)
