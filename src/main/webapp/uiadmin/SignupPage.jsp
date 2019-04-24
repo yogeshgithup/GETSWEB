@@ -278,7 +278,7 @@
 
                                     <div class="form-group">
                                         <label class="control-label col-md-3 col-sm-3 col-xs-12"  for="contact_no">Contact Number <span class="required">*</span>
-                                        </la bel>
+                                        </label>
                                         <div class="col-md-5 col-sm-6 col-xs-12">
                                             <input type="number" id="contactnumber" name="contact_no"  class="form-control col-md-7 col-xs-12" onkeypress="return isNumber(event)">
                                         </div>
@@ -371,9 +371,9 @@
 
                                     <div class="form-group">
                                         <div class="col-md-5 col-sm-6 col-xs-12 col-md-offset-3">
-                                            <button class="btn btn-primary" type="button">Cancel</button>
-                                            <button class="btn btn-primary" type="reset">Reset</button>
-                                            <button type="submit" value="submit" name="submit" class="btn btn-success" >Submit</button>
+<!--                                            <button class="btn btn-primary" type="button">Cancel</button>
+                                            <button class="btn btn-primary" type="reset">Reset</button>-->
+<center>  <button type="submit" value="submit" name="submit" class="btn btn-success" >Submit</button></center>
                                         </div>
                                     </div>
                                 </form>
