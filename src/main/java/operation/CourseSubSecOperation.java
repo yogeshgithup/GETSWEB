@@ -502,7 +502,6 @@ return msg;
     }
     
     
-    
     public JSONArray getSelectedSubject(String op)
     {
         JSONArray ja=new JSONArray();
@@ -1237,7 +1236,7 @@ return msg;
                      {
                          CourseSubSecOperation cop=new CourseSubSecOperation(con);
                          msg="Student";  
-                         String sendmsg=cop.notification("Now you are able to LOGIN",id,"forindividual");
+                        // String sendmsg=cop.notification("Now you are able to LOGIN",id,"forindividual");
                      }else
                      { 
                          msg="User Not Approved Yet"; 
@@ -4211,8 +4210,7 @@ String msg="";
       
     }  
   
-          
-        public JSONArray timetable(){
+         public JSONArray timetable(){
               JSONArray ja=new JSONArray();
               JSONObject jo=new JSONObject();
         Statement stmt=null;
@@ -4223,6 +4221,11 @@ String msg="";
         String sqlll="SELECT wsl.slot_id,wsl.start_time,wsl.end_time,bb.batch_id,ba.batch_name from batch_slot_master wsl inner join workingshift_batchslot ww on ww.slot_id=wsl.slot_id inner join batchallocation_batchslot bb on bb.slot_id=wsl.slot_id inner join batch_allocation ba on ba.batch_id=bb.batch_id where ww.ws_id=?";
         try
         {
+            con.setAutoCommit(false);
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           System.out.println(rs);
+       while(rs.next())
        {
            JSONObject obj=new JSONObject();
             String week_day=rs.getString("week_day");
@@ -4258,13 +4261,294 @@ String msg="";
             }
                ja.put(obj);
                System.out.println("jaaafinal-------"+ja);
-       
+                 con.commit();   
+       }
+              stmt.close();
+                }
+           catch(Exception e)
+       {
+        System.out.println(e.getMessage());
+       }
+            System.out.println("27");
+           
                   String s=ja.toString();
                  System.out.println("30");
                     
          return ja;   
         }
-    
 
+    public String getAdminNumber() {
+        String num="";   
+        PreparedStatement pstmt=null;
+        ResultSet rs;
+           String sql="select contact_no from person where p_id=?"; 
+            try
+        {
+            con.setAutoCommit(false);
+           pstmt=con.prepareStatement(sql);
+           pstmt.setString(1, "A1");
+           rs=pstmt.executeQuery();
+           System.out.println(rs);
+       while(rs.next())
+       {
+            num=rs.getString("contact_no");
+       }
+                }
+           catch(Exception e)
+       {
+        System.out.println(e.getMessage());
+       }  
+      return num;    
+        }
+      
+    public JSONArray getsubjectcourseformarks(String loginid,String a)
+    {
+              JSONArray ja=new JSONArray();
+      
+        if(a.equals("course"))
+        {
+       try
+       {
+                     
+           PreparedStatement pstmt = null;
+           ResultSet rs=null;
+           String sql="SELECT uc.c_id,c.c_name FROM users_course uc inner join course c on c.c_id=uc.c_id where uc.p_id=?";
+             System.out.println(sql);
+               con.setAutoCommit(false);
+               pstmt=con.prepareStatement(sql);
+            
+               System.out.println("1");
+               pstmt.setString(1, loginid);
+             System.out.println("2");
+               rs = pstmt.executeQuery();
+               while (rs.next()) {
+        JSONObject jo=new JSONObject();
+      
+                   String c_name=rs.getString("c_name");
+                   System.out.println("6534----"+c_name);
+                   String c_id=rs.getString("c_id");
+                   System.out.println("987----"+c_id);
+                   jo.put("c_name",c_name);
+                   jo.put("c_id",c_id);
+                   ja.put(jo);
+                   System.out.println("jaaaaa"+ja.toString());
+               }
+               
+               con.commit();
+           return ja;
+           
+           
+       }           
+        catch (SQLException ex) {       
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+      }
+        if(a.equals("subject"))
+        {
+       try
+       {
+                     
+           PreparedStatement pstmt = null;
+           ResultSet rs=null;
+           String sql="select c_id from users_course where p_id=?";
+             System.out.println(sql);
+               con.setAutoCommit(false);
+               pstmt=con.prepareStatement(sql);
+            
+               System.out.println("1");
+               pstmt.setString(1, loginid);
+             System.out.println("2");
+               rs = pstmt.executeQuery();
+               while (rs.next()) {
+        JSONObject jo=new JSONObject();
+      
+                   String sub_name=rs.getString("sub_name");
+                   System.out.println("6534----"+sub_name);
+                   String sub_id=rs.getString("sub_id");
+                   System.out.println("987----"+sub_id);
+                   jo.put("sub_name",sub_name);
+                   jo.put("sub_id",sub_id);
+                   ja.put(jo);
+                   System.out.println("jaaaaa"+ja.toString());
+               }
+               
+               con.commit();
+           return ja;
+           
+           
+       }           
+        catch (SQLException ex) {       
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+      }
+        
+        
+        
+        return ja;
+    }
+      
+    public JSONArray getfaculty()
+    {
+           JSONArray ja=new JSONArray();
+             Statement stmt = null;
+           ResultSet rs=null;
+           String sql="SELECT p_id,f_name,m_name,l_name FROM person WHERE substring(p_id,1,1)='F'";
+             System.out.println("sqqll"+sql);
+       try
+       {
+           stmt=con.createStatement();
+           rs=stmt.executeQuery(sql);
+           while(rs.next())  
+           {
+                  JSONObject jo=new JSONObject();
+      
+                   String p_id=rs.getString("p_id");
+                   System.out.println("6534----"+p_id);
+                   String f_name=rs.getString("f_name")+" "+rs.getString("m_name")+" "+rs.getString("l_name");
+                   System.out.println("987----"+f_name);
+                   jo.put("f_name",f_name);
+                   jo.put("p_id",p_id);
+                   ja.put(jo);
+                   System.out.println("jaaaaa"+ja.toString());
+               
+           }
+       }catch(Exception e)
+       {
+                ;
+       }
+           
+           
+           
+           
+           
+           
+            return ja;
+    }    
+
+    public String appointdayshifttouser(String fac, String Day, String shift) {
+        String msg="";
+        PreparedStatement pstmt = null;
+        String sql = "insert into users_workingdays value(?,?)";
+        PreparedStatement pstmtt = null;
+        String sqll = "insert into users_workingshift value(?,?)";
+        
+        System.out.println("1212313");
+        
+        try {
+            con.setAutoCommit(false);
+            
+            System.out.println("p_id-++++++++++++++++++++++++---"+fac);
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, fac);
+            pstmt.setString(2, Day);
+            
+            pstmt.executeUpdate();
+
+            pstmtt = con.prepareStatement(sqll);
+            pstmtt.setString(1, fac);
+            pstmtt.setString(2, shift);
+            
+            pstmtt.executeUpdate();
+
+            
+            con.commit();
+            msg = "Data Entered Succesfully";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+               } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return msg;    
+    }
+
+    public String appointcoursesubjecttouser(String fac, String course, String subject) {
+        String msg="";
+        PreparedStatement pstmt = null;
+        String sql = "insert into users_course value(?,?)";
+        PreparedStatement pstmtt = null;
+        String sqll = "insert into users_subject value(?,?)";
+        
+        System.out.println("1212313");
+        
+        try {
+            con.setAutoCommit(false);
+            
+            System.out.println("p_id--======================================--"+fac);
+            pstmt = con.prepareStatement(sql);
+            pstmt.setString(1, fac);
+            pstmt.setString(2, course);
+            
+            pstmt.executeUpdate();
+
+            pstmtt = con.prepareStatement(sqll);
+            pstmtt.setString(1, fac);
+            pstmtt.setString(2, subject);
+            
+            pstmtt.executeUpdate();
+
+            
+            con.commit();
+            msg = "Data Entered Succesfully";
+            
+        } catch (SQLException cnfe) {
+            try {
+                con.rollback();
+               } catch (SQLException ex) {
+                Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            msg = cnfe.getMessage();
+        }
+        return msg;    
+  
+    
+    
+    }
+
+    public JSONArray getSelecteduser(String s_id) {
+  JSONArray ja=new JSONArray();
+       try
+       {
+                     
+           PreparedStatement pstmt = null;
+           ResultSet rs=null;
+           String sql="SELECT p.f_name,us.p_id FROM users_subject us inner join person p on p.p_id=us.p_id where sub_id=?";
+             System.out.println(sql);
+               con.setAutoCommit(false);
+               pstmt=con.prepareStatement(sql);
+            
+               System.out.println("1");
+               pstmt.setString(1, s_id);
+             System.out.println("2");
+               rs = pstmt.executeQuery();
+               while (rs.next()) {
+        JSONObject jo=new JSONObject();
+      
+                   String p_id=rs.getString("p_id");
+                   System.out.println("6534----"+p_id);
+                   String name=rs.getString("f_name");
+                   System.out.println("987----"+name);
+                   jo.put("fname",name);
+                   jo.put("p_id",p_id);
+                   ja.put(jo);
+                   System.out.println("jaaaaa"+ja.toString());
+               }
+               
+               con.commit();
+           return ja;
+           
+           
+       }           
+        catch (SQLException ex) {       
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+           return ja;
+
+    
+    
+    }
   
     }

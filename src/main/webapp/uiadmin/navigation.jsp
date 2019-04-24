@@ -103,7 +103,9 @@ System.out.println("------------------------------------------------------------
                       <li><a href="AllocateBatch.jsp">Allocate Batch</a></li>
                       <li><a href="ViewBatchList.jsp">View Batch List</a></li>
                      <li><a href="AllocateStudent.jsp">Allocate Student</a></li>
-                 
+                     <li><a href="AllocateStaff.jsp">Allocate Staff</a></li>
+                     <li><a href="AppointBatch.jsp">Appoint Batch</a></li>
+                    
                     </ul>
                   </li>
                   <li><a><i class="fa fa-bar-chart-o"></i>Manage WS <span class="fa fa-chevron-down"></span></a>

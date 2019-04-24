@@ -97,13 +97,19 @@ public class SerPerson extends HttpServlet {
                // CourseSubSecOperation cop=new CourseSubSecOperation(con);
                 p.setQuali(quali);
                String msg = null;
-                String mess="username="+email+"password="+password;
+                String mess="Welcome,your"+"username="+email+"And password="+password;
                 System.out.println(mess);
-                String num= "8200781397";
+                String num= Long.toString(contact_no);
                 msg = cop.insertinPerson(p);
+                String adnum=cop.getAdminNumber();
                 SMSOperation sms=new SMSOperation();
                 sms.sendSMS(num,mess);
+                if(adnum!=null)
+                {
+                sms.sendSMS(adnum,"NEW USER HAS JUST SIGNED UP");
+                }
                 out.println(msg);
+                
                 
                 System.out.println("36---"+op);
 

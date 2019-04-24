@@ -92,14 +92,6 @@ public class SerAllocateBatch extends HttpServlet {
          hs.setAttribute("msg", batch_id);
           res.sendRedirect(ctx.getContextPath()+"/"+"uiadmin"+"/"+"AllocateBatch.jsp");
        
-                if(req.getParameter("sec").equals("staff"))
-         {
-             res.sendRedirect(ctx.getContextPath()+"/"+"UploadMaterialStaff.jsp");
-         }
-         else
-         {
-             res.sendRedirect(ctx.getContextPath()+"/"+"UploadMaterialstaff.jsp");
-         }   
           
             } catch (ParseException ex) {
                 Logger.getLogger(SerAllocateBatch.class.getName()).log(Level.SEVERE, null, ex);

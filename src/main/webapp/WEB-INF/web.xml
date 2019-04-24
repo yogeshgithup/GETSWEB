@@ -14,7 +14,7 @@
     </context-param>
     <context-param>
         <param-name>password</param-name>
-        <param-value>asad</param-value>
+        <param-value>ajava</param-value>
     </context-param>
     <context-param>
         <param-name>accesstoken</param-name>
@@ -282,10 +282,18 @@
     <servlet>
         <servlet-name>SerAllocateBatchToStudent</servlet-name>
         <servlet-class>ser.SerAllocateBatchToStudent</servlet-class>
-   </servlet>
+    </servlet>
     <servlet>
-      <servlet-name>SerTimeTable</servlet-name>
+        <servlet-name>SerTimeTable</servlet-name>
         <servlet-class>ser.SerTimeTable</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerAllocateStaff</servlet-name>
+        <servlet-class>ser.SerAllocateStaff</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerGetUserBySubject</servlet-name>
+        <servlet-class>ser.SerGetUserBySubject</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
@@ -546,10 +554,18 @@
     <servlet-mapping>
         <servlet-name>SerAllocateBatchToStudent</servlet-name>
         <url-pattern>/SerAllocateBatchToStudent</url-pattern>
-</servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SerTimeTable</servlet-name>
         <url-pattern>/SerTimeTable</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAllocateStaff</servlet-name>
+        <url-pattern>/SerAllocateStaff</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerGetUserBySubject</servlet-name>
+        <url-pattern>/SerGetUserBySubject</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
