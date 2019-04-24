@@ -15,7 +15,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Allocate Batch</title>
+    <title>Upload Material</title>
     <%@include file="adminHeaders.jsp" %>
  
   </head>
@@ -25,7 +25,7 @@
       <div class="main_container">
              
        
-    <%@include file="navigation.jsp" %>
+    <%@include file="navigationfaculty.jsp" %>
   <%
 String msg=(String)session.getAttribute("msg");
                     if(msg!=null)
@@ -40,12 +40,12 @@ String msg=(String)session.getAttribute("msg");
   %>
  
 
- <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
  <script>
     $(document).ready(function() {
 //     alert("hello");
        $('#msg').fadeOut(5000);
-      var m="";
+  
        $("#course").focusout(function(){
          $('#subject').empty();
         var n= $("#course option:selected").val();  
@@ -66,57 +66,52 @@ String msg=(String)session.getAttribute("msg");
    });       
               
      });
-      
-       $("#subject").focusout(function(){
-         $('#student').empty();
-        var n= $("#course option:selected").val();  
-        var nn=$("#subject option:selected").val();  
-       
-  //alert("nn"+nn);  
-   $.post("<%=application.getContextPath()%>/SerGetStudentbycourse?id="+n+"&id1="+nn,function(data,status){
-                        ///alert(data) ;
-                     obj=JSON.parse(data);
-//                  alert(obj.length);
-                      for(i=0;i<obj.length;i++)
-                      {   
-    //                 alert(obj[i]);
-                          $('#student')
-         .append($("<option></option>")
-                     .attr("value",obj[i].p_id)
-                    .text(obj[i].p_fname));
-                   }
-                  
-   });       
-              
-     });
-    
-    
- $("#subject").focusout(function(){
-         $('#batch').empty();
-        var n= $("#subject option:selected").val();  
+     
+    $("#day").focusout(function(){
+         $('#shift').empty();
+        var n= $("#day option:selected").val();  
 //  alert(n);  
-   $.post("<%=application.getContextPath()%>/SerGetbatchbysubject?id="+n,function(data,status){
+   $.post("<%=application.getContextPath()%>/SerGetShift?id="+n,function(data,status){
                       //alert("1"+data) ;
                      obj=JSON.parse(data);
                      
 //                     alert(obj.length);
                       for(i=0;i<obj.length;i++)
                       {
-                          $('#batch')
+                          $('#shift')
          .append($("<option></option>")
-                     .attr("value",obj[i].batch_id)
-                    .text(obj[i].batchname));
+                     .attr("value",obj[i].ws_id)
+                    .text(obj[i].start_time+"-"+obj[i].end_time));
+                   }
+                  
+   });       
+              
+     });
+  
+ $("#shift").focusout(function(){
+         $('#slot').empty();
+        var n= $("#shift option:selected").val();  
+//  alert(n);  
+   $.post("<%=application.getContextPath()%>/SerGetSlot?id="+n,function(data,status){
+                      //alert("1"+data) ;
+                     obj=JSON.parse(data);
+                     
+//                     alert(obj.length);
+                      for(i=0;i<obj.length;i++)
+                      {
+                          $('#slot')
+         .append($("<option></option>")
+                     .attr("value",obj[i].slot_id)
+                    .text(obj[i].start_time+"-"+obj[i].end_time));
                    }
                   
    });       
                
      });
   
-           
-           
-    });  
+  
 
-   
+    });
    
 </script>
 
@@ -127,8 +122,8 @@ String msg=(String)session.getAttribute("msg");
             <div class="row">
               <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
-                   <div class="x_title">
-                    <h2>Allocate Student</h2>
+                  <div class="x_title">
+                    <h2>Upload Material</h2>
                     <ul class="nav navbar-right panel_toolbox">
                       <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
                       </li>
@@ -142,8 +137,8 @@ String msg=(String)session.getAttribute("msg");
                     <div class="clearfix"></div>
                   </div>
                    <div class="x_content">
-                    <br /> 
-                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerAllocateBatchToStudent" >
+                    <br />
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" method="post" action="<%=application.getContextPath()%>/SerAllocateBatch?sec=staff">
             <h3>Select Course</h3>
       <select  id="course" name="course">
                                 <%               
@@ -169,32 +164,24 @@ String msg=(String)session.getAttribute("msg");
                                  %> 
                              </select>
       </br></br>
-<div class="form-group">
-                     
-          
-      </br></br>
-      <h2>Select Student</h2> 
-                             <select id="student" name="student">
-                                 <% 
-                                   
-                                 %> 
-                             </select>
-      </br></br>
-
-      <h2>Select Batch</h2> 
-                             <select id="batch" name="batch">
-                                 <% 
-                                   
-                                 %> 
-                             </select> 
-      
-      </div>
-                     
-                     <div class="form-group">
-                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
-                          <center><button type="submit" id="submit" name="submit" class="btn btn-success">Submit</button></center>
+                      <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="Upload Material">Upload Material
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                          <input type="file" id="Upload Material" name="Upload Material"  class="form-control col-md-7 col-xs-12">
                         </div>
                       </div>
+      
+                    <div class="form-group">
+                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                          <center><button type="submit" name="submit" class="btn btn-success">Submit</button></center>
+                        </div>
+                      </div>
+
+                    
+<div class="form-group">
+                     
+                
 
                     </form>
                         

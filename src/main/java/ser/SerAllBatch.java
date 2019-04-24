@@ -41,6 +41,15 @@ public class SerAllBatch extends HttpServlet {
                 String allbatch;
                 allbatch= cop.notification(msg,"","forall");
                 
+                      if(request.getParameter("sec").equals("staff"))
+         {
+             response.sendRedirect(ctx.getContextPath()+"/"+"SendAllStaff.jsp");
+         }
+         else
+         {
+             response.sendRedirect(ctx.getContextPath()+"/"+"SendAllStaff.jsp");
+         }   
+                
                }
                catch(Exception e)
                {
