@@ -85,6 +85,7 @@ System.out.println("------------------------------------------------------------
                       <li><a href="Feedbacksstaff">View FeedBack</a></li>
                        </ul>
                   </li>
+                  <li><a href="EnterMarksStaff.jsp"><i class="fa fa-table"></i> Enter Marks </a></li>
                  
                   
                   

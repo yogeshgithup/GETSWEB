@@ -120,9 +120,9 @@ public class SerPersonAndroid extends HttpServlet {
                String msg = null;
                msg = cop.insertinPerson(p);
                
-                String mess="username="+email+"password="+password;
+                String mess="Welcome,your"+"username="+email+"And password="+password;
                 System.out.println(mess);
-                String num= "9586622091";
+                String num= Long.toString(contact_no);
                 String guardian_contact_no=obj.getString("guardian_contact_no");
                 System.out.println("gcn"+guardian_contact_no);
                 String parent_name=obj.getString("parent_name");

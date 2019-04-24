@@ -22,13 +22,6 @@ public class SerTimeTable extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       doPost(request,response);
-    }
-
-   
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
           PrintWriter out=response.getWriter();
       ServletContext ctx=this.getServletContext();
         System.out.println("1234567890-");
@@ -41,7 +34,7 @@ public class SerTimeTable extends HttpServlet {
                try {
                 JSONArray jab=cop.timetable();
                    System.out.println("jsonarray-----"+jab);
-              
+                    out.println(jab);
                }
                catch(Exception e)
                {
@@ -49,9 +42,11 @@ public class SerTimeTable extends HttpServlet {
                }
             
            }
-   }
-    
+    }
 
    
+    
+
+
     
 
