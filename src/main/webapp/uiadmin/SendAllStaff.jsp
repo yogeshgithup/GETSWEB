@@ -1,11 +1,7 @@
-<%@page import="data.Student"%>
-<%@page import="org.json.JSONObject"%>
-<%@page import="org.json.JSONTokener"%>
-<%@page import="org.json.JSONArray"%>
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Feedback</title>
+    <title>SendAll</title>
     <%@include file="adminHeaders.jsp" %>
 
   </head>
@@ -26,7 +22,7 @@ String msg=(String)session.getAttribute("msg");
               }
 %>
 
- <script>
+<script>
 $(document).ready(function(){
     //alert("Hello");
     //$('#msg').load(function(){
@@ -44,7 +40,7 @@ $(document).ready(function(){
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Feedback</h3>
+                <h3>Send Notification to All</h3>
               </div>
 
               <div class="title_right">
@@ -72,31 +68,18 @@ $(document).ready(function(){
                     </ul>
                               <div id="msg" align="center" style="color:red">
                         <h3><%=msg%></h3>
-                        <% loginid=(String)session.getAttribute("loginid");%>
-                 <%session.removeAttribute("msg");%>              
+ <%session.removeAttribute("msg");%>                               
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br />
-                    
-<form  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerGiveFeedback">
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerAllBatch?sec=staff">
 
-                      <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="message">Rating
-                        </label>
-                        <div class="col-md-6 col-sm-6 col-xs-12">
-                                 <input type="radio" name="rating" value="1" class="fa star"> 
-                                 <input type="radio" name="rating" value="2" class="star">
-                                 <input type="radio" name="rating" value="3" class="star">
-                                 <input type="radio" name="rating" value="4" class="star">
-                                 <input type="radio" name="rating" value="5" class="star">
-                        </div>
-                      </div>
                              <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="message">Message
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                              <textarea id="message" name="message" class="form-control" rows="6" ></textarea>
+                              <textarea id="updateaboutus" name="message" class="form-control" rows="6" ></textarea>
                         
                         </div>
                       </div>
@@ -107,7 +90,6 @@ $(document).ready(function(){
                           <button id="send" type="submit" class="btn btn-success">Submit</button>
                         </div>
                       </div>
-                    </form>
                   </div>
                 </div>
               </div>

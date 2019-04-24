@@ -280,7 +280,11 @@
         <servlet-class>ser.SerCourseSpinner</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SerTimeTable</servlet-name>
+        <servlet-name>SerAllocateBatchToStudent</servlet-name>
+        <servlet-class>ser.SerAllocateBatchToStudent</servlet-class>
+   </servlet>
+    <servlet>
+      <servlet-name>SerTimeTable</servlet-name>
         <servlet-class>ser.SerTimeTable</servlet-class>
     </servlet>
     <servlet-mapping>
@@ -539,6 +543,10 @@
         <servlet-name>SerCourseSpinner</servlet-name>
         <url-pattern>/SerCourseSpinner</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAllocateBatchToStudent</servlet-name>
+        <url-pattern>/SerAllocateBatchToStudent</url-pattern>
+</servlet-mapping>
     <servlet-mapping>
         <servlet-name>SerTimeTable</servlet-name>
         <url-pattern>/SerTimeTable</url-pattern>

@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Feedback</title>
+    <title>Send Batch-Wise</title>
     <%@include file="adminHeaders.jsp" %>
 
   </head>
@@ -44,7 +44,7 @@ $(document).ready(function(){
           <div class="">
             <div class="page-title">
               <div class="title_left">
-                <h3>Feedback</h3>
+                <h3>Send Batch-Wise Notification</h3>
               </div>
 
               <div class="title_right">
@@ -72,24 +72,37 @@ $(document).ready(function(){
                     </ul>
                               <div id="msg" align="center" style="color:red">
                         <h3><%=msg%></h3>
-                        <% loginid=(String)session.getAttribute("loginid");%>
                  <%session.removeAttribute("msg");%>              
                     <div class="clearfix"></div>
                   </div>
                   <div class="x_content">
                     <br />
                     
-<form  id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerGiveFeedback">
+<form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left"  method="post" action="<%=application.getContextPath()%>/SerBatchWise?sec=staff">
 
                       <div class="form-group">
-                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="message">Rating
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="rollno">Roll No
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
-                                 <input type="radio" name="rating" value="1" class="fa star"> 
-                                 <input type="radio" name="rating" value="2" class="star">
-                                 <input type="radio" name="rating" value="3" class="star">
-                                 <input type="radio" name="rating" value="4" class="star">
-                                 <input type="radio" name="rating" value="5" class="star">
+                               <h>Select Batch</h>   
+      <select  id="batch" name="batch">
+                             <%
+                           CourseSubSecOperation cso=new CourseSubSecOperation(con);
+                            JSONArray ja=cso.sendbatchweb();
+                               JSONTokener js=new JSONTokener(ja.toString());
+                                   JSONArray jaa=(JSONArray)js.nextValue();
+                                 System.out.println("89");
+                         
+                                    System.out.println("ja.length()"+ja.length());
+                            for(int i=0;i<ja.length();i++)
+                            {  
+                                   JSONObject obj=(JSONObject)jaa.getJSONObject(i);
+                              %>
+                         
+                                  <option value="<%=obj.getString("batch_id")%>"><%=obj.getString("batch_id")%>--<%=obj.getString("batch_name")%></option>
+                                 
+                                  <% } %>
+      </select>
                         </div>
                       </div>
                              <div class="form-group">

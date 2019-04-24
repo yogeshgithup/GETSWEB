@@ -25,20 +25,20 @@
                                      $(document).ready(function()                                                                          
                                      {
                                       $("#msg").fadeOut(3000);
-                                       $("#LoginId").focusout(function(){
-                                    //       alert("123");
-                                          var login = $("#LoginId").val();
-                                      //    alert(login);
-                                          if(login!=="")
-                                          {
-                                       //       alert("1234");
-                                             $.post("<%=application.getContextPath()%>/SerUserChecking",{"LoginId":login},function(data,status){
-                                          //   alert("heloooo");
-                                             alert(data);
-                                            $("#LoginId").val("");
-                                         });
-                                          }
-                                       }); 
+//                                       $("#LoginId").focusout(function(){
+//                                    //       alert("123");
+//                                          var login = $("#LoginId").val();
+//                                          alert(login);
+//                                          if(login!=="")
+//                                          {
+//                                       //       alert("1234");
+//                                             $.post("/SerUserChecking",{"LoginId":login},function(data,status){
+//                                          //   alert("heloooo");
+//                                             alert(data);
+//                                            $("#LoginId").val("");
+//                                         });
+//                                          }
+//                                       }); 
                                      });
                                     
                                      </script>

@@ -50,16 +50,25 @@ public class SerIndividual extends HttpServlet {
                 
                 String individual;
                 individual= cop.notification(msg,student,"forindividual");
-                
+           
+                if(request.getParameter("sec").equals("staff"))
+         {
+             response.sendRedirect(ctx.getContextPath()+"/"+"SendIndividualStaff.jsp");
+         }
+         else
+         {
+             response.sendRedirect(ctx.getContextPath()+"/"+"SendIndividual.jsp");
+         }   
+         
                }
                catch(Exception e)
                {
                    System.out.println("123--------"+e);
                }
-            out.println("Message sent");
         
     }
 
+         
    
     @Override
     public String getServletInfo() {

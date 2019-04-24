@@ -42,6 +42,7 @@ public class SerUserChecking extends HttpServlet {
         CourseSubSecOperation cop=new CourseSubSecOperation(con);
          PrintWriter out=response.getWriter();
         // out.println("hellooo");
+         System.out.println("loginid in ser user checking"+request.getParameter("LoginId"));
         if(request.getParameter("LoginId")!=null)
         {
             

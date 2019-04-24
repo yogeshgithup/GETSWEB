@@ -51,7 +51,18 @@ public class SerBatchWise extends HttpServlet {
                 String batchh;
                 batchh= cop.notification(msg,batch,"forbatch");
                 
+                      if(request.getParameter("sec").equals("staff"))
+         {
+             response.sendRedirect(ctx.getContextPath()+"/"+"SendBatchWiseStaff.jsp");
+         }
+         else
+         {
+             response.sendRedirect(ctx.getContextPath()+"/"+"SendBatchWiseStaff.jsp");
+         }   
+         
+                
                }
+               
                catch(Exception e)
                {
                    System.out.println("123--------"+e);
