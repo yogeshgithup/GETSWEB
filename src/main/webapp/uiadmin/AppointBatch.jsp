@@ -33,7 +33,7 @@
         var n= $("#course option:selected").val();  
   //alert(n);  
    $.post("<%=application.getContextPath()%>/SerGetSubject?id="+n,function(data,status){
-                        alert(data) ;
+      //                  alert(data) ;
                      obj=JSON.parse(data);
 //                  alert(obj.length);
                       for(i=0;i<obj.length;i++)
@@ -60,17 +60,37 @@
                       for(i=0;i<obj.length;i++)
                       {
     //                 alert(obj[i]);
-                          $('#subject')
+                          $('#fac')
          .append($("<option></option>")
-                     .attr("value",obj[i].sub_id)
-                    .text(obj[i].sub_name));
+                     .attr("value",obj[i].p_id)
+                    .text(obj[i].fname));
                    }
                   
    });       
               
      });
     
-       
+       $("#fac").focusout(function(){
+         $('#batch').empty();
+        var n= $("#fac option:selected").val();  
+  //alert(n);  
+   $.post("<%=application.getContextPath()%>/SerGetbatchbyuser?id="+n,function(data,status){
+                        alert(data) ;
+                     obj=JSON.parse(data);
+//                  alert(obj.length);
+                      for(i=0;i<obj.length;i++)
+                      {
+    //                 alert(obj[i]);
+                          $('#batch')
+         .append($("<option></option>")
+                     .attr("value",obj[i].batch_id)
+                    .text(obj[i].batch_name));
+                   }
+                  
+   });       
+              
+     });
+     
 
     }); 
    

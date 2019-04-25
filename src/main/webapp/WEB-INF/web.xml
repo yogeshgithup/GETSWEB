@@ -295,6 +295,14 @@
         <servlet-name>SerGetUserBySubject</servlet-name>
         <servlet-class>ser.SerGetUserBySubject</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SerGetbatchbyuser</servlet-name>
+        <servlet-class>ser.SerGetbatchbyuser</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SerAndroidMarks</servlet-name>
+        <servlet-class>ser.SerAndroidMarks</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>SerCourse</servlet-name>
         <url-pattern>/SerCourse</url-pattern>
@@ -566,6 +574,14 @@
     <servlet-mapping>
         <servlet-name>SerGetUserBySubject</servlet-name>
         <url-pattern>/SerGetUserBySubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerGetbatchbyuser</servlet-name>
+        <url-pattern>/SerGetbatchbyuser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SerAndroidMarks</servlet-name>
+        <url-pattern>/SerAndroidMarks</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
