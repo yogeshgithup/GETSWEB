@@ -4551,5 +4551,108 @@ String msg="";
     
     
     }
+
+    public JSONArray getSelectedbatchforuser(String user) {
+
+      JSONArray ja=new JSONArray();
+       try
+       {
+                     
+           PreparedStatement pstmt = null;
+           ResultSet rs=null;
+           String sql="SELECT b.batch_name,b.batch_id from batch_allocation b inner join batchallocation_batchslot bb on bb.batch_id=b.batch_id inner join workingshift_batchslot ws on ws.slot_id=bb.slot_id inner join users_workingshift uw on uw.ws_id=ws.ws_id where p_id='F3'";
+             System.out.println(sql);
+               con.setAutoCommit(false);
+               pstmt=con.prepareStatement(sql);
+            
+               System.out.println("1");
+               pstmt.setString(1, user);
+             System.out.println("2");
+               rs = pstmt.executeQuery();
+               while (rs.next()) {
+        JSONObject jo=new JSONObject();
+      
+                   String batch_id=rs.getString("batch_id");
+                   System.out.println("6534----"+batch_id);
+                   String batchname=rs.getString("batch_name");
+                   System.out.println("987----"+batchname);
+                   jo.put("batchname",batchname);
+                   jo.put("batch_id",batch_id);
+                   ja.put(jo);
+                   System.out.println("jaaaaa"+ja.toString());
+               }
+               
+               con.commit();
+           return ja;
+           
+           
+       }           
+        catch (SQLException ex) {       
+            Logger.getLogger(CourseSubSecOperation.class.getName()).log(Level.SEVERE, null, ex);
+        }       
+           return ja;
+   
+
+    
+    }
   
+    
+    public String androidmarks() throws SQLException,ServletException,IOException{
+        
+         JSONArray ja=new JSONArray();   
+              
+       System.out.println("12");
+           PreparedStatement stmt = null;
+            System.out.println("13");
+       ResultSet rs;
+        System.out.println("14");
+       
+      
+        String sql="select m.exam_id,p.f_name,m.exam_title,s.sub_name ,m.obtained_marks,m.total_marks from project.person p inner join project.marks m on m.p_id=p.p_id inner join project.subject s inner join project.student_subject ss on ss.sub_id=s.sub_id ;";
+           System.out.println("15");
+           //try
+       //{
+           con.setAutoCommit(false);
+           stmt=con.prepareStatement(sql);
+//           stmt.setString(1,email);
+           rs =stmt.executeQuery();
+           System.out.println(rs);
+       while(rs.next())
+         
+               {
+     
+                   JSONObject obj=new JSONObject();
+       
+
+            String subject=rs.getString("sub_name");
+             String exam_title=rs.getString("exam_title");
+                Integer total_marks=rs.getInt("total_marks");
+              System.out.println("22");
+            Integer obtained_marks=rs.getInt("obtained_marks");
+          
+             obj.put("sub_name",subject);
+                 
+             obj.put("exam_title",exam_title);
+            
+                 
+             obj.put("total_marks",total_marks);
+             obj.put("obtained_marks",obtained_marks);                  
+                    ja.put(obj);
+                 con.commit();       
+            
+               }
+              stmt.close();
+                
+           //catch(Exception e)
+       //{
+        //System.out.println(e.getMessage());
+       //}
+            System.out.println("27");
+           
+                  String s=ja.toString();
+                 System.out.println(s);
+                    return s;
+         
+        
+    }
     }
